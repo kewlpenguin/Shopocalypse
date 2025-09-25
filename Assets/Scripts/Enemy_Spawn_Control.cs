@@ -9,7 +9,7 @@ using TMPro;
 
 
 
-public class Enemy_Spawn_Control : MonoBehaviour
+public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persistent data
 {
     public GameObject Basic_Enemy;
     public GameObject Roller_Enemy;

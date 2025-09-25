@@ -200,7 +200,7 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Inialize_Super_Heavy_Enemy() // acts as like a blocker for the cannon bc obviosly there are more pressing matters then the areal turd
     {
-        Health = 1000;
+        Health = 750;
         Move_Speed = -.5f;
         Damage = 25f;
         Hit_Speed = 3f;
@@ -346,17 +346,17 @@ public class Enemy_Behavior : MonoBehaviour
     void Knockback_Super_Heavy()
     {
       
-        if(Health <= 750 && !Three_Q_Hp)
+        if(Health <= 500 && !Three_Q_Hp)
         {
             Three_Q_Hp = true;
             EnemyRigidbody.AddForce(Vector3.right * 3000, ForceMode.Impulse);
         }
-       else if (Health <= 500 && !Half_Hp)
+       else if (Health <= 350 && !Half_Hp)
         {
             Half_Hp = true;
             EnemyRigidbody.AddForce(Vector3.right * 3000, ForceMode.Impulse);
         }
-        else if (Health <= 250 && !One_Q_Hp)
+        else if (Health <= 170 && !One_Q_Hp)
         {
             One_Q_Hp = true;
             EnemyRigidbody.AddForce(Vector3.right * 3000, ForceMode.Impulse);

@@ -15,11 +15,11 @@ public class Persistent_Data_Store : MonoBehaviour
     
     static public float House_Health = 100; 
     static public float Slow_Wave_Ammo = 100; 
-    static public float Sniper_Ammo = 33;
-    static public float Saw_Ammo = 33;
-    static public float Vines_Ammo = 33;
-    static public float Pierce_Lazer_Ammo = 33;
-    static public float Burst_Module_Ammo = 10;
+    static public float Sniper_Ammo = 100;
+    static public float Saw_Ammo = 300;
+    static public float Vines_Ammo = 10;
+    static public float Pierce_Lazer_Ammo = 20;
+    static public float Burst_Module_Ammo = 3;
 
     static public int Difficulty = 0;   // increment on every shop scene swap
 
@@ -27,6 +27,10 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Scene_Swaps = 0;
 
+    static public int Pre_Shopping_Time = 20;
+
+    static public int Shopping_Time;
+    
     bool Hard_Mode_Active = false;
 
 
@@ -92,10 +96,11 @@ public class Persistent_Data_Store : MonoBehaviour
         {
             Scene_Swaps++;
          
-            if(Temp.buildIndex == 3) // increment difficulty during every shop phase immediately after the enemies have been decided for the upcoming level
+            if(Temp.buildIndex == 2) // increment difficulty during every shop phase immediately after the enemies have been decided for the upcoming level
             {
                 Difficulty++;
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
+                Shopping_Time = 10 + (5 * Difficulty);
             }
 
         }

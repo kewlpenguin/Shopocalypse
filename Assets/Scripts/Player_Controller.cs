@@ -240,6 +240,13 @@ public class Player_Controller : MonoBehaviour
 
         House_Health.text = "House " + Persistent_Data_Store.House_Health.ToString("f1");
 
+
+
+
+
+
+
+
     }
 
 

@@ -9,9 +9,9 @@ using TMPro;
 
 
 
-public class Show_Next_Enemies : MonoBehaviour
+public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version of the real spawn routine
 {
-    /*
+    
     public GameObject Basic_Enemy;
     public GameObject Roller_Enemy;
     public GameObject Fast_Enemy;
@@ -22,7 +22,7 @@ public class Show_Next_Enemies : MonoBehaviour
     public GameObject Super_Heavy;
     public GameObject Charger;
 
-    public Vector3 General_Spawn_Pos = new Vector3(37f, 1.56f, 4f);
+    public Vector3 General_Spawn_Pos = new Vector3(78, 4, 14);
 
     List<GameObject> Normal_Spawns = new List<GameObject>();
     List<GameObject> Disrupter_Spawns = new List<GameObject>();
@@ -33,13 +33,16 @@ public class Show_Next_Enemies : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        General_Spawn_Pos = gameObject.transform.position;
+
+
         Fill_Out_Normal_Spawns_List();  // fill all lists
         Fill_Out_Disrupter_Spawns_List();
         Fill_Out_Hell_Spawns_List();
         Fill_Out_Spawns_List_List();
 
-
-        Instantiate_All_Enemies();
+        StartCoroutine(Delay_Start());
+      
 
 
 
@@ -50,46 +53,25 @@ public class Show_Next_Enemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        gameObject.transform.Rotate(0, .04f, 0);
     }
 
-    void Instantiate_Enemy_From_GameObject(GameObject Enemy)
+    IEnumerator Delay_Start() // wait for persistent data to generate enemies
     {
-        if (Enemy.tag != "Roller" && Enemy.tag != "Lava_Hound")
-        {
-            Instantiate(Enemy, General_Spawn_Pos + new Vector3(Random.Range(1f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.Euler(0, 0, 0));
-        }
-
-        else if (Enemy.tag == "Roller")
-        {
-            Instantiate(Roller_Enemy, General_Spawn_Pos + new Vector3(Random.Range(1f, 2f), Random.Range(0f, 2f), 0), Quaternion.Euler(0, 0, 0)); // make sure rollers have a consistently lined up z
-                                                                                                                                                  // value because their collider must be smaller blah blah blah}
-        }
-
-        else if (Enemy.tag == "Lava_Hound")
-        {
-            GameObject My_Hound = Instantiate(Lava_Hound_Enemy, General_Spawn_Pos + new Vector3(Random.Range(1f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.Euler(0, 0, 0)); // spawn lava hound
-            StartCoroutine(Lavahound_Spawn_Routine(My_Hound)); // start children spawn coroutine
-
-        }
+        yield return new WaitForSeconds(.2f);
+        Instantiate_All_Enemies();
     }
 
-    IEnumerator Lavahound_Spawn_Routine(GameObject My_Hound) // spawn enemies forever while hound is alive
+
+
+    //-6, 14 ,30
+
+    void Instantiate_Enemy_From_GameObject(GameObject Enemy, float Z_Offset) // z offset for clumped and normal differentiation, aka  More modifiable randomised spawning
     {
-        for (int i = 0; i < 999999; i++)
-        {
-            if (My_Hound.gameObject == true) // idk how this works lol
-            {
-                GameObject My_Spawn = Instantiate(Normal_Spawns[Random.Range(0, 3)], My_Hound.transform.position, Quaternion.Euler(0, 0, 0));
-                My_Spawn.GetComponent<Rigidbody>().AddForce(new Vector3(20, 0, 0), ForceMode.Impulse);
-
-                yield return new WaitForSeconds(5);
-            }
-        }
-
+            Instantiate(Enemy, General_Spawn_Pos + new Vector3(0, 0, Z_Offset), Quaternion.Euler(0, 0, 0));
     }
 
-
+   
     void Fill_Out_Normal_Spawns_List()
     {
         Normal_Spawns.Add(Fast_Enemy);
@@ -155,117 +137,36 @@ public class Show_Next_Enemies : MonoBehaviour
     void Modifiable_Enemy_Spawner(GameObject Enemy_To_Spawn, int Spawn_List_Num)  // spawnlistnum for clumped or non clumped identification
     {
         Debug.Log(Enemy_To_Spawn.tag + ", ");
+      
         //non clumped spawn calls
-        if (Spawn_List_Num == 0)
+        if (Spawn_List_Num == 0 || Spawn_List_Num == 2 || Spawn_List_Num == 4)
         {
-            for (int i = 12; i > 0; i--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); } // if normal spawn 20
+            Instantiate_Enemy_From_GameObject(Enemy_To_Spawn,Random.Range(-15f,15f));  
         }
-
-
-
-        else if (Spawn_List_Num == 2)
-        {
-            for (int J = 6; J > 0; J--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // if disrupter spawn 10
-        }
-
-
-        else if (Spawn_List_Num == 4)
-        {
-
-            if (Enemy_To_Spawn.CompareTag("Charger"))
-            {
-                for (int k = 5; k > 0; k--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // spawn 9 chargers
-            }
-
-
-            else if (!(Enemy_To_Spawn.tag == "Charger"))
-            {
-                for (int l = 3; l > 0; l--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // if hell spawn 3
-            }
-
-
-
-        }
-
 
 
         //clumped spawn calls
-        if (Spawn_List_Num == 1)
+        if (Spawn_List_Num == 1 || Spawn_List_Num == 3 || Spawn_List_Num == 5)
         {
-            StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 18));  // if normal spawn 20
+
+            StartCoroutine(Clumped_Enemy_Spawns(Enemy_To_Spawn, 3));
         }
-
-
-        else if (Spawn_List_Num == 3)
-        {
-            StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 12));   // if disrupter spawn 10
-        }
-
-        else if (Spawn_List_Num == 5)
-        {
-            if (Enemy_To_Spawn.CompareTag("Charger"))  // spawn more chargers than opther hell enemies
-            {
-                StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 9));
-            }
-
-            else if (!(Enemy_To_Spawn.tag == "Charger"))
-            {
-                StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 3));   // if hell spawn 3
-            }
-        }
-
-
 
 
     }
 
 
-    IEnumerator Clumped_Enemy_Spawn_Delay(GameObject Enemy_To_Spawn, int Enemy_Count)
+   IEnumerator Clumped_Enemy_Spawns(GameObject Enemy_To_Spawn, int Enemy_Count)
     {
-
-
-        if (Enemy_To_Spawn.tag != "Lava_Hound" && Enemy_To_Spawn.tag != "Super_Heavy")
-        {
-            for (int m = 3; m > 0; m--) // spawn cump 3 times
-            {
-                yield return new WaitForSeconds(16 + Random.Range(-5, 5)); //Spawn clumps at 3 random ish points and not at the beggining
-
-                for (int k = (Enemy_Count / 3); k > 0; k--) // spawn 1/3 of the enemies 3 times if not normal hell enemies
+        float Z_Offset_For_Clump = Random.Range(-15f, 15f);
+               
+        for (int k = Enemy_Count; k > 0; k--) 
                 {
-                    Instantiate_Enemy_From_GameObject(Enemy_To_Spawn);
-                    yield return new WaitForSeconds(.1f + Random.Range(-.1f, .1f));  // time between enemies in clump spawn
+                    Instantiate_Enemy_From_GameObject(Enemy_To_Spawn, Z_Offset_For_Clump + Random.Range(-1f, 1f));
+            yield return new WaitForSeconds(.01f);
                 }
 
-
-            }
-
-        }
-
-
-        else if (Enemy_To_Spawn.tag == "Lava_Hound" || Enemy_To_Spawn.tag == "Super_Heavy")
-        {
-            yield return new WaitForSeconds(25 + Random.Range(-20f, 20f)); // between 5 and 45 seconds
-            for (int k = (Enemy_Count / 3); k > 0; k--)
-            {
-                Instantiate_Enemy_From_GameObject(Enemy_To_Spawn);
-                yield return new WaitForSeconds(2 + Random.Range(-1f, 1f));
-            }
-        }
-
     }
-
-
-    IEnumerator Non_Clumped_Enemy_Spawn_Delay(GameObject Enemy_To_Spawn)
-    {
-        yield return new WaitForSeconds(Random.Range(0f, 50f));
-        Instantiate_Enemy_From_GameObject(Enemy_To_Spawn);
-    }
-
-
-
-
-
-    */
 
 
 
