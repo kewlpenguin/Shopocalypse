@@ -28,6 +28,8 @@ TagManager:
   - Health_Pickup
   - Super_Heavy
   - Charger
+  - Water
+  - Water (Moving)
   layers:
   - Default
   - TransparentFX

@@ -339,7 +339,7 @@ public class Enemy_Behavior : MonoBehaviour
         for (int i = 0; i < 999999; i++) 
         { 
         yield return new WaitForSeconds(.33f);
-        Health -= .5f;
+        Health -= 1f;
         }
     }
 

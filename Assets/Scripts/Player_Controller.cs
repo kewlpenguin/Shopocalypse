@@ -21,7 +21,9 @@ public class Player_Controller : MonoBehaviour
     // public GameObject Slow_Wave_Pickup;
     // public GameObject Slow_Wave_Pickup;
     // public GameObject Slow_Wave_Pickup;
-
+   
+    
+    public GameObject Slow_Wave_Spawn;
 
     public Vector3 Spawn_Pos;
 
@@ -48,7 +50,7 @@ public class Player_Controller : MonoBehaviour
       
         Instantiate_Ammo();
 
-      
+        StartCoroutine(Slow_Wave_Routine_Spawn());
     }
 
 
@@ -170,26 +172,16 @@ public class Player_Controller : MonoBehaviour
 
 
 
-    void Instantiate_Ammo() // if adding new ammo types add to these lists, couldnt find a smarter way to do this smh
+    void Instantiate_Ammo() // will be used later maybe, right now just used for sniper shelves
     {
-        int List_Lengths = 2;
+   
 
-        Ammo_Pickups = new List<GameObject>(List_Lengths) ; // list for the ammo tags
-        Ammo_Pickups.Add(Slow_Wave_Pickup);
+        Ammo_Pickups = new List<GameObject>() ; // list for the ammo tags
         Ammo_Pickups.Add(Sniper_Pickup);
 
 
-
-
-
-
-        Ammo_Spawn_Tags = new List<string>(List_Lengths); // the spawn empty game object objects tags
-        Ammo_Spawn_Tags.Add("Slow_Wave_Ammo_Spawn"); // too many to to the get tag method so just use tag names 
+        Ammo_Spawn_Tags = new List<string>(); // the spawn empty game object objects tags
         Ammo_Spawn_Tags.Add("Sniper_Ammo_Spawn");
-
-
-
-
 
 
 
@@ -197,7 +189,6 @@ public class Player_Controller : MonoBehaviour
         {
 
             GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
-            Debug.Log(Ammo_Spawn_Tags[i]);
             
             for (int j = 0; j < Current_Spawn.Length; j++)
             {
@@ -209,6 +200,21 @@ public class Player_Controller : MonoBehaviour
 
 
     }
+
+
+
+IEnumerator Slow_Wave_Routine_Spawn()
+    {
+        for (int i = 999999; i > 0; i--)
+        {
+            Instantiate(Slow_Wave_Pickup, Slow_Wave_Spawn.transform.position + new Vector3(Random.Range(-.1f,.1f), Random.Range(-.1f, .1f), Random.Range(-.1f, .1f)), Slow_Wave_Spawn.transform.rotation);
+
+            yield return new WaitForSeconds(.33f);
+        }
+    }
+
+     
+
 
 
     void Update_Ammo_Counts() // this whole system is fucking terrible and not able to be scaled up easily
