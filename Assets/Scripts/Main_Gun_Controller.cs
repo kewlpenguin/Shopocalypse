@@ -386,12 +386,12 @@ public class Main_Gun_Controller : MonoBehaviour
         {
             case "Slow_Wave":
 
-                if (Persistent_Data_Store.Slow_Wave_Ammo >= 15 && !Burst_Module_On_Cooldown)
+                if (Persistent_Data_Store.Slow_Wave_Ammo >= 100 && !Burst_Module_On_Cooldown)
                 {
              
                     StartCoroutine(Burst_Module_Cooldown_Timer()); // put burst module on cooldown if firing is successful also ammo is subtracted from burst module in the cooldown coroutine
                    
-                    for (float i = 0; i < 15; i ++)
+                    for (float i = 0; i < 100; i ++)
                     {
                         Instantiate(Slow_Wave, gameObject.transform.position, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f,10f),1,1)); // need to randomize this
                         Persistent_Data_Store.Slow_Wave_Ammo--;
@@ -403,12 +403,12 @@ public class Main_Gun_Controller : MonoBehaviour
 
 
             case "Sniper":
-                if (Persistent_Data_Store.Sniper_Ammo >= 15 && !Burst_Module_On_Cooldown)
+                if (Persistent_Data_Store.Sniper_Ammo >= 30 && !Burst_Module_On_Cooldown)
                 {
 
                     StartCoroutine(Burst_Module_Cooldown_Timer()); // put burst module on cooldown if firing is successful also ammo is subtracted from burst module in the cooldown coroutine
 
-                    for (float i = 0; i < 15; i++)
+                    for (float i = 0; i < 30; i++)
                     {
                         Instantiate(Sniper, gameObject.transform.position, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Sniper_Ammo--;
@@ -438,12 +438,12 @@ public class Main_Gun_Controller : MonoBehaviour
 
             case "Saw":
 
-                if (Persistent_Data_Store.Saw_Ammo >= 15 && !Burst_Module_On_Cooldown)
+                if (Persistent_Data_Store.Saw_Ammo >= 40 && !Burst_Module_On_Cooldown)
                 {
 
                     StartCoroutine(Burst_Module_Cooldown_Timer()); // put burst module on cooldown if firing is successful also ammo is subtracted from burst module in the cooldown coroutine
 
-                    for (float i = 0; i < 15; i++)
+                    for (float i = 0; i < 40; i++)
                     {
                         Instantiate(Saw, gameObject.transform.position, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Saw_Ammo--;

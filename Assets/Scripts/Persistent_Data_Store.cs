@@ -14,12 +14,12 @@ public class Persistent_Data_Store : MonoBehaviour
     public static Persistent_Data_Store Instance;
     
     static public float House_Health = 100; 
-    static public float Slow_Wave_Ammo = 100; 
-    static public float Sniper_Ammo = 100;
+    static public float Slow_Wave_Ammo = 999; 
+    static public float Sniper_Ammo = 9999;
     static public float Saw_Ammo = 300;
-    static public float Vines_Ammo = 10;
-    static public float Pierce_Lazer_Ammo = 20;
-    static public float Burst_Module_Ammo = 3;
+    static public float Vines_Ammo = 99;
+    static public float Pierce_Lazer_Ammo = 2990;
+    static public float Burst_Module_Ammo = 3999;
 
     static public int Difficulty = 0;   // increment on every shop scene swap
 
@@ -98,7 +98,7 @@ public class Persistent_Data_Store : MonoBehaviour
          
             if(Temp.buildIndex == 2) // increment difficulty during every shop phase immediately after the enemies have been decided for the upcoming level
             {
-                Difficulty++;
+                Difficulty += 3;
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
                 Shopping_Time = 10 + (5 * Difficulty);
             }
@@ -136,7 +136,7 @@ public class Persistent_Data_Store : MonoBehaviour
         Choosen_Spawn_List_Numbers.Clear();// empty list first
 
        
-        Points_To_Allocate = (Difficulty + 3); // each enemy spawn group will cost a different point value, we reset this each time 
+        Points_To_Allocate = (Difficulty + 1); // each enemy spawn group will cost a different point value, we reset this each time 
 
         int Number_Choice;
 

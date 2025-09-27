@@ -32,6 +32,7 @@ public class Player_Controller : MonoBehaviour
     public TextMeshProUGUI Vines;
     public TextMeshProUGUI Lazer;
     public TextMeshProUGUI Sniper;
+    public TextMeshProUGUI Burst_Module;
 
     public TextMeshProUGUI House_Health;
 
@@ -247,6 +248,9 @@ IEnumerator Slow_Wave_Routine_Spawn()
         House_Health.text = "House " + Persistent_Data_Store.House_Health.ToString("f1");
 
 
+        if (Persistent_Data_Store.Burst_Module_Ammo > 0) { Burst_Module.enabled = true; } else if (Persistent_Data_Store.Burst_Module_Ammo <= 0) { Burst_Module.enabled = false; }
+
+        Lazer.text = "SPACE : " + Persistent_Data_Store.Burst_Module_Ammo;
 
 
 

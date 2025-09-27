@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 public class Enemy_Behavior : MonoBehaviour
 {
     string Enemy_Type;
@@ -9,8 +10,12 @@ public class Enemy_Behavior : MonoBehaviour
     private float Damage = 1;
     private float Max_Fly_Hight = 1;
     private float Min_Fly_Hight = 1;
+    private float Max_Health = 1;
+
+
     private Rigidbody EnemyRigidbody;
-    
+    private Slider Health_Bar;
+    private Transform Health_Bar_Canvas;
 
     private float Hit_Speed = 1;
     bool Touching_House = false;
@@ -29,9 +34,9 @@ public class Enemy_Behavior : MonoBehaviour
 
     public string spinTag = "Saw"; // for spinning the saw weapon once it becomes a child of the enemy
 
-    private bool Three_Q_Hp; // for super heavy
-    private bool Half_Hp;
-    private bool One_Q_Hp;
+
+    private bool Half_Hp; // for super heavy
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,6 +46,16 @@ public class Enemy_Behavior : MonoBehaviour
         Enemy_Behavior_From_Type(Enemy_Type);
         //Physics.SetLayerCollisionMask(Enemy, Environment, false);
         Physics.gravity = Physics.gravity;
+      
+        Health_Bar = gameObject.GetComponentInChildren<Slider>();
+       
+        Health_Bar_Canvas = gameObject.transform.Find("Canvas");
+
+        Health_Bar_Canvas.gameObject.SetActive(false);
+
+
+
+
     }
 
 
@@ -48,8 +63,22 @@ public class Enemy_Behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // House_Health_Reference = Persistent_Data_Store.House_Health; // for debuging 
-       if(Health <= 0)
+        Update_Enemy_Healthbar();
+
+        if (Health < Max_Health)
+        {
+            Health_Bar_Canvas.gameObject.SetActive(true);
+            if(gameObject.tag == "Roller")
+            {
+                Health_Bar_Canvas.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
+        }
+
+
+
+        // House_Health_Reference = Persistent_Data_Store.House_Health; // for debuging 
+        if (Health <= 0)
         {
             Destroy(gameObject);
           
@@ -130,16 +159,19 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Inialize_Basic_Enemy() // called when an enemies tag is Basic
     {
+      Max_Health = 12;
       Health = 12;
       Move_Speed = -4f -Random.Range(-1f,1f); // so enemies stand out from eachother
       Damage = 2;
       Hit_Speed = 1;
-   
+     
+      
 
-}
+    }
 
     void Inialize_Roller_Enemy() // called when an enemies tag is roller etc
     {
+        Max_Health = 40;
         Health = 40;
         Move_Speed = 0;
         Damage = 5f;
@@ -150,6 +182,7 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Inialize_Fast_Enemy()
     {
+        Max_Health = 9;
         Health = 9;
         Move_Speed = -9f - Random.Range(-2f, 2f);
         Damage = 1;
@@ -160,6 +193,7 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Inialize_Heavy_Enemy() 
     {
+        Max_Health = 100;
         Health = 100;
         Move_Speed = -1.5f - Random.Range(-.5f, .5f);
         Damage = 10;
@@ -170,6 +204,7 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Inialize_Flyer_Enemy() 
     {
+        Max_Health = 9;
         Health = 9;
         Move_Speed = -4f - Random.Range(-1f, 1f);
         Damage = 2;
@@ -181,6 +216,7 @@ public class Enemy_Behavior : MonoBehaviour
     }
     void Inialize_Lava_Hound_Mini_Enemy() // called when an enemies tag is roller etc
     {
+        Max_Health = 70;
         Health = 70;
         Move_Speed = -6f - Random.Range(-1f, 1f);
         Damage = 2f;
@@ -191,6 +227,7 @@ public class Enemy_Behavior : MonoBehaviour
     }
     void Inialize_Lava_Hound_Enemy() // acts as like a blocker for the cannon bc obviosly there are more pressing matters then the areal turd
     {
+        Max_Health = 200;
         Health = 200;
         Move_Speed = -1.25f;
         Max_Fly_Hight = 6f;
@@ -200,7 +237,8 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Inialize_Super_Heavy_Enemy() // acts as like a blocker for the cannon bc obviosly there are more pressing matters then the areal turd
     {
-        Health = 750;
+        Max_Health = 1000;
+        Health = 1000;
         Move_Speed = -.5f;
         Damage = 25f;
         Hit_Speed = 3f;
@@ -209,6 +247,7 @@ public class Enemy_Behavior : MonoBehaviour
     }
     void Inialize_Charger_Enemy() // acts as like a blocker for the cannon bc obviosly there are more pressing matters then the areal turd
     {
+        Max_Health = 70;
         Health = 70;
         Move_Speed = -.5f;
         Damage = 5;
@@ -216,6 +255,19 @@ public class Enemy_Behavior : MonoBehaviour
         StartCoroutine(Charger_Speed_Scaling());
 
     }
+
+
+    void Update_Enemy_Healthbar()
+    {
+
+        Health_Bar.value = (Health / Max_Health);
+    }
+
+
+
+
+
+
 
     void Universal_Enemy_Movement() // with some special cases, moves the enemy at a constant rate towards the base
     {
@@ -344,25 +396,13 @@ public class Enemy_Behavior : MonoBehaviour
     }
 
     void Knockback_Super_Heavy()
-    {
-      
-        if(Health <= 500 && !Three_Q_Hp)
+    {  
+        if(Health <= 500 && !Half_Hp)
         {
             Three_Q_Hp = true;
             EnemyRigidbody.AddForce(Vector3.right * 3000, ForceMode.Impulse);
         }
-       else if (Health <= 350 && !Half_Hp)
-        {
-            Half_Hp = true;
-            EnemyRigidbody.AddForce(Vector3.right * 3000, ForceMode.Impulse);
-        }
-        else if (Health <= 170 && !One_Q_Hp)
-        {
-            One_Q_Hp = true;
-            EnemyRigidbody.AddForce(Vector3.right * 3000, ForceMode.Impulse);
-        }
-
-
+ 
 
     }
 

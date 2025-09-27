@@ -779,10 +779,10 @@ MonoBehaviour:
   Pierce_Lazer_On_Cooldown: 0
   Burst_Module_On_Cooldown: 0
   Sniper_Cooldown: 0.25
-  Pierce_Lazer_Cooldown: 3
+  Pierce_Lazer_Cooldown: 2
   Saw_Cooldown: 0.5
   Vines_Cooldown: 2
-  Burst_Module_Cooldown: 3
+  Burst_Module_Cooldown: 2
   Sniper_Countdown: 0
   Pierce_Lazer_Countdown: 0
   Saw_Countdown: 0
