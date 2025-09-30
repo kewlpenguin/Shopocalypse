@@ -30,6 +30,10 @@ TagManager:
   - Charger
   - Water
   - Water (Moving)
+  - Lazer_Ammo
+  - Burst_Ammo
+  - Saw_Ammo
+  - Vines_Ammo
   layers:
   - Default
   - TransparentFX

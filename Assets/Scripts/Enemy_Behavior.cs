@@ -399,7 +399,7 @@ public class Enemy_Behavior : MonoBehaviour
     {  
         if(Health <= 500 && !Half_Hp)
         {
-            Three_Q_Hp = true;
+            Half_Hp = true;
             EnemyRigidbody.AddForce(Vector3.right * 3000, ForceMode.Impulse);
         }
  

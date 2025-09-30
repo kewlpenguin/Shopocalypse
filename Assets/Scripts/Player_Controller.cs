@@ -17,13 +17,18 @@ public class Player_Controller : MonoBehaviour
     List<string> Ammo_Spawn_Tags;
     public GameObject Slow_Wave_Pickup;
     public GameObject Sniper_Pickup;
-    //public GameObject Slow_Wave_Pickup;
-    // public GameObject Slow_Wave_Pickup;
-    // public GameObject Slow_Wave_Pickup;
-    // public GameObject Slow_Wave_Pickup;
-   
-    
+    public GameObject Lazer_Pickup;
+    public GameObject Saw_Pickup;
+    public GameObject Vines_Pickup;
+    public GameObject Burst_Module_Pickup;
+
+    public GameObject Door_To_Enable;
+    public GameObject Door_To_Disable;
+
+
+
     public GameObject Slow_Wave_Spawn;
+    public GameObject Lazer_Spawn;
 
     public Vector3 Spawn_Pos;
 
@@ -52,6 +57,7 @@ public class Player_Controller : MonoBehaviour
         Instantiate_Ammo();
 
         StartCoroutine(Slow_Wave_Routine_Spawn());
+        StartCoroutine(Lazer_Routine_Spawn());
     }
 
 
@@ -142,7 +148,7 @@ public class Player_Controller : MonoBehaviour
         switch (My_Tag)
         {
             case "Slow_Wave_Ammo":
-                Persistent_Data_Store.Slow_Wave_Ammo += 10;
+                Persistent_Data_Store.Slow_Wave_Ammo += 2;
                 break;
 
             case "Sniper_Ammo":
@@ -157,8 +163,27 @@ public class Player_Controller : MonoBehaviour
                 }
                 break;
 
+            case "Lazer_Ammo":
+                Persistent_Data_Store.Pierce_Lazer_Ammo += 1;
+                Debug.Log("increment lazer");
+                break;
 
 
+            case "Vines_Ammo":
+                Persistent_Data_Store.Vines_Ammo += 1;
+
+                break;
+
+
+            case "Saw_Ammo":
+                Persistent_Data_Store.Saw_Ammo += 10;
+
+                break;
+
+            case "Burst_Ammo":
+                Persistent_Data_Store.Burst_Module_Ammo += 1;
+
+                break;
 
             case null:
                 break;
@@ -214,7 +239,27 @@ IEnumerator Slow_Wave_Routine_Spawn()
         }
     }
 
-     
+    // Y  1.4 , -1.5, .3
+    // Z -4 , 2,  -1.4
+    // x 0
+    IEnumerator Lazer_Routine_Spawn()
+    {
+        for (int i = 999999; i > 0; i--)
+        {
+            GameObject Last_Spawn = Instantiate(Lazer_Pickup, Lazer_Spawn.transform.position + new Vector3(0, Random.Range(-1f, 1f), Random.Range(-2f, 3f)), Slow_Wave_Spawn.transform.rotation); // rotation is just whatever
+            StartCoroutine(Destroy_Lazer_Ammo(Last_Spawn));
+
+            yield return new WaitForSeconds(.5f);
+        }
+    }
+
+
+    IEnumerator Destroy_Lazer_Ammo(GameObject Last_Lazer_Pickup)
+    {
+            yield return new WaitForSeconds(2f);
+        Destroy(Last_Lazer_Pickup);
+    }
+
 
 
 
@@ -238,7 +283,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
 
         if (Persistent_Data_Store.Pierce_Lazer_Ammo > 0) { Lazer.enabled = true; } else if (Persistent_Data_Store.Pierce_Lazer_Ammo <= 0) { Lazer.enabled = false; }
 
-        Lazer.text = "D : " + Persistent_Data_Store.Pierce_Lazer_Ammo;
+        Lazer.text = "A : " + Persistent_Data_Store.Pierce_Lazer_Ammo;
 
 
         if (Persistent_Data_Store.Slow_Wave_Ammo > 0) { Slow_Wave.enabled = true; } else if (Persistent_Data_Store.Slow_Wave_Ammo <= 0) { Slow_Wave.enabled = false; }
@@ -250,7 +295,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
 
         if (Persistent_Data_Store.Burst_Module_Ammo > 0) { Burst_Module.enabled = true; } else if (Persistent_Data_Store.Burst_Module_Ammo <= 0) { Burst_Module.enabled = false; }
 
-        Lazer.text = "SPACE : " + Persistent_Data_Store.Burst_Module_Ammo;
+        Burst_Module.text = "SPACE : " + Persistent_Data_Store.Burst_Module_Ammo;
 
 
 
@@ -259,8 +304,31 @@ IEnumerator Slow_Wave_Routine_Spawn()
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+      
+    
+        if(other.name == "Ticket_Machine_Trigger")
+        {
+            Door_To_Enable.SetActive(true);
+            Door_To_Disable.SetActive(false);
+        }
+    
+    
+    
+    }
 
 
+
+
+    private void OnCollisionEnter(Collision collision)
+    { 
+        if (collision.gameObject.name == "Door_To_Enable") // when we walk into the newly enabled door, disable it and re enable the open door aka door to disable
+        {
+            collision.gameObject.SetActive(false);
+            Door_To_Disable.SetActive(true);
+        }
+    }
 
 }
 

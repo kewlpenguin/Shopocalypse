@@ -8,17 +8,27 @@ public class Ammo_Behavior : MonoBehaviour
     Rigidbody My_Rigidbody;
     private float Buyancy_Force = 10;
     private float Water_Speed = 5;
+    private GameObject Lazer_Game_Center;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        My_Rigidbody = gameObject.GetComponent<Rigidbody>();
+        Lazer_Game_Center = GameObject.Find("Lazer_Game_Middle");
 
+
+        My_Rigidbody = gameObject.GetComponent<Rigidbody>();
+        
+        if(gameObject.tag == "Lazer_Ammo")
+        {
+            My_Rigidbody.AddForce((Lazer_Game_Center.transform.position - gameObject.transform.position) * 2, ForceMode.Impulse);
+            My_Rigidbody.AddTorque(new Vector3(0, 0, 10));
+        }
 
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
       
