@@ -24,7 +24,7 @@ public class Player_Controller : MonoBehaviour
 
     public GameObject Door_To_Enable;
     public GameObject Door_To_Disable;
-
+    public GameObject Ticket;
 
 
     public GameObject Slow_Wave_Spawn;
@@ -41,6 +41,9 @@ public class Player_Controller : MonoBehaviour
 
     public TextMeshProUGUI House_Health;
 
+    private bool In_Ticket_Booth = false;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,7 +51,7 @@ public class Player_Controller : MonoBehaviour
         gameObject.transform.position = Spawn_Pos;
        
         Lock_Cursor = CursorLockMode.Locked;
-       // Cursor.lockState = Lock_Cursor;
+        Cursor.lockState = Lock_Cursor;
       
         Player_Rigidbody = GetComponent<Rigidbody>();
       
@@ -65,6 +68,7 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         Update_Ammo_Counts();
+        Check_Object_Pickup();
     }
 
 
@@ -86,15 +90,26 @@ public class Player_Controller : MonoBehaviour
 
         Player_Rigidbody.linearVelocity = Horizontal + Vertical + Forward;
 
-        bool Mouse_Down = Input.GetKey(KeyCode.Mouse0);
+      
+
+
+    }
+
+
+    void Check_Object_Pickup()
+    {
+        bool Mouse_Down = Input.GetKeyDown(KeyCode.Mouse0);
 
         if (Mouse_Down)
         {
             Pickup_Object();
         }
 
-
     }
+
+
+
+
 
 
     private void Match_Camera_Rotate()
@@ -242,7 +257,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
     // Y  1.4 , -1.5, .3
     // Z -4 , 2,  -1.4
     // x 0
-    IEnumerator Lazer_Routine_Spawn()
+    IEnumerator Lazer_Routine_Spawn() // for the arcade machine
     {
         for (int i = 999999; i > 0; i--)
         {
@@ -254,11 +269,63 @@ IEnumerator Slow_Wave_Routine_Spawn()
     }
 
 
-    IEnumerator Destroy_Lazer_Ammo(GameObject Last_Lazer_Pickup)
+
+
+    IEnumerator Destroy_Lazer_Ammo(GameObject Last_Lazer_Pickup) 
     {
             yield return new WaitForSeconds(2f);
         Destroy(Last_Lazer_Pickup);
     }
+
+
+
+
+    IEnumerator Ticket_Machine_Spawns() // perioically spawns tickets (Lazer Ammo with low gravity) while there are less than x tickets in the scene. differentiates lazer ammo based on whether they use gravity or not so be careful itf
+    {
+        for (int i = 99999; i > 0; i--)
+        {
+            int Tickets_In_Scene = 0;
+           
+            GameObject[] Lazer_Ammo_In_Scene = GameObject.FindGameObjectsWithTag("Lazer_Ammo");
+          
+            for(int j = Lazer_Ammo_In_Scene.Length - 1; j > 0; j--) // counts tickets in scene by differentiating lazer ammo whether or not the ammo uses gravity
+            {
+                if (Lazer_Ammo_In_Scene[j].GetComponent<Rigidbody>().useGravity)
+                {
+                    Tickets_In_Scene++;
+                }
+                
+
+            }
+
+            if(Tickets_In_Scene < 40 && In_Ticket_Booth)   // limits maximum tickets after counting the tickets in the scene
+            {
+                GameObject Ticket_Spawn = GameObject.Find("Ticket_Blower_Center");
+                Instantiate(Ticket, Ticket_Spawn.transform.position + new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f)), Quaternion.Euler(Random.Range(-90f, 90f), Random.Range(-90f, 90f), Random.Range(-90f, 90f)));
+            }
+
+            if (!In_Ticket_Booth) // when we leave booth destroy tickets and de activate the coroutine with break
+            {
+
+                for (int k = Lazer_Ammo_In_Scene.Length - 1; k > 0; k--) // counts tickets in scene by differentiating lazer ammo whether or not the ammo uses gravity
+                {
+                    if (Lazer_Ammo_In_Scene[k].GetComponent<Rigidbody>().useGravity)
+                    {
+                        Destroy(Lazer_Ammo_In_Scene[k]);
+                    }
+                }
+
+                break;
+            }
+
+
+            yield return new WaitForSeconds(.2f);
+            
+
+        }
+    }
+
+
 
 
 
@@ -312,10 +379,14 @@ IEnumerator Slow_Wave_Routine_Spawn()
         {
             Door_To_Enable.SetActive(true);
             Door_To_Disable.SetActive(false);
+
+            In_Ticket_Booth = true;
+            StartCoroutine(Ticket_Machine_Spawns());
+
+
+
         }
-    
-    
-    
+
     }
 
 
@@ -325,6 +396,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
     { 
         if (collision.gameObject.name == "Door_To_Enable") // when we walk into the newly enabled door, disable it and re enable the open door aka door to disable
         {
+            In_Ticket_Booth = false;
             collision.gameObject.SetActive(false);
             Door_To_Disable.SetActive(true);
         }
