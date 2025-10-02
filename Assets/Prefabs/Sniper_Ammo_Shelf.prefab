@@ -31,37 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043950447728010291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &910936825261915780
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3337422234201210525}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (61)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3337422234201210525
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910936825261915780}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: -0.721, y: 3.7, z: -0.219}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1298463492813864158
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,37 +88,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
   m_LocalPosition: {x: 0.295, y: 3.7, z: -0.4573}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1354420676381296762
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3076367563766472919}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (26)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3076367563766472919
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354420676381296762}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: 0.044, y: 3.7, z: -0.1555}
   m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -217,37 +155,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043950447728010291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1431763491295717983
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3053855573022399083}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (13)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3053855573022399083
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431763491295717983}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: 0.044, y: 3.7, z: 0.1077}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1496073704598415777
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +188,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1784355838628327237}
+  - {fileID: 6370569147135986921}
   - {fileID: 634924851317085696}
   - {fileID: 5145285202741023221}
   - {fileID: 4710384174841243337}
@@ -301,7 +209,6 @@ Transform:
   - {fileID: 8892061783987034745}
   - {fileID: 198192067858726001}
   - {fileID: 79715426711102063}
-  - {fileID: 712206438886855106}
   - {fileID: 557143275091552179}
   - {fileID: 1020789205970605209}
   - {fileID: 5552633419594547705}
@@ -313,39 +220,26 @@ Transform:
   - {fileID: 3506639609301309052}
   - {fileID: 86830327809832378}
   - {fileID: 2797925354728577814}
-  - {fileID: 1551452392523600532}
-  - {fileID: 8274075254188234764}
-  - {fileID: 4960000350046098486}
   - {fileID: 8834920814934948485}
   - {fileID: 1309162095786318762}
-  - {fileID: 3838289433128647877}
   - {fileID: 2386353353231366841}
   - {fileID: 3236752504139457674}
   - {fileID: 8996963804839719161}
   - {fileID: 4083003637163811804}
   - {fileID: 7838257207874249599}
-  - {fileID: 3076367563766472919}
   - {fileID: 6735587572478737278}
-  - {fileID: 3053855573022399083}
   - {fileID: 7563852804623325415}
-  - {fileID: 8872641920097267834}
-  - {fileID: 5485281183679968808}
   - {fileID: 3204866155304596333}
   - {fileID: 8565388570160150208}
   - {fileID: 5698676635352833356}
   - {fileID: 4543181761990008490}
-  - {fileID: 2651706904366074897}
   - {fileID: 4706422400028427122}
   - {fileID: 4082879564463332208}
-  - {fileID: 7644138041070491759}
   - {fileID: 4166924283296956267}
-  - {fileID: 3110826514184853713}
   - {fileID: 5843500484172729266}
-  - {fileID: 3337422234201210525}
-  - {fileID: 2971699013192550899}
-  - {fileID: 5005199919087988139}
   - {fileID: 7301055356683613673}
   - {fileID: 2485102093752752673}
+  - {fileID: 8389181867548335455}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!33 &8670491908092707321
@@ -639,37 +533,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043950447728010291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2517643179811240237
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 712206438886855106}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (41)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &712206438886855106
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2517643179811240237}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: -0.47, y: 3.7, z: -0.097}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2614436565834955162
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,37 +719,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043950447728010291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3504136506898799328
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8872641920097267834}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (27)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8872641920097267834
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3504136506898799328}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: 0.044, y: 3.7, z: -0.3934}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3637476096059080112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,6 +843,114 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043950447728010291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3849943836070158198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8389181867548335455}
+  - component: {fileID: 3104322810667023901}
+  - component: {fileID: 822546994173105461}
+  - component: {fileID: 1977114588100417947}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8389181867548335455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849943836070158198}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.0334, y: 7.553, z: 0.0102710165}
+  m_LocalScale: {x: 1.9919788, y: 0.91679734, z: 1.0205419}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6043950447728010291}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3104322810667023901
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849943836070158198}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &822546994173105461
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849943836070158198}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1977114588100417947
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849943836070158198}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000005, y: 1.0000005, z: 1}
+  m_Center: {x: 0.0000057220477, y: -0.0000007152631, z: 0}
 --- !u!1 &3850838354070136454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,68 +1101,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
   m_LocalPosition: {x: 0.044, y: 3.7, z: -0.0327}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4359788247817389142
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4960000350046098486}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (48)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4960000350046098486
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4359788247817389142}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: -0.721, y: 3.7, z: 0.468}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4712615410941378249
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5005199919087988139}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (62)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5005199919087988139
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4712615410941378249}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: -0.721, y: 3.7, z: 0.044}
   m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1491,37 +1369,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043950447728010291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5474710282591248248
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3110826514184853713}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (60)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3110826514184853713
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5474710282591248248}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: -0.721, y: 3.7, z: 0.282}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5703579440102684253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,37 +1477,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &5788029761665022672
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5485281183679968808}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (55)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5485281183679968808
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5788029761665022672}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: -0.721, y: 3.7, z: -0.393}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5872534547549872630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,37 +1503,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
   m_LocalPosition: {x: 0.295, y: 3.7, z: -0.3345}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6004520755863788382
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2971699013192550899}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (15)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2971699013192550899
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6004520755863788382}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: 0.044, y: 3.7, z: 0.0438}
   m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1754,37 +1539,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043950447728010291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6141201006786806088
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1551452392523600532}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (47)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1551452392523600532
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6141201006786806088}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: -0.47, y: 3.7, z: -0.457}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6325591018295106455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,37 +1565,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
   m_LocalPosition: {x: -0.721, y: 3.7, z: 0.405}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6326121318945632870
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2651706904366074897}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (14)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2651706904366074897
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6326121318945632870}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: 0.044, y: 3.7, z: 0.1666}
   m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1971,37 +1694,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043950447728010291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7321970523004586416
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7644138041070491759}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (59)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7644138041070491759
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7321970523004586416}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: -0.721, y: 3.7, z: -0.335}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7435374721688102532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,37 +1751,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
   m_LocalPosition: {x: -0.47, y: 3.7, z: -0.393}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7942223267157211211
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3838289433128647877}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (12)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3838289433128647877
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942223267157211211}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: 0.044, y: 3.7, z: 0.2305}
   m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2281,6 +1942,114 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043950447728010291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8661371523328747076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6370569147135986921}
+  - component: {fileID: 1888999627542893987}
+  - component: {fileID: 4182665440014270050}
+  - component: {fileID: 3771458633922364801}
+  m_Layer: 0
+  m_Name: child (1)
+  m_TagString: ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6370569147135986921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661371523328747076}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071057, w: 0.7071079}
+  m_LocalPosition: {x: -0.14748923, y: 3.0284557, z: -0.0000000064869385}
+  m_LocalScale: {x: 7.056933, y: 0.075, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6043950447728010291}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!33 &1888999627542893987
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661371523328747076}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4182665440014270050
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661371523328747076}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4255c5a143d8efb42a18281ada05d125, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3771458633922364801
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661371523328747076}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8692069587961405746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,37 +2076,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
   m_LocalPosition: {x: 0.295, y: 3.7, z: -0.0327}
-  m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6043950447728010291}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8979479957152145697
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8274075254188234764}
-  m_Layer: 0
-  m_Name: Ammo_Spawn (1)
-  m_TagString: Sniper_Ammo_Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8274075254188234764
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8979479957152145697}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.49999854, y: 0.5, z: 0.5, w: 0.5000015}
-  m_LocalPosition: {x: 0.044, y: 3.7, z: 0.4684}
   m_LocalScale: {x: 0.07790365, y: 0.38343683, z: 6.2055426}
   m_ConstrainProportionsScale: 0
   m_Children: []

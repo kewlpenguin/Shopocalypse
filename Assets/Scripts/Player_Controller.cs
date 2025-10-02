@@ -41,8 +41,13 @@ public class Player_Controller : MonoBehaviour
 
     public TextMeshProUGUI House_Health;
 
+   public Slider Pickup_Progress_Bar;
+
     private bool In_Ticket_Booth = false;
 
+    private bool Holding_Sniper_Large = false;
+    private bool Holding_Health = false;
+    private bool Holding_Sniper_Xtra = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -133,24 +138,163 @@ public class Player_Controller : MonoBehaviour
 
         RaycastHit Object_Info;
         bool Object_In_Range = Physics.Raycast(Main_Camera.transform.position, Main_Camera.transform.forward, out Object_Info, 7f, Ammo_Layer);
-      
-        if (Object_In_Range && Object_Info.collider.gameObject.tag != "ground") //make sure picked up is actually ammo also 13 is the ammo layer for all ammo types
+        if (Object_In_Range && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Large" && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Xtra_Large" && Object_Info.collider.gameObject.tag != "Health_Pickup" )   // if pickup is instant for this ammo type
         {
-           
-         
-            Increment_Ammo_Counters(Object_Info.collider.tag);
-            Destroy(Object_Info.collider.gameObject);
+            if (Object_In_Range && Object_Info.collider.gameObject.tag != "ground") //make sure picked up is actually ammo also 13 is the ammo layer for all ammo types
+            {
+
+
+                Increment_Ammo_Counters(Object_Info.collider.tag);
+                Destroy(Object_Info.collider.gameObject);
+
+            }
+        }
+       
+        else if(Object_In_Range && Object_Info.collider.gameObject.tag == "Sniper_Ammo_Large")   
+        {
+            if (!Holding_Sniper_Large) // so we are only able to start 1 coroutine at a time
+            {
+                StartCoroutine(Large_Ammo_Wait(Object_Info));
+            }
+        }
+       
+
+        else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Sniper_Ammo_Xtra_Large")
+        {
+            StartCoroutine(Xtra_Large_Ammo_Wait(Object_Info));
 
         }
+      
+
+        else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Health_Pickup")
+        {
+            StartCoroutine(Health_Pickup_Wait(Object_Info));
+
+        }
+
+
 
     }
 
 
    
 
+    IEnumerator Large_Ammo_Wait(RaycastHit Ammo_We_Looking_At) // all wait functions are checking if we are holding the pickup key over the course of X seconds
+    {
+        int Time_To_Wait = 10;
+        Pickup_Progress_Bar.maxValue = Time_To_Wait;
+        Pickup_Progress_Bar.gameObject.SetActive(true);
+      
+        for (int i = 0; i < 9999; i++)
+        {
+            bool temp = Input.GetKey(KeyCode.Mouse0);
+            Holding_Sniper_Large = temp;
+
+            Pickup_Progress_Bar.value = i;
+
+            if (!Holding_Sniper_Large) // if we stop holding exit the loop
+            {
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+         
+            if (i > Time_To_Wait) // about 1 seconds
+            {
+                Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
+                Destroy(Ammo_We_Looking_At.collider.gameObject);
+                Holding_Sniper_Large = false;
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
 
 
 
+            yield return new WaitForSeconds(.1f);
+
+        }
+
+
+
+    }
+
+
+    IEnumerator Xtra_Large_Ammo_Wait(RaycastHit Ammo_We_Looking_At)
+    {
+        int Time_To_Wait = 30;
+        Pickup_Progress_Bar.maxValue = Time_To_Wait;
+        Pickup_Progress_Bar.gameObject.SetActive(true);
+      
+        for (int i = 0; i < 9999; i++)
+        {
+            bool temp = Input.GetKey(KeyCode.Mouse0);
+            Holding_Sniper_Xtra = temp;
+
+            Pickup_Progress_Bar.value = i;
+
+            if (!Holding_Sniper_Xtra)
+            {
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+            if (i > Time_To_Wait) // about 4 seconds
+            {
+                Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
+                Destroy(Ammo_We_Looking_At.collider.gameObject);
+                Holding_Sniper_Xtra = false;
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+
+
+
+            yield return new WaitForSeconds(.1f);
+
+        }
+
+
+
+
+    }
+
+
+    IEnumerator Health_Pickup_Wait(RaycastHit Ammo_We_Looking_At)
+    {
+        int Time_To_Wait = 20;
+        Pickup_Progress_Bar.maxValue = Time_To_Wait;
+        Pickup_Progress_Bar.gameObject.SetActive(true);
+
+        for (int i = 0; i < 9999; i++)
+        {
+            bool temp = Input.GetKey(KeyCode.Mouse0);
+            Holding_Health = temp;
+
+            Pickup_Progress_Bar.value = i;
+
+
+            if (!Holding_Health)
+            {
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+            if (i > Time_To_Wait) //about 2 seconds
+            {
+                Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
+                Destroy(Ammo_We_Looking_At.collider.gameObject);
+                Holding_Health = false;
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+
+
+
+            yield return new WaitForSeconds(.1f);
+
+        }
+
+
+
+
+    }
 
 
 
@@ -168,6 +312,17 @@ public class Player_Controller : MonoBehaviour
 
             case "Sniper_Ammo":
                 Persistent_Data_Store.Sniper_Ammo += 1;
+
+                break;
+
+            case "Sniper_Ammo_Large":
+                Persistent_Data_Store.Sniper_Ammo += 10;
+
+                break;
+
+
+            case "Sniper_Ammo_Xtra_Large":
+                Persistent_Data_Store.Sniper_Ammo += 50;
 
                 break;
 
@@ -219,24 +374,46 @@ public class Player_Controller : MonoBehaviour
 
         Ammo_Pickups = new List<GameObject>() ; // list for the ammo tags
         Ammo_Pickups.Add(Sniper_Pickup);
-
+        Ammo_Pickups.Add(Vines_Pickup);
 
         Ammo_Spawn_Tags = new List<string>(); // the spawn empty game object objects tags
         Ammo_Spawn_Tags.Add("Sniper_Ammo_Spawn");
-
+        Ammo_Spawn_Tags.Add("Vines_Spawn");
 
 
         for (int i = 0; i < Ammo_Spawn_Tags.Count; i++) // goes through each spawn tag instantiating ammo at each empty game object befor going to the next spawn tag
         {
 
-            GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
-            
-            for (int j = 0; j < Current_Spawn.Length; j++)
+            if (Ammo_Spawn_Tags[i] != "Vines_Spawn")
             {
-                Instantiate(Ammo_Pickups[i], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
-               
-            }
+                GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
 
+                for (int j = 0; j < Current_Spawn.Length; j++)
+                {
+
+                    Instantiate(Ammo_Pickups[i], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
+
+                }
+
+
+            }
+          
+            
+            else if(Ammo_Spawn_Tags[i] == "Vines_Spawn")   // if vines spawn make is chance based
+            {
+                GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
+
+                for (int j = 0; j < Current_Spawn.Length; j++)
+                {
+                    int Five_Is_True = Random.Range(0, 6);
+
+                    if (Five_Is_True == 5)
+                    {
+                        Instantiate(Ammo_Pickups[i], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
+                    }
+                }
+
+            }
         }
 
 
@@ -298,7 +475,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
 
             }
 
-            if(Tickets_In_Scene < 40 && In_Ticket_Booth)   // limits maximum tickets after counting the tickets in the scene
+            if(Tickets_In_Scene < 99999 && In_Ticket_Booth)   // limits maximum tickets after counting the tickets in the scene
             {
                 GameObject Ticket_Spawn = GameObject.Find("Ticket_Blower_Center");
                 Instantiate(Ticket, Ticket_Spawn.transform.position + new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f)), Quaternion.Euler(Random.Range(-90f, 90f), Random.Range(-90f, 90f), Random.Range(-90f, 90f)));

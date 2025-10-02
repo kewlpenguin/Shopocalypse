@@ -34,6 +34,9 @@ TagManager:
   - Burst_Ammo
   - Saw_Ammo
   - Vines_Ammo
+  - Vines_Spawn
+  - Sniper_Ammo_Large
+  - Sniper_Ammo_Xtra_Large
   layers:
   - Default
   - TransparentFX
