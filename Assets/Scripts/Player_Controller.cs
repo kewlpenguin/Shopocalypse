@@ -26,6 +26,8 @@ public class Player_Controller : MonoBehaviour
     public GameObject Door_To_Disable;
     public GameObject Ticket;
 
+    public GameObject Main_Door_Left;
+    public GameObject Main_Door_Right;
 
     public GameObject Slow_Wave_Spawn;
     public GameObject Lazer_Spawn;
@@ -39,6 +41,15 @@ public class Player_Controller : MonoBehaviour
     public TextMeshProUGUI Sniper;
     public TextMeshProUGUI Burst_Module;
 
+    public GameObject Soda_1;
+    public GameObject Soda_2;
+    public GameObject Soda_3;
+    public GameObject Soda_4;
+    public GameObject Soda_5;
+
+    private List<GameObject> Sodas = new List<GameObject>();
+
+
     public TextMeshProUGUI House_Health;
 
    public Slider Pickup_Progress_Bar;
@@ -49,7 +60,10 @@ public class Player_Controller : MonoBehaviour
     private bool Holding_Health = false;
     private bool Holding_Sniper_Xtra = false;
 
-
+    private bool Main_Doors_Open = false;
+    private bool Main_Doors_Opening = false; // just means moving, not specifically opening
+   
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -66,6 +80,14 @@ public class Player_Controller : MonoBehaviour
 
         StartCoroutine(Slow_Wave_Routine_Spawn());
         StartCoroutine(Lazer_Routine_Spawn());
+
+        Sodas.Add(Soda_1);
+        Sodas.Add(Soda_2);
+        Sodas.Add(Soda_3);
+        Sodas.Add(Soda_4);
+        Sodas.Add(Soda_5);
+
+
     }
 
 
@@ -257,9 +279,9 @@ public class Player_Controller : MonoBehaviour
     }
 
 
-    IEnumerator Health_Pickup_Wait(RaycastHit Ammo_We_Looking_At)
+    IEnumerator Health_Pickup_Wait(RaycastHit Vending_Machine_Looking_At)
     {
-        int Time_To_Wait = 20;
+        int Time_To_Wait = 10;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
 
@@ -278,10 +300,11 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) //about 2 seconds
             {
-                Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
-                Destroy(Ammo_We_Looking_At.collider.gameObject);
+                // do not destroy because we should be looking at a vending machine
                 Holding_Health = false;
                 Pickup_Progress_Bar.gameObject.SetActive(false);
+                GameObject New_Soda = Instantiate(Sodas[Random.Range(0, 5)], Vending_Machine_Looking_At.transform.position + (Vending_Machine_Looking_At.transform.forward * 1.5f), Vending_Machine_Looking_At.transform.rotation);
+                New_Soda.GetComponent<Rigidbody>().AddForce(Vending_Machine_Looking_At.transform.forward * 5, ForceMode.Impulse);
                 break;
             }
 
@@ -326,13 +349,6 @@ public class Player_Controller : MonoBehaviour
 
                 break;
 
-            case "Health_Pickup":
-                if (Persistent_Data_Store.House_Health < 100)
-                {
-                    Persistent_Data_Store.House_Health += 10;
-                }
-                break;
-
             case "Lazer_Ammo":
                 Persistent_Data_Store.Pierce_Lazer_Ammo += 1;
                 Debug.Log("increment lazer");
@@ -358,9 +374,14 @@ public class Player_Controller : MonoBehaviour
             case null:
                 break;
 
+            case "Soda_Pickup":
 
-
-
+                if (Persistent_Data_Store.House_Health < 100)
+                {
+                    Persistent_Data_Store.House_Health += 5;
+                }
+              
+                break;
 
         }
 
@@ -503,7 +524,37 @@ IEnumerator Slow_Wave_Routine_Spawn()
     }
 
 
+    IEnumerator Slide_Main_Doors(GameObject Left_Door, GameObject Right_Door) // actian depends on if the door is open or closed
+    {
+        if (!Main_Doors_Open)
+        {
+            for (int i = 20; i > 0; i--)
+            {
+                Main_Doors_Opening = true;
+                Left_Door.transform.Translate(new Vector3(0, 0, .5f));
+                Right_Door.transform.Translate(new Vector3(0, 0, -.5f));
+                yield return new WaitForSeconds(.01f);
+            }
+           
+            Main_Doors_Open = true;
+            Main_Doors_Opening = false;
+        }
 
+
+       else if (Main_Doors_Open)
+        {
+            for (int j = 20; j > 0; j--)
+            {
+                Main_Doors_Opening = true;
+                Left_Door.transform.Translate(new Vector3(0, 0, -.5f));
+                Right_Door.transform.Translate(new Vector3(0, 0, .5f));
+                yield return new WaitForSeconds(.01f);
+            }
+            Main_Doors_Open = false;
+            Main_Doors_Opening = false;
+          
+        }
+    }
 
 
 
@@ -550,9 +601,9 @@ IEnumerator Slow_Wave_Routine_Spawn()
 
     private void OnTriggerEnter(Collider other)
     {
-      
-    
-        if(other.name == "Ticket_Machine_Trigger")
+
+
+        if (other.name == "Ticket_Machine_Trigger")
         {
             Door_To_Enable.SetActive(true);
             Door_To_Disable.SetActive(false);
@@ -560,13 +611,24 @@ IEnumerator Slow_Wave_Routine_Spawn()
             In_Ticket_Booth = true;
             StartCoroutine(Ticket_Machine_Spawns());
 
-
-
+        }
+        else if (other.name == "Main_Door_Trigger" && !Main_Doors_Opening) // when we enter the main door trigger, if the doores are open, close em
+        {
+            if (!Main_Doors_Open) { 
+            StartCoroutine(Slide_Main_Doors(Main_Door_Left,Main_Door_Right));
+            }
         }
 
     }
 
-
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.name == "Main_Door_Trigger" && !Main_Doors_Opening)
+       
+        {
+            StartCoroutine(Slide_Main_Doors(Main_Door_Left, Main_Door_Right));
+        }
+    }
 
 
     private void OnCollisionEnter(Collision collision)

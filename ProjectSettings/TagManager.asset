@@ -37,6 +37,7 @@ TagManager:
   - Vines_Spawn
   - Sniper_Ammo_Large
   - Sniper_Ammo_Xtra_Large
+  - Soda_Pickup
   layers:
   - Default
   - TransparentFX
