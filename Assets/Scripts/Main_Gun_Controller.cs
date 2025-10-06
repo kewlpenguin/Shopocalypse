@@ -190,10 +190,10 @@ public class Main_Gun_Controller : MonoBehaviour
     {
         Saw_On_Cooldown = true;
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++) // to make a 3 round burst
         {
             Persistent_Data_Store.Saw_Ammo -= 1;
-            Instantiate(Saw, gameObject.transform.position, gameObject.transform.rotation);
+            Instantiate(Saw, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
             yield return new WaitForSeconds(.11f);
         }
         
@@ -229,7 +229,7 @@ public class Main_Gun_Controller : MonoBehaviour
         Main_On_Cooldown = true;
         for(int i = 0; i < 4; i++)
         {
-            Instantiate(Main, gameObject.transform.position, gameObject.transform.rotation);
+            Instantiate(Main, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
             yield return new WaitForSeconds(.1f);
         }
       
@@ -272,7 +272,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Slow_Wave_On_Cooldown && Persistent_Data_Store.Slow_Wave_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Slow_Wave());
-                        Instantiate(Slow_Wave, gameObject.transform.position, gameObject.transform.rotation);
+                        Instantiate(Slow_Wave, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
                     }
                     break;
 
@@ -284,7 +284,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Sniper_On_Cooldown && Persistent_Data_Store.Sniper_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Sniper());
-                        Instantiate(Sniper, gameObject.transform.position, gameObject.transform.rotation);
+                        Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation);
 
                     }
                     break;
@@ -296,7 +296,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Pierce_Lazer_On_Cooldown && Persistent_Data_Store.Pierce_Lazer_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Pierce_Lazer());
-                        Instantiate(Pierce_Lazer, gameObject.transform.position, gameObject.transform.rotation);
+                        Instantiate(Pierce_Lazer, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation);
 
                     }
                     break;
@@ -318,7 +318,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Vines_On_Cooldown && Persistent_Data_Store.Vines_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Vines());
-                        GameObject Vine_Shot = Instantiate(Vines, gameObject.transform.position, gameObject.transform.rotation); // needs changed a bit here
+                        GameObject Vine_Shot = Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation); // needs changed a bit here
                         Vine_Shot.GetComponent<Bullet_Control>().Vine_Spawn = Vine_Spawn_Reference;
                     }
                     
@@ -393,7 +393,7 @@ public class Main_Gun_Controller : MonoBehaviour
                    
                     for (float i = 0; i < 100; i ++)
                     {
-                        Instantiate(Slow_Wave, gameObject.transform.position, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f,10f),1,1)); // need to randomize this
+                        Instantiate(Slow_Wave, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f,10f),1,1)); // need to randomize this
                         Persistent_Data_Store.Slow_Wave_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }
@@ -410,7 +410,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                     for (float i = 0; i < 30; i++)
                     {
-                        Instantiate(Sniper, gameObject.transform.position, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
+                        Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Sniper_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }
@@ -427,7 +427,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                     for (float i = 0; i < 15; i++)
                     {
-                        Instantiate(Pierce_Lazer, gameObject.transform.position, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
+                        Instantiate(Pierce_Lazer, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Pierce_Lazer_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }
@@ -445,7 +445,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                     for (float i = 0; i < 40; i++)
                     {
-                        Instantiate(Saw, gameObject.transform.position, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
+                        Instantiate(Saw, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Saw_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }
@@ -463,7 +463,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                     for (float i = 0; i < 15; i++)
                     {
-                        Instantiate(Vines, gameObject.transform.position, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
+                        Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Vines_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }

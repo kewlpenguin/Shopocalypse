@@ -13,13 +13,13 @@ public class Persistent_Data_Store : MonoBehaviour
 {
     public static Persistent_Data_Store Instance;
     
-    static public float House_Health = 0; 
-    static public float Slow_Wave_Ammo = 0; 
-    static public float Sniper_Ammo = 0;
-    static public float Saw_Ammo = 0;
-    static public float Vines_Ammo = 0;
-    static public float Pierce_Lazer_Ammo = 0;
-    static public float Burst_Module_Ammo = 0;
+    static public float House_Health = 100; 
+    static public float Slow_Wave_Ammo = 999; 
+    static public float Sniper_Ammo = 999;
+    static public float Saw_Ammo = 999;
+    static public float Vines_Ammo = 999;
+    static public float Pierce_Lazer_Ammo = 999;
+    static public float Burst_Module_Ammo = 999;
 
     static public int Difficulty = 0;   // increment on every shop scene swap
 

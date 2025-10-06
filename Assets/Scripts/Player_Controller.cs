@@ -70,7 +70,7 @@ public class Player_Controller : MonoBehaviour
         gameObject.transform.position = Spawn_Pos;
        
         Lock_Cursor = CursorLockMode.Locked;
-        Cursor.lockState = Lock_Cursor;
+        //Cursor.lockState = Lock_Cursor;
       
         Player_Rigidbody = GetComponent<Rigidbody>();
       
