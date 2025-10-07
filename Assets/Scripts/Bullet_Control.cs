@@ -6,12 +6,11 @@ public class Bullet_Control : MonoBehaviour
 
 
     string My_Tag;
-    
-    private GameObject Main_Gun;
+   
 
     public GameObject Vine_Spawn;
 
-    private bool My_Bullet_Is_Active = false; // can be used for all bullets
+
 
     private Rigidbody Bullet_Rb;
 
@@ -41,9 +40,7 @@ public class Bullet_Control : MonoBehaviour
     private void Awake()
     {
         Bullet_Rb = GetComponent<Rigidbody>();
-        My_Bullet_Is_Active = true;
        
-        Main_Gun = GameObject.Find("Main_Gun");
         My_Tag = gameObject.tag;
         
         Choose_Behavior(My_Tag); // also activates behavior selected
@@ -114,7 +111,6 @@ public class Bullet_Control : MonoBehaviour
       
         yield return new WaitForSeconds(Bullet_Lifetime);
       
-        My_Bullet_Is_Active = false;
         Destroy(gameObject);
       
     }
@@ -185,8 +181,19 @@ public class Bullet_Control : MonoBehaviour
         col.enabled = false;
         Bullet_Rb.isKinematic = true;
 
+   
+
+ 
         transform.SetParent(Enemy.transform);
-       
-       
+        
+
+
     }
+
+
+
+
+
+
+
 }

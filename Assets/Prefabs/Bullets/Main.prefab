@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8b1ebaf09dd0d8c4aa6058f79462a556, type: 2}
+  - {fileID: 2100000, guid: 7276c3ce4471376428b27af9a3a1de89, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,8 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b655f878781b98e47a7b6ebdaac39aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Vine_Spawn: {fileID: 0}
   Bullet_Lifetime: 5
   Bullet_Move_Speed: 40
+  Enemies_Hit: 0
 --- !u!54 &8961119418015857245
 Rigidbody:
   m_ObjectHideFlags: 0

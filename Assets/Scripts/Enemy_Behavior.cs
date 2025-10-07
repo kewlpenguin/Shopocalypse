@@ -182,8 +182,9 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Inialize_Fast_Enemy()
     {
-        Max_Health = 9;
-        Health = 9;
+        //  Max_Health = 9;
+        Max_Health = 99999;
+        Health = 99999;
         Move_Speed = -9f - Random.Range(-2f, 2f);
         Damage = 1;
         Hit_Speed =.5f;
