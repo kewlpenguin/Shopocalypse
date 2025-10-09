@@ -1,13 +1,23 @@
 using UnityEngine;
-
-public class Ammo_Behavior : MonoBehaviour
+using System.Collections;
+using System.Collections.Generic;
+public class Ammo_Behavior : MonoBehaviour 
 {
 
     public bool In_Water_Moving = false;
     public bool In_Water = false;
+
+    public bool On_Conveyer_1 = false;
+    public bool On_Conveyer_2 = false;
+
+
     Rigidbody My_Rigidbody;
     private float Buyancy_Force = 10;
     private float Water_Speed = 5;
+    private float Conveyer_Belt_Speed = 20;
+
+
+
     private GameObject Lazer_Game_Center;
   
 
@@ -17,6 +27,8 @@ public class Ammo_Behavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
+
         Lazer_Game_Center = GameObject.Find("Lazer_Game_Middle");
 
 
@@ -36,13 +48,34 @@ public class Ammo_Behavior : MonoBehaviour
     }
 
 
+    private void Awake()
+    {
+        if (gameObject.tag == "Slow_Wave_Ammo")
+        {
+            StartCoroutine(Destroy_Slow_Wave());
+        }
+
+    }
+
+
+
     void Update()
     {
       
 
     }
 
+    
+    IEnumerator Destroy_Slow_Wave()// destroys slow wave ammo after 30 secs so it does not build up in fountain base
+    { 
+           yield return new WaitForSeconds(30);
+            Destroy(gameObject);
+    }
 
+
+
+
+    
 
 
     private void FixedUpdate()
@@ -53,16 +86,39 @@ public class Ammo_Behavior : MonoBehaviour
 
 
         }
-        else if (In_Water_Moving)
+        if (In_Water_Moving)
         {
             My_Rigidbody.AddForce(Vector3.up * Buyancy_Force, ForceMode.Acceleration);
-           
+
             if (!(My_Rigidbody.linearVelocity.z < -3))
             {
                 My_Rigidbody.AddForce(Vector3.back * Water_Speed, ForceMode.Acceleration); // this is only used in 1 spot so idc that its not flexible
             }
 
         }
+        
+        if (On_Conveyer_1)
+        {
+
+            if (!(My_Rigidbody.linearVelocity.x < Conveyer_Belt_Speed))
+            {
+                My_Rigidbody.AddForce(Vector3.left * Conveyer_Belt_Speed, ForceMode.VelocityChange);
+            }
+
+        }
+
+        if (On_Conveyer_2)
+        {
+            if (!(My_Rigidbody.linearVelocity.z < -Conveyer_Belt_Speed))
+            {
+                My_Rigidbody.AddForce(Vector3.back * Conveyer_Belt_Speed, ForceMode.VelocityChange);
+            }
+        }
+
+
+
+
+
 
         if (gameObject.tag == "Lazer_Ammo" && My_Rigidbody.useGravity == true)
         {
@@ -113,7 +169,43 @@ public class Ammo_Behavior : MonoBehaviour
 
 
         }
+        
+        if (collision.gameObject.name == "Conveyer_Bottom_Collider")
+        {
+            On_Conveyer_1 = true;     
+ 
+        }
+
+        if (collision.gameObject.name == "Conveyer_Bottom_Collider (1)")
+        {
+            On_Conveyer_2 = true;
+
+        }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name == "Conveyer_Bottom_Collider")
+        {
+            On_Conveyer_1 = false;
+
+        }
+
+        if (collision.gameObject.name == "Conveyer_Bottom_Collider (1)")
+        {
+            On_Conveyer_2 = false;
+
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 
 

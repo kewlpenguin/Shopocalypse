@@ -47,6 +47,21 @@ public class Player_Controller : MonoBehaviour
     public GameObject Soda_4;
     public GameObject Soda_5;
 
+
+    public GameObject Sushi_Spawn;
+    public GameObject Sushi_1;
+    public GameObject Sushi_2;
+    public GameObject Sushi_3;
+    public GameObject Sushi_4;
+    public GameObject Sushi_5;
+    public GameObject Sushi_6;
+    public GameObject Sushi_7;
+    public GameObject Sushi_8;
+    public GameObject Sushi_9;
+    public GameObject Sushi_10;
+
+    public List<GameObject> Sushi_List = new List<GameObject>();
+
     private List<GameObject> Sodas = new List<GameObject>();
 
 
@@ -67,6 +82,9 @@ public class Player_Controller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Create_Soda_List();
+        Create_Sushi_List();
+
         gameObject.transform.position = Spawn_Pos;
        
         Lock_Cursor = CursorLockMode.Locked;
@@ -80,14 +98,9 @@ public class Player_Controller : MonoBehaviour
 
         StartCoroutine(Slow_Wave_Routine_Spawn());
         StartCoroutine(Lazer_Routine_Spawn());
+        StartCoroutine(Sushi_Spawn_Routine());
 
-        Sodas.Add(Soda_1);
-        Sodas.Add(Soda_2);
-        Sodas.Add(Soda_3);
-        Sodas.Add(Soda_4);
-        Sodas.Add(Soda_5);
-
-
+      
     }
 
 
@@ -123,13 +136,13 @@ public class Player_Controller : MonoBehaviour
     }
 
 
-    void Check_Object_Pickup()
+    void Check_Object_Pickup() // if we press m1 are we looking at a grabably object if so do this ------>
     {
         bool Mouse_Down = Input.GetKeyDown(KeyCode.Mouse0);
 
         if (Mouse_Down)
         {
-            Pickup_Object();
+            Pickup_Object(); // <----------
         }
 
     }
@@ -139,7 +152,7 @@ public class Player_Controller : MonoBehaviour
 
 
 
-    private void Match_Camera_Rotate()
+    private void Match_Camera_Rotate() //for the player, the player follows the camera in this case
     {
         Quaternion turnRotation;
         float y = Main_Camera.transform.eulerAngles.y;
@@ -152,6 +165,7 @@ public class Player_Controller : MonoBehaviour
 
         
     }
+
 
 
     private void Pickup_Object()
@@ -314,13 +328,12 @@ public class Player_Controller : MonoBehaviour
 
         }
 
-
+     
 
 
     }
 
-
-
+    
     void Increment_Ammo_Counters(string tag) //increments the global ammo counts based on the tag of the raycasted object
     {
 
@@ -330,7 +343,7 @@ public class Player_Controller : MonoBehaviour
         switch (My_Tag)
         {
             case "Slow_Wave_Ammo":
-                Persistent_Data_Store.Slow_Wave_Ammo += 2;
+                Persistent_Data_Store.Slow_Wave_Ammo += 5;
                 break;
 
             case "Sniper_Ammo":
@@ -466,13 +479,55 @@ IEnumerator Slow_Wave_Routine_Spawn()
         }
     }
 
+    
 
-
-
-    IEnumerator Destroy_Lazer_Ammo(GameObject Last_Lazer_Pickup) 
+    void Create_Sushi_List()
     {
-            yield return new WaitForSeconds(2f);
-        Destroy(Last_Lazer_Pickup);
+      
+        Sushi_List.Add(Sushi_1);
+        Sushi_List.Add(Sushi_2);
+        Sushi_List.Add(Sushi_3);
+        Sushi_List.Add(Sushi_4);
+        Sushi_List.Add(Sushi_5);
+        Sushi_List.Add(Sushi_6);
+        Sushi_List.Add(Sushi_7);
+        Sushi_List.Add(Sushi_8);
+        Sushi_List.Add(Sushi_9);
+        Sushi_List.Add(Sushi_10);
+
+    }
+
+
+    void Create_Soda_List()
+    {
+        Sodas.Add(Soda_1);
+        Sodas.Add(Soda_2);
+        Sodas.Add(Soda_3);
+        Sodas.Add(Soda_4);
+        Sodas.Add(Soda_5);
+    }
+
+
+
+
+    IEnumerator Sushi_Spawn_Routine() // for sushi belt
+
+    {
+        for (int i = 999999; i > 0; i--)
+        {
+           Instantiate(Sushi_List[Random.Range(0, 10)], Sushi_Spawn.transform.position, Sushi_Spawn.transform.rotation);
+ 
+
+            yield return new WaitForSeconds(4);
+        }
+    }
+
+
+    IEnumerator Destroy_Lazer_Ammo(GameObject Last_Spawn)
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(Last_Spawn);
+
     }
 
 

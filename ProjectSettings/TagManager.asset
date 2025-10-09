@@ -38,6 +38,9 @@ TagManager:
   - Sniper_Ammo_Large
   - Sniper_Ammo_Xtra_Large
   - Soda_Pickup
+  - Fish_Spawn
+  - Fish_Spawn_2
+  - Saw_Ammo_Pickup_1
   layers:
   - Default
   - TransparentFX
