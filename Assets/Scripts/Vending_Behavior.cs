@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class Vending_Behavior : MonoBehaviour
 {
-    Transform Children;
+    Transform Child;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Children = gameObject.GetComponent<Transform>().GetChild(0);
+      
 
 
 
 
     }
+
+    private void Awake()
+    {
+        Child = gameObject.GetComponent<Transform>().GetChild(0);
+       
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -26,7 +33,7 @@ public class Vending_Behavior : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Children.transform.Rotate(new Vector3(0, 1, 0));
+        Child.transform.Rotate(new Vector3(0, 1, 0));
     }
 
 

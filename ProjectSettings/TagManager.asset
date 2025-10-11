@@ -41,6 +41,7 @@ TagManager:
   - Fish_Spawn
   - Fish_Spawn_2
   - Saw_Ammo_Pickup_1
+  - fish
   layers:
   - Default
   - TransparentFX

@@ -32,7 +32,7 @@ public class Enemy_Behavior : MonoBehaviour
   
     private bool Is_Rising; // for flying enemies
 
-    public string spinTag = "Saw"; // for spinning the saw weapon once it becomes a child of the enemy
+
 
 
     private bool Half_Hp; // for super heavy
@@ -84,6 +84,8 @@ public class Enemy_Behavior : MonoBehaviour
           
         }
         
+
+        /* cool code from when the fish were saws
         foreach (Transform child in transform) // if the enemy has a saw added as a child rotate it
         {
 
@@ -93,6 +95,8 @@ public class Enemy_Behavior : MonoBehaviour
                 child.Rotate( new Vector3(-2500,0,0) * Time.deltaTime, Space.Self);
             }
         }
+        */
+
 
         if (gameObject.tag == "Super_Heavy")
         {
@@ -183,8 +187,8 @@ public class Enemy_Behavior : MonoBehaviour
     void Inialize_Fast_Enemy()
     {
         //  Max_Health = 9;
-        Max_Health = 99999;
-        Health = 99999;
+        Max_Health = 9;
+        Health = 9;
         Move_Speed = -9f - Random.Range(-2f, 2f);
         Damage = 1;
         Hit_Speed =.5f;
@@ -420,11 +424,7 @@ public class Enemy_Behavior : MonoBehaviour
             }
         }
        
-        if (collision.gameObject.CompareTag("ground"))
-        {
-            On_Ground = true;
-        }
-      
+     
         if (collision.gameObject.CompareTag("Vine_Spawn"))
         {
            
@@ -461,11 +461,6 @@ public class Enemy_Behavior : MonoBehaviour
             Touching_House = false;
         }
 
-        if (collision.gameObject.CompareTag("ground"))
-        {
-            On_Ground = false;
-        }
-
 
     }
 
@@ -475,6 +470,11 @@ public class Enemy_Behavior : MonoBehaviour
         if (other.tag == "Slow_Wave" && !Slowed)
         {
             StartCoroutine(Slow_Timer());
+        }
+        
+        if (other.gameObject.CompareTag("ground"))
+        {
+            On_Ground = true;
         }
 
         else if (other.gameObject.CompareTag("Sniper"))
@@ -529,7 +529,15 @@ public class Enemy_Behavior : MonoBehaviour
 
 
     }
+    private void OnTriggerExit(Collider other)
+    {
 
+        if (other.gameObject.CompareTag("ground"))
+        {
+            On_Ground = false;
+        }
+
+    }
 
 
 

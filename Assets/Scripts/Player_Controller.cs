@@ -60,6 +60,18 @@ public class Player_Controller : MonoBehaviour
     public GameObject Sushi_9;
     public GameObject Sushi_10;
 
+    public GameObject Fish;
+    public GameObject Fish_1;
+    public GameObject Fish_2;
+    public GameObject Fish_3;
+    public GameObject Fish_4;
+    public GameObject Fish_5;
+    public GameObject Fish_6;
+    public GameObject Fish_7;
+
+
+
+
     public List<GameObject> Sushi_List = new List<GameObject>();
 
     private List<GameObject> Sodas = new List<GameObject>();
@@ -358,7 +370,7 @@ public class Player_Controller : MonoBehaviour
 
 
             case "Sniper_Ammo_Xtra_Large":
-                Persistent_Data_Store.Sniper_Ammo += 50;
+                Persistent_Data_Store.Sniper_Ammo += 20;
 
                 break;
 
@@ -376,6 +388,11 @@ public class Player_Controller : MonoBehaviour
 
             case "Saw_Ammo":
                 Persistent_Data_Store.Saw_Ammo += 10;
+
+                break;
+
+            case "Saw_Ammo_Pickup_1":
+                Persistent_Data_Store.Saw_Ammo += 5;
 
                 break;
 
@@ -402,38 +419,53 @@ public class Player_Controller : MonoBehaviour
 
 
 
-    void Instantiate_Ammo() // will be used later maybe, right now just used for sniper shelves
+    void Instantiate_Ammo() 
     {
    
 
         Ammo_Pickups = new List<GameObject>() ; // list for the ammo tags
         Ammo_Pickups.Add(Sniper_Pickup);
         Ammo_Pickups.Add(Vines_Pickup);
+        Ammo_Pickups.Add(Fish);
+        Ammo_Pickups.Add(Fish_1);
+        Ammo_Pickups.Add(Fish_2);
+        Ammo_Pickups.Add(Fish_3);
+        Ammo_Pickups.Add(Fish_4);
+        Ammo_Pickups.Add(Fish_5);
+        Ammo_Pickups.Add(Fish_6);
+        Ammo_Pickups.Add(Fish_7);
 
-        Ammo_Spawn_Tags = new List<string>(); // the spawn empty game object objects tags
+
+
+        Ammo_Spawn_Tags = new List<string>(); // the name of the tag that possible spawn locations are assigned
         Ammo_Spawn_Tags.Add("Sniper_Ammo_Spawn");
         Ammo_Spawn_Tags.Add("Vines_Spawn");
+        Ammo_Spawn_Tags.Add("Fish_Spawn");
+        Ammo_Spawn_Tags.Add("Fish_Spawn_2");
+
+
+
 
 
         for (int i = 0; i < Ammo_Spawn_Tags.Count; i++) // goes through each spawn tag instantiating ammo at each empty game object befor going to the next spawn tag
+                                                        // creates an array of all the possible spawn locations of ammo i, then loops through them based on the count of spawn locations
+                                                        //instantiating (or not instantiating) depending on what we want
         {
 
-            if (Ammo_Spawn_Tags[i] != "Vines_Spawn")
+            if (Ammo_Spawn_Tags[i] == "Sniper_Ammo_Spawn")
             {
-                GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
+                GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]); // make array of all spawn locations
 
-                for (int j = 0; j < Current_Spawn.Length; j++)
+                for (int j = 0; j < Current_Spawn.Length; j++) // loop through spawn locations
                 {
-
-                    Instantiate(Ammo_Pickups[i], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
-
+                    Instantiate(Ammo_Pickups[0], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation); // i is incremented after one of these for loops runs so al long as both lists are \
                 }
 
 
             }
           
             
-            else if(Ammo_Spawn_Tags[i] == "Vines_Spawn")   // if vines spawn make is chance based
+            else if(Ammo_Spawn_Tags[i] == "Vines_Spawn")   // vines spawn make is chance based
             {
                 GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
 
@@ -443,11 +475,37 @@ public class Player_Controller : MonoBehaviour
 
                     if (Five_Is_True == 5)
                     {
-                        Instantiate(Ammo_Pickups[i], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
+                        Instantiate(Ammo_Pickups[1], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
                     }
                 }
 
             }
+
+            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn")   // if vines spawn make is chance based
+            {
+                GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
+
+                for (int j = 0; j < Current_Spawn.Length; j++)
+                {
+                        Instantiate(Ammo_Pickups[1 + Random.Range(1, 9)], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
+                }
+
+            }
+
+
+            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn_2")   // if vines spawn make is chance based
+            {
+                GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
+
+                for (int j = 0; j < Current_Spawn.Length; j++)
+                {
+                    Instantiate(Ammo_Pickups[1 + Random.Range(1, 9)], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
+                }
+
+            }
+
+
+
         }
 
 
@@ -518,7 +576,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
            Instantiate(Sushi_List[Random.Range(0, 10)], Sushi_Spawn.transform.position, Sushi_Spawn.transform.rotation);
  
 
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(1);
         }
     }
 

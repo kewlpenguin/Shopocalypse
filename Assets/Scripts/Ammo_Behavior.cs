@@ -14,8 +14,8 @@ public class Ammo_Behavior : MonoBehaviour
     Rigidbody My_Rigidbody;
     private float Buyancy_Force = 10;
     private float Water_Speed = 5;
-    private float Conveyer_Belt_Speed = 20;
-
+    private float Conveyer_Belt_Speed = 1;
+    private float Fish_Movement = 1;
 
 
     private GameObject Lazer_Game_Center;
@@ -41,6 +41,13 @@ public class Ammo_Behavior : MonoBehaviour
           
         }
 
+
+        if (gameObject.tag == "fish" || gameObject.tag == "Saw_Ammo_Pickup_1")
+        {
+          
+            StartCoroutine(Fish_Float());
+
+        }
 
 
 
@@ -97,12 +104,13 @@ public class Ammo_Behavior : MonoBehaviour
 
         }
         
-        if (On_Conveyer_1)
+        if (On_Conveyer_1)   // different movement methods for each belt because velocity change was giving me shit when i used it for both
         {
 
-            if (!(My_Rigidbody.linearVelocity.x < Conveyer_Belt_Speed))
+            if (!(My_Rigidbody.linearVelocity.x < -Conveyer_Belt_Speed))
             {
-                My_Rigidbody.AddForce(Vector3.left * Conveyer_Belt_Speed, ForceMode.VelocityChange);
+
+                My_Rigidbody.linearVelocity = new Vector3(-Conveyer_Belt_Speed, 0, 0);
             }
 
         }
@@ -117,9 +125,6 @@ public class Ammo_Behavior : MonoBehaviour
 
 
 
-
-
-
         if (gameObject.tag == "Lazer_Ammo" && My_Rigidbody.useGravity == true)
         {
             My_Rigidbody.AddForce(Vector3.up * 9f, ForceMode.Acceleration);
@@ -127,7 +132,41 @@ public class Ammo_Behavior : MonoBehaviour
         }
 
 
+
+
+
+
+
     }
+
+
+    IEnumerator Fish_Float()
+    { 
+        yield return new WaitForSeconds(Random.Range(0f,5f)); // create random fish offsets so they dont look uniform
+       
+        for (int i = 0; i < 9999999; i++) {
+         
+            for (int j = 0; j < 50; j++) // float fish up
+            {
+       
+                gameObject.transform.Translate(Vector3.up * .01f);
+                yield return new WaitForSeconds(Random.Range(.02f,.04f));
+               
+            }
+        
+
+            for (int k = 0; k < 50; k++)  // float fish down
+            {
+        
+                gameObject.transform.Translate(Vector3.down * .01f);
+                yield return new WaitForSeconds(Random.Range(.02f, .04f));
+            }
+
+        }
+    }
+
+
+
 
 
 
@@ -181,6 +220,16 @@ public class Ammo_Behavior : MonoBehaviour
             On_Conveyer_2 = true;
 
         }
+
+        if (collision.gameObject.name == "Food_Destroyer")
+        {
+            Destroy(gameObject);
+
+        }
+
+
+
+
     }
 
     private void OnCollisionExit(Collision collision)

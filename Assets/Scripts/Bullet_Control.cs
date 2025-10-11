@@ -29,10 +29,7 @@ public class Bullet_Control : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (gameObject.tag == "Saw")
-        {
-            gameObject.transform.Rotate(new Vector3(-2500, 0, 0) * Time.deltaTime, Space.Self);
-        }
+      
     }
 
 
