@@ -42,6 +42,9 @@ TagManager:
   - Fish_Spawn_2
   - Saw_Ammo_Pickup_1
   - fish
+  - Tech_Medium
+  - Tech_Small
+  - Tech_Large
   layers:
   - Default
   - TransparentFX

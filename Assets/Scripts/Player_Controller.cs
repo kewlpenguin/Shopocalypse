@@ -86,6 +86,9 @@ public class Player_Controller : MonoBehaviour
     private bool Holding_Sniper_Large = false;
     private bool Holding_Health = false;
     private bool Holding_Sniper_Xtra = false;
+    private bool Holding_Small_Tech = false;
+    private bool Holding_Medium_Tech = false;
+    private bool Holding_Large_Tech = false;
 
     private bool Main_Doors_Open = false;
     private bool Main_Doors_Opening = false; // just means moving, not specifically opening
@@ -186,7 +189,11 @@ public class Player_Controller : MonoBehaviour
 
         RaycastHit Object_Info;
         bool Object_In_Range = Physics.Raycast(Main_Camera.transform.position, Main_Camera.transform.forward, out Object_Info, 7f, Ammo_Layer);
-        if (Object_In_Range && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Large" && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Xtra_Large" && Object_Info.collider.gameObject.tag != "Health_Pickup" )   // if pickup is instant for this ammo type
+       
+        //ugly ass if to exclude all the pickups that have a hold time attatcched
+        if (Object_In_Range && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Large" && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Xtra_Large" && Object_Info.collider.gameObject.tag != "Health_Pickup"
+          && Object_Info.collider.gameObject.tag != "Tech_Small" && Object_Info.collider.gameObject.tag != "Tech_Large" && Object_Info.collider.gameObject.tag != "Tech_Medium")   // if pickup is instant for this ammo type
+
         {
             if (Object_In_Range && Object_Info.collider.gameObject.tag != "ground") //make sure picked up is actually ammo also 13 is the ammo layer for all ammo types
             {
@@ -198,6 +205,8 @@ public class Player_Controller : MonoBehaviour
             }
         }
        
+
+
         else if(Object_In_Range && Object_Info.collider.gameObject.tag == "Sniper_Ammo_Large")   
         {
             if (!Holding_Sniper_Large) // so we are only able to start 1 coroutine at a time
@@ -220,7 +229,28 @@ public class Player_Controller : MonoBehaviour
 
         }
 
+       
+        
+        else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Tech_Small")
+        {
+            Debug.Log("picking up tech small");
+            StartCoroutine(Small_Tech_Pickup(Object_Info));
 
+        }
+      
+        
+        else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Tech_Large")
+        {
+            StartCoroutine(Large_Tech_Pickup(Object_Info));
+
+        }
+       
+        
+        else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Tech_Medium")
+        {
+            StartCoroutine(Medium_Tech_Pickup(Object_Info));
+
+        }
 
     }
 
@@ -340,12 +370,122 @@ public class Player_Controller : MonoBehaviour
 
         }
 
-     
+ 
 
+        }
+
+
+
+
+
+    IEnumerator Small_Tech_Pickup(RaycastHit Ammo_We_Looking_At) // same as above except we are pulling the randomly generated time to pickup tech number for the time to pickup value
+    {
+        float Time_To_Wait = Ammo_We_Looking_At.collider.GetComponent<Ammo_Behavior>().Tech_Pickup_Time * 10;
+        Pickup_Progress_Bar.maxValue = Time_To_Wait;
+        Pickup_Progress_Bar.gameObject.SetActive(true);
+
+        for (int i = 0; i < 9999; i++)
+        {
+            bool temp = Input.GetKey(KeyCode.Mouse0);
+            Holding_Small_Tech = temp;
+
+            Pickup_Progress_Bar.value = i;
+
+            if (!Holding_Small_Tech)
+            {
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+            if (i > Time_To_Wait) // whatever the random number genned was
+            {
+                Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
+                Destroy(Ammo_We_Looking_At.collider.gameObject);
+                Holding_Small_Tech = false;
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+
+
+
+            yield return new WaitForSeconds(.1f);
+
+        }
 
     }
 
-    
+
+    IEnumerator Large_Tech_Pickup(RaycastHit Ammo_We_Looking_At) // same as above except we are pulling the randomly generated time to pickup tech number for the time to pickup value
+    {
+        float Time_To_Wait = Ammo_We_Looking_At.collider.GetComponent<Ammo_Behavior>().Tech_Pickup_Time * 10;
+        Pickup_Progress_Bar.maxValue = Time_To_Wait;
+        Pickup_Progress_Bar.gameObject.SetActive(true);
+
+        for (int i = 0; i < 9999; i++)
+        {
+            bool temp = Input.GetKey(KeyCode.Mouse0);
+            Holding_Large_Tech = temp;
+
+            Pickup_Progress_Bar.value = i;
+
+            if (!Holding_Large_Tech)
+            {
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+            if (i > Time_To_Wait) // whatever the random number genned was
+            {
+                Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
+                Destroy(Ammo_We_Looking_At.collider.gameObject);
+                Holding_Large_Tech = false;
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+
+
+
+            yield return new WaitForSeconds(.1f);
+
+        }
+
+    }
+
+
+    IEnumerator Medium_Tech_Pickup(RaycastHit Ammo_We_Looking_At) // same as above except we are pulling the randomly generated time to pickup tech number for the time to pickup value
+    {
+        float Time_To_Wait = Ammo_We_Looking_At.collider.GetComponent<Ammo_Behavior>().Tech_Pickup_Time * 10;
+        Pickup_Progress_Bar.maxValue = Time_To_Wait;
+        Pickup_Progress_Bar.gameObject.SetActive(true);
+
+        for (int i = 0; i < 9999; i++)
+        {
+            bool temp = Input.GetKey(KeyCode.Mouse0);
+            Holding_Medium_Tech = temp;
+
+            Pickup_Progress_Bar.value = i;
+
+            if (!Holding_Medium_Tech)
+            {
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+            if (i > Time_To_Wait) // whatever the random number genned was
+            {
+                Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
+                Destroy(Ammo_We_Looking_At.collider.gameObject);
+                Holding_Medium_Tech = false;
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+
+
+
+            yield return new WaitForSeconds(.1f);
+
+        }
+
+    }
+
+
     void Increment_Ammo_Counters(string tag) //increments the global ammo counts based on the tag of the raycasted object
     {
 
@@ -376,7 +516,7 @@ public class Player_Controller : MonoBehaviour
 
             case "Lazer_Ammo":
                 Persistent_Data_Store.Pierce_Lazer_Ammo += 1;
-                Debug.Log("increment lazer");
+              
                 break;
 
 
@@ -396,8 +536,18 @@ public class Player_Controller : MonoBehaviour
 
                 break;
 
-            case "Burst_Ammo":
+            case "Tech_Small":
                 Persistent_Data_Store.Burst_Module_Ammo += 1;
+                Debug.Log("increment burst");
+                break;
+
+            case "Tech_Medium":
+                Persistent_Data_Store.Burst_Module_Ammo += 3;
+
+                break;
+
+            case "Tech_Large":
+                Persistent_Data_Store.Burst_Module_Ammo += 5;
 
                 break;
 

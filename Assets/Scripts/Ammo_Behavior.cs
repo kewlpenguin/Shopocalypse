@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 public class Ammo_Behavior : MonoBehaviour 
 {
 
@@ -15,7 +17,9 @@ public class Ammo_Behavior : MonoBehaviour
     private float Buyancy_Force = 10;
     private float Water_Speed = 5;
     private float Conveyer_Belt_Speed = 1;
-    private float Fish_Movement = 1;
+    public float Tech_Pickup_Time;
+    private TextMeshProUGUI My_Text;
+
 
 
     private GameObject Lazer_Game_Center;
@@ -27,7 +31,7 @@ public class Ammo_Behavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+       
 
         Lazer_Game_Center = GameObject.Find("Lazer_Game_Middle");
 
@@ -57,6 +61,13 @@ public class Ammo_Behavior : MonoBehaviour
 
     private void Awake()
     {
+        if (gameObject.tag == "Tech_Small" || gameObject.tag == "Tech_Medium" || gameObject.tag == "Tech_Large")
+        {
+            My_Text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            Debug.Log("assign time");
+            Tech_Pickup_Time_Assignment();
+        }
+
         if (gameObject.tag == "Slow_Wave_Ammo")
         {
             StartCoroutine(Destroy_Slow_Wave());
@@ -138,6 +149,41 @@ public class Ammo_Behavior : MonoBehaviour
 
 
     }
+
+
+    void Tech_Pickup_Time_Assignment() // random time for each, bigger objects take longer on average to pick up, value is used in player controller
+    {
+        if(gameObject.tag == "Tech_Small")
+        {
+            Tech_Pickup_Time = Random.Range(.5f, 5f);
+            My_Text.text = Tech_Pickup_Time.ToString("f1");
+
+        }
+     
+        else if(gameObject.tag == "Tech_Medium")
+        {
+            Tech_Pickup_Time = Random.Range(4f, 13f);
+            My_Text.text = Tech_Pickup_Time.ToString("f1");
+        }
+      
+        else if (gameObject.tag == "Tech_Large")
+        {
+            Tech_Pickup_Time = Random.Range(8f, 30f);
+            My_Text.text = Tech_Pickup_Time.ToString("f1");
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
     IEnumerator Fish_Float()
