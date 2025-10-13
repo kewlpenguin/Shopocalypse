@@ -92,11 +92,15 @@ public class Player_Controller : MonoBehaviour
 
     private bool Main_Doors_Open = false;
     private bool Main_Doors_Opening = false; // just means moving, not specifically opening
-   
-    
+
+    public bool Started_Real_Countdown = false;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Started_Real_Countdown = false;
+
         Create_Soda_List();
         Create_Sushi_List();
 
@@ -189,7 +193,9 @@ public class Player_Controller : MonoBehaviour
 
         RaycastHit Object_Info;
         bool Object_In_Range = Physics.Raycast(Main_Camera.transform.position, Main_Camera.transform.forward, out Object_Info, 7f, Ammo_Layer);
-       
+        
+
+
         //ugly ass if to exclude all the pickups that have a hold time attatcched
         if (Object_In_Range && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Large" && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Xtra_Large" && Object_Info.collider.gameObject.tag != "Health_Pickup"
           && Object_Info.collider.gameObject.tag != "Tech_Small" && Object_Info.collider.gameObject.tag != "Tech_Large" && Object_Info.collider.gameObject.tag != "Tech_Medium")   // if pickup is instant for this ammo type
@@ -197,8 +203,8 @@ public class Player_Controller : MonoBehaviour
         {
             if (Object_In_Range && Object_Info.collider.gameObject.tag != "ground") //make sure picked up is actually ammo also 13 is the ammo layer for all ammo types
             {
-
-
+                Started_Real_Countdown = true;
+                Debug.Log("Activate");
                 Increment_Ammo_Counters(Object_Info.collider.tag);
                 Destroy(Object_Info.collider.gameObject);
 
@@ -209,6 +215,7 @@ public class Player_Controller : MonoBehaviour
 
         else if(Object_In_Range && Object_Info.collider.gameObject.tag == "Sniper_Ammo_Large")   
         {
+    
             if (!Holding_Sniper_Large) // so we are only able to start 1 coroutine at a time
             {
                 StartCoroutine(Large_Ammo_Wait(Object_Info));
@@ -233,7 +240,8 @@ public class Player_Controller : MonoBehaviour
         
         else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Tech_Small")
         {
-            Debug.Log("picking up tech small");
+           
+        
             StartCoroutine(Small_Tech_Pickup(Object_Info));
 
         }
@@ -241,6 +249,7 @@ public class Player_Controller : MonoBehaviour
         
         else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Tech_Large")
         {
+           
             StartCoroutine(Large_Tech_Pickup(Object_Info));
 
         }
@@ -248,6 +257,7 @@ public class Player_Controller : MonoBehaviour
         
         else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Tech_Medium")
         {
+            
             StartCoroutine(Medium_Tech_Pickup(Object_Info));
 
         }
@@ -278,6 +288,9 @@ public class Player_Controller : MonoBehaviour
          
             if (i > Time_To_Wait) // about 1 seconds
             {
+                Debug.Log("Activate");
+                Started_Real_Countdown = true;
+
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
                 Destroy(Ammo_We_Looking_At.collider.gameObject);
                 Holding_Sniper_Large = false;
@@ -316,6 +329,9 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) // about 4 seconds
             {
+                Debug.Log("Activate");
+                Started_Real_Countdown = true;
+
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
                 Destroy(Ammo_We_Looking_At.collider.gameObject);
                 Holding_Sniper_Xtra = false;
@@ -356,6 +372,9 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) //about 2 seconds
             {
+                Debug.Log("Activate");
+                Started_Real_Countdown = true;
+
                 // do not destroy because we should be looking at a vending machine
                 Holding_Health = false;
                 Pickup_Progress_Bar.gameObject.SetActive(false);
@@ -398,6 +417,9 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) // whatever the random number genned was
             {
+                Debug.Log("Activate");
+                Started_Real_Countdown = true;
+
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
                 Destroy(Ammo_We_Looking_At.collider.gameObject);
                 Holding_Small_Tech = false;
@@ -434,6 +456,9 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) // whatever the random number genned was
             {
+                Debug.Log("Activate");
+                Started_Real_Countdown = true;
+
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
                 Destroy(Ammo_We_Looking_At.collider.gameObject);
                 Holding_Large_Tech = false;
@@ -470,6 +495,9 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) // whatever the random number genned was
             {
+                Debug.Log("Activate");
+                Started_Real_Countdown = true;
+
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
                 Destroy(Ammo_We_Looking_At.collider.gameObject);
                 Holding_Medium_Tech = false;
@@ -672,6 +700,8 @@ IEnumerator Slow_Wave_Routine_Spawn()
             yield return new WaitForSeconds(.33f);
         }
     }
+
+
 
     // Y  1.4 , -1.5, .3
     // Z -4 , 2,  -1.4

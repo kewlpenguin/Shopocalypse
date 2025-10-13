@@ -64,7 +64,7 @@ public class Ammo_Behavior : MonoBehaviour
         if (gameObject.tag == "Tech_Small" || gameObject.tag == "Tech_Medium" || gameObject.tag == "Tech_Large")
         {
             My_Text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            Debug.Log("assign time");
+       
             Tech_Pickup_Time_Assignment();
         }
 

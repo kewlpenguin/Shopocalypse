@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
 
 
 
@@ -27,12 +27,15 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Scene_Swaps = 0;
 
-    static public int Pre_Shopping_Time = 20;
+    static public int Pre_Shopping_Time = 120; // time to wander about and plan the shopping
 
-    static public int Shopping_Time;
-    
+    static public int Shopping_Time; // time the shopping spree actually lasts, does not start until pre shop time runs out or we pick up an object
+
+    static public int Shopping_Countdown; // the number that gets decrem,ented and keeps track of time left to shop
+
     bool Hard_Mode_Active = false;
 
+    static public bool Game_Has_Started = false;
 
     static public Scene Current_Scene;
 
@@ -40,6 +43,11 @@ public class Persistent_Data_Store : MonoBehaviour
     public int Test_Show_Var;
     static public List<int> Choosen_Enemy_Numbers = new List<int>(); // for picking enemies from the different lists
     static public List<int> Choosen_Spawn_List_Numbers = new List<int>(); //  for picking what lists of enemies we want to pull enemir=es from
+
+   public TextMeshProUGUI Shopping_Timer;
+
+
+
 
    // List<List<int>> List_Of_Above_Lists = new List<List<int>>();
 
@@ -60,6 +68,14 @@ public class Persistent_Data_Store : MonoBehaviour
     {
         Check_For_Scene_Swap();
         Test_Show_Var = Difficulty;
+       
+        if (Current_Scene.buildIndex == 3)
+        {
+            Game_Has_Started = FindFirstObjectByType<Player_Controller>().Started_Real_Countdown;
+           
+            Check_For_Object_Pickup();
+         
+        }
 
     }
 
@@ -87,22 +103,36 @@ public class Persistent_Data_Store : MonoBehaviour
 
 
 
-   void Check_For_Scene_Swap()
+   void Check_For_Scene_Swap() // scene 2 is transition 3 is shopp 0 is title and 1 is defend
     {
        
         Scene Temp = SceneManager.GetActiveScene();
 
         if (Temp != Current_Scene) // current and temp should be the same at the beginning but as soon as the scene changes temp will change first and the if will run
         {
+            Shopping_Timer.gameObject.SetActive(false);
             Scene_Swaps++;
          
-            if(Temp.buildIndex == 2) // increment difficulty during every shop phase immediately after the enemies have been decided for the upcoming level
+            if(Temp.buildIndex == 2) // increment difficulty during every show next enemies phase immediately after the enemies have been decided for the upcoming level
             {
                 Difficulty += 3;
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
                 Shopping_Time = 10 + (5 * Difficulty);
             }
+           
+            if (Temp.buildIndex == 3) // if the scene is Shopping_Time then start shoping timer
+            {
 
+                Shopping_Time = 10 + (5 * Difficulty);
+               
+                Shopping_Timer.gameObject.SetActive(true);
+              
+                Shopping_Countdown = Pre_Shopping_Time;
+               
+                Shopping_Timer.text = "Time Until Next Wave: " + Shopping_Countdown;
+              
+                StartCoroutine(Shopping_Timer_Countdown());
+            }
         }
         
 
@@ -111,6 +141,56 @@ public class Persistent_Data_Store : MonoBehaviour
         Current_Scene = SceneManager.GetActiveScene();
 
     }
+
+
+
+
+    IEnumerator Shopping_Timer_Countdown()
+    {
+        for (int i = Pre_Shopping_Time; i > 0; i--)
+        {
+
+            yield return new WaitForSeconds(1);
+            Shopping_Countdown--;
+
+
+
+        }
+    }
+
+
+
+    void Check_For_Object_Pickup() // if the game has started (due to an object being picked up or the pre shop timer running out) then increase the size of the countdown text
+    {
+        if (Game_Has_Started) // if we pickup an object before the pre shopping time is over set the countdown to be the shopping time because the game has started
+        {
+            Shopping_Timer.fontSize = 40;
+
+            if (Shopping_Countdown > Shopping_Time)
+            {
+                Shopping_Countdown = Shopping_Time;
+            }
+
+        }
+
+
+        if (Shopping_Countdown < Shopping_Time)
+        {
+            Game_Has_Started = true;
+        }
+
+        if (!Game_Has_Started) { 
+        Shopping_Timer.fontSize = 25;
+    }
+
+        Shopping_Timer.text = "Time Until Next Wave: " + Shopping_Countdown;
+    
+
+    }
+
+
+
+
 
 
 
