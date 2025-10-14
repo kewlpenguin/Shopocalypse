@@ -80,6 +80,7 @@ public class Enemy_Behavior : MonoBehaviour
         // House_Health_Reference = Persistent_Data_Store.House_Health; // for debuging 
         if (Health <= 0)
         {
+            GameObject.Find("Enemy_Spawn_Manager").SendMessage("OnEnemyKilled", SendMessageOptions.RequireReceiver);
             Destroy(gameObject);
           
         }

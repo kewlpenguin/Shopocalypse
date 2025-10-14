@@ -33,7 +33,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Shopping_Countdown; // the number that gets decrem,ented and keeps track of time left to shop
 
-    bool Hard_Mode_Active = false;
+    public bool Normal_Mode_Active = false;
 
     static public bool Game_Has_Started = false;
 
@@ -46,10 +46,11 @@ public class Persistent_Data_Store : MonoBehaviour
 
    public TextMeshProUGUI Shopping_Timer;
 
+   private Toggle Normal_Mode_Button;
+   private Toggle Easy_Mode_Button;
 
 
-
-   // List<List<int>> List_Of_Above_Lists = new List<List<int>>();
+    // List<List<int>> List_Of_Above_Lists = new List<List<int>>();
 
 
 
@@ -58,6 +59,8 @@ public class Persistent_Data_Store : MonoBehaviour
 
     void Start()
     {
+        Assign_Buttons();
+
         Current_Scene = SceneManager.GetActiveScene();
         Build_Next_Enemy_Roster();
     }
@@ -102,8 +105,33 @@ public class Persistent_Data_Store : MonoBehaviour
     }
 
 
+    void Assign_Buttons()
+    {
+        Normal_Mode_Button = GameObject.Find("Select_Difficulty_Option2").GetComponent<Button>();
+        Easy_Mode_Button = GameObject.Find("Select_Difficulty_Option1").GetComponent<Button>();
 
-   void Check_For_Scene_Swap() // scene 2 is transition 3 is shopp 0 is title and 1 is defend
+        Normal_Mode_Button.onClick.AddListener(Normal_Mode_True);
+        Easy_Mode_Button.onClick.AddListener(Normal_Mode_false);
+
+      
+
+
+    }
+
+
+    void Normal_Mode_True()
+    {
+        Normal_Mode_Active = true;
+    }
+
+    void Normal_Mode_false()
+    {
+        Normal_Mode_Active = false;
+    }
+  
+
+
+    void Check_For_Scene_Swap() // scene 2 is transition 3 is shopp 0 is title and 1 is defend
     {
        
         Scene Temp = SceneManager.GetActiveScene();

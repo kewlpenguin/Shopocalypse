@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 
 
@@ -21,6 +21,9 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
     public GameObject Super_Heavy;
     public GameObject Charger;
 
+    public TextMeshProUGUI Enemies_Remaining_Text;
+
+
     public Vector3 General_Spawn_Pos = new Vector3(37f, 1.56f, 4f);
 
     List<GameObject> Normal_Spawns = new List<GameObject>();
@@ -29,9 +32,18 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
     List<List<GameObject>> Spawn_Lists = new List<List<GameObject>>();
 
+    private int Enemies_Remaining;
+    private GameObject[] Enemies_In_Scene;
+
+    bool Wave_Over;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Enemies_Remaining = 0;
+        Wave_Over = false;
+
         Fill_Out_Normal_Spawns_List();  // fill all lists
         Fill_Out_Disrupter_Spawns_List();
         Fill_Out_Hell_Spawns_List();
@@ -40,17 +52,44 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
         Instantiate_All_Enemies();
 
+        //start all enemy dead check coroutine
 
 
-
+    }
+    void OnEnemyKilled() // is called by a sent message to this game object by the enemy behavior scripts on death
+    {
+        Debug.Log("Enemy killed!");
+        Enemies_Remaining--;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        Enemies_Remaining_Text.text = Enemies_Remaining.ToString("f0"); // enemies remaining is set to be the enemies we are going to spawn inside functions called by start
+        if(Enemies_Remaining <= 0)
+        {
+            if (!Wave_Over)
+            {
+
+            }
+           
+            Wave_Over = true; // so the swap scene coroutine is only called once
+            
+        }
     }
+
+    IEnumerator Wave_Ended()
+    {
+
+        yield return new WaitForSeconds(4);
+        SceneManager.LoadScene(2); // go to next level transition
+
+    }
+
+
+
+
 
     void Instantiate_Enemy_From_GameObject(GameObject Enemy)
     {
@@ -124,8 +163,9 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
     }
 
 
-    // the way this spawning works is in x steps
-    // 1: persistent data has the wanted enemy type numbers list and enemy lisnt numbers (normal, disruptor or hell)
+    // the way this spawning works is in 4 steps
+    //
+    // 1: persistent data has the wanted enemy type numbers list and enemy list numbers (normal, disruptor or hell)
     //
     // 2: we loop through the lists choosen in persistent data EX: Choosen_Lists(1, 0)  there are 2 lists so the loop runs twice
     //
@@ -157,15 +197,17 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
         //non clumped spawn calls
         if (Spawn_List_Num == 0) 
             {
-                for (int i = 12; i > 0; i--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); } // if normal spawn 20
+                for (int i = 12; i > 0; i--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); } // if normal spawn 12
+            Enemies_Remaining += 12;
             }
 
 
 
         else if (Spawn_List_Num == 2)
             {
-                for (int J = 6; J > 0; J--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // if disrupter spawn 10
-            }
+                for (int J = 6; J > 0; J--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // if disrupter spawn 6
+            Enemies_Remaining += 6;
+        }
 
 
         else if (Spawn_List_Num == 4)
@@ -173,14 +215,16 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
                 if (Enemy_To_Spawn.CompareTag("Charger"))
                  {
-                     for (int k = 5; k > 0; k--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // spawn 9 chargers
-                 }
+                     for (int k = 5; k > 0; k--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // spawn 5 chargers
+                Enemies_Remaining += 5;
+            }
 
 
                  else if (!(Enemy_To_Spawn.tag == "Charger"))
                 {
                      for (int l = 3; l > 0; l--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // if hell spawn 3
-                }
+                Enemies_Remaining += 3;
+            }
 
 
 
@@ -191,13 +235,15 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
         //clumped spawn calls
         if (Spawn_List_Num == 1)
         {
-            StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 18));  // if normal spawn 20
+            StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 18));  // if normal spawn 18
+            Enemies_Remaining += 18;
         }
 
 
         else if (Spawn_List_Num == 3)
         {
-            StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 12));   // if disrupter spawn 10
+            StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 12));   // if disrupter spawn 12
+            Enemies_Remaining += 12;
         }
 
         else if (Spawn_List_Num == 5)
@@ -205,11 +251,13 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
             if (Enemy_To_Spawn.CompareTag("Charger"))  // spawn more chargers than opther hell enemies
             {
                 StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 9));
+                Enemies_Remaining += 9;
             }
 
             else if (!(Enemy_To_Spawn.tag == "Charger"))
             {
                 StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 3));   // if hell spawn 3
+                Enemies_Remaining += 3;
             }
         }
 
@@ -218,7 +266,7 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
     }
 
-
+    // clumped delays are split into three and evenly ish spread throughout a roughly 1 minute wave
     IEnumerator Clumped_Enemy_Spawn_Delay(GameObject Enemy_To_Spawn, int Enemy_Count)
     {
 
