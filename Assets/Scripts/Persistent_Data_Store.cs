@@ -46,11 +46,16 @@ public class Persistent_Data_Store : MonoBehaviour
 
    public TextMeshProUGUI Shopping_Timer;
 
+    private Button Start_Button;
+
+
    private Toggle Normal_Mode_Button;
    private Toggle Easy_Mode_Button;
+   private ToggleGroup Difficulty_Selector;
 
-
-    // List<List<int>> List_Of_Above_Lists = new List<List<int>>();
+   private bool Difficulty_Has_Been_Selected = false;
+   
+ 
 
 
 
@@ -80,6 +85,11 @@ public class Persistent_Data_Store : MonoBehaviour
          
         }
 
+        if (Current_Scene.buildIndex == 0) // if we are on the title screen
+        {
+            Check_Difficulty_Toggle();
+        }
+
     }
 
 
@@ -105,16 +115,47 @@ public class Persistent_Data_Store : MonoBehaviour
     }
 
 
-    void Assign_Buttons()
+    void Assign_Buttons()// and toggles
     {
-        Normal_Mode_Button = GameObject.Find("Select_Difficulty_Option2").GetComponent<Button>();
-        Easy_Mode_Button = GameObject.Find("Select_Difficulty_Option1").GetComponent<Button>();
+        
+        Start_Button = GameObject.Find("Start").GetComponent<Button>();
 
-        Normal_Mode_Button.onClick.AddListener(Normal_Mode_True);
-        Easy_Mode_Button.onClick.AddListener(Normal_Mode_false);
+        Difficulty_Selector = GameObject.Find("Toggle_Group").GetComponent<ToggleGroup>();
+        Normal_Mode_Button = GameObject.Find("Select_Difficulty_Option2").GetComponent<Toggle>();
+        Easy_Mode_Button = GameObject.Find("Select_Difficulty_Option1").GetComponent<Toggle>();
+
+        Difficulty_Selector.allowSwitchOff = true;
+
+        Normal_Mode_Button.group = Difficulty_Selector;
+        Easy_Mode_Button.group = Difficulty_Selector;
+       
+        Normal_Mode_Button.onValueChanged.AddListener(Activate_Start_Button);
+        Easy_Mode_Button.onValueChanged.AddListener(Activate_Start_Button);
+        Start_Button.onClick.AddListener(Swap_To_Scene_1);
+      
+       
+
+        Start_Button.gameObject.SetActive(false);
+
+    
+
+    }
+
+
+    void Check_Difficulty_Toggle()
+    {
+     
+        if (Normal_Mode_Button.isOn)
+        {
+            Normal_Mode_True();
+        }
+       
+        else if (!Normal_Mode_Button.isOn)
+        {
+            Normal_Mode_false();
+        }
 
       
-
 
     }
 
@@ -128,7 +169,29 @@ public class Persistent_Data_Store : MonoBehaviour
     {
         Normal_Mode_Active = false;
     }
-  
+
+    void Activate_Start_Button(bool Difficulty_Has_Been_Selected)
+    {
+        if (Difficulty_Has_Been_Selected)
+        {
+            Start_Button.gameObject.SetActive(true);
+        }
+        else if (!Difficulty_Has_Been_Selected)
+        {
+            Start_Button.gameObject.SetActive(false);
+        }
+    }
+
+
+    void Swap_To_Scene_1()
+    {
+        if (Normal_Mode_Active)
+        {
+            Difficulty += 3;
+        }
+        SceneManager.LoadScene(1);
+    }
+
 
 
     void Check_For_Scene_Swap() // scene 2 is transition 3 is shopp 0 is title and 1 is defend
@@ -146,8 +209,15 @@ public class Persistent_Data_Store : MonoBehaviour
                 Difficulty += 3;
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
                 Shopping_Time = 10 + (5 * Difficulty);
+               
+                if(Shopping_Time > 60)
+                {
+                    Shopping_Time = 60;
+                }
+
             }
            
+
             if (Temp.buildIndex == 3) // if the scene is Shopping_Time then start shoping timer
             {
 
