@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 public class Player_Controller : MonoBehaviour
 {
     public float Speed;
@@ -69,7 +71,9 @@ public class Player_Controller : MonoBehaviour
     public GameObject Fish_6;
     public GameObject Fish_7;
 
-
+    public GameObject Closed_Sushi_Shop;
+    public GameObject Closed_Arcade;
+    public GameObject Closed_Burst_Module_Shop;
 
 
     public List<GameObject> Sushi_List = new List<GameObject>();
@@ -107,7 +111,7 @@ public class Player_Controller : MonoBehaviour
         gameObject.transform.position = Spawn_Pos;
        
         Lock_Cursor = CursorLockMode.Locked;
-        //Cursor.lockState = Lock_Cursor;
+        Cursor.lockState = Lock_Cursor;
       
         Player_Rigidbody = GetComponent<Rigidbody>();
       
@@ -128,8 +132,14 @@ public class Player_Controller : MonoBehaviour
     {
         Update_Ammo_Counts();
         Check_Object_Pickup();
-    }
+       
+        if(Persistent_Data_Store.Shopping_Countdown <= 0)
+        {
+            Scene_Swap();
+        }
 
+        Open_Closed_Stores();
+    }
 
 
     private void FixedUpdate()
@@ -140,7 +150,32 @@ public class Player_Controller : MonoBehaviour
 
 
 
-    private void Move_Player() // also includes the pickup objects function
+    void Scene_Swap() // swap to defend the house scene when time runs out
+    {
+        SceneManager.LoadScene(1); 
+    }
+
+    void Open_Closed_Stores()
+    {
+        switch (Persistent_Data_Store.Difficulty)
+        {
+            case > 1:
+              
+                
+                break;
+
+
+
+
+
+
+        }
+
+    }
+
+
+
+    private void Move_Player() 
     {
         Vector3 Horizontal = Input.GetAxis("Horizontal") * Speed * Time.deltaTime * Player_Rigidbody.transform.right;
         Vector3 Forward = Input.GetAxis("Vertical") * Speed * Time.deltaTime * Player_Rigidbody.transform.forward;
@@ -148,11 +183,8 @@ public class Player_Controller : MonoBehaviour
 
 
         Player_Rigidbody.linearVelocity = Horizontal + Vertical + Forward;
-
-      
-
-
     }
+
 
 
     void Check_Object_Pickup() // if we press m1 are we looking at a grabably object if so do this ------>
@@ -532,13 +564,13 @@ public class Player_Controller : MonoBehaviour
                 break;
 
             case "Sniper_Ammo_Large":
-                Persistent_Data_Store.Sniper_Ammo += 10;
+                Persistent_Data_Store.Sniper_Ammo += 5;
 
                 break;
 
 
             case "Sniper_Ammo_Xtra_Large":
-                Persistent_Data_Store.Sniper_Ammo += 20;
+                Persistent_Data_Store.Sniper_Ammo += 15;
 
                 break;
 

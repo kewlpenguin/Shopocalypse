@@ -4245,8 +4245,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 29.7
+  m_fontSizeBase: 29.7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5046,7 +5046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &139135303
 Transform:
   m_ObjectHideFlags: 0
@@ -25728,9 +25728,13 @@ MonoBehaviour:
   Fish_5: {fileID: 7770584863604633872, guid: c8c6d74cf9b46094fb50a6610c7dbd7f, type: 3}
   Fish_6: {fileID: 2206852426022253465, guid: 61f271b9129cf04438442607160679a1, type: 3}
   Fish_7: {fileID: 1937588542411740048, guid: c3208e5906e41a24fafdc70ad8bf88a3, type: 3}
+  Closed_Sushi_Shop: {fileID: 139135302}
+  Closed_Arcade: {fileID: 647524477}
+  Closed_Burst_Module_Shop: {fileID: 1168591140}
   Sushi_List: []
   House_Health: {fileID: 1070344297}
   Pickup_Progress_Bar: {fileID: 351185784}
+  Started_Real_Countdown: 0
 --- !u!136 &611416908
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -27758,7 +27762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &647524478
 Transform:
   m_ObjectHideFlags: 0
@@ -30434,8 +30438,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 29.7
+  m_fontSizeBase: 29.7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -31608,7 +31612,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e3726b338f42348afde65021be0cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Normal_Mode_Active: 0
   Test_Show_Var: 0
+  Shopping_Timer: {fileID: 0}
 --- !u!4 &730908481
 Transform:
   m_ObjectHideFlags: 0
@@ -42896,8 +42902,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 29.7
+  m_fontSizeBase: 29.7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -49018,8 +49024,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 29.7
+  m_fontSizeBase: 29.7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -51489,7 +51495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1168591141
 Transform:
   m_ObjectHideFlags: 0
@@ -54251,8 +54257,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 29.7
+  m_fontSizeBase: 29.7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -72735,8 +72741,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 29.7
+  m_fontSizeBase: 29.7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -85720,7 +85726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1974551308
 MonoBehaviour:
   m_ObjectHideFlags: 0

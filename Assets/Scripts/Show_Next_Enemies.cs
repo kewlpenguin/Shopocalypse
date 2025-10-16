@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 
 
@@ -30,6 +30,8 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
 
     List<List<GameObject>> Spawn_Lists = new List<List<GameObject>>();
 
+    private Button Enter_Shop_Phase;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,9 +44,9 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
         Fill_Out_Spawns_List_List();
 
         StartCoroutine(Delay_Start());
-      
 
-
+        Enter_Shop_Phase = GameObject.Find("Enter_Shop_Phase").GetComponent<Button>();
+        Enter_Shop_Phase.onClick.AddListener(Swap_To_Scene_3);
 
 
     }
@@ -55,6 +57,12 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
     {
         gameObject.transform.Rotate(0, .04f, 0);
     }
+
+    void Swap_To_Scene_3() // to shopping scene
+    {
+        SceneManager.LoadScene(3);
+    }
+
 
     IEnumerator Delay_Start() // wait for persistent data to generate enemies
     {

@@ -67,11 +67,12 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
     void Update()
     {
         Enemies_Remaining_Text.text = Enemies_Remaining.ToString("f0"); // enemies remaining is set to be the enemies we are going to spawn inside functions called by start
+      
         if(Enemies_Remaining <= 0)
         {
             if (!Wave_Over)
             {
-
+                StartCoroutine(Wave_Ended());
             }
            
             Wave_Over = true; // so the swap scene coroutine is only called once
@@ -79,10 +80,9 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
         }
     }
 
-    IEnumerator Wave_Ended()
+    IEnumerator Wave_Ended() // swap to next scene
     {
-
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene(2); // go to next level transition
 
     }
@@ -119,6 +119,8 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
             if (My_Hound.gameObject == true) // idk how this works lol
             {
                 GameObject My_Spawn = Instantiate(Normal_Spawns[Random.Range(0, 3)], My_Hound.transform.position, Quaternion.Euler(0, 0, 0));
+              
+                My_Spawn.gameObject.GetComponent<Enemy_Behavior>().Is_Lava_Child = true; //so we dont cound their kills
                 My_Spawn.GetComponent<Rigidbody>().AddForce(new Vector3(20, 0, 0), ForceMode.Impulse);
                 
                 yield return new WaitForSeconds(5);

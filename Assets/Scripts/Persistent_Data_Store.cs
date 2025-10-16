@@ -14,14 +14,17 @@ public class Persistent_Data_Store : MonoBehaviour
     public static Persistent_Data_Store Instance;
     
     static public float House_Health = 100; 
-    static public float Slow_Wave_Ammo = 1; 
-    static public float Sniper_Ammo = 10;
-    static public float Saw_Ammo = 10;
-    static public float Vines_Ammo = 10;
-    static public float Pierce_Lazer_Ammo = 10;
-    static public float Burst_Module_Ammo = 10;
+    static public float Slow_Wave_Ammo = 0; 
+    static public float Sniper_Ammo = 0;
+    static public float Saw_Ammo = 0;
+    static public float Vines_Ammo = 0;
+    static public float Pierce_Lazer_Ammo = 0;
+    static public float Burst_Module_Ammo = 0;
 
-    static public int Difficulty = 0;   // increment on every shop scene swap
+    static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
+    static public int Difficulty_Increment = 0;
+
+
 
     static public int Points_To_Allocate;
 
@@ -32,6 +35,8 @@ public class Persistent_Data_Store : MonoBehaviour
     static public int Shopping_Time; // time the shopping spree actually lasts, does not start until pre shop time runs out or we pick up an object
 
     static public int Shopping_Countdown; // the number that gets decrem,ented and keeps track of time left to shop
+
+
 
     public bool Normal_Mode_Active = false;
 
@@ -49,7 +54,7 @@ public class Persistent_Data_Store : MonoBehaviour
     private Button Start_Button;
 
 
-   private Toggle Normal_Mode_Button;
+    private Toggle Normal_Mode_Button;
    private Toggle Easy_Mode_Button;
    private ToggleGroup Difficulty_Selector;
 
@@ -67,7 +72,7 @@ public class Persistent_Data_Store : MonoBehaviour
         Assign_Buttons();
 
         Current_Scene = SceneManager.GetActiveScene();
-        Build_Next_Enemy_Roster();
+       
     }
 
 
@@ -123,6 +128,9 @@ public class Persistent_Data_Store : MonoBehaviour
         Difficulty_Selector = GameObject.Find("Toggle_Group").GetComponent<ToggleGroup>();
         Normal_Mode_Button = GameObject.Find("Select_Difficulty_Option2").GetComponent<Toggle>();
         Easy_Mode_Button = GameObject.Find("Select_Difficulty_Option1").GetComponent<Toggle>();
+        
+       
+
 
         Difficulty_Selector.allowSwitchOff = true;
 
@@ -131,9 +139,10 @@ public class Persistent_Data_Store : MonoBehaviour
        
         Normal_Mode_Button.onValueChanged.AddListener(Activate_Start_Button);
         Easy_Mode_Button.onValueChanged.AddListener(Activate_Start_Button);
+        
         Start_Button.onClick.AddListener(Swap_To_Scene_1);
-      
        
+
 
         Start_Button.gameObject.SetActive(false);
 
@@ -170,7 +179,9 @@ public class Persistent_Data_Store : MonoBehaviour
         Normal_Mode_Active = false;
     }
 
-    void Activate_Start_Button(bool Difficulty_Has_Been_Selected)
+
+
+    void Activate_Start_Button(bool Difficulty_Has_Been_Selected) //if we have selected a difficulty, activate and display the start button
     {
         if (Difficulty_Has_Been_Selected)
         {
@@ -183,16 +194,26 @@ public class Persistent_Data_Store : MonoBehaviour
     }
 
 
-    void Swap_To_Scene_1()
+
+    void Swap_To_Scene_1() // to defend the house scene once from the title screen to the first defend the house instance
     {
         if (Normal_Mode_Active)
         {
-            Difficulty += 3;
+            Difficulty += 1;
+            Difficulty_Increment = 2;
         }
+      
+        else if (!Normal_Mode_Active) // difficulty starts lower and increments slower on easy mode
+        {
+            Difficulty_Increment = 1;
+        }
+       
+        Build_Next_Enemy_Roster();
+
         SceneManager.LoadScene(1);
     }
 
-
+  
 
     void Check_For_Scene_Swap() // scene 2 is transition 3 is shopp 0 is title and 1 is defend
     {
@@ -206,13 +227,14 @@ public class Persistent_Data_Store : MonoBehaviour
          
             if(Temp.buildIndex == 2) // increment difficulty during every show next enemies phase immediately after the enemies have been decided for the upcoming level
             {
-                Difficulty += 3;
+                Difficulty += Difficulty_Increment;
+               
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
                 Shopping_Time = 10 + (5 * Difficulty);
                
-                if(Shopping_Time > 60)
+                if(Shopping_Time > 110) // maximum shop time for later waves (slightly less than pre shop time)
                 {
-                    Shopping_Time = 60;
+                    Shopping_Time = 110;
                 }
 
             }
@@ -227,7 +249,7 @@ public class Persistent_Data_Store : MonoBehaviour
               
                 Shopping_Countdown = Pre_Shopping_Time;
                
-                Shopping_Timer.text = "Time Until Next Wave: " + Shopping_Countdown;
+                Shopping_Timer.text = "Time Until Shopping Spree Start: " + Shopping_Countdown;
               
                 StartCoroutine(Shopping_Timer_Countdown());
             }
@@ -243,15 +265,14 @@ public class Persistent_Data_Store : MonoBehaviour
 
 
 
-    IEnumerator Shopping_Timer_Countdown()
+
+    IEnumerator Shopping_Timer_Countdown() // decrements global timer that swaps to house defend scene when reaches 0
     {
         for (int i = Pre_Shopping_Time; i > 0; i--)
         {
 
             yield return new WaitForSeconds(1);
             Shopping_Countdown--;
-
-
 
         }
     }
@@ -277,12 +298,23 @@ public class Persistent_Data_Store : MonoBehaviour
             Game_Has_Started = true;
         }
 
-        if (!Game_Has_Started) { 
+        if (!Game_Has_Started) 
+        { 
         Shopping_Timer.fontSize = 25;
-    }
+         }
 
-        Shopping_Timer.text = "Time Until Next Wave: " + Shopping_Countdown;
-    
+
+        if (Shopping_Countdown > Shopping_Time) // if we are in the pre shopping time make the text say untill spree starts instead of until next vwave arrives
+        {
+
+            Shopping_Timer.text = "Time Until Shopping Spree Start: " + Shopping_Countdown; 
+        }
+       
+        else if (Shopping_Countdown <= Shopping_Time) // iff the spree time has begun
+        {
+            Shopping_Timer.fontSize = 40;
+            Shopping_Timer.text = "Time Until Next Wave Arrives: " + Shopping_Countdown;
+        }
 
     }
 

@@ -32,7 +32,7 @@ public class Enemy_Behavior : MonoBehaviour
   
     private bool Is_Rising; // for flying enemies
 
-
+    public bool Is_Lava_Child = false; // if enemy is child of lavahound we do not count their kills
 
 
     private bool Half_Hp; // for super heavy
@@ -80,7 +80,11 @@ public class Enemy_Behavior : MonoBehaviour
         // House_Health_Reference = Persistent_Data_Store.House_Health; // for debuging 
         if (Health <= 0)
         {
+            if (!Is_Lava_Child) 
+            { 
             GameObject.Find("Enemy_Spawn_Manager").SendMessage("OnEnemyKilled", SendMessageOptions.RequireReceiver);
+             }
+            
             Destroy(gameObject);
           
         }
@@ -222,7 +226,7 @@ public class Enemy_Behavior : MonoBehaviour
     }
     void Inialize_Lava_Hound_Mini_Enemy() // called when an enemies tag is roller etc
     {
-        Max_Health = 70;
+        Max_Health = 60;
         Health = 70;
         Move_Speed = -6f - Random.Range(-1f, 1f);
         Damage = 2f;
@@ -507,17 +511,17 @@ public class Enemy_Behavior : MonoBehaviour
 
         else if (other.gameObject.CompareTag("Pierce_Lazer"))
         {
-            Health -= 1.9f; // does abt 20 to rollers
+            Health -= 2.1f; // does abt 24 to rollers
           
             if (gameObject.tag != "Roller") // roller has multiple segments so it normally gets one shotted llooooll
 
             {
-                Health -= 7;
+                Health -= 10;
             }
           
-            if(!On_Ground && gameObject.tag != "Roller") // double damage to Airborne enemies
+            if(!On_Ground && gameObject.tag != "Roller") // quadrouple damage to Airborne enemies
             {
-                Health -= 20;
+                Health -= 30;
                 EnemyRigidbody.AddForce(Vector3.right * Pierce_Lazer_Knockback * 15, ForceMode.Impulse);
             }
 
