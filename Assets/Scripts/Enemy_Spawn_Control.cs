@@ -66,7 +66,7 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
     // Update is called once per frame
     void Update()
     {
-        Enemies_Remaining_Text.text = Enemies_Remaining.ToString("f0"); // enemies remaining is set to be the enemies we are going to spawn inside functions called by start
+        Enemies_Remaining_Text.text = Enemies_Remaining.ToString(); // enemies remaining is set to be the enemies we are going to spawn inside functions called by start
       
         if(Enemies_Remaining <= 0)
         {

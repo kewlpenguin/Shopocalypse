@@ -75,6 +75,10 @@ public class Player_Controller : MonoBehaviour
     public GameObject Closed_Arcade;
     public GameObject Closed_Burst_Module_Shop;
 
+    public GameObject Sushi_Shop;
+    public GameObject Arcade;
+    public GameObject Burst_Module_Shop;
+
 
     public List<GameObject> Sushi_List = new List<GameObject>();
 
@@ -93,6 +97,7 @@ public class Player_Controller : MonoBehaviour
     private bool Holding_Small_Tech = false;
     private bool Holding_Medium_Tech = false;
     private bool Holding_Large_Tech = false;
+    private bool Holding_Car_Door = false;
 
     private bool Main_Doors_Open = false;
     private bool Main_Doors_Opening = false; // just means moving, not specifically opening
@@ -103,8 +108,12 @@ public class Player_Controller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Open_Closed_Stores();
+      
         Started_Real_Countdown = false;
 
+       
+       
         Create_Soda_List();
         Create_Sushi_List();
 
@@ -138,7 +147,7 @@ public class Player_Controller : MonoBehaviour
             Scene_Swap();
         }
 
-        Open_Closed_Stores();
+        
     }
 
 
@@ -155,20 +164,29 @@ public class Player_Controller : MonoBehaviour
         SceneManager.LoadScene(1); 
     }
 
-    void Open_Closed_Stores()
+    void Open_Closed_Stores() // depending on difficulty
     {
         switch (Persistent_Data_Store.Difficulty)
+
         {
-            case > 1:
-              
-                
+            case >= 13:
+                Closed_Burst_Module_Shop.gameObject.SetActive(false);
+                Burst_Module_Shop.gameObject.SetActive(true);
                 break;
 
+            case >= 7:
+                Closed_Arcade.gameObject.SetActive(false);
+                Arcade.gameObject.SetActive(true);
 
+                break;
+            case >= 3:
+                Sushi_Shop.gameObject.SetActive(true);
+                Closed_Sushi_Shop.gameObject.SetActive(false);
+                break;
 
-
-
-
+            case < 3:
+                Initiate_Shop_States();
+                break;
         }
 
     }
@@ -198,8 +216,15 @@ public class Player_Controller : MonoBehaviour
 
     }
 
+    void Initiate_Shop_States() {
+        Closed_Burst_Module_Shop.gameObject.SetActive(true);
+        Closed_Arcade.gameObject.SetActive(true);
+        Closed_Sushi_Shop.gameObject.SetActive(true);
 
-
+        Sushi_Shop.gameObject.SetActive(false);
+        Burst_Module_Shop.gameObject.SetActive(false);
+        Arcade.gameObject.SetActive(false);
+    }
 
 
 
@@ -230,7 +255,7 @@ public class Player_Controller : MonoBehaviour
 
         //ugly ass if to exclude all the pickups that have a hold time attatcched
         if (Object_In_Range && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Large" && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Xtra_Large" && Object_Info.collider.gameObject.tag != "Health_Pickup"
-          && Object_Info.collider.gameObject.tag != "Tech_Small" && Object_Info.collider.gameObject.tag != "Tech_Large" && Object_Info.collider.gameObject.tag != "Tech_Medium")   // if pickup is instant for this ammo type
+          && Object_Info.collider.gameObject.tag != "Tech_Small" && Object_Info.collider.gameObject.tag != "Tech_Large" && Object_Info.collider.gameObject.tag != "Tech_Medium" && Object_Info.collider.gameObject.tag != "Car_Door")   // if pickup is instant for this ammo type
 
         {
             if (Object_In_Range && Object_Info.collider.gameObject.tag != "ground") //make sure picked up is actually ammo also 13 is the ammo layer for all ammo types
@@ -293,11 +318,17 @@ public class Player_Controller : MonoBehaviour
             StartCoroutine(Medium_Tech_Pickup(Object_Info));
 
         }
+      
+        else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Car_Door")
+        {
 
+            StartCoroutine(Leave_Shop_Early(Object_Info));
+
+        }
     }
 
 
-   
+   //multiple coroutines modify the one slider progress bar gameobject, definitely not the cleanest way to this lol
 
     IEnumerator Large_Ammo_Wait(RaycastHit Ammo_We_Looking_At) // all wait functions are checking if we are holding the pickup key over the course of X seconds
     {
@@ -320,7 +351,6 @@ public class Player_Controller : MonoBehaviour
          
             if (i > Time_To_Wait) // about 1 seconds
             {
-                Debug.Log("Activate");
                 Started_Real_Countdown = true;
 
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
@@ -361,7 +391,6 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) // about 4 seconds
             {
-                Debug.Log("Activate");
                 Started_Real_Countdown = true;
 
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
@@ -404,7 +433,6 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) //about 2 seconds
             {
-                Debug.Log("Activate");
                 Started_Real_Countdown = true;
 
                 // do not destroy because we should be looking at a vending machine
@@ -449,7 +477,6 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) // whatever the random number genned was
             {
-                Debug.Log("Activate");
                 Started_Real_Countdown = true;
 
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
@@ -488,7 +515,6 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) // whatever the random number genned was
             {
-                Debug.Log("Activate");
                 Started_Real_Countdown = true;
 
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
@@ -527,11 +553,45 @@ public class Player_Controller : MonoBehaviour
             }
             if (i > Time_To_Wait) // whatever the random number genned was
             {
-                Debug.Log("Activate");
                 Started_Real_Countdown = true;
 
                 Increment_Ammo_Counters(Ammo_We_Looking_At.collider.tag);
                 Destroy(Ammo_We_Looking_At.collider.gameObject);
+                Holding_Medium_Tech = false;
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+
+
+
+            yield return new WaitForSeconds(.1f);
+
+        }
+
+    }
+
+    IEnumerator Leave_Shop_Early(RaycastHit Ammo_We_Looking_At) // same as above except we are pulling the randomly generated time to pickup tech number for the time to pickup value
+    {
+        float Time_To_Wait = 30;
+        Pickup_Progress_Bar.maxValue = Time_To_Wait;
+        Pickup_Progress_Bar.gameObject.SetActive(true);
+
+        for (int i = 0; i < 9999; i++)
+        {
+            bool temp = Input.GetKey(KeyCode.Mouse0);
+            Holding_Car_Door = temp;
+
+            Pickup_Progress_Bar.value = i;
+
+            if (!Holding_Car_Door)
+            {
+                Pickup_Progress_Bar.gameObject.SetActive(false);
+                break;
+            }
+            if (i > Time_To_Wait) // whatever the random number genned was
+            {
+                SceneManager.LoadScene(1); //go to defend the house
+
                 Holding_Medium_Tech = false;
                 Pickup_Progress_Bar.gameObject.SetActive(false);
                 break;

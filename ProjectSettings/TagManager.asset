@@ -45,6 +45,7 @@ TagManager:
   - Tech_Medium
   - Tech_Small
   - Tech_Large
+  - Car_Door
   layers:
   - Default
   - TransparentFX

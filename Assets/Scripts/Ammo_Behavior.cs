@@ -23,7 +23,7 @@ public class Ammo_Behavior : MonoBehaviour
 
 
     private GameObject Lazer_Game_Center;
-  
+    private GameObject Arcade;
 
 
 
@@ -31,36 +31,16 @@ public class Ammo_Behavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       
-
-        Lazer_Game_Center = GameObject.Find("Lazer_Game_Middle");
-
-
+   
         My_Rigidbody = gameObject.GetComponent<Rigidbody>();
-        
-        if(gameObject.tag == "Lazer_Ammo" && My_Rigidbody.useGravity == false)
-        {
-            My_Rigidbody.AddForce(((Lazer_Game_Center.transform.position - gameObject.transform.position) + new Vector3(0, Random.Range(-.3f, .3f), Random.Range(-.3f, .3f))) * 2, ForceMode.Impulse);
-            My_Rigidbody.AddTorque(new Vector3(0, 0, 10));
-          
-        }
-
-
-        if (gameObject.tag == "fish" || gameObject.tag == "Saw_Ammo_Pickup_1")
-        {
-          
-            StartCoroutine(Fish_Float());
-
-        }
-
-
-
 
     }
 
 
     private void Awake()
     {
+        Arcade = GameObject.Find("Arcade");
+
         if (gameObject.tag == "Tech_Small" || gameObject.tag == "Tech_Medium" || gameObject.tag == "Tech_Large")
         {
             My_Text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -71,6 +51,26 @@ public class Ammo_Behavior : MonoBehaviour
         if (gameObject.tag == "Slow_Wave_Ammo")
         {
             StartCoroutine(Destroy_Slow_Wave());
+        }
+
+        Lazer_Game_Center = GameObject.Find("Lazer_Game_Middle");
+
+        if (Arcade.gameObject.activeInHierarchy == true)
+        {
+            if (gameObject.tag == "Lazer_Ammo" && My_Rigidbody.useGravity == false)
+            {
+                My_Rigidbody.AddForce(((Lazer_Game_Center.transform.position - gameObject.transform.position) + new Vector3(0, Random.Range(-.3f, .3f), Random.Range(-.3f, .3f))) * 2, ForceMode.Impulse);
+                My_Rigidbody.AddTorque(new Vector3(0, 0, 10));
+
+            }
+        }
+
+
+        if (gameObject.tag == "fish" || gameObject.tag == "Saw_Ammo_Pickup_1")
+        {
+
+            StartCoroutine(Fish_Float());
+
         }
 
     }

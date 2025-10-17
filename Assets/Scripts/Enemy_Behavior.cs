@@ -22,7 +22,7 @@ public class Enemy_Behavior : MonoBehaviour
     bool Slowed = false;
    
     //knockback values
-    private float Sniper_Knockback = 30;
+    private float Sniper_Knockback = 10;
     private float Main_Knockback = 4;
     private float Pierce_Lazer_Knockback = 2;
    
@@ -227,7 +227,7 @@ public class Enemy_Behavior : MonoBehaviour
     void Inialize_Lava_Hound_Mini_Enemy() // called when an enemies tag is roller etc
     {
         Max_Health = 60;
-        Health = 70;
+        Health = 60;
         Move_Speed = -6f - Random.Range(-1f, 1f);
         Damage = 2f;
         Hit_Speed = 2f;
@@ -488,7 +488,7 @@ public class Enemy_Behavior : MonoBehaviour
             // StartCoroutine(Local_Invincibility_Sniper());// because the stupid roller has multiple segments but also to prevent potential multi hits
             if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1)
             {
-                Health -= 20;
+                Health -= 12;
                 EnemyRigidbody.AddForce(Vector3.right * Sniper_Knockback + new Vector3(0, (Sniper_Knockback / 2), 0), ForceMode.Impulse);
                 other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit++;
             }

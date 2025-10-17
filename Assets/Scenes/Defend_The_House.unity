@@ -1023,7 +1023,7 @@ MonoBehaviour:
   Vines_On_Cooldown: 0
   Pierce_Lazer_On_Cooldown: 0
   Burst_Module_On_Cooldown: 0
-  Sniper_Cooldown: 0.25
+  Sniper_Cooldown: 0.33
   Pierce_Lazer_Cooldown: 2
   Saw_Cooldown: 0.5
   Vines_Cooldown: 2
@@ -3087,7 +3087,7 @@ Transform:
   m_GameObject: {fileID: 1074716644}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 8369.5, y: -4.21, z: 18.0487}
+  m_LocalPosition: {x: 8369.5, y: -4.2, z: 18.0487}
   m_LocalScale: {x: 16699.604, y: 1.2621092, z: 38.911922}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5187,7 +5187,7 @@ Transform:
   m_GameObject: {fileID: 1844073322}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0, w: 1.0000001}
-  m_LocalPosition: {x: 44, y: 0.30999947, z: 3.7689934}
+  m_LocalPosition: {x: 49.11, y: 0.30999947, z: 3.7689934}
   m_LocalScale: {x: 0.55806, y: 1169.6223, z: 10.09597}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5482,8 +5482,8 @@ Transform:
   m_GameObject: {fileID: 1996489169}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1586, y: -3.94, z: 18.0487}
-  m_LocalScale: {x: 43.68452, y: 1.2621092, z: 38.911922}
+  m_LocalPosition: {x: 34.3565, y: -3.94, z: 18.0487}
+  m_LocalScale: {x: 112.08012, y: 1.2621092, z: 38.911922}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

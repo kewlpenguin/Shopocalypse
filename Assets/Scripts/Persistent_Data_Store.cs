@@ -58,7 +58,7 @@ public class Persistent_Data_Store : MonoBehaviour
    private Toggle Easy_Mode_Button;
    private ToggleGroup Difficulty_Selector;
 
-   private bool Difficulty_Has_Been_Selected = false;
+  
    
  
 
@@ -200,12 +200,12 @@ public class Persistent_Data_Store : MonoBehaviour
         if (Normal_Mode_Active)
         {
             Difficulty += 1;
-            Difficulty_Increment = 2;
+            Difficulty_Increment = 3;
         }
       
         else if (!Normal_Mode_Active) // difficulty starts lower and increments slower on easy mode
         {
-            Difficulty_Increment = 1;
+            Difficulty_Increment = 2;
         }
        
         Build_Next_Enemy_Roster();
