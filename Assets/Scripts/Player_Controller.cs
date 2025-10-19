@@ -967,7 +967,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
     {
         if (Persistent_Data_Store.Sniper_Ammo > 0) { Sniper.enabled = true; } else if (Persistent_Data_Store.Sniper_Ammo <= 0) { Sniper.enabled = false; }
        
-        Sniper.text = "F : " + Persistent_Data_Store.Sniper_Ammo;
+        Sniper.text = "D : " + Persistent_Data_Store.Sniper_Ammo;
 
 
         if (Persistent_Data_Store.Saw_Ammo > 0) { Saw.enabled = true; } else if (Persistent_Data_Store.Saw_Ammo <= 0) { Saw.enabled = false; }

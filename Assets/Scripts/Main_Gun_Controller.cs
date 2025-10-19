@@ -66,8 +66,9 @@ public class Main_Gun_Controller : MonoBehaviour
 
     public TextMeshProUGUI House_Health;
 
-
-
+    public ToggleGroup Arrows;
+    public Toggle Up_Arrow;
+    public Toggle Down_Arrow;
 
 
 
@@ -117,6 +118,19 @@ public class Main_Gun_Controller : MonoBehaviour
 
         // Use the direction for rotation
         Main_Gun_Rigidbody.rotation = Quaternion.LookRotation(direction, Vector3.up);
+
+
+
+
+        //neeeeeds finisheeedd djkdshfgalksdugfolaisfudgalksdujfygoasudfygoiausfydgioausdfygoausdfgiouasfdgiouasfdgioasfydgiausdvfkjhggggkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgk
+        if(Vertical_Input > 0)
+        {
+            Up_Arrow.isOn = true;
+        }
+        if (Vertical_Input < 0)
+        {
+            Up_Arrow.isOn = false;
+        }
 
 
     }
