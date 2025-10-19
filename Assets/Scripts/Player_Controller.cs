@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Player_Controller : MonoBehaviour
 {
     public float Speed;
+    private float Spree_Speed = 1500;
     public float Jump_Power;
     public float Gravity_Mult;
     CursorLockMode Lock_Cursor;
@@ -107,8 +108,8 @@ public class Player_Controller : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
-        Open_Closed_Stores();
+    { 
+        Open_Closed_Stores(); // do this first so gamobject.active dependencies are satisfied
       
         Started_Real_Countdown = false;
 
@@ -129,9 +130,16 @@ public class Player_Controller : MonoBehaviour
         Instantiate_Ammo();
 
         StartCoroutine(Slow_Wave_Routine_Spawn());
-        StartCoroutine(Lazer_Routine_Spawn());
-        StartCoroutine(Sushi_Spawn_Routine());
+     
+        if (Arcade.gameObject.activeInHierarchy == true)
+        {
+            StartCoroutine(Lazer_Routine_Spawn());
+        }
 
+        if (Sushi_Shop.gameObject.activeInHierarchy == true)
+        {
+            StartCoroutine(Sushi_Spawn_Routine());
+        }
       
     }
 
@@ -147,6 +155,8 @@ public class Player_Controller : MonoBehaviour
             Scene_Swap();
         }
 
+        if (Started_Real_Countdown && Speed != Spree_Speed)  // when the spree starts you move faster
+        { Speed = Spree_Speed; }
         
     }
 
@@ -172,17 +182,27 @@ public class Player_Controller : MonoBehaviour
             case >= 13:
                 Closed_Burst_Module_Shop.gameObject.SetActive(false);
                 Burst_Module_Shop.gameObject.SetActive(true);
+                Closed_Arcade.gameObject.SetActive(false);
+                Arcade.gameObject.SetActive(true);
+                Sushi_Shop.gameObject.SetActive(true);
+                Closed_Sushi_Shop.gameObject.SetActive(false);
                 break;
+
 
             case >= 7:
                 Closed_Arcade.gameObject.SetActive(false);
                 Arcade.gameObject.SetActive(true);
+                Sushi_Shop.gameObject.SetActive(true);
+                Closed_Sushi_Shop.gameObject.SetActive(false);
 
                 break;
+
+
             case >= 3:
                 Sushi_Shop.gameObject.SetActive(true);
                 Closed_Sushi_Shop.gameObject.SetActive(false);
                 break;
+
 
             case < 3:
                 Initiate_Shop_States();

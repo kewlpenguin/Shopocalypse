@@ -30,7 +30,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Scene_Swaps = 0;
 
-    static public int Pre_Shopping_Time = 120; // time to wander about and plan the shopping
+    static public int Pre_Shopping_Time = 99999999; // time to wander about and plan the shopping
 
     static public int Shopping_Time; // time the shopping spree actually lasts, does not start until pre shop time runs out or we pick up an object
 
@@ -230,9 +230,11 @@ public class Persistent_Data_Store : MonoBehaviour
                 Difficulty += Difficulty_Increment;
                
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
-                Shopping_Time = 10 + (5 * Difficulty);
-               
-                if(Shopping_Time > 110) // maximum shop time for later waves (slightly less than pre shop time)
+                Shopping_Time = 20 + (2 * Difficulty);
+           
+
+
+                if (Shopping_Time > 110) // maximum shop time for later waves (slightly less than pre shop time)
                 {
                     Shopping_Time = 110;
                 }
@@ -307,12 +309,14 @@ public class Persistent_Data_Store : MonoBehaviour
         if (Shopping_Countdown > Shopping_Time) // if we are in the pre shopping time make the text say untill spree starts instead of until next vwave arrives
         {
 
-            Shopping_Timer.text = "Time Until Shopping Spree Start: " + Shopping_Countdown; 
+            Shopping_Timer.text = "WARNING: TAKING ANY ITEM WILL ALERT THE NEXT WAVE ";
+            Shopping_Timer.color = Color.yellow;
         }
        
         else if (Shopping_Countdown <= Shopping_Time) // iff the spree time has begun
         {
             Shopping_Timer.fontSize = 40;
+            Shopping_Timer.color = Color.red;
             Shopping_Timer.text = "Time Until Next Wave Arrives: " + Shopping_Countdown;
         }
 

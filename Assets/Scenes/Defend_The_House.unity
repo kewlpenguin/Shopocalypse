@@ -1023,7 +1023,7 @@ MonoBehaviour:
   Vines_On_Cooldown: 0
   Pierce_Lazer_On_Cooldown: 0
   Burst_Module_On_Cooldown: 0
-  Sniper_Cooldown: 0.33
+  Sniper_Cooldown: 0.2
   Pierce_Lazer_Cooldown: 2
   Saw_Cooldown: 0.5
   Vines_Cooldown: 2

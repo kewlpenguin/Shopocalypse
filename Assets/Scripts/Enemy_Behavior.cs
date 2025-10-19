@@ -23,6 +23,7 @@ public class Enemy_Behavior : MonoBehaviour
    
     //knockback values
     private float Sniper_Knockback = 10;
+    private float Slow_Knockback = 1;
     private float Main_Knockback = 4;
     private float Pierce_Lazer_Knockback = 2;
    
@@ -203,8 +204,8 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Inialize_Heavy_Enemy() 
     {
-        Max_Health = 100;
-        Health = 100;
+        Max_Health = 80;
+        Health = 80;
         Move_Speed = -1.5f - Random.Range(-.5f, .5f);
         Damage = 10;
         Hit_Speed = 3f;
@@ -470,11 +471,16 @@ public class Enemy_Behavior : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other) // for getting shot
+    private void OnTriggerEnter(Collider other) // slow does not reapply but the knockback does
     {
-        if (other.tag == "Slow_Wave" && !Slowed)
+        if (other.tag == "Slow_Wave")
         {
-            StartCoroutine(Slow_Timer());
+            if (!Slowed)
+            {
+                StartCoroutine(Slow_Timer());
+            }
+           
+            EnemyRigidbody.AddForce(Vector3.right * Slow_Knockback + new Vector3(0, (Slow_Knockback / 2), 0), ForceMode.Impulse); // 
         }
         
         if (other.gameObject.CompareTag("ground"))
@@ -488,7 +494,7 @@ public class Enemy_Behavior : MonoBehaviour
             // StartCoroutine(Local_Invincibility_Sniper());// because the stupid roller has multiple segments but also to prevent potential multi hits
             if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1)
             {
-                Health -= 12;
+                Health -= 15;
                 EnemyRigidbody.AddForce(Vector3.right * Sniper_Knockback + new Vector3(0, (Sniper_Knockback / 2), 0), ForceMode.Impulse);
                 other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit++;
             }
@@ -516,7 +522,7 @@ public class Enemy_Behavior : MonoBehaviour
             if (gameObject.tag != "Roller") // roller has multiple segments so it normally gets one shotted llooooll
 
             {
-                Health -= 10;
+                Health -= 6;
             }
           
             if(!On_Ground && gameObject.tag != "Roller") // quadrouple damage to Airborne enemies

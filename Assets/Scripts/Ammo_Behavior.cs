@@ -14,7 +14,7 @@ public class Ammo_Behavior : MonoBehaviour
 
 
     Rigidbody My_Rigidbody;
-    private float Buyancy_Force = 10;
+    private float Buyancy_Force = 11;
     private float Water_Speed = 5;
     private float Conveyer_Belt_Speed = 1;
     public float Tech_Pickup_Time;
@@ -23,7 +23,7 @@ public class Ammo_Behavior : MonoBehaviour
 
 
     private GameObject Lazer_Game_Center;
-    private GameObject Arcade;
+   // private GameObject Arcade;
 
 
 
@@ -32,14 +32,14 @@ public class Ammo_Behavior : MonoBehaviour
     void Start()
     {
    
-        My_Rigidbody = gameObject.GetComponent<Rigidbody>();
+     
 
     }
 
 
     private void Awake()
     {
-        Arcade = GameObject.Find("Arcade");
+        My_Rigidbody = gameObject.GetComponent<Rigidbody>();
 
         if (gameObject.tag == "Tech_Small" || gameObject.tag == "Tech_Medium" || gameObject.tag == "Tech_Large")
         {
@@ -48,15 +48,20 @@ public class Ammo_Behavior : MonoBehaviour
             Tech_Pickup_Time_Assignment();
         }
 
+
         if (gameObject.tag == "Slow_Wave_Ammo")
         {
+            My_Rigidbody.AddForce(new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), Random.Range(-3f, 3f)), ForceMode.Impulse);
             StartCoroutine(Destroy_Slow_Wave());
         }
 
-        Lazer_Game_Center = GameObject.Find("Lazer_Game_Middle");
 
-        if (Arcade.gameObject.activeInHierarchy == true)
+      
+
+        if (GameObject.Find("The_Shop").transform.Find("Arcade").gameObject.activeInHierarchy == true)
         {
+            Lazer_Game_Center = GameObject.Find("Lazer_Game_Middle");
+          
             if (gameObject.tag == "Lazer_Ammo" && My_Rigidbody.useGravity == false)
             {
                 My_Rigidbody.AddForce(((Lazer_Game_Center.transform.position - gameObject.transform.position) + new Vector3(0, Random.Range(-.3f, .3f), Random.Range(-.3f, .3f))) * 2, ForceMode.Impulse);
