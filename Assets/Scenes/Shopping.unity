@@ -72814,8 +72814,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290031272
-  m_fontColor: {r: 0.65882355, g: 0.68235296, b: 0.7058824, a: 1}
+    rgba: 4287323318
+  m_fontColor: {r: 0.7137255, g: 0.36078432, b: 0.54509807, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -80599,6 +80599,8 @@ MonoBehaviour:
   Sniper1: {fileID: 0}
   Burst_Module: {fileID: 0}
   House_Health: {fileID: 0}
+  Up_Arrow: {fileID: 0}
+  Down_Arrow: {fileID: 0}
 --- !u!54 &1841498728
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -82,7 +82,7 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
     IEnumerator Wave_Ended() // swap to next scene
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3); // was 3, fix this later
         SceneManager.LoadScene(2); // go to next level transition
 
     }
@@ -207,8 +207,17 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
         else if (Spawn_List_Num == 2)
             {
-                for (int J = 6; J > 0; J--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // if disrupter spawn 6
-            Enemies_Remaining += 6;
+            if (Enemy_To_Spawn.CompareTag("Heavy"))
+            {
+                for (int J = 3; J > 0; J--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // if heavy spawn 3
+                Enemies_Remaining += 3;
+            }
+
+            else if (!Enemy_To_Spawn.CompareTag("Heavy"))
+            {
+                for (int J = 6; J > 0; J--) { StartCoroutine(Non_Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn)); }  // if disrupter not heavy spawn 6
+                Enemies_Remaining += 6;
+            }
         }
 
 
@@ -244,8 +253,17 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
         else if (Spawn_List_Num == 3)
         {
-            StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 12));   // if disrupter spawn 12
-            Enemies_Remaining += 12;
+            if (Enemy_To_Spawn.CompareTag("Heavy"))
+            {
+                StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 9));   // if disrupter spawn 12
+                Enemies_Remaining += 9;
+            }
+
+            else if (!Enemy_To_Spawn.CompareTag("Heavy"))
+            {
+                StartCoroutine(Clumped_Enemy_Spawn_Delay(Enemy_To_Spawn, 12));   // if disrupter spawn 12
+                Enemies_Remaining += 12;
+            }
         }
 
         else if (Spawn_List_Num == 5)
@@ -275,7 +293,7 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
         if (Enemy_To_Spawn.tag != "Lava_Hound" && Enemy_To_Spawn.tag != "Super_Heavy")
         {
-            for (int m = 3; m > 0; m--) // spawn cump 3 times
+            for (int m = 3; m > 0; m--) // spawn clump 3 times
             {
                 yield return new WaitForSeconds(16 + Random.Range(-5, 5)); //Spawn clumps at 3 random ish points and not at the beggining
               

@@ -236,7 +236,7 @@ public class Enemy_Behavior : MonoBehaviour
         Min_Fly_Hight = 2;
 
     }
-    void Inialize_Lava_Hound_Enemy() // acts as like a blocker for the cannon bc obviosly there are more pressing matters then the areal turd
+    void Inialize_Lava_Hound_Enemy() //
     {
         Max_Health = 200;
         Health = 200;
@@ -246,17 +246,17 @@ public class Enemy_Behavior : MonoBehaviour
 
     }
 
-    void Inialize_Super_Heavy_Enemy() // acts as like a blocker for the cannon bc obviosly there are more pressing matters then the areal turd
+    void Inialize_Super_Heavy_Enemy() // 
     {
-        Max_Health = 1000;
-        Health = 1000;
+        Max_Health = 500;
+        Health = 800;
         Move_Speed = -.5f;
         Damage = 25f;
         Hit_Speed = 3f;
      
 
     }
-    void Inialize_Charger_Enemy() // acts as like a blocker for the cannon bc obviosly there are more pressing matters then the areal turd
+    void Inialize_Charger_Enemy() // 
     {
         Max_Health = 70;
         Health = 70;
@@ -408,7 +408,7 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Knockback_Super_Heavy()
     {  
-        if(Health <= 500 && !Half_Hp)
+        if(Health <= 250 && !Half_Hp)
         {
             Half_Hp = true;
             EnemyRigidbody.AddForce(Vector3.right * 3000, ForceMode.Impulse);

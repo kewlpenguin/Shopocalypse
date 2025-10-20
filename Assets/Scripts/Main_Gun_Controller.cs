@@ -66,9 +66,8 @@ public class Main_Gun_Controller : MonoBehaviour
 
     public TextMeshProUGUI House_Health;
 
-    public ToggleGroup Arrows;
-    public Toggle Up_Arrow;
-    public Toggle Down_Arrow;
+    public Image Up_Arrow;
+    public Image Down_Arrow;
 
 
 
@@ -105,6 +104,41 @@ public class Main_Gun_Controller : MonoBehaviour
     void Move_Main_Gun()
     {
         float Vertical_Input = Input.GetAxis("Vertical") * Move_Speed * Time.deltaTime;
+       
+        bool Holding_W = Input.GetKey(KeyCode.W); // for glowing arrows
+        bool Holding_S = Input.GetKey(KeyCode.S);
+
+        if (Holding_S) // down
+        {
+            Up_Arrow.color = Color.white;
+            Down_Arrow.GetComponentInParent<RectTransform>().localScale = new Vector3(2f, 2f, 2f);
+          
+            Down_Arrow.color = Color.green;
+            Up_Arrow.GetComponentInParent<RectTransform>().localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+     
+        if (Holding_W) // up
+        {
+            Up_Arrow.color = Color.green;
+            Down_Arrow.GetComponentInParent<RectTransform>().localScale = new Vector3(1.5f, 1.5f, 1.5f);
+
+            Down_Arrow.color = Color.white;
+            Up_Arrow.GetComponentInParent<RectTransform>().localScale = new Vector3(2f, 2f, 2f);
+        }
+
+        if (!Holding_S)
+        {
+            Down_Arrow.color = Color.white;
+            Down_Arrow.GetComponentInParent<RectTransform>().localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+       
+        if (!Holding_W)
+        {
+            Up_Arrow.color = Color.white;
+            Up_Arrow.GetComponentInParent<RectTransform>().localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+
+
         float Current_Pos = gameObject.transform.position.y;
         float change_In_Pos = Mathf.Clamp(Current_Pos + Vertical_Input, Min_Hight, Max_Hight);
 
@@ -118,19 +152,6 @@ public class Main_Gun_Controller : MonoBehaviour
 
         // Use the direction for rotation
         Main_Gun_Rigidbody.rotation = Quaternion.LookRotation(direction, Vector3.up);
-
-
-
-
-        //neeeeeds finisheeedd djkdshfgalksdugfolaisfudgalksdujfygoasudfygoiausfydgioausdfygoausdfgiouasfdgiouasfdgioasfydgiausdvfkjhggggkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgk
-        if(Vertical_Input > 0)
-        {
-            Up_Arrow.isOn = true;
-        }
-        if (Vertical_Input < 0)
-        {
-            Up_Arrow.isOn = false;
-        }
 
 
     }

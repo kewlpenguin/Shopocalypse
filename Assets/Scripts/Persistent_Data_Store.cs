@@ -24,7 +24,10 @@ public class Persistent_Data_Store : MonoBehaviour
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
 
-
+    static public int Easy_Base_Shop_Time = 50;
+    static public int Normal_Base_Shop_Time = 30;
+    
+    static public int Base_Shop_Time; //we set this later
 
     static public int Points_To_Allocate;
 
@@ -41,6 +44,7 @@ public class Persistent_Data_Store : MonoBehaviour
     public bool Normal_Mode_Active = false;
 
     static public bool Game_Has_Started = false;
+    static public bool CountDown_Has_Started = false;
 
     static public Scene Current_Scene;
 
@@ -201,11 +205,14 @@ public class Persistent_Data_Store : MonoBehaviour
         {
             Difficulty += 1;
             Difficulty_Increment = 3;
+         
+            Base_Shop_Time = Normal_Base_Shop_Time;
         }
       
         else if (!Normal_Mode_Active) // difficulty starts lower and increments slower on easy mode
         {
             Difficulty_Increment = 2;
+            Base_Shop_Time = Easy_Base_Shop_Time;
         }
        
         Build_Next_Enemy_Roster();
@@ -222,6 +229,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
         if (Temp != Current_Scene) // current and temp should be the same at the beginning but as soon as the scene changes temp will change first and the if will run
         {
+          
             Shopping_Timer.gameObject.SetActive(false);
             Scene_Swaps++;
          
@@ -230,30 +238,24 @@ public class Persistent_Data_Store : MonoBehaviour
                 Difficulty += Difficulty_Increment;
                
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
-                Shopping_Time = 20 + (2 * Difficulty);
-           
-
-
-                if (Shopping_Time > 110) // maximum shop time for later waves (slightly less than pre shop time)
-                {
-                    Shopping_Time = 110;
-                }
+                Shopping_Time = Base_Shop_Time + (2 * Difficulty); // either 30 or 50 seconds plus 2 * difficulty
 
             }
            
 
             if (Temp.buildIndex == 3) // if the scene is Shopping_Time then start shoping timer
             {
-
-                Shopping_Time = 10 + (5 * Difficulty);
-               
+                CountDown_Has_Started = false;
+                
                 Shopping_Timer.gameObject.SetActive(true);
               
                 Shopping_Countdown = Pre_Shopping_Time;
-               
-                Shopping_Timer.text = "Time Until Shopping Spree Start: " + Shopping_Countdown;
-              
-                StartCoroutine(Shopping_Timer_Countdown());
+
+                if (!CountDown_Has_Started)
+                {
+                    StartCoroutine(Shopping_Timer_Countdown());
+                    CountDown_Has_Started = true;
+                }
             }
         }
         
@@ -272,10 +274,13 @@ public class Persistent_Data_Store : MonoBehaviour
     {
         for (int i = Pre_Shopping_Time; i > 0; i--)
         {
-
             yield return new WaitForSeconds(1);
             Shopping_Countdown--;
-
+         
+            if(Current_Scene.buildIndex != 3) // when we are not in shop stop the countdown
+            {
+                break;
+            }
         }
     }
 
