@@ -13,7 +13,7 @@ public class Main_Gun_Controller : MonoBehaviour
     Rigidbody Main_Gun_Rigidbody;
     public float Move_Speed = 10;
     CursorLockMode Battle_Cursor_Mode;
-    public string Selected_Ammo = "none";
+    public string Selected_Ammo = "None";
     private int Weapon_Selected_Font_Size = 32;
     private int Default_Font_Size = 24;
 
@@ -24,6 +24,11 @@ public class Main_Gun_Controller : MonoBehaviour
     public GameObject Saw;
     public GameObject Vines;
     public GameObject Vine_Spawn_Reference;
+
+
+
+
+
 
     public float Selected_Bullet_Cooldown;
     public bool Secondary_On_Cooldown;
@@ -37,6 +42,8 @@ public class Main_Gun_Controller : MonoBehaviour
     public bool Pierce_Lazer_On_Cooldown = false;
     public bool Burst_Module_On_Cooldown = true;
 
+    public bool Select_Weapon_Text_Flashing = false;
+
     public float Sniper_Cooldown;
     public float Pierce_Lazer_Cooldown;
     public float Saw_Cooldown;
@@ -48,6 +55,13 @@ public class Main_Gun_Controller : MonoBehaviour
     public float Saw_Countdown;
     public float Vines_Countdown;
     public float Burst_Module_Countdown;
+
+    bool Slow_Wave_Active;
+    bool Sniper_Active;
+    bool Pierce_Lazer_Active;
+    bool Saw_Active;
+    bool Vines_Active;
+
 
 
     public TextMeshProUGUI Slow_Wave2;
@@ -62,7 +76,8 @@ public class Main_Gun_Controller : MonoBehaviour
     public TextMeshProUGUI Lazer1;
     public TextMeshProUGUI Sniper1;
     public TextMeshProUGUI Burst_Module;
-
+   
+    public TextMeshProUGUI Select_Weapon_Text;
 
     public TextMeshProUGUI House_Health;
 
@@ -78,6 +93,8 @@ public class Main_Gun_Controller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Selected_Ammo = "None";
+        Select_Weapon_Text.gameObject.SetActive(false);
         Main_Gun_Rigidbody = gameObject.GetComponent<Rigidbody>();
        Battle_Cursor_Mode = CursorLockMode.None;
        Cursor.lockState = Battle_Cursor_Mode;
@@ -108,7 +125,7 @@ public class Main_Gun_Controller : MonoBehaviour
         bool Holding_W = Input.GetKey(KeyCode.W); // for glowing arrows
         bool Holding_S = Input.GetKey(KeyCode.S);
 
-        if (Holding_S) // down
+        if (Holding_S) // down   // for ui arrow elements
         {
             Up_Arrow.color = Color.white;
             Down_Arrow.GetComponentInParent<RectTransform>().localScale = new Vector3(2f, 2f, 2f);
@@ -161,26 +178,69 @@ public class Main_Gun_Controller : MonoBehaviour
 
     void Switch_Selected_Ammo() // very inneficient way of checking what the active weapon is
     {
-        bool Slow_Wave_Active = Input.GetKeyDown(KeyCode.LeftShift);
-        bool Sniper_Active = Input.GetKeyDown(KeyCode.D);
-        bool Pierce_Lazer_Active = Input.GetKeyDown(KeyCode.A);
-        bool Saw_Active = Input.GetKeyDown(KeyCode.E);
-        bool Vines_Active = Input.GetKeyDown(KeyCode.Q);
+       
 
+        Slow_Wave_Active = Input.GetKeyDown(KeyCode.LeftShift);
+        Sniper_Active = Input.GetKeyDown(KeyCode.D);
+        Pierce_Lazer_Active = Input.GetKeyDown(KeyCode.A);
+        Saw_Active = Input.GetKeyDown(KeyCode.E);
+        Vines_Active = Input.GetKeyDown(KeyCode.Q);
+      
+
+        if (Selected_Ammo == "None" && Persistent_Data_Store.Total_Ammo != 0) // if we have no ammo do not pester player
+        {
+
+            Select_Weapon_Text.gameObject.SetActive(true);
+           
+            if (Select_Weapon_Text_Flashing == false) // so it is only started once
+            {
+                Select_Weapon_Text_Flashing = true;
+                StartCoroutine(Flash_Text());
+            }
+            
+          
+        }
 
         // i hate how i had to do this but basically it just sets all other font sizes to default and the selected one to 30
 
-        if (Slow_Wave_Active) { Selected_Ammo = "Slow_Wave"; Slow_Wave2.fontSize = Weapon_Selected_Font_Size; Vines1.fontSize = Default_Font_Size; Saw1.fontSize = Default_Font_Size; Lazer1.fontSize = Default_Font_Size; Sniper1.fontSize = Default_Font_Size; }
+        if (Slow_Wave_Active) { Selected_Ammo = "Slow_Wave"; Slow_Wave2.fontSize = Weapon_Selected_Font_Size; Vines1.fontSize = Default_Font_Size; Saw1.fontSize = Default_Font_Size; Lazer1.fontSize = Default_Font_Size; Sniper1.fontSize = Default_Font_Size; Select_Weapon_Text_Flashing = false; }
             
-        else if (Sniper_Active) {Selected_Ammo = "Sniper"; Slow_Wave2.fontSize = Default_Font_Size; Vines1.fontSize = Default_Font_Size; Saw1.fontSize = Default_Font_Size; Lazer1.fontSize = Default_Font_Size; Sniper1.fontSize = Weapon_Selected_Font_Size; }
+        else if (Sniper_Active) {Selected_Ammo = "Sniper"; Slow_Wave2.fontSize = Default_Font_Size; Vines1.fontSize = Default_Font_Size; Saw1.fontSize = Default_Font_Size; Lazer1.fontSize = Default_Font_Size; Sniper1.fontSize = Weapon_Selected_Font_Size; Select_Weapon_Text_Flashing = false;}
 
-        else if (Pierce_Lazer_Active) { Selected_Ammo = "Pierce_Lazer"; Slow_Wave2.fontSize = Default_Font_Size; Vines1.fontSize = Default_Font_Size; Saw1.fontSize = Default_Font_Size; Lazer1.fontSize = Weapon_Selected_Font_Size; Sniper1.fontSize = Default_Font_Size; }
+        else if (Pierce_Lazer_Active) { Selected_Ammo = "Pierce_Lazer"; Slow_Wave2.fontSize = Default_Font_Size; Vines1.fontSize = Default_Font_Size; Saw1.fontSize = Default_Font_Size; Lazer1.fontSize = Weapon_Selected_Font_Size; Sniper1.fontSize = Default_Font_Size; Select_Weapon_Text_Flashing = false; }
 
-        else if (Saw_Active) { Selected_Ammo = "Saw"; Slow_Wave2.fontSize = Default_Font_Size; Vines1.fontSize = Default_Font_Size; Saw1.fontSize = Weapon_Selected_Font_Size; Lazer1.fontSize = Default_Font_Size; Sniper1.fontSize = Default_Font_Size; }
+        else if (Saw_Active) { Selected_Ammo = "Saw"; Slow_Wave2.fontSize = Default_Font_Size; Vines1.fontSize = Default_Font_Size; Saw1.fontSize = Weapon_Selected_Font_Size; Lazer1.fontSize = Default_Font_Size; Sniper1.fontSize = Default_Font_Size; Select_Weapon_Text_Flashing = false;}
 
-        else if (Vines_Active) { Selected_Ammo = "Vines"; Slow_Wave2.fontSize = Default_Font_Size; Vines1.fontSize = Weapon_Selected_Font_Size; Saw1.fontSize = Default_Font_Size; Lazer1.fontSize = Default_Font_Size; Sniper1.fontSize = Default_Font_Size; }
+        else if (Vines_Active) { Selected_Ammo = "Vines"; Slow_Wave2.fontSize = Default_Font_Size; Vines1.fontSize = Weapon_Selected_Font_Size; Saw1.fontSize = Default_Font_Size; Lazer1.fontSize = Default_Font_Size; Sniper1.fontSize = Default_Font_Size; Select_Weapon_Text_Flashing = false;}
+
 
     }
+
+    IEnumerator Flash_Text()
+    {
+        for (int i = 999999; i > 0; i--)
+        {
+            if (Select_Weapon_Text_Flashing)
+            {
+                Select_Weapon_Text.color = Color.red;
+
+                yield return new WaitForSeconds(.5f);
+
+                Select_Weapon_Text.color = Color.white;
+
+                yield return new WaitForSeconds(.5f);
+
+                if(Select_Weapon_Text_Flashing == false)
+                {
+                    Debug.Log("deactivate text");
+                    Select_Weapon_Text.gameObject.SetActive(false);
+                    break;
+                   
+                }
+            }
+        }
+    }
+
 
 
 
@@ -266,7 +326,7 @@ public class Main_Gun_Controller : MonoBehaviour
         Main_On_Cooldown = true;
         for(int i = 0; i < 4; i++)
         {
-            Instantiate(Main, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
+            Instantiate(Main, gameObject.transform.position + gameObject.transform.up * .75f + gameObject.transform.forward * .75f, gameObject.transform.rotation);
             yield return new WaitForSeconds(.1f);
         }
       
@@ -297,7 +357,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
     void Fire_Selected_Ammo()// instantiates bullets and such while the bullets have their own script that controlls their behavior
     {
-        bool Mouse_Down = Input.GetMouseButton(1);
+        bool Mouse_Down = Input.GetMouseButton(0);
         if (Mouse_Down && !Charging)
         {
             switch (Selected_Ammo) // fires ammo based on the selected ammo string
@@ -311,7 +371,14 @@ public class Main_Gun_Controller : MonoBehaviour
                         StartCoroutine(Weapon_Cooldown_Slow_Wave());
                         Instantiate(Slow_Wave, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
                     }
+                    
+                    else if(Persistent_Data_Store.Slow_Wave_Ammo <= 0)
+                    {
+                        Selected_Ammo = "None";
+                    }
+
                     break;
+
 
 
                 case "Sniper":
@@ -324,7 +391,15 @@ public class Main_Gun_Controller : MonoBehaviour
                         Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation);
 
                     }
+
+                    else if (Persistent_Data_Store.Sniper_Ammo <= 0)
+                    {
+                        Selected_Ammo = "None";
+                    }
+
                     break;
+
+
 
                 case "Pierce_Lazer":
 
@@ -336,7 +411,14 @@ public class Main_Gun_Controller : MonoBehaviour
                         Instantiate(Pierce_Lazer, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation);
 
                     }
+
+                    else if (Persistent_Data_Store.Pierce_Lazer_Ammo <= 0)
+                    {
+                        Selected_Ammo = "None";
+                    }
                     break;
+
+
 
                 case "Saw":
 
@@ -346,8 +428,15 @@ public class Main_Gun_Controller : MonoBehaviour
                     {
                         StartCoroutine(Weapon_Cooldown_Saw());
                     }
+
+                    else if (Persistent_Data_Store.Saw_Ammo <= 0)
+                    {
+                        Selected_Ammo = "None";
+                    }
                     break;
               
+
+
                 case "Vines":
 
                     Selected_Bullet_Cooldown = Vines_Cooldown;
@@ -358,9 +447,18 @@ public class Main_Gun_Controller : MonoBehaviour
                         GameObject Vine_Shot = Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation); // needs changed a bit here
                         Vine_Shot.GetComponent<Bullet_Control>().Vine_Spawn = Vine_Spawn_Reference;
                     }
-                    
+
+                    else if (Persistent_Data_Store.Vines_Ammo <= 0)
+                    {
+                        Selected_Ammo = "None";
+                    }
                     break;
 
+
+
+                case "None":
+                    //do nothing lol
+                    break;
             }
         }
      
@@ -524,7 +622,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
     void Fire_Main_Gun()
     {
-        bool Mouse_Down = Input.GetMouseButton(0);
+        bool Mouse_Down = Input.GetMouseButton(1);
         if (!Main_On_Cooldown && Mouse_Down)
         {
             StartCoroutine(Main_Weapon_Cooldown());
@@ -535,9 +633,10 @@ public class Main_Gun_Controller : MonoBehaviour
     
 
     void Update_Cooldowns_And_Ammo_Counts() // this whole system is fucking terrible and not able to be scaled up easily
+        //basically just enables and disables ui elements based on ammo counts, also updates ammo counts every frame and helps de select ammo after it runs out of ammo
     {
 
-        if (Persistent_Data_Store.Sniper_Ammo > 0) { Sniper2.enabled = true; } else if(Persistent_Data_Store.Sniper_Ammo <= 0) { Sniper1.enabled = false; }
+        if (Persistent_Data_Store.Sniper_Ammo > 0) { Sniper2.enabled = true; } else if(Persistent_Data_Store.Sniper_Ammo <= 0) { Sniper1.enabled = false; Sniper_Active = false; }
 
 
         Sniper1.text = "D: " + Persistent_Data_Store.Sniper_Ammo;
@@ -555,7 +654,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
 
 
-        if (Persistent_Data_Store.Saw_Ammo > 0) { Saw2.enabled = true; } else if (Persistent_Data_Store.Saw_Ammo <= 0) { Saw1.enabled = false; }
+        if (Persistent_Data_Store.Saw_Ammo > 0) { Saw2.enabled = true; } else if (Persistent_Data_Store.Saw_Ammo <= 0) { Saw1.enabled = false;}
         Saw1.text = "E: " + Persistent_Data_Store.Saw_Ammo;
 
         if (Saw_On_Cooldown)
@@ -588,7 +687,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
 
 
-        if (Persistent_Data_Store.Pierce_Lazer_Ammo > 0) { Lazer2.enabled = true; } else if (Persistent_Data_Store.Pierce_Lazer_Ammo <= 0) { Lazer1.enabled = false; }
+        if (Persistent_Data_Store.Pierce_Lazer_Ammo > 0) { Lazer2.enabled = true; } else if (Persistent_Data_Store.Pierce_Lazer_Ammo <= 0) { Lazer1.enabled = false;}
 
         Lazer1.text = "A: " + Persistent_Data_Store.Pierce_Lazer_Ammo;
 
@@ -605,7 +704,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
 
 
-        if (Persistent_Data_Store.Slow_Wave_Ammo > 0) { Slow_Wave2.enabled = true; } else if (Persistent_Data_Store.Slow_Wave_Ammo <= 0) { Slow_Wave2.enabled = false; }
+        if (Persistent_Data_Store.Slow_Wave_Ammo > 0) { Slow_Wave2.enabled = true; } else if (Persistent_Data_Store.Slow_Wave_Ammo <= 0) { Slow_Wave2.enabled = false;}
 
         Slow_Wave2.text = "Shift: " + Persistent_Data_Store.Slow_Wave_Ammo;
 
@@ -614,7 +713,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
 
 
-        if (Persistent_Data_Store.Burst_Module_Ammo > 0) { Burst_Module.enabled = true; } else if (Persistent_Data_Store.Burst_Module_Ammo <= 0) { Burst_Module1.enabled = false; }
+        if (Persistent_Data_Store.Burst_Module_Ammo > 0) { Burst_Module.enabled = true; } else if (Persistent_Data_Store.Burst_Module_Ammo <= 0) { Burst_Module1.enabled = false;}
 
         Burst_Module1.text = "SPACE: " + Persistent_Data_Store.Burst_Module_Ammo;
 

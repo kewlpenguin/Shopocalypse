@@ -20,6 +20,9 @@ public class Persistent_Data_Store : MonoBehaviour
     static public float Vines_Ammo = 0;
     static public float Pierce_Lazer_Ammo = 0;
     static public float Burst_Module_Ammo = 0;
+    
+    static public float Total_Ammo = 0;
+
 
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
@@ -49,7 +52,7 @@ public class Persistent_Data_Store : MonoBehaviour
     static public Scene Current_Scene;
 
 
-    public int Test_Show_Var;
+    public float Test_Show_Var;
     static public List<int> Choosen_Enemy_Numbers = new List<int>(); // for picking enemies from the different lists
     static public List<int> Choosen_Spawn_List_Numbers = new List<int>(); //  for picking what lists of enemies we want to pull enemir=es from
 
@@ -84,8 +87,11 @@ public class Persistent_Data_Store : MonoBehaviour
     void Update()
     {
         Check_For_Scene_Swap();
-        Test_Show_Var = Difficulty;
-       
+      
+        Total_Ammo = Slow_Wave_Ammo + Saw_Ammo + Sniper_Ammo + Pierce_Lazer_Ammo + Vines_Ammo; // not including burst module
+        Test_Show_Var = Total_Ammo;
+
+
         if (Current_Scene.buildIndex == 3)
         {
             Game_Has_Started = FindFirstObjectByType<Player_Controller>().Started_Real_Countdown;
