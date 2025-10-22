@@ -58,12 +58,6 @@ public class Persistent_Data_Store : MonoBehaviour
 
    public TextMeshProUGUI Shopping_Timer;
 
-    private Button Start_Button;
-
-
-    private Toggle Normal_Mode_Button;
-   private Toggle Easy_Mode_Button;
-   private ToggleGroup Difficulty_Selector;
 
   
    
@@ -76,16 +70,15 @@ public class Persistent_Data_Store : MonoBehaviour
 
     void Start()
     {
-        Assign_Buttons();
-
         Current_Scene = SceneManager.GetActiveScene();
-       
     }
 
 
  
     void Update()
     {
+
+
         Check_For_Scene_Swap();
       
         Total_Ammo = Slow_Wave_Ammo + Saw_Ammo + Sniper_Ammo + Pierce_Lazer_Ammo + Vines_Ammo; // not including burst module
@@ -115,6 +108,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
         if (Instance == null)
         {
+
             Instance = this;
             DontDestroyOnLoad(gameObject); // Don't destroy this object
         }
@@ -130,46 +124,19 @@ public class Persistent_Data_Store : MonoBehaviour
     }
 
 
-    void Assign_Buttons()// and toggles
-    {
-        
-        Start_Button = GameObject.Find("Start").GetComponent<Button>();
-
-        Difficulty_Selector = GameObject.Find("Toggle_Group").GetComponent<ToggleGroup>();
-        Normal_Mode_Button = GameObject.Find("Select_Difficulty_Option2").GetComponent<Toggle>();
-        Easy_Mode_Button = GameObject.Find("Select_Difficulty_Option1").GetComponent<Toggle>();
-        
-       
-
-
-        Difficulty_Selector.allowSwitchOff = true;
-
-        Normal_Mode_Button.group = Difficulty_Selector;
-        Easy_Mode_Button.group = Difficulty_Selector;
-       
-        Normal_Mode_Button.onValueChanged.AddListener(Activate_Start_Button);
-        Easy_Mode_Button.onValueChanged.AddListener(Activate_Start_Button);
-        
-        Start_Button.onClick.AddListener(Swap_To_Scene_1);
-       
-
-
-        Start_Button.gameObject.SetActive(false);
-
+   
     
-
-    }
-
 
     void Check_Difficulty_Toggle()
     {
-     
-        if (Normal_Mode_Button.isOn)
+        GameObject Button_Controller_Object = GameObject.Find("Button_Controller");
+        
+        if (Button_Controller_Object.GetComponent<Button_Controller>().Normal_Mode_Button.isOn) // need to look for other script to referemnce button
         {
             Normal_Mode_True();
         }
        
-        else if (!Normal_Mode_Button.isOn)
+        else if (!Button_Controller_Object.GetComponent<Button_Controller>().Normal_Mode_Button.isOn)
         {
             Normal_Mode_false();
         }
@@ -178,7 +145,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
     }
 
-
+    
     void Normal_Mode_True()
     {
         Normal_Mode_Active = true;
@@ -189,19 +156,6 @@ public class Persistent_Data_Store : MonoBehaviour
         Normal_Mode_Active = false;
     }
 
-
-
-    void Activate_Start_Button(bool Difficulty_Has_Been_Selected) //if we have selected a difficulty, activate and display the start button
-    {
-        if (Difficulty_Has_Been_Selected)
-        {
-            Start_Button.gameObject.SetActive(true);
-        }
-        else if (!Difficulty_Has_Been_Selected)
-        {
-            Start_Button.gameObject.SetActive(false);
-        }
-    }
 
 
 

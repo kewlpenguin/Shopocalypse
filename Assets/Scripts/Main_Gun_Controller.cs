@@ -180,11 +180,11 @@ public class Main_Gun_Controller : MonoBehaviour
     {
        
 
-        Slow_Wave_Active = Input.GetKeyDown(KeyCode.LeftShift);
-        Sniper_Active = Input.GetKeyDown(KeyCode.D);
-        Pierce_Lazer_Active = Input.GetKeyDown(KeyCode.A);
-        Saw_Active = Input.GetKeyDown(KeyCode.E);
-        Vines_Active = Input.GetKeyDown(KeyCode.Q);
+        Slow_Wave_Active = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Alpha1);
+        Sniper_Active = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.Alpha2); ;
+        Pierce_Lazer_Active = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Alpha4); ;
+        Saw_Active = Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Alpha3); ;
+        Vines_Active = Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.Alpha5); ;
       
 
         if (Selected_Ammo == "None" && Persistent_Data_Store.Total_Ammo != 0) // if we have no ammo do not pester player
@@ -222,11 +222,11 @@ public class Main_Gun_Controller : MonoBehaviour
         {
             if (Select_Weapon_Text_Flashing)
             {
-                Select_Weapon_Text.color = Color.red;
+                Select_Weapon_Text.color = Color.white;
 
                 yield return new WaitForSeconds(.5f);
 
-                Select_Weapon_Text.color = Color.white;
+                Select_Weapon_Text.color = Color.red;
 
                 yield return new WaitForSeconds(.5f);
 
@@ -357,7 +357,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
     void Fire_Selected_Ammo()// instantiates bullets and such while the bullets have their own script that controlls their behavior
     {
-        bool Mouse_Down = Input.GetMouseButton(0);
+        bool Mouse_Down = Input.GetMouseButton(1);
         if (Mouse_Down && !Charging)
         {
             switch (Selected_Ammo) // fires ammo based on the selected ammo string
@@ -471,7 +471,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
     void Fire_Selected_Ammo_Burst()// initiates the hold for seconds check which in turn initiates the bullet burst from initiate bullet burst through setting the charged bool to true
     {
-        bool Space_down = Input.GetKey(KeyCode.Space);
+        bool Space_down = Input.GetKey(KeyCode.Space) || Input.GetKeyDown(KeyCode.Alpha6); ;
         if (Space_down && !Charging && Persistent_Data_Store.Burst_Module_Ammo >= 1 && !Burst_Module_On_Cooldown) { StartCoroutine(Held_Space_For_Seconds()); }
 
         else if (!Space_down || Burst_Module_On_Cooldown) { Charging = false; }   // charging is used to stop the other weapons from firing till the burst is done firing
@@ -486,7 +486,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
         for (float i = 0; i < 3f; i += .1f)
         {
-            bool Space_Held = Input.GetKey(KeyCode.Space);
+            bool Space_Held = Input.GetKey(KeyCode.Space) || Input.GetKeyDown(KeyCode.Alpha6); ;
           
             
             if (Space_Held)
@@ -622,7 +622,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
     void Fire_Main_Gun()
     {
-        bool Mouse_Down = Input.GetMouseButton(1);
+        bool Mouse_Down = Input.GetMouseButton(0);
         if (!Main_On_Cooldown && Mouse_Down)
         {
             StartCoroutine(Main_Weapon_Cooldown());
