@@ -15,7 +15,7 @@ public class Main_Gun_Controller : MonoBehaviour
     CursorLockMode Battle_Cursor_Mode;
     public string Selected_Ammo = "None";
     private int Weapon_Selected_Font_Size = 32;
-    private int Default_Font_Size = 24;
+    private int Default_Font_Size = 20;
 
     public GameObject Main;
     public GameObject Slow_Wave;
@@ -41,6 +41,9 @@ public class Main_Gun_Controller : MonoBehaviour
     public bool Vines_On_Cooldown = false;
     public bool Pierce_Lazer_On_Cooldown = false;
     public bool Burst_Module_On_Cooldown = true;
+
+    public bool Has_Fired_Ammo_In_Last_30_Secs = false;
+    public float Countdown_30_Seconds = 30;
 
     public bool Select_Weapon_Text_Flashing = false;
 
@@ -78,6 +81,9 @@ public class Main_Gun_Controller : MonoBehaviour
     public TextMeshProUGUI Burst_Module;
    
     public TextMeshProUGUI Select_Weapon_Text;
+    public TextMeshProUGUI Right_Click_Reminder;
+    public TextMeshProUGUI Out_Of_Ammo_Text;
+    public TextMeshProUGUI Not_Enough_For_Burst;
 
     public TextMeshProUGUI House_Health;
 
@@ -93,10 +99,17 @@ public class Main_Gun_Controller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Not_Enough_For_Burst.gameObject.SetActive(false);
+        Out_Of_Ammo_Text.gameObject.SetActive(false);
+        Right_Click_Reminder.gameObject.SetActive(false);
+        StartCoroutine(Display_Right_Click_Reminder());
+      
         Selected_Ammo = "None";
         Select_Weapon_Text.gameObject.SetActive(false);
+       
         Main_Gun_Rigidbody = gameObject.GetComponent<Rigidbody>();
-       Battle_Cursor_Mode = CursorLockMode.None;
+     
+        Battle_Cursor_Mode = CursorLockMode.None;
        Cursor.lockState = Battle_Cursor_Mode;
 
     }
@@ -360,6 +373,10 @@ public class Main_Gun_Controller : MonoBehaviour
         bool Mouse_Down = Input.GetMouseButton(1);
         if (Mouse_Down && !Charging)
         {
+            Countdown_30_Seconds = 30; // reset reminder
+            Right_Click_Reminder.gameObject.SetActive(false); // hide reminder text object
+
+
             switch (Selected_Ammo) // fires ammo based on the selected ammo string
             {
                 case "Slow_Wave":
@@ -464,7 +481,20 @@ public class Main_Gun_Controller : MonoBehaviour
      
     }
 
+    IEnumerator Display_Right_Click_Reminder()
+    {
+        for(int i = 99999999; i > 0; i--) // runs until scene swap
+        {
+            Countdown_30_Seconds--;
+          
+            if(Countdown_30_Seconds <=  0 && Persistent_Data_Store.Total_Ammo > 0)
+            {
+                Right_Click_Reminder.gameObject.SetActive(true);
+            }
+            yield return new WaitForSeconds(1);
+        }
 
+    }
 
 
 
@@ -537,6 +567,9 @@ public class Main_Gun_Controller : MonoBehaviour
                     }
 
                 }
+
+                else if(Persistent_Data_Store.Slow_Wave_Ammo < 100) { StartCoroutine(Show_Not_Enough_Burst_Text()); }
+
                 break;
 
 
@@ -554,6 +587,9 @@ public class Main_Gun_Controller : MonoBehaviour
                     }
 
                 }
+
+                else if (Persistent_Data_Store.Sniper_Ammo < 30) { StartCoroutine(Show_Not_Enough_Burst_Text()); }
+
                 break;
 
             case "Pierce_Lazer":
@@ -571,6 +607,9 @@ public class Main_Gun_Controller : MonoBehaviour
                     }
 
                 }
+
+                else if (Persistent_Data_Store.Pierce_Lazer_Ammo < 15) { StartCoroutine(Show_Not_Enough_Burst_Text()); }
+
                 break;
 
 
@@ -589,17 +628,20 @@ public class Main_Gun_Controller : MonoBehaviour
                     }
 
                 }
+
+                else if (Persistent_Data_Store.Saw_Ammo < 40) { StartCoroutine(Show_Not_Enough_Burst_Text()); }
+
                 break;
 
 
             case "Vines":
 
-                if (Persistent_Data_Store.Vines_Ammo >= 15 && !Burst_Module_On_Cooldown)
+                if (Persistent_Data_Store.Vines_Ammo >= 5 && !Burst_Module_On_Cooldown)
                 {
 
                     StartCoroutine(Burst_Module_Cooldown_Timer()); // put burst module on cooldown if firing is successful also ammo is subtracted from burst module in the cooldown coroutine
 
-                    for (float i = 0; i < 15; i++)
+                    for (float i = 0; i < 5; i++)
                     {
                         Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Vines_Ammo--;
@@ -607,6 +649,9 @@ public class Main_Gun_Controller : MonoBehaviour
                     }
 
                 }
+
+                else if (Persistent_Data_Store.Vines_Ammo < 5) { StartCoroutine(Show_Not_Enough_Burst_Text()); }
+
                 break;
 
         }
@@ -616,7 +661,25 @@ public class Main_Gun_Controller : MonoBehaviour
 
     }
 
+    IEnumerator Show_Not_Enough_Burst_Text()
+    {
+        Not_Enough_For_Burst.fontSize = 35;
+       
+        for (int i = 100; i > 0; i--)
+        {
 
+            if (!Not_Enough_For_Burst.isActiveAndEnabled)
+            {
+                Not_Enough_For_Burst.gameObject.SetActive(true);
+            }
+
+            yield return new WaitForSeconds(.01f);
+
+        }
+        
+        Not_Enough_For_Burst.gameObject.SetActive(false);
+
+    }
 
 
 
@@ -635,6 +698,8 @@ public class Main_Gun_Controller : MonoBehaviour
     void Update_Cooldowns_And_Ammo_Counts() // this whole system is fucking terrible and not able to be scaled up easily
         //basically just enables and disables ui elements based on ammo counts, also updates ammo counts every frame and helps de select ammo after it runs out of ammo
     {
+
+        if (Persistent_Data_Store.Total_Ammo <= 0) { Out_Of_Ammo_Text.gameObject.SetActive(true); } else if(Persistent_Data_Store.Total_Ammo > 0) { Out_Of_Ammo_Text.gameObject.SetActive(false); }
 
         if (Persistent_Data_Store.Sniper_Ammo > 0) { Sniper2.enabled = true; } else if(Persistent_Data_Store.Sniper_Ammo <= 0) { Sniper1.enabled = false; Sniper_Active = false; }
 

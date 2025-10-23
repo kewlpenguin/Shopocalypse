@@ -204,8 +204,8 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Inialize_Heavy_Enemy() 
     {
-        Max_Health = 80;
-        Health = 80;
+        Max_Health = 120;
+        Health = 120;
         Move_Speed = -1.5f - Random.Range(-.5f, .5f);
         Damage = 10;
         Hit_Speed = 3f;
@@ -249,8 +249,8 @@ public class Enemy_Behavior : MonoBehaviour
     void Inialize_Super_Heavy_Enemy() // 
     {
         Max_Health = 500;
-        Health = 800;
-        Move_Speed = -.5f;
+        Health = 500;
+        Move_Speed = -1.5f;
         Damage = 25f;
         Hit_Speed = 3f;
      
@@ -480,7 +480,16 @@ public class Enemy_Behavior : MonoBehaviour
                 StartCoroutine(Slow_Timer());
             }
            
-            EnemyRigidbody.AddForce(Vector3.right * Slow_Knockback + new Vector3(0, (Slow_Knockback / 2), 0), ForceMode.Impulse); // 
+            if (gameObject.tag != "Roller")
+            {
+                EnemyRigidbody.AddForce(Vector3.right * Slow_Knockback + new Vector3(0, (Slow_Knockback / 2), 0), ForceMode.Impulse); 
+            }
+           
+            else if (gameObject.tag == "Roller") // aply less knockback because they have 9 segments that the knockback applies to
+            {
+                EnemyRigidbody.AddForce(Vector3.right * (Slow_Knockback / 8) + new Vector3(0, ((Slow_Knockback / 8) / 2), 0), ForceMode.Impulse); 
+            }
+
         }
         
         if (other.gameObject.CompareTag("ground"))

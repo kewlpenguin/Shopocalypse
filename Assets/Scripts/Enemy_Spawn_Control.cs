@@ -312,7 +312,7 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
         else if(Enemy_To_Spawn.tag == "Lava_Hound" || Enemy_To_Spawn.tag == "Super_Heavy")
         {
             yield return new WaitForSeconds(25 + Random.Range(-20f, 20f)); // between 5 and 45 seconds
-            for (int k = (Enemy_Count / 3); k > 0; k--)
+            for (int k = Enemy_Count; k > 0; k--)
             {
                 Instantiate_Enemy_From_GameObject(Enemy_To_Spawn);
                 yield return new WaitForSeconds(2 + Random.Range(-1f, 1f)); 

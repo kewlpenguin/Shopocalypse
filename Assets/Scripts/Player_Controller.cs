@@ -592,7 +592,7 @@ public class Player_Controller : MonoBehaviour
 
     IEnumerator Leave_Shop_Early(RaycastHit Ammo_We_Looking_At) // same as above except we are pulling the randomly generated time to pickup tech number for the time to pickup value
     {
-        float Time_To_Wait = 30;
+        float Time_To_Wait = 10;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
 

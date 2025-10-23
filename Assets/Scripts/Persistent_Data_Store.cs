@@ -171,7 +171,7 @@ public class Persistent_Data_Store : MonoBehaviour
       
         else if (!Normal_Mode_Active) // difficulty starts lower and increments slower on easy mode
         {
-            Difficulty_Increment = 2;
+            Difficulty_Increment = 1;
             Base_Shop_Time = Easy_Base_Shop_Time;
         }
        
