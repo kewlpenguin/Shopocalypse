@@ -761,7 +761,7 @@ public class Player_Controller : MonoBehaviour
 
                 for (int j = 0; j < Current_Spawn.Length; j++)
                 {
-                    int Five_Is_True = Random.Range(0, 6);
+                    int Five_Is_True = Random.Range(0, 10);
 
                     if (Five_Is_True == 5)
                     {

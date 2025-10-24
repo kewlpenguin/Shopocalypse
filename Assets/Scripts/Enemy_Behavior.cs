@@ -23,7 +23,7 @@ public class Enemy_Behavior : MonoBehaviour
    
     //knockback values
     private float Sniper_Knockback = 10;
-    private float Slow_Knockback = 1;
+    private float Slow_Knockback = 2;
     private float Main_Knockback = 4;
     private float Pierce_Lazer_Knockback = 2;
    
@@ -250,7 +250,7 @@ public class Enemy_Behavior : MonoBehaviour
     {
         Max_Health = 500;
         Health = 500;
-        Move_Speed = -1.5f;
+        Move_Speed = -.7f;
         Damage = 25f;
         Hit_Speed = 3f;
      
@@ -433,13 +433,14 @@ public class Enemy_Behavior : MonoBehaviour
      
         if (collision.gameObject.CompareTag("Vine_Spawn"))
         {
-           
-            EnemyRigidbody.AddForce(Vector3.up * 10, ForceMode.Impulse);
+            if (gameObject.tag != "Flyer" && gameObject.tag != "Lava_Hound_Mini" && gameObject.tag != "Lava_Hound" && gameObject.tag != "Roller") // if enemy does not fly
+            {
+                EnemyRigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
 
-            Vector3 Velocity_Before_Stun = EnemyRigidbody.linearVelocity;
+                Vector3 Velocity_Before_Stun = EnemyRigidbody.linearVelocity;
 
-            EnemyRigidbody.linearVelocity = Velocity_Before_Stun - new Vector3(Velocity_Before_Stun.x, 0, 0);
-
+                EnemyRigidbody.linearVelocity = Velocity_Before_Stun - new Vector3(Velocity_Before_Stun.x, 0, 0);
+            }
 
         }
 

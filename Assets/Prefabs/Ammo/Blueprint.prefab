@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 978688976142239948}
   - component: {fileID: 708105426175042992}
   - component: {fileID: 1498197910338507430}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Blueprint
   m_TagString: Tech_Large
   m_Icon: {fileID: 0}
