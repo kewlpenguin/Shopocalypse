@@ -12717,6 +12717,9 @@ MonoBehaviour:
   Vines_On_Cooldown: 0
   Pierce_Lazer_On_Cooldown: 0
   Burst_Module_On_Cooldown: 0
+  Has_Fired_Ammo_In_Last_30_Secs: 0
+  Countdown_30_Seconds: 30
+  Select_Weapon_Text_Flashing: 0
   Sniper_Cooldown: 0.25
   Pierce_Lazer_Cooldown: 2
   Saw_Cooldown: 0.5
@@ -12738,7 +12741,13 @@ MonoBehaviour:
   Lazer1: {fileID: 0}
   Sniper1: {fileID: 0}
   Burst_Module: {fileID: 0}
+  Select_Weapon_Text: {fileID: 0}
+  Right_Click_Reminder: {fileID: 0}
+  Out_Of_Ammo_Text: {fileID: 0}
+  Not_Enough_For_Burst: {fileID: 0}
   House_Health: {fileID: 0}
+  Up_Arrow: {fileID: 0}
+  Down_Arrow: {fileID: 0}
 --- !u!54 &1660174756
 Rigidbody:
   m_ObjectHideFlags: 0
