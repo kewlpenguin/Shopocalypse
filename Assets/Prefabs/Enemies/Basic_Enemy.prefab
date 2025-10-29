@@ -208,7 +208,7 @@ MonoBehaviour:
   Move_Speed: -1
   On_Ground: 0
   Hit_On_Cooldown: 0
-  spinTag: Saw
+  Is_Lava_Child: 0
 --- !u!54 &7280759568857339988
 Rigidbody:
   m_ObjectHideFlags: 0
