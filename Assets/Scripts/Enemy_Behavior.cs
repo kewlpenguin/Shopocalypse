@@ -98,11 +98,11 @@ public class Enemy_Behavior : MonoBehaviour
             // Spin all children that have the specified tag
             if (child.CompareTag("Saw"))
             {
-                child.Rotate( new Vector3(-2500,0,0) * Time.deltaTime, Space.Self);
+               child.Rotate( new Vector3(-2500,0,0) * Time.deltaTime, Space.Self);
             }
         }
+        
         */
-
 
         if (gameObject.tag == "Super_Heavy")
         {
@@ -241,7 +241,7 @@ public class Enemy_Behavior : MonoBehaviour
         Max_Health = 200;
         Health = 200;
         Move_Speed = -1.25f;
-        Max_Fly_Hight = 6f;
+        Max_Fly_Hight = Random.Range(6f, 7f);
         Min_Fly_Hight = 5.9999f;
 
     }
@@ -300,7 +300,7 @@ public class Enemy_Behavior : MonoBehaviour
       
         else if (gameObject.tag == "Charger") // if its a charger
         {
-            if (On_Ground)
+            if (On_Ground && !Slowed) // if slowed do not move it at all
             {
                 Vector3 Move_Enemy = new Vector3(1, 0, 0) * Move_Speed * Time.deltaTime;
                 if (EnemyRigidbody.linearVelocity.x > Move_Speed)
@@ -309,7 +309,7 @@ public class Enemy_Behavior : MonoBehaviour
 
                 }
             }
-
+            
 
         }
 

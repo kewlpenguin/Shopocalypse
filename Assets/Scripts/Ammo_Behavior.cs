@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class Ammo_Behavior : MonoBehaviour 
 {
 
@@ -39,45 +40,47 @@ public class Ammo_Behavior : MonoBehaviour
 
     private void Awake()
     {
-        My_Rigidbody = gameObject.GetComponent<Rigidbody>();
-
-        if (gameObject.tag == "Tech_Small" || gameObject.tag == "Tech_Medium" || gameObject.tag == "Tech_Large")
+        if (SceneManager.GetActiveScene().buildIndex == 3) // if we are in the shopping scene
         {
-            My_Text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-       
-            Tech_Pickup_Time_Assignment();
-        }
+            My_Rigidbody = gameObject.GetComponent<Rigidbody>();
 
-
-        if (gameObject.tag == "Slow_Wave_Ammo")
-        {
-            My_Rigidbody.AddForce(new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), Random.Range(-3f, 3f)), ForceMode.Impulse);
-            StartCoroutine(Destroy_Slow_Wave());
-        }
-
-
-      
-
-        if (GameObject.Find("The_Shop").transform.Find("Arcade").gameObject.activeInHierarchy == true)
-        {
-            Lazer_Game_Center = GameObject.Find("Lazer_Game_Middle");
-          
-            if (gameObject.tag == "Lazer_Ammo" && My_Rigidbody.useGravity == false)
+            if (gameObject.tag == "Tech_Small" || gameObject.tag == "Tech_Medium" || gameObject.tag == "Tech_Large")
             {
-                My_Rigidbody.AddForce(((Lazer_Game_Center.transform.position - gameObject.transform.position) + new Vector3(0, Random.Range(-.3f, .3f), Random.Range(-.3f, .3f))) * 2, ForceMode.Impulse);
-                My_Rigidbody.AddTorque(new Vector3(0, 0, 10));
+                My_Text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
+                Tech_Pickup_Time_Assignment();
+            }
+
+
+            if (gameObject.tag == "Slow_Wave_Ammo")
+            {
+                My_Rigidbody.AddForce(new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), Random.Range(-3f, 3f)), ForceMode.Impulse);
+                StartCoroutine(Destroy_Slow_Wave());
+            }
+
+
+
+
+            if (GameObject.Find("The_Shop").transform.Find("Arcade").gameObject.activeInHierarchy == true)
+            {
+                Lazer_Game_Center = GameObject.Find("Lazer_Game_Middle");
+
+                if (gameObject.tag == "Lazer_Ammo" && My_Rigidbody.useGravity == false)
+                {
+                    My_Rigidbody.AddForce(((Lazer_Game_Center.transform.position - gameObject.transform.position) + new Vector3(0, Random.Range(-.3f, .3f), Random.Range(-.3f, .3f))) * 2, ForceMode.Impulse);
+                    My_Rigidbody.AddTorque(new Vector3(0, 0, 10));
+
+                }
+            }
+
+
+            if (gameObject.tag == "fish" || gameObject.tag == "Saw_Ammo_Pickup_1")
+            {
+
+                StartCoroutine(Fish_Float());
 
             }
         }
-
-
-        if (gameObject.tag == "fish" || gameObject.tag == "Saw_Ammo_Pickup_1")
-        {
-
-            StartCoroutine(Fish_Float());
-
-        }
-
     }
 
 

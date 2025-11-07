@@ -144,7 +144,7 @@ public class Bullet_Control : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision) // for vines and saw and arrow rain
+    private void OnCollisionEnter(Collision collision) // for vines and saw
     {
         if(gameObject.tag == "Vines" && collision.gameObject.CompareTag("ground"))
         {
@@ -178,16 +178,46 @@ public class Bullet_Control : MonoBehaviour
         col.enabled = false;
         Bullet_Rb.isKinematic = true;
 
-   
+        float y = transform.eulerAngles.y;
 
- 
+        gameObject.transform.LookAt(Enemy.transform);
+
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, y, transform.eulerAngles.z);
+
+        StartCoroutine(Fish_Bite());
+
         transform.SetParent(Enemy.transform);
-        
-
 
     }
 
 
+
+    IEnumerator Fish_Bite()
+    {
+        Debug.Log("Fish Bite");
+
+        Transform Open_Fish = gameObject.transform.Find("Fish");
+        Transform Closed_Fish = gameObject.transform.Find("Fish - Copy");
+
+        Open_Fish.GetComponent<MeshRenderer>().enabled = true;
+        Closed_Fish.GetComponent<MeshRenderer>().enabled = false;
+
+        for (int i = 99999; i > 0; i--)
+        {
+            yield return new WaitForSeconds(.2f);
+
+                Open_Fish.GetComponent<MeshRenderer>().enabled = false;
+            Closed_Fish.GetComponent<MeshRenderer>().enabled = true;
+
+            yield return new WaitForSeconds(.2f);
+
+            Open_Fish.GetComponent<MeshRenderer>().enabled = true;
+            Closed_Fish.GetComponent<MeshRenderer>().enabled = false;
+
+        }
+
+
+    }
 
 
 

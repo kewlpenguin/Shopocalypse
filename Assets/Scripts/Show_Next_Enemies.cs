@@ -170,8 +170,8 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
                
         for (int k = Enemy_Count; k > 0; k--) 
                 {
-                    Instantiate_Enemy_From_GameObject(Enemy_To_Spawn, Z_Offset_For_Clump + Random.Range(-1f, 1f));
-            yield return new WaitForSeconds(.01f);
+                    Instantiate_Enemy_From_GameObject(Enemy_To_Spawn, Z_Offset_For_Clump + Random.Range(-3f, 3f));
+            yield return new WaitForSeconds(.05f);
                 }
 
     }
