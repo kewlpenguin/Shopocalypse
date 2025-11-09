@@ -44,6 +44,16 @@ public class Player_Controller : MonoBehaviour
     public TextMeshProUGUI Sniper;
     public TextMeshProUGUI Burst_Module;
 
+    public RawImage Slow_Wave_Image;
+    public RawImage Saw_Image; // for ammo counts
+    public RawImage Vines_Image;
+    public RawImage Lazer_Image;
+    public RawImage Sniper_Image;
+    public RawImage Burst_Module_Image;
+
+
+
+
     public GameObject Soda_1;
     public GameObject Soda_2;
     public GameObject Soda_3;
@@ -635,7 +645,7 @@ public class Player_Controller : MonoBehaviour
         switch (My_Tag)
         {
             case "Slow_Wave_Ammo":
-                Persistent_Data_Store.Slow_Wave_Ammo += 5;
+                Persistent_Data_Store.Slow_Wave_Ammo += 10;
                 break;
 
             case "Sniper_Ammo":
@@ -696,9 +706,9 @@ public class Player_Controller : MonoBehaviour
 
             case "Soda_Pickup":
 
-                if (Persistent_Data_Store.House_Health < 100)
+                if (Persistent_Data_Store.House_Health < 200)
                 {
-                    Persistent_Data_Store.House_Health += 5;
+                    Persistent_Data_Store.House_Health += 10;
                 }
               
                 break;
@@ -965,35 +975,35 @@ IEnumerator Slow_Wave_Routine_Spawn()
 
     void Update_Ammo_Counts() // this whole system is fucking terrible and not able to be scaled up easily
     {
-        if (Persistent_Data_Store.Sniper_Ammo > 0) { Sniper.enabled = true; } else if (Persistent_Data_Store.Sniper_Ammo <= 0) { Sniper.enabled = false; }
+        if (Persistent_Data_Store.Sniper_Ammo > 0) { Sniper.enabled = true; Sniper_Image.enabled = true; } else if (Persistent_Data_Store.Sniper_Ammo <= 0) { Sniper.enabled = false; Sniper_Image.enabled = false; }
        
         Sniper.text = "D : " + Persistent_Data_Store.Sniper_Ammo;
 
 
-        if (Persistent_Data_Store.Saw_Ammo > 0) { Saw.enabled = true; } else if (Persistent_Data_Store.Saw_Ammo <= 0) { Saw.enabled = false; }
+        if (Persistent_Data_Store.Saw_Ammo > 0) { Saw.enabled = true; Saw_Image.enabled = true; } else if (Persistent_Data_Store.Saw_Ammo <= 0) { Saw.enabled = false; Saw_Image.enabled = false; }
        
         Saw.text = "E : " + Persistent_Data_Store.Saw_Ammo;
 
 
-        if (Persistent_Data_Store.Vines_Ammo > 0) { Vines.enabled = true; } else if (Persistent_Data_Store.Vines_Ammo <= 0) { Vines.enabled = false; }
+        if (Persistent_Data_Store.Vines_Ammo > 0) { Vines.enabled = true; Vines_Image.enabled = true; } else if (Persistent_Data_Store.Vines_Ammo <= 0) { Vines.enabled = false; Vines.enabled = false; }
 
         Vines.text = "Q : " + Persistent_Data_Store.Vines_Ammo;
 
 
 
-        if (Persistent_Data_Store.Pierce_Lazer_Ammo > 0) { Lazer.enabled = true; } else if (Persistent_Data_Store.Pierce_Lazer_Ammo <= 0) { Lazer.enabled = false; }
+        if (Persistent_Data_Store.Pierce_Lazer_Ammo > 0) { Lazer.enabled = true; Lazer_Image.enabled = true; } else if (Persistent_Data_Store.Pierce_Lazer_Ammo <= 0) { Lazer.enabled = false; Lazer_Image.enabled = false; }
 
         Lazer.text = "A : " + Persistent_Data_Store.Pierce_Lazer_Ammo;
 
 
-        if (Persistent_Data_Store.Slow_Wave_Ammo > 0) { Slow_Wave.enabled = true; } else if (Persistent_Data_Store.Slow_Wave_Ammo <= 0) { Slow_Wave.enabled = false; }
+        if (Persistent_Data_Store.Slow_Wave_Ammo > 0) { Slow_Wave.enabled = true; Slow_Wave_Image.enabled = true; } else if (Persistent_Data_Store.Slow_Wave_Ammo <= 0) { Slow_Wave.enabled = false; Slow_Wave_Image.enabled = false; }
 
         Slow_Wave.text = "Shift : " + Persistent_Data_Store.Slow_Wave_Ammo;
 
         House_Health.text = "House " + Persistent_Data_Store.House_Health.ToString("f1");
 
 
-        if (Persistent_Data_Store.Burst_Module_Ammo > 0) { Burst_Module.enabled = true; } else if (Persistent_Data_Store.Burst_Module_Ammo <= 0) { Burst_Module.enabled = false; }
+        if (Persistent_Data_Store.Burst_Module_Ammo > 0) { Burst_Module.enabled = true; Burst_Module_Image.enabled = true; } else if (Persistent_Data_Store.Burst_Module_Ammo <= 0) { Burst_Module.enabled = false; Burst_Module_Image.enabled = false; }
 
         Burst_Module.text = "SPACE : " + Persistent_Data_Store.Burst_Module_Ammo;
 

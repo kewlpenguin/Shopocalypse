@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: fires Basic ammo
+  m_text: fires Basic
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: selects SLOW ammo
+  m_text: selects WATER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3479,7 +3479,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HOLD SPACE KEY (With Ammmo Selected):'
+  m_text: 'hold SPACE KEY (With weapon Selected):'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4238,7 +4238,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -124, y: -705}
+  m_AnchoredPosition: {x: -31, y: -702}
   m_SizeDelta: {x: 490.7447, y: 57.0893}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1140011676
@@ -5063,7 +5063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: selects SNIPER ammo
+  m_text: 'selects SNIPER '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5199,7 +5199,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: selects LAZER ammo
+  m_text: 'selects LAZER
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5692,7 +5694,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 7, y: -736}
+  m_AnchoredPosition: {x: -10, y: -736}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1519322624
@@ -5715,7 +5717,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: fire AMMO BURST
+  m_text: Activate TURBO OVERCLOCK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5724,8 +5726,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278195455
+  m_fontColor: {r: 1, g: 0.07898478, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5742,8 +5744,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32.43
+  m_fontSizeBase: 32.43
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6090,6 +6092,8 @@ MonoBehaviour:
   Vines_On_Cooldown: 0
   Pierce_Lazer_On_Cooldown: 0
   Burst_Module_On_Cooldown: 0
+  Has_Fired_Ammo_In_Last_30_Secs: 0
+  Countdown_30_Seconds: 30
   Select_Weapon_Text_Flashing: 0
   Sniper_Cooldown: 0.25
   Pierce_Lazer_Cooldown: 2
@@ -6112,7 +6116,22 @@ MonoBehaviour:
   Lazer1: {fileID: 0}
   Sniper1: {fileID: 0}
   Burst_Module: {fileID: 0}
+  Slow_Image: {fileID: 0}
+  Saw_Image: {fileID: 0}
+  Vines_Image: {fileID: 0}
+  Lazer_Image: {fileID: 0}
+  Sniper_Image: {fileID: 0}
+  Burst_Module_Image: {fileID: 0}
+  Slow_Image_Selected_Ammo: {fileID: 0}
+  Saw_Image_Selected_Ammo: {fileID: 0}
+  Vines_Image_Selected_Ammo: {fileID: 0}
+  Lazer_Image_Selected_Ammo: {fileID: 0}
+  Sniper_Image_Selected_Ammo: {fileID: 0}
+  Burst_Module_Image_Selected_Ammo: {fileID: 0}
   Select_Weapon_Text: {fileID: 0}
+  Right_Click_Reminder: {fileID: 0}
+  Out_Of_Ammo_Text: {fileID: 0}
+  Not_Enough_For_Burst: {fileID: 0}
   House_Health: {fileID: 0}
   Up_Arrow: {fileID: 0}
   Down_Arrow: {fileID: 0}
@@ -6292,7 +6311,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: selects FISH ammo
+  m_text: selects FISH
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6498,7 +6517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: selects VINES ammo
+  m_text: selects VINES
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
