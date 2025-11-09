@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class Player_Controller : MonoBehaviour
 {
     public float Speed;
-    private float Spree_Speed = 1500;
+    private float Spree_Speed = 2000;
     public float Jump_Power;
     public float Gravity_Mult;
     CursorLockMode Lock_Cursor;
