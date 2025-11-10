@@ -17,15 +17,31 @@ public class Persistent_Data_Store : MonoBehaviour
     static public float Slow_Wave_Ammo = 2; 
     static public float Sniper_Ammo = 1;
     static public float Saw_Ammo = 1;
-    static public float Vines_Ammo = 2;
+    static public float Vines_Ammo = 0;
     static public float Pierce_Lazer_Ammo = 1;
     static public float Burst_Module_Ammo = 1;
-    
+
+    static private float Default_House_Health = 200;
+    static private float Default_Slow_Wave_Ammo = 0;
+    static private float Default_Sniper_Ammo = 0;
+    static private float Default_Saw_Ammo = 0;
+    static private float Default_Vines_Ammo = 0;
+    static private float Default_Pierce_Lazer_Ammo = 0;
+    static private float Default_Burst_Module_Ammo = 0;
+    static private float Default_Total_Ammo = 0;
+    static private int Default_Difficulty = 0;
+    static private int Default_Day = 0;
+    static private int Default_Scene_Swaps = 0;
+  
+
+
     static public float Total_Ammo = 0;
 
 
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
+    static public int Day = 0;
+
 
     static public int Easy_Base_Shop_Time = 50;
     static public int Normal_Base_Shop_Time = 30;
@@ -77,12 +93,14 @@ public class Persistent_Data_Store : MonoBehaviour
  
     void Update()
     {
-
+        if (House_Health < 200 && SceneManager.GetActiveScene().buildIndex == 0) { // because house health resets to 200 we will only run this once when we go back to the title screen also these are mostly safety checks bc there is no way to get back to title except to die
+            Reset_To_Default_Values();
+                }
 
         Check_For_Scene_Swap();
       
         Total_Ammo = Slow_Wave_Ammo + Saw_Ammo + Sniper_Ammo + Pierce_Lazer_Ammo + Vines_Ammo; // not including burst module
-        Test_Show_Var = Total_Ammo;
+        Test_Show_Var = Difficulty;
 
 
         if (Current_Scene.buildIndex == 3)
@@ -195,6 +213,7 @@ public class Persistent_Data_Store : MonoBehaviour
          
             if(Temp.buildIndex == 2) // increment difficulty during every show next enemies phase immediately after the enemies have been decided for the upcoming level
             {
+                Day++;
                 Difficulty += Difficulty_Increment;
                
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
@@ -422,7 +441,36 @@ public class Persistent_Data_Store : MonoBehaviour
 
     }
 
+    /*
+    the values we gotta reset
+    static private float Default_House_Health = 200;
+    static private float Default_Slow_Wave_Ammo = 0;
+    static private float Default_Sniper_Ammo = 0;
+    static private float Default_Saw_Ammo = 0;
+    static private float Default_Vines_Ammo = 0;
+    static private float Default_Pierce_Lazer_Ammo = 0;
+    static private float Default_Burst_Module_Ammo = 0;
+    static private float Default_Total_Ammo = 0;
+    static private float Default_Difficulty = 0;
+    static private float Default_Day = 0;
+    static private float Default_Scene_Swaps = 0;
+    */
+   
+    void Reset_To_Default_Values()
+    {
+        House_Health = Default_House_Health;
+        Slow_Wave_Ammo = Default_Slow_Wave_Ammo;
+        Sniper_Ammo = Default_Sniper_Ammo;
+        Saw_Ammo = Default_Saw_Ammo;
+        Vines_Ammo = Default_Vines_Ammo;
+        Pierce_Lazer_Ammo = Default_Pierce_Lazer_Ammo;
+        Burst_Module_Ammo = Default_Burst_Module_Ammo;
+        Total_Ammo = Default_Total_Ammo;
+        Difficulty = Default_Difficulty;
+        Day = Default_Day;
+        Scene_Swaps = Default_Scene_Swaps;
 
+    }
 
 
 

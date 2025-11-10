@@ -120,7 +120,8 @@ public class Player_Controller : MonoBehaviour
     void Start()
     { 
         Open_Closed_Stores(); // do this first so gamobject.active dependencies are satisfied
-      
+        Update_Shop_Open_Countdowns();
+       
         Started_Real_Countdown = false;
 
        
@@ -160,6 +161,7 @@ public class Player_Controller : MonoBehaviour
         Update_Ammo_Counts();
         Check_Object_Pickup();
        
+
         if(Persistent_Data_Store.Shopping_Countdown <= 0)
         {
             Scene_Swap();
@@ -184,12 +186,12 @@ public class Player_Controller : MonoBehaviour
         SceneManager.LoadScene(1); 
     }
 
-    void Open_Closed_Stores() // depending on difficulty
+    void Open_Closed_Stores() // depending on Day
     {
-        switch (Persistent_Data_Store.Difficulty)
+        switch (Persistent_Data_Store.Day)
 
         {
-            case >= 13:
+            case >= 8:
                 Closed_Burst_Module_Shop.gameObject.SetActive(false);
                 Burst_Module_Shop.gameObject.SetActive(true);
                 Closed_Arcade.gameObject.SetActive(false);
@@ -199,7 +201,7 @@ public class Player_Controller : MonoBehaviour
                 break;
 
 
-            case >= 7:
+            case >= 4:
                 Closed_Arcade.gameObject.SetActive(false);
                 Arcade.gameObject.SetActive(true);
                 Sushi_Shop.gameObject.SetActive(true);
@@ -208,13 +210,13 @@ public class Player_Controller : MonoBehaviour
                 break;
 
 
-            case >= 3:
+            case >= 2:
                 Sushi_Shop.gameObject.SetActive(true);
                 Closed_Sushi_Shop.gameObject.SetActive(false);
                 break;
 
 
-            case < 3:
+            case < 2:
                 Initiate_Shop_States();
                 break;
         }
@@ -734,7 +736,7 @@ public class Player_Controller : MonoBehaviour
         Ammo_Pickups.Add(Fish_5);
         Ammo_Pickups.Add(Fish_6);
         Ammo_Pickups.Add(Fish_7);
-
+        Ammo_Pickups.Add(Lazer_Pickup);
 
 
         Ammo_Spawn_Tags = new List<string>(); // the name of the tag that possible spawn locations are assigned
@@ -765,23 +767,29 @@ public class Player_Controller : MonoBehaviour
             }
           
             
-            else if(Ammo_Spawn_Tags[i] == "Vines_Spawn")   // vines spawn make is chance based
+            else if(Ammo_Spawn_Tags[i] == "Vines_Spawn")   // vines spawn make is chance based, also spawns random shit sometimes to draw player attention and potentially offer useful ammo
             {
                 GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
 
                 for (int j = 0; j < Current_Spawn.Length; j++)
                 {
-                    int Five_Is_True = Random.Range(0, 10);
+                    int Five_Is_True = Random.Range(0, 20);
 
-                    if (Five_Is_True == 5)
+                    if (Five_Is_True == 5 || Five_Is_True == 6 || Five_Is_True == 7 || Five_Is_True == 8 || Five_Is_True == 9) // used to only be 5 but now includes more
                     {
                         Instantiate(Ammo_Pickups[1], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
                     }
+
+                    if (Five_Is_True == 4 || Five_Is_True == 3 || Five_Is_True == 2 || Five_Is_True == 1)
+                    {
+                        Instantiate(Ammo_Pickups[4], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
+                    }
+
                 }
 
             }
 
-            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn")   // if vines spawn make is chance based
+            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn")   
             {
                 GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
 
@@ -793,7 +801,7 @@ public class Player_Controller : MonoBehaviour
             }
 
 
-            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn_2")   // if vines spawn make is chance based
+            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn_2")   
             {
                 GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
 
@@ -972,6 +980,40 @@ IEnumerator Slow_Wave_Routine_Spawn()
     }
 
 
+    void Update_Shop_Open_Countdowns()
+    {
+        GameObject[] Sushi_Countdown = GameObject.FindGameObjectsWithTag("Sushi_Shop_Days_Till_Open");
+
+        GameObject[] Lazer_Countdown = GameObject.FindGameObjectsWithTag("Arcade_Shop_Days_Till_Open");
+       
+        GameObject[] Tech_Countdown = GameObject.FindGameObjectsWithTag("Tech_Shop_Days_Till_Open");
+        
+
+        for (int i = Sushi_Countdown.Length - 1; i >= 0; i--)
+        {
+            Sushi_Countdown[i].GetComponent<TextMeshProUGUI>().text = (2 - Persistent_Data_Store.Day) + " Days Till Sushi Store Opens";
+        }
+
+        for (int k = Lazer_Countdown.Length - 1; k >= 0; k--) 
+        {
+            Lazer_Countdown[k].GetComponent<TextMeshProUGUI>().text = (4 - Persistent_Data_Store.Day) + " Days Till Arcade Opens";
+        }
+
+        for (int l = Tech_Countdown.Length - 1; l >= 0; l--) 
+        {
+            Tech_Countdown[l].GetComponent<TextMeshProUGUI>().text = (8 - Persistent_Data_Store.Day) + " Days Till Tech Shop Opens";
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
     void Update_Ammo_Counts() // this whole system is fucking terrible and not able to be scaled up easily
     {
@@ -985,7 +1027,8 @@ IEnumerator Slow_Wave_Routine_Spawn()
         Saw.text = "E : " + Persistent_Data_Store.Saw_Ammo;
 
 
-        if (Persistent_Data_Store.Vines_Ammo > 0) { Vines.enabled = true; Vines_Image.enabled = true; } else if (Persistent_Data_Store.Vines_Ammo <= 0) { Vines.enabled = false; Vines.enabled = false; }
+        if (Persistent_Data_Store.Vines_Ammo > 0) { Vines.enabled = true; Vines_Image.enabled = true; } else if (Persistent_Data_Store.Vines_Ammo <= 0) { Vines.enabled = false; Vines_Image.enabled = false; }
+
 
         Vines.text = "Q : " + Persistent_Data_Store.Vines_Ammo;
 

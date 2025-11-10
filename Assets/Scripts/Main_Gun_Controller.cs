@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 
@@ -103,19 +104,27 @@ public class Main_Gun_Controller : MonoBehaviour
 
     public Image Up_Arrow;
     public Image Down_Arrow;
+   
+    public GameObject Game_Over_Ui_Stuff;
+    public Button Back_To_Title_Screen;
+    public TextMeshProUGUI Days_Survived;
 
-
-
-
-
+    private bool Are_Dead = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Are_Dead = false;
+        
+        Back_To_Title_Screen.onClick.AddListener(Return_To_Title_Screen);
+
+        Game_Over_Ui_Stuff.SetActive(false);
+      
         Not_Enough_For_Burst.gameObject.SetActive(false);
         Out_Of_Ammo_Text.gameObject.SetActive(false);
         Right_Click_Reminder.gameObject.SetActive(false);
+       
         StartCoroutine(Display_Right_Click_Reminder());
       
         Selected_Ammo = "None";
@@ -131,18 +140,28 @@ public class Main_Gun_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Fire_Main_Gun();
-        Switch_Selected_Ammo();
-        Fire_Selected_Ammo(); // if right mouse button is pressed
-        Fire_Selected_Ammo_Burst(); // if space is held for some seconds
-        Update_Cooldowns_And_Ammo_Counts();
+        Game_Over_Check();
+
+        if (!Are_Dead)
+        {
+            Fire_Main_Gun();
+            Switch_Selected_Ammo();
+            Fire_Selected_Ammo(); // if right mouse button is pressed
+            Fire_Selected_Ammo_Burst(); // if space is held for some seconds
+            Update_Cooldowns_And_Ammo_Counts();
+        }
+
+
     }
 
 
 
     private void FixedUpdate()
     {
-        Move_Main_Gun();
+        if (!Are_Dead)
+        {
+            Move_Main_Gun();
+        }
     }
 
     void Move_Main_Gun()
@@ -843,8 +862,21 @@ public class Main_Gun_Controller : MonoBehaviour
     }
 
 
+    void Return_To_Title_Screen()
+    {
+        SceneManager.LoadScene(0);
+    }
 
+    void Game_Over_Check()
+    {
 
+        if(Persistent_Data_Store.House_Health <= 0)
+        {
+            Are_Dead = true;
+            Days_Survived.text = "Days Survived: " + Persistent_Data_Store.Day;
+            Game_Over_Ui_Stuff.SetActive(true);
+        }
+    }
 
 
 

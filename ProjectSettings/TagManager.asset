@@ -46,6 +46,9 @@ TagManager:
   - Tech_Small
   - Tech_Large
   - Car_Door
+  - Tech_Shop_Days_Till_Open
+  - Arcade_Shop_Days_Till_Open
+  - Sushi_Shop_Days_Till_Open
   layers:
   - Default
   - TransparentFX
