@@ -100,6 +100,8 @@ public class Main_Gun_Controller : MonoBehaviour
     public TextMeshProUGUI Out_Of_Ammo_Text;
     public TextMeshProUGUI Not_Enough_For_Burst;
 
+    public TextMeshProUGUI Day_Counter;
+
     public TextMeshProUGUI House_Health;
 
     public Image Up_Arrow;
@@ -109,14 +111,29 @@ public class Main_Gun_Controller : MonoBehaviour
     public Button Back_To_Title_Screen;
     public TextMeshProUGUI Days_Survived;
 
+    public GameObject Health_Bomb_1; // use gameobject to access the child images and the tick on the healthbar
+    public GameObject Health_Bomb_2;
+    public GameObject Health_Bomb_3;
+
+    public Slider House_Health_Bar;
+
     private bool Are_Dead = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        Day_Counter.text = "Day " + Persistent_Data_Store.Day;
+        StartCoroutine(Day_Count_Fade());
+
         Are_Dead = false;
+
+        House_Health_Bar.maxValue = 200;
+        House_Health_Bar.minValue = 0;
         
+        Health_Bomb_Setup();
+
         Back_To_Title_Screen.onClick.AddListener(Return_To_Title_Screen);
 
         Game_Over_Ui_Stuff.SetActive(false);
@@ -137,6 +154,8 @@ public class Main_Gun_Controller : MonoBehaviour
 
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
@@ -144,6 +163,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
         if (!Are_Dead)
         {
+            Health_Bomb_Handler();
             Fire_Main_Gun();
             Switch_Selected_Ammo();
             Fire_Selected_Ammo(); // if right mouse button is pressed
@@ -163,6 +183,8 @@ public class Main_Gun_Controller : MonoBehaviour
             Move_Main_Gun();
         }
     }
+
+
 
     void Move_Main_Gun()
     {
@@ -838,7 +860,9 @@ public class Main_Gun_Controller : MonoBehaviour
 
         Slow_Wave2.text = "Shift: " + Persistent_Data_Store.Slow_Wave_Ammo;
 
-        House_Health.text = "House " + Persistent_Data_Store.House_Health.ToString("f1");
+        
+        House_Health.text = Persistent_Data_Store.House_Health.ToString("f1");
+        House_Health_Bar.value = Persistent_Data_Store.House_Health;
 
 
 
@@ -877,6 +901,145 @@ public class Main_Gun_Controller : MonoBehaviour
             Game_Over_Ui_Stuff.SetActive(true);
         }
     }
+
+    void Health_Bomb_Setup() // if easy mode then add bomb at 75, 50, and 25 percent health, if normal mode add bomb at only 25%. also goes based on which bombs have already been used
+    {
+        if(Persistent_Data_Store.Normal_Mode_Active == true)
+        {
+            if (!Persistent_Data_Store.Health_Bomb_1_Used)
+            {
+                Health_Bomb_1.SetActive(true);
+            }
+        
+            else if (Persistent_Data_Store.Health_Bomb_1_Used)
+            {
+                Health_Bomb_1.SetActive(false);
+            }
+
+            Health_Bomb_2.SetActive(false);
+            Health_Bomb_3.SetActive(false);
+        }
+
+        else if(Persistent_Data_Store.Normal_Mode_Active == false)
+        {
+            if (!Persistent_Data_Store.Health_Bomb_1_Used)
+            {
+                Health_Bomb_1.SetActive(true);
+            }
+
+            else if (Persistent_Data_Store.Health_Bomb_1_Used)
+            {
+                Health_Bomb_1.SetActive(false);
+            }
+
+            if (!Persistent_Data_Store.Health_Bomb_2_Used)
+            {
+                Health_Bomb_2.SetActive(true);
+            }
+
+            else if (Persistent_Data_Store.Health_Bomb_2_Used)
+            {
+                Health_Bomb_2.SetActive(false);
+            }
+
+            if (!Persistent_Data_Store.Health_Bomb_3_Used)
+            {
+                Health_Bomb_3.SetActive(true);
+            }
+
+            else if (Persistent_Data_Store.Health_Bomb_3_Used)
+            {
+                Health_Bomb_3.SetActive(false);
+            }
+        }
+
+    }
+
+
+
+
+    void Health_Bomb_Handler()
+    {
+        if (!Persistent_Data_Store.Normal_Mode_Active)
+        {
+
+            if(Persistent_Data_Store.House_Health < 150 && !Persistent_Data_Store.Health_Bomb_3_Used)
+             {
+                Persistent_Data_Store.Health_Bomb_3_Used = true;
+
+                Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
+                for(int i = 0; i < All_Active_Enemies.Length; i++)
+                {
+                    All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);
+                }
+
+                Health_Bomb_3.SetActive(false);
+                
+            }
+
+            if (Persistent_Data_Store.House_Health < 100 && !Persistent_Data_Store.Health_Bomb_2_Used)
+            {
+                Persistent_Data_Store.Health_Bomb_2_Used = true;
+
+                Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
+                for (int i = 0; i < All_Active_Enemies.Length; i++)
+                {
+                    All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);
+                }
+
+                Health_Bomb_2.SetActive(false);
+            }
+
+            if (Persistent_Data_Store.House_Health < 50 && !Persistent_Data_Store.Health_Bomb_1_Used)
+            {
+                Persistent_Data_Store.Health_Bomb_1_Used = true;
+
+                Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
+                for (int i = 0; i < All_Active_Enemies.Length; i++)
+                {
+                    All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);
+                }
+
+                Health_Bomb_1.SetActive(false);
+            }
+        }
+
+
+        else if (Persistent_Data_Store.Normal_Mode_Active)
+        {
+          if(Persistent_Data_Store.House_Health < 50 && !Persistent_Data_Store.Health_Bomb_1_Used)
+            {
+                Persistent_Data_Store.Health_Bomb_3_Used = true;
+
+                Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
+                for (int i = 0; i < All_Active_Enemies.Length; i++)
+                {
+                    All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);
+                }
+
+                Health_Bomb_1.SetActive(false);
+            }
+        }
+
+    }
+
+
+    IEnumerator Day_Count_Fade()
+    {
+        Day_Counter.alpha = 1;
+
+        yield return new WaitForSeconds(2);
+            
+            for (int i = 100; i > 0; i--)
+        {
+            Day_Counter.alpha -= .01f;
+            yield return new WaitForSeconds(.01f);
+        }
+    }
+
+
+
+
 
 
 

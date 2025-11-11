@@ -20,8 +20,12 @@ public class Persistent_Data_Store : MonoBehaviour
     static public float Vines_Ammo = 0;
     static public float Pierce_Lazer_Ammo = 1;
     static public float Burst_Module_Ammo = 1;
+    static public bool Health_Bomb_1_Used = false;
+    static public bool Health_Bomb_2_Used = false;
+    static public bool Health_Bomb_3_Used = false;
 
-    static private float Default_House_Health = 200;
+
+    static private float Default_House_Health = 200; 
     static private float Default_Slow_Wave_Ammo = 0;
     static private float Default_Sniper_Ammo = 0;
     static private float Default_Saw_Ammo = 0;
@@ -32,7 +36,9 @@ public class Persistent_Data_Store : MonoBehaviour
     static private int Default_Difficulty = 0;
     static private int Default_Day = 0;
     static private int Default_Scene_Swaps = 0;
-  
+    static private bool Default_Health_Bomb_1_Used = false;
+    static private bool Default_Health_Bomb_2_Used = false;
+    static private bool Default_Health_Bomb_3_Used = false;
 
 
     static public float Total_Ammo = 0;
@@ -60,7 +66,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
 
 
-    public bool Normal_Mode_Active = false;
+    static public bool Normal_Mode_Active = false;
 
     static public bool Game_Has_Started = false;
     static public bool CountDown_Has_Started = false;
@@ -454,8 +460,11 @@ public class Persistent_Data_Store : MonoBehaviour
     static private float Default_Difficulty = 0;
     static private float Default_Day = 0;
     static private float Default_Scene_Swaps = 0;
+     static private bool Default_Health_Bomb_1_Used = false;
+    static private bool Default_Health_Bomb_2_Used = false;
+    static private bool Default_Health_Bomb_3_Used = false;
     */
-   
+
     void Reset_To_Default_Values()
     {
         House_Health = Default_House_Health;
@@ -469,6 +478,10 @@ public class Persistent_Data_Store : MonoBehaviour
         Difficulty = Default_Difficulty;
         Day = Default_Day;
         Scene_Swaps = Default_Scene_Swaps;
+        Health_Bomb_1_Used = Default_Health_Bomb_1_Used;
+        Health_Bomb_2_Used = Default_Health_Bomb_2_Used;
+        Health_Bomb_3_Used = Default_Health_Bomb_3_Used;
+
 
     }
 

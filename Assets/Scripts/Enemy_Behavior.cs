@@ -562,4 +562,11 @@ public class Enemy_Behavior : MonoBehaviour
 
 
 
+
+    void Get_Bombed()
+    {
+        EnemyRigidbody.linearVelocity = new Vector3(50, 5, 0);
+        Health -= 55;
+    }
+
 }
