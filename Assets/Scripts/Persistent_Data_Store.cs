@@ -14,12 +14,12 @@ public class Persistent_Data_Store : MonoBehaviour
     public static Persistent_Data_Store Instance;
     
     static public float House_Health = 200; 
-    static public float Slow_Wave_Ammo = 2; 
-    static public float Sniper_Ammo = 1;
-    static public float Saw_Ammo = 1;
-    static public float Vines_Ammo = 0;
-    static public float Pierce_Lazer_Ammo = 1;
-    static public float Burst_Module_Ammo = 1;
+    static public float Slow_Wave_Ammo = 999; 
+    static public float Sniper_Ammo = 999;
+    static public float Saw_Ammo = 999;
+    static public float Vines_Ammo = 999;
+    static public float Pierce_Lazer_Ammo = 999;
+    static public float Burst_Module_Ammo = 999;
     static public bool Health_Bomb_1_Used = false;
     static public bool Health_Bomb_2_Used = false;
     static public bool Health_Bomb_3_Used = false;

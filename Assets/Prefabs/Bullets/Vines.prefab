@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b655f878781b98e47a7b6ebdaac39aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vine_Grow: {fileID: 8300000, guid: 8effb7b094b641a4382c7c261de62e6c, type: 3}
   Vine_Spawn: {fileID: 4035357971783493204, guid: 380ac9a9ab6f07849bb6ef594bead07a, type: 3}
   Bullet_Lifetime: 30
   Bullet_Move_Speed: 70

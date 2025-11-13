@@ -17,6 +17,13 @@ public class Enemy_Behavior : MonoBehaviour
     private Slider Health_Bar;
     private Transform Health_Bar_Canvas;
 
+    public AudioClip Sniper_Hit;
+    public AudioClip Water_Hit;
+    public AudioClip Lazer_Hit;
+    public AudioClip Lazer_crit;
+    public AudioClip Fish_Chomp;
+    public AudioClip Vines_bounce;
+
     private float Hit_Speed = 1;
     bool Touching_House = false;
     bool Slowed = false;
@@ -402,7 +409,8 @@ public class Enemy_Behavior : MonoBehaviour
         for (int i = 0; i < 999999; i++) 
         { 
         yield return new WaitForSeconds(.33f);
-        Health -= 1f;
+            Audio_Manager_Script.instance.Play_Selected_Audio(Fish_Chomp, gameObject.transform.position, .1f, 1 + Random.Range(-.1f, .1f));
+            Health -= 1f;
         }
     }
 
@@ -411,6 +419,7 @@ public class Enemy_Behavior : MonoBehaviour
         if(Health <= 250 && !Half_Hp)
         {
             Half_Hp = true;
+            Audio_Manager_Script.instance.Play_Selected_Audio(Vines_bounce, gameObject.transform.position, .5f, 1 + Random.Range(-.1f, .1f));
             EnemyRigidbody.AddForce(Vector3.right * 3000, ForceMode.Impulse);
         }
  
@@ -435,6 +444,8 @@ public class Enemy_Behavior : MonoBehaviour
         {
             if (gameObject.tag != "Flyer" && gameObject.tag != "Lava_Hound_Mini" && gameObject.tag != "Lava_Hound" && gameObject.tag != "Roller") // if enemy does not fly
             {
+                Audio_Manager_Script.instance.Play_Selected_Audio(Vines_bounce, gameObject.transform.position, .4f, 1 + Random.Range(-.1f, .1f));
+
                 EnemyRigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
 
                 Vector3 Velocity_Before_Stun = EnemyRigidbody.linearVelocity;
@@ -476,6 +487,7 @@ public class Enemy_Behavior : MonoBehaviour
     {
         if (other.tag == "Slow_Wave")
         {
+            Audio_Manager_Script.instance.Play_Selected_Audio(Water_Hit, gameObject.transform.position, .1f, 1 + Random.Range(-.1f, .1f));
             if (!Slowed)
             {
                 StartCoroutine(Slow_Timer());
@@ -500,6 +512,7 @@ public class Enemy_Behavior : MonoBehaviour
 
         else if (other.gameObject.CompareTag("Sniper"))
         {
+            Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Hit, gameObject.transform.position, .4f, .9f + Random.Range(-.1f, .1f));
             Destroy(other.gameObject);
             // StartCoroutine(Local_Invincibility_Sniper());// because the stupid roller has multiple segments but also to prevent potential multi hits
             if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1)
@@ -515,7 +528,7 @@ public class Enemy_Behavior : MonoBehaviour
 
         else if (other.gameObject.CompareTag("Main"))
         {
-
+            Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Hit, gameObject.transform.position, .075f, 1.2f + Random.Range(-.1f, .1f));
             Destroy(other.gameObject);
             if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1) { 
             Health -= 3;
@@ -527,8 +540,10 @@ public class Enemy_Behavior : MonoBehaviour
 
         else if (other.gameObject.CompareTag("Pierce_Lazer"))
         {
+            Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Hit, gameObject.transform.position, .075f, 1 + Random.Range(-.2f, .2f));
             Health -= 2.1f; // does abt 24 to rollers
-          
+            EnemyRigidbody.AddForce(Vector3.right * Pierce_Lazer_Knockback + new Vector3(0, (Pierce_Lazer_Knockback / 2), 0), ForceMode.Impulse);
+
             if (gameObject.tag != "Roller") // roller has multiple segments so it normally gets one shotted llooooll
 
             {
@@ -537,11 +552,16 @@ public class Enemy_Behavior : MonoBehaviour
           
             if(!On_Ground && gameObject.tag != "Roller") // quadrouple damage to Airborne enemies
             {
+                Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_crit, gameObject.transform.position, .15f, 1 + Random.Range(-.1f, .1f));
                 Health -= 30;
                 EnemyRigidbody.AddForce(Vector3.right * Pierce_Lazer_Knockback * 15, ForceMode.Impulse);
             }
+           
+            if (gameObject.tag == "Roller")
+            {
+                Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_crit, gameObject.transform.position, .15f, 1 + Random.Range(-.1f, .1f));
+            }
 
-            EnemyRigidbody.AddForce(Vector3.right * Pierce_Lazer_Knockback + new Vector3(0, (Pierce_Lazer_Knockback / 2), 0), ForceMode.Impulse);
         }
 
 

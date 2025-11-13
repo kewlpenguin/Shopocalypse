@@ -66,6 +66,15 @@ public class Main_Gun_Controller : MonoBehaviour
     bool Saw_Active;
     bool Vines_Active;
 
+    public AudioClip Sniper_Fire;
+    public AudioClip Basic_Fire;
+    public AudioClip Water_Fire;
+    public AudioClip Lazer_Fire;
+    public AudioClip Fish_Fire;
+    public AudioClip Vines_Fire;
+    
+    
+
 
 
     public TextMeshProUGUI Slow_Wave2;
@@ -381,6 +390,7 @@ public class Main_Gun_Controller : MonoBehaviour
             if (Persistent_Data_Store.Saw_Ammo > 0)
             {
                 Persistent_Data_Store.Saw_Ammo -= 1;
+                Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .25f, .75f);
                 Instantiate(Saw, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
                 yield return new WaitForSeconds(.11f);
             }
@@ -420,6 +430,8 @@ public class Main_Gun_Controller : MonoBehaviour
         Main_On_Cooldown = true;
         for(int i = 0; i < 4; i++)
         {
+            Audio_Manager_Script.instance.Play_Selected_Audio(Basic_Fire, gameObject.transform.position, .075f, 1);
+
             Instantiate(Main, gameObject.transform.position + gameObject.transform.up * .75f + gameObject.transform.forward * .75f, gameObject.transform.rotation);
             yield return new WaitForSeconds(.1f);
         }
@@ -467,6 +479,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Slow_Wave_On_Cooldown && Persistent_Data_Store.Slow_Wave_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Slow_Wave());
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Water_Fire, gameObject.transform.position, 10, .75f);
                         Instantiate(Slow_Wave, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
                     }
                     
@@ -487,6 +500,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Sniper_On_Cooldown && Persistent_Data_Store.Sniper_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Sniper());
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Fire, gameObject.transform.position, .15f, 1);
                         Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation);
 
                     }
@@ -508,6 +522,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Pierce_Lazer_On_Cooldown && Persistent_Data_Store.Pierce_Lazer_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Pierce_Lazer());
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Fire, gameObject.transform.position, .075f, 1);
                         Instantiate(Pierce_Lazer, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation);
 
                     }
@@ -546,6 +561,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Vines_On_Cooldown && Persistent_Data_Store.Vines_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Vines());
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .2f, 1);
                         GameObject Vine_Shot = Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation); // needs changed a bit here
                         Vine_Shot.GetComponent<Bullet_Control>().Vine_Spawn = Vine_Spawn_Reference;
                     }
@@ -648,6 +664,7 @@ public class Main_Gun_Controller : MonoBehaviour
                    
                     for (float i = 0; i < 100; i ++)
                     {
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Water_Fire, gameObject.transform.position, 5, .75f);
                         Instantiate(Slow_Wave, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f,10f),1,1)); // need to randomize this
                         Persistent_Data_Store.Slow_Wave_Ammo--;
                         yield return new WaitForSeconds(.03f);
@@ -668,6 +685,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                     for (float i = 0; i < 30; i++)
                     {
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Fire, gameObject.transform.position, .075f, 1);
                         Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Sniper_Ammo--;
                         yield return new WaitForSeconds(.03f);
@@ -688,6 +706,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                     for (float i = 0; i < 15; i++)
                     {
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Fire, gameObject.transform.position, .05f, 1);
                         Instantiate(Pierce_Lazer, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Pierce_Lazer_Ammo--;
                         yield return new WaitForSeconds(.03f);
@@ -709,6 +728,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                     for (float i = 0; i < 40; i++)
                     {
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .125f, .75f);
                         Instantiate(Saw, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Saw_Ammo--;
                         yield return new WaitForSeconds(.03f);
@@ -730,6 +750,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                     for (float i = 0; i < 5; i++)
                     {
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .25f, 1);
                         Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Vines_Ammo--;
                         yield return new WaitForSeconds(.03f);
@@ -1009,7 +1030,7 @@ public class Main_Gun_Controller : MonoBehaviour
         {
           if(Persistent_Data_Store.House_Health < 50 && !Persistent_Data_Store.Health_Bomb_1_Used)
             {
-                Persistent_Data_Store.Health_Bomb_3_Used = true;
+                Persistent_Data_Store.Health_Bomb_1_Used = true;
 
                 Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
                 for (int i = 0; i < All_Active_Enemies.Length; i++)

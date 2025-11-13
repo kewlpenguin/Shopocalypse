@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class Bullet_Control : MonoBehaviour
 {
-
+    public AudioClip vine_Grow;
 
     string My_Tag;
    
@@ -148,7 +148,7 @@ public class Bullet_Control : MonoBehaviour
     {
         if(gameObject.tag == "Vines" && collision.gameObject.CompareTag("ground"))
         {
-
+            Audio_Manager_Script.instance.Play_Selected_Audio(vine_Grow, gameObject.transform.position, .075f, 1);
             Instantiate(Vine_Spawn, new Vector3(gameObject.transform.position.x, -6, 7), Quaternion.Euler(0,0,0));
            
             Destroy(gameObject);

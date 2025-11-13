@@ -2387,6 +2387,12 @@ MonoBehaviour:
   Saw_Countdown: 0
   Vines_Countdown: 0
   Burst_Module_Countdown: 0
+  Sniper_Fire: {fileID: 8300000, guid: 2205f948dd8904849b93b5ed01c895ac, type: 3}
+  Basic_Fire: {fileID: 8300000, guid: 833589515a7d28a4e804fa672b0df16a, type: 3}
+  Water_Fire: {fileID: 8300000, guid: b44fd5f8270e6764a91edd0bb694ea96, type: 3}
+  Lazer_Fire: {fileID: 8300000, guid: ce6bd9c024bb99841bead65a02b6059e, type: 3}
+  Fish_Fire: {fileID: 8300000, guid: b44fd5f8270e6764a91edd0bb694ea96, type: 3}
+  Vines_Fire: {fileID: 8300000, guid: f9c4ab82252ba9549a5fcfd7d4c5649f, type: 3}
   Slow_Wave2: {fileID: 1767721476}
   Saw2: {fileID: 1788411613}
   Vines2: {fileID: 1062288427}

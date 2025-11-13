@@ -5713,6 +5713,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184076354}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &187100022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 187100024}
+  - component: {fileID: 187100023}
+  m_Layer: 0
+  m_Name: Audio_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &187100023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187100022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad600860cd147f409ea572701cceed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Base_Audio_Source: {fileID: 4393559529888775016, guid: c171c8c5eab76bd42895f41c886373c9, type: 3}
+--- !u!4 &187100024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187100022}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -165.42914, y: -217.8436, z: 638.55927}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &193271267
 GameObject:
   m_ObjectHideFlags: 0
@@ -25917,7 +25962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e3726b338f42348afde65021be0cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Normal_Mode_Active: 0
   Test_Show_Var: 0
   Shopping_Timer: {fileID: 957351092}
 --- !u!4 &797571134
@@ -40349,6 +40393,7 @@ MonoBehaviour:
   Normal_Mode_Button: {fileID: 1143927932}
   Easy_Mode_Button: {fileID: 568909855}
   Difficulty_Selector: {fileID: 695676359}
+  Bat_Quick_Attack: {fileID: 8300000, guid: 0b665bdab8db1664b80503571d06cefd, type: 3}
 --- !u!4 &1219931052
 Transform:
   m_ObjectHideFlags: 0
@@ -70087,3 +70132,4 @@ SceneRoots:
   - {fileID: 1620741954}
   - {fileID: 562471295}
   - {fileID: 1674251532}
+  - {fileID: 187100024}

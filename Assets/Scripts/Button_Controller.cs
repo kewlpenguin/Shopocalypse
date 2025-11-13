@@ -14,6 +14,9 @@ public class Button_Controller : MonoBehaviour
     public Toggle Easy_Mode_Button;
     public ToggleGroup Difficulty_Selector;
 
+  //  public AudioClip Bat_Quick_Attack;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,6 +52,8 @@ public class Button_Controller : MonoBehaviour
 
     void Activate_Start_Button(bool Difficulty_Has_Been_Selected) //if we have selected a difficulty, activate and display the start button
     {
+     
+
         if (Difficulty_Has_Been_Selected)
         {
             Start_Button.gameObject.SetActive(true);
