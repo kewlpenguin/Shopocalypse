@@ -72,8 +72,8 @@ public class Main_Gun_Controller : MonoBehaviour
     public AudioClip Lazer_Fire;
     public AudioClip Fish_Fire;
     public AudioClip Vines_Fire;
-    
-    
+    public AudioClip Burst_Wind_Up;
+    public AudioClip Bomb_Activate;
 
 
 
@@ -522,7 +522,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Pierce_Lazer_On_Cooldown && Persistent_Data_Store.Pierce_Lazer_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Pierce_Lazer());
-                        Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Fire, gameObject.transform.position, .075f, 1);
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Fire, gameObject.transform.position, .045f, 1);
                         Instantiate(Pierce_Lazer, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation);
 
                     }
@@ -617,6 +617,7 @@ public class Main_Gun_Controller : MonoBehaviour
     {
         Debug.Log("Charging");
 
+        Audio_Manager_Script.instance.Play_Selected_Audio(Burst_Wind_Up, gameObject.transform.position, .075f, 1);
         for (float i = 0; i < 3f; i += .1f)
         {
             bool Space_Held = Input.GetKey(KeyCode.Space) || Input.GetKeyDown(KeyCode.Alpha6); ;
@@ -626,6 +627,7 @@ public class Main_Gun_Controller : MonoBehaviour
             {
                 Charging = true;
                 Burst_Module1.fontSize = Weapon_Selected_Font_Size;
+     
                 yield return new WaitForSeconds(.1f);
                 if (i >= 1f)
                 {
@@ -706,7 +708,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                     for (float i = 0; i < 15; i++)
                     {
-                        Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Fire, gameObject.transform.position, .05f, 1);
+                        Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Fire, gameObject.transform.position, .0225f, 1);
                         Instantiate(Pierce_Lazer, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Pierce_Lazer_Ammo--;
                         yield return new WaitForSeconds(.03f);
@@ -989,8 +991,12 @@ public class Main_Gun_Controller : MonoBehaviour
                 Persistent_Data_Store.Health_Bomb_3_Used = true;
 
                 Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
-                for(int i = 0; i < All_Active_Enemies.Length; i++)
+                
+                Audio_Manager_Script.instance.Play_Selected_Audio(Bomb_Activate, gameObject.transform.position, .075f, 1);
+
+                for (int i = 0; i < All_Active_Enemies.Length; i++)
                 {
+
                     All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);
                 }
 
@@ -1003,6 +1009,9 @@ public class Main_Gun_Controller : MonoBehaviour
                 Persistent_Data_Store.Health_Bomb_2_Used = true;
 
                 Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
+
+                Audio_Manager_Script.instance.Play_Selected_Audio(Bomb_Activate, gameObject.transform.position, .075f, 1);
+
                 for (int i = 0; i < All_Active_Enemies.Length; i++)
                 {
                     All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);
@@ -1016,6 +1025,9 @@ public class Main_Gun_Controller : MonoBehaviour
                 Persistent_Data_Store.Health_Bomb_1_Used = true;
 
                 Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
+
+                Audio_Manager_Script.instance.Play_Selected_Audio(Bomb_Activate, gameObject.transform.position, .075f, 1);
+
                 for (int i = 0; i < All_Active_Enemies.Length; i++)
                 {
                     All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);
@@ -1033,6 +1045,9 @@ public class Main_Gun_Controller : MonoBehaviour
                 Persistent_Data_Store.Health_Bomb_1_Used = true;
 
                 Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
+
+                Audio_Manager_Script.instance.Play_Selected_Audio(Bomb_Activate, gameObject.transform.position, .075f, 1);
+
                 for (int i = 0; i < All_Active_Enemies.Length; i++)
                 {
                     All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);

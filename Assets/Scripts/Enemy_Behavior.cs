@@ -23,6 +23,11 @@ public class Enemy_Behavior : MonoBehaviour
     public AudioClip Lazer_crit;
     public AudioClip Fish_Chomp;
     public AudioClip Vines_bounce;
+    public AudioClip Basic_Hit;
+    public AudioClip House_Take_Damage;
+    public AudioClip Death_Sound_Small;
+    public AudioClip Death_Sound_Large_1;
+    public AudioClip Death_Sound_Large_2;
 
     private float Hit_Speed = 1;
     bool Touching_House = false;
@@ -85,14 +90,30 @@ public class Enemy_Behavior : MonoBehaviour
 
 
 
-        // House_Health_Reference = Persistent_Data_Store.House_Health; // for debuging 
+        //  for different death sounds based on enemy type
         if (Health <= 0)
         {
             if (!Is_Lava_Child) 
             { 
             GameObject.Find("Enemy_Spawn_Manager").SendMessage("OnEnemyKilled", SendMessageOptions.RequireReceiver);
              }
-            
+           
+            if(gameObject.tag == "Basic" || gameObject.tag == "Roller" || gameObject.tag == "Flyer" || gameObject.tag == "Fast")
+            {
+                Audio_Manager_Script.instance.Play_Selected_Audio(Death_Sound_Small, gameObject.transform.position, .5f, 1 + Random.Range(-.2f, .2f));
+            }
+          
+            if(gameObject.tag == "Heavy" || gameObject.tag == "Lava_Hound_Mini" || gameObject.tag == "Charger")
+            {
+                Audio_Manager_Script.instance.Play_Selected_Audio(Death_Sound_Large_2, gameObject.transform.position, .3f, 1.5f + Random.Range(-.2f, .2f));
+            }
+           
+            if (gameObject.tag == "Super_Heavy" || gameObject.tag == "Lava_Hound")
+            {
+                Audio_Manager_Script.instance.Play_Selected_Audio(Death_Sound_Large_1, gameObject.transform.position, .6f, .9f + Random.Range(-.2f, .2f));
+            }
+
+
             Destroy(gameObject);
           
         }
@@ -119,10 +140,14 @@ public class Enemy_Behavior : MonoBehaviour
     }
 
 
+
+
     private void FixedUpdate()
     {
         Universal_Enemy_Movement();
     }
+
+
 
 
 
@@ -367,6 +392,7 @@ public class Enemy_Behavior : MonoBehaviour
             for (int i = 0; i < 99999; i++) // i refuse to use a fucking while loop
             {
                 Hit_On_Cooldown = true;                             // so coroutine only runs once before needing to wait on the cooldown
+                Audio_Manager_Script.instance.Play_Selected_Audio(House_Take_Damage, gameObject.transform.position, .075f, .6f + Random.Range(-.1f,.1f));
                 Persistent_Data_Store.House_Health -= Damage;
 
                 if (gameObject.CompareTag("Roller")) //launch up when hit base if its the roller
@@ -528,7 +554,7 @@ public class Enemy_Behavior : MonoBehaviour
 
         else if (other.gameObject.CompareTag("Main"))
         {
-            Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Hit, gameObject.transform.position, .075f, 1.2f + Random.Range(-.1f, .1f));
+            Audio_Manager_Script.instance.Play_Selected_Audio(Basic_Hit, gameObject.transform.position, .15f, 1.2f + Random.Range(-.1f, .1f));
             Destroy(other.gameObject);
             if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1) { 
             Health -= 3;

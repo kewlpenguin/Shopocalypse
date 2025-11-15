@@ -58,7 +58,10 @@ public class Audio_Manager_Script : MonoBehaviour
     IEnumerator Wait_For_Clip_Over(float Clip_Length, AudioSource Source_To_Destroy)
     {
         yield return new WaitForSeconds(Clip_Length);
-        Destroy(Source_To_Destroy.gameObject);
+        if (Source_To_Destroy != null)
+        {
+            Destroy(Source_To_Destroy.gameObject);
+        }
     }
 
 

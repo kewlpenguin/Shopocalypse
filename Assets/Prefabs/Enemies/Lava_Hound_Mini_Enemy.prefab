@@ -141,12 +141,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 1
   Move_Speed: -1
-  Sniper_Hit: {fileID: 8300000, guid: d9cb47db22d604d499f296594e134837, type: 3}
+  Sniper_Hit: {fileID: 8300000, guid: 6296958f2877ca146b352970da104962, type: 3}
   Water_Hit: {fileID: 8300000, guid: e4dc15f4e946ace4b9b47b5f0a503b2d, type: 3}
   Lazer_Hit: {fileID: 8300000, guid: 0b665bdab8db1664b80503571d06cefd, type: 3}
   Lazer_crit: {fileID: 8300000, guid: 5fadd092ca141b046a36a6e4b5a79deb, type: 3}
   Fish_Chomp: {fileID: 8300000, guid: b1ec80542b0882641808b5aa64786a99, type: 3}
   Vines_bounce: {fileID: 8300000, guid: 1d04e91cf44cec54eb1e17aae5e94959, type: 3}
+  Basic_Hit: {fileID: 8300000, guid: 60abec7fcfafad441a8ffdbea3e181d1, type: 3}
+  House_Take_Damage: {fileID: 8300000, guid: 58ad1e34b1cf4fc4bbe49ca84ed225dd, type: 3}
+  Death_Sound_Small: {fileID: 8300000, guid: c7778d309d79ffb46be8d91cfdfeab75, type: 3}
+  Death_Sound_Large_1: {fileID: 8300000, guid: 921f6fc8024152542bd0f25247869b52, type: 3}
+  Death_Sound_Large_2: {fileID: 8300000, guid: 584c11358fba97f41b2d5c023959c391, type: 3}
   On_Ground: 0
   Hit_On_Cooldown: 0
   Is_Lava_Child: 0
