@@ -220,7 +220,15 @@ public class Persistent_Data_Store : MonoBehaviour
             if(Temp.buildIndex == 2) // increment difficulty during every show next enemies phase immediately after the enemies have been decided for the upcoming level
             {
                 Day++;
-                Difficulty += Difficulty_Increment;
+                if (Day != 12)
+                {
+                    Difficulty += Difficulty_Increment;
+                }
+                else if(Day != 12) // on final day make it 3X harder
+                {
+                    Difficulty += Difficulty_Increment;
+                    Difficulty = Difficulty * 3;
+                }
                
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
                 Shopping_Time = Base_Shop_Time + (2 * Difficulty); // either 30 or 50 seconds plus 2 * difficulty

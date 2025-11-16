@@ -76,6 +76,9 @@ public class Main_Gun_Controller : MonoBehaviour
     public AudioClip Bomb_Activate;
 
 
+    public AudioClip Day_Fade_In_Sound;
+    public AudioClip Normal_Music;
+    public AudioClip Final_Level_Music; //Day 12
 
     public TextMeshProUGUI Slow_Wave2;
     public TextMeshProUGUI Saw2; // for cooldowns
@@ -1062,19 +1065,39 @@ public class Main_Gun_Controller : MonoBehaviour
 
     IEnumerator Day_Count_Fade()
     {
-        Day_Counter.alpha = 1;
+        Day_Counter.alpha = 0;
+
+        Audio_Manager_Script.instance.Play_Selected_Audio(Day_Fade_In_Sound, gameObject.transform.position, .7f, 1);
+
+        for (int i = 100; i > 0; i--)
+        {
+            Day_Counter.alpha += .01f;
+            yield return new WaitForSeconds(.01f);
+        }
 
         yield return new WaitForSeconds(2);
-            
-            for (int i = 100; i > 0; i--)
+
+        for (int i = 100; i > 0; i--)
         {
             Day_Counter.alpha -= .01f;
             yield return new WaitForSeconds(.01f);
         }
+
+        if (Persistent_Data_Store.Day != 12)
+        {
+            Music_Controller.Music_instance.Play_Selected_Audio(Normal_Music, GameObject.Find("Main Camera").transform.position, .15f, 1, true, true);
+        }
+
+        if (Persistent_Data_Store.Day == 12)
+        {
+            Music_Controller.Music_instance.Play_Selected_Audio(Final_Level_Music, GameObject.Find("Main Camera").transform.position, .6f, 1, true, true);
+        }
+
+
     }
 
 
-
+  
 
 
 

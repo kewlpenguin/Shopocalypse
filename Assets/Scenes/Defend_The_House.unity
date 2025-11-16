@@ -2395,6 +2395,9 @@ MonoBehaviour:
   Vines_Fire: {fileID: 8300000, guid: f9c4ab82252ba9549a5fcfd7d4c5649f, type: 3}
   Burst_Wind_Up: {fileID: 8300000, guid: 32fd6cebc9f947941bf83e1c8d727f0d, type: 3}
   Bomb_Activate: {fileID: 8300000, guid: 843c532c790c1654f91fa74094a8b355, type: 3}
+  Day_Fade_In_Sound: {fileID: 8300000, guid: 5e6ebfb92bdd9e843bf6d67df8fe7faf, type: 3}
+  Normal_Music: {fileID: 8300000, guid: 22a5aa6930182db4cafbca6368de73fd, type: 3}
+  Final_Level_Music: {fileID: 8300000, guid: cb6dbb8ad7eef314db25c4b728eea5e1, type: 3}
   Slow_Wave2: {fileID: 1767721476}
   Saw2: {fileID: 1788411613}
   Vines2: {fileID: 1062288427}

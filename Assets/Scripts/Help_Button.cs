@@ -9,6 +9,10 @@ using UnityEngine.SceneManagement;
 public class Help_Button : MonoBehaviour
 {
     private Button Help_TitleScreen_Button;
+    public GameObject Help_Screen;
+    public GameObject Title_Screen_UI;
+    public AudioClip Button_Click_SFX;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,17 +34,20 @@ public class Help_Button : MonoBehaviour
 
 
 
-    void Swap_Title_Help_Screen()
+    void Swap_Title_Help_Screen() // now just shows and hides ui elements
     {
-        Scene Active_Scene = SceneManager.GetActiveScene();
       
-        if (Active_Scene.buildIndex == 4) {
-            SceneManager.LoadScene(0);
+        if (Help_Screen.activeInHierarchy) {
+            Audio_Manager_Script.instance.Play_Selected_Audio(Button_Click_SFX, gameObject.transform.position, .7f, 1);
+            Help_Screen.SetActive(false);
+            Title_Screen_UI.SetActive(true);
         }
        
-        else if(Active_Scene.buildIndex == 0)
+        else if(!Help_Screen.activeInHierarchy)
         {
-            SceneManager.LoadScene(4);
+            Audio_Manager_Script.instance.Play_Selected_Audio(Button_Click_SFX, gameObject.transform.position, .7f, 1);
+            Help_Screen.SetActive(true);
+            Title_Screen_UI.SetActive(false);
         }
 
     }
