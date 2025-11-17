@@ -14,12 +14,12 @@ public class Persistent_Data_Store : MonoBehaviour
     public static Persistent_Data_Store Instance;
     
     static public float House_Health = 200; 
-    static public float Slow_Wave_Ammo = 999; 
-    static public float Sniper_Ammo = 999;
-    static public float Saw_Ammo = 999;
-    static public float Vines_Ammo = 999;
-    static public float Pierce_Lazer_Ammo = 999;
-    static public float Burst_Module_Ammo = 999;
+    static public float Slow_Wave_Ammo = 0; 
+    static public float Sniper_Ammo = 0;
+    static public float Saw_Ammo = 0;
+    static public float Vines_Ammo = 0;
+    static public float Pierce_Lazer_Ammo = 0;
+    static public float Burst_Module_Ammo = 0;
     static public bool Health_Bomb_1_Used = false;
     static public bool Health_Bomb_2_Used = false;
     static public bool Health_Bomb_3_Used = false;
@@ -49,8 +49,8 @@ public class Persistent_Data_Store : MonoBehaviour
     static public int Day = 0;
 
 
-    static public int Easy_Base_Shop_Time = 50;
-    static public int Normal_Base_Shop_Time = 30;
+    static public int Easy_Base_Shop_Time = 30;
+    static public int Normal_Base_Shop_Time = 10;
     
     static public int Base_Shop_Time; //we set this later
 
@@ -220,19 +220,23 @@ public class Persistent_Data_Store : MonoBehaviour
             if(Temp.buildIndex == 2) // increment difficulty during every show next enemies phase immediately after the enemies have been decided for the upcoming level
             {
                 Day++;
-                if (Day != 12)
+                if ((Day % 12) != 0)
                 {
                     Difficulty += Difficulty_Increment;
                 }
-                else if(Day != 12) // on final day make it 3X harder
+                else if((Day % 12) == 0) // on final day make it 3X harder, also insanely mone difficult every 12th day
                 {
-                    Difficulty += Difficulty_Increment;
                     Difficulty = Difficulty * 3;
                 }
                
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
-                Shopping_Time = Base_Shop_Time + (2 * Difficulty); // either 30 or 50 seconds plus 2 * difficulty
-
+                
+                Shopping_Time = Base_Shop_Time + (5 * Day); // either 10 or 30 seconds plus 2 * difficulty
+               
+                if(Day > 7) // the later the waves the more time you should get to buy things
+                {
+                    Shopping_Time += (5 * Day); 
+                }
             }
            
 

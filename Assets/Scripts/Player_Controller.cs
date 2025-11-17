@@ -647,7 +647,7 @@ public class Player_Controller : MonoBehaviour
         switch (My_Tag)
         {
             case "Slow_Wave_Ammo":
-                Persistent_Data_Store.Slow_Wave_Ammo += 10;
+                Persistent_Data_Store.Slow_Wave_Ammo += 4;
                 break;
 
             case "Sniper_Ammo":
@@ -694,12 +694,12 @@ public class Player_Controller : MonoBehaviour
                 break;
 
             case "Tech_Medium":
-                Persistent_Data_Store.Burst_Module_Ammo += 3;
+                Persistent_Data_Store.Burst_Module_Ammo += 2;
 
                 break;
 
             case "Tech_Large":
-                Persistent_Data_Store.Burst_Module_Ammo += 5;
+                Persistent_Data_Store.Burst_Module_Ammo += 3;
 
                 break;
 

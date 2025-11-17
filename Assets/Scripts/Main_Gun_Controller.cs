@@ -1067,7 +1067,7 @@ public class Main_Gun_Controller : MonoBehaviour
     {
         Day_Counter.alpha = 0;
 
-        Audio_Manager_Script.instance.Play_Selected_Audio(Day_Fade_In_Sound, gameObject.transform.position, .7f, 1);
+        Audio_Manager_Script.instance.Play_Selected_Audio(Day_Fade_In_Sound, gameObject.transform.position, .5f, 1);
 
         for (int i = 100; i > 0; i--)
         {
@@ -1083,14 +1083,14 @@ public class Main_Gun_Controller : MonoBehaviour
             yield return new WaitForSeconds(.01f);
         }
 
-        if (Persistent_Data_Store.Day != 12)
+        if (Persistent_Data_Store.Day < 12)
         {
-            Music_Controller.Music_instance.Play_Selected_Audio(Normal_Music, GameObject.Find("Main Camera").transform.position, .15f, 1, true, true);
+            Music_Controller.Music_instance.Play_Selected_Audio(Normal_Music, GameObject.Find("Main Camera").transform.position, .15f, 1, true, true,true);
         }
 
-        if (Persistent_Data_Store.Day == 12)
+        if (Persistent_Data_Store.Day >= 12)
         {
-            Music_Controller.Music_instance.Play_Selected_Audio(Final_Level_Music, GameObject.Find("Main Camera").transform.position, .6f, 1, true, true);
+            Music_Controller.Music_instance.Play_Selected_Audio(Final_Level_Music, GameObject.Find("Main Camera").transform.position, .6f, 1, true, true, true);
         }
 
 

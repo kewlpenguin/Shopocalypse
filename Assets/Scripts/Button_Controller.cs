@@ -25,7 +25,7 @@ public class Button_Controller : MonoBehaviour
     void Start()
     {
         Assign_Buttons();
-        Music_Controller.Music_instance.Play_Selected_Audio(Title_Screen_Music, gameObject.transform.position, .2f, 1,true,true);
+        Music_Controller.Music_instance.Play_Selected_Audio(Title_Screen_Music, gameObject.transform.position, .2f, 1,true,true, false);
     }
 
     // Update is called once per frame

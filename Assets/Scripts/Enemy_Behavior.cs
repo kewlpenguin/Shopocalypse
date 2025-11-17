@@ -377,7 +377,7 @@ public class Enemy_Behavior : MonoBehaviour
 
     IEnumerator Charger_Speed_Scaling()
     {
-        for (int i = 99999; i >= 0 && !(Move_Speed < -30); i--)
+        for (int i = 99999; i >= 0 && !(Move_Speed < -20); i--)
         {
             Move_Speed += -1f;
             yield return new WaitForSeconds(.5f);
@@ -421,7 +421,7 @@ public class Enemy_Behavior : MonoBehaviour
         float Temp = Move_Speed; // stores move speed before the slowing for revertion
       
         Move_Speed = -.5f; // should effect large enemies less but still be useful
-            yield return new WaitForSeconds(7);
+            yield return new WaitForSeconds(3);
 
         Move_Speed = Temp;
          Slowed = false;
@@ -538,7 +538,7 @@ public class Enemy_Behavior : MonoBehaviour
 
         else if (other.gameObject.CompareTag("Sniper"))
         {
-            Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Hit, gameObject.transform.position, .4f, .9f + Random.Range(-.1f, .1f));
+            Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Hit, gameObject.transform.position, .25f, .9f + Random.Range(-.1f, .1f));
             Destroy(other.gameObject);
             // StartCoroutine(Local_Invincibility_Sniper());// because the stupid roller has multiple segments but also to prevent potential multi hits
             if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1)
@@ -611,8 +611,8 @@ public class Enemy_Behavior : MonoBehaviour
 
     void Get_Bombed()
     {
-        EnemyRigidbody.linearVelocity = new Vector3(50, 5, 0);
-        Health -= 55;
+        EnemyRigidbody.linearVelocity = new Vector3(40, 0, 0);
+        Health -= 40;
     }
 
 }

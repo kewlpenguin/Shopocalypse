@@ -170,13 +170,13 @@ public class Ammo_Behavior : MonoBehaviour
      
         else if(gameObject.tag == "Tech_Medium")
         {
-            Tech_Pickup_Time = Random.Range(4f, 13f);
+            Tech_Pickup_Time = Random.Range(1f, 10f);
             My_Text.text = Tech_Pickup_Time.ToString("f1");
         }
       
         else if (gameObject.tag == "Tech_Large")
         {
-            Tech_Pickup_Time = Random.Range(8f, 30f);
+            Tech_Pickup_Time = Random.Range(1.5f, 15f);
             My_Text.text = Tech_Pickup_Time.ToString("f1");
         }
 

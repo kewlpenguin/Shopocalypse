@@ -166,8 +166,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4315695, y: 0.8516495, z: 2.5295978}
-  m_Center: {x: -0.0012715415, y: 0.016671626, z: 0.00003574278}
+  m_Size: {x: 0.46634793, y: 0.86175156, z: 2.5295978}
+  m_Center: {x: -0.0045772474, y: 0.011620538, z: 0.00003574278}
 --- !u!136 &4134620804012747631
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643833887706458083}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b12068600951b9842916cbd61921d638, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
