@@ -106,6 +106,9 @@ public class Persistent_Data_Store : MonoBehaviour
         Check_For_Scene_Swap();
       
         Total_Ammo = Slow_Wave_Ammo + Saw_Ammo + Sniper_Ammo + Pierce_Lazer_Ammo + Vines_Ammo; // not including burst module
+       
+        
+        
         Test_Show_Var = Difficulty;
 
 
@@ -206,7 +209,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
   
 
-    void Check_For_Scene_Swap() // scene 2 is transition 3 is shopp 0 is title and 1 is defend
+    void Check_For_Scene_Swap() // scene 2 is transition 3 is shopp 0 is title and 1 is defend, when we change scenes perform specific actions
     {
        
         Scene Temp = SceneManager.GetActiveScene();
@@ -216,29 +219,37 @@ public class Persistent_Data_Store : MonoBehaviour
           
             Shopping_Timer.gameObject.SetActive(false);
             Scene_Swaps++;
-         
-            if(Temp.buildIndex == 2) // increment difficulty during every show next enemies phase immediately after the enemies have been decided for the upcoming level
+
+            if (Temp.buildIndex == 2) // increment difficulty during every show next enemies phase immediately after the enemies have been decided for the upcoming level
             {
                 Day++;
-                if ((Day % 12) != 0)
+
+                if ((Day % 12) != 0) // because day is incremented before we check the remainder we will not get any false positives
                 {
                     Difficulty += Difficulty_Increment;
                 }
-                else if((Day % 12) == 0) // on final day make it 3X harder, also insanely mone difficult every 12th day
+                else if ((Day % 12) == 0) // on final day make it 3X harder, also insanely mone difficult every 12th day
                 {
                     Difficulty = Difficulty * 3;
                 }
-               
+
+
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
-                
-                Shopping_Time = Base_Shop_Time + (5 * Day); // either 10 or 30 seconds plus 2 * difficulty
-               
-                if(Day > 7) // the later the waves the more time you should get to buy things
+
+
+                Shopping_Time = Base_Shop_Time + (6 * Day); // either 10 or 30 seconds plus 5 * Day (for difficulty scaling reguardless of difficulty bc you would get way too much time in normal mode)
+
+                if (Default_Health_Bomb_1_Used) // give extra time to recover if we lose our last life
                 {
-                    Shopping_Time += (5 * Day); 
+                    Shopping_Time += 30;
+                }
+
+                if (Day % 12 == 0) //give 50 more seconds of shopping time on the final day
+                {
+                    Shopping_Time += 50;
                 }
             }
-           
+
 
             if (Temp.buildIndex == 3) // if the scene is Shopping_Time then start shoping timer
             {
@@ -432,21 +443,20 @@ public class Persistent_Data_Store : MonoBehaviour
             
             if (Points_To_Allocate <= 0)
             {
-                for (int j = Choosen_Spawn_List_Numbers.Count - 1; j >= 0; j--) // test list list
-                {
-                    Debug.Log(Choosen_Spawn_List_Numbers[j]);
-                }
               
                 for (int k = Choosen_Spawn_List_Numbers.Count; k > 0; k--) // choose what enemies to spawn from selected lists
                 {
                     Choosen_Enemy_Numbers.Add(Random.Range(0, 3)); // each enemy list only has 3 options so we can use this for all of them
                 }
-
+              
+                /*
                 for (int l = Choosen_Enemy_Numbers.Count - 1; l >= 0; l--) //
                 {
                     Debug.Log("Choosen enemy number " + l + ": " + Choosen_Enemy_Numbers[l]);
              
                 }
+                */
+
             }
                 
             

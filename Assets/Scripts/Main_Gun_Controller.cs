@@ -26,8 +26,8 @@ public class Main_Gun_Controller : MonoBehaviour
     public GameObject Vines;
     public GameObject Vine_Spawn_Reference;
 
-
-
+    public Material Skybox_Day;
+    public Material Skybox_Dusk;
 
 
 
@@ -1065,11 +1065,22 @@ public class Main_Gun_Controller : MonoBehaviour
 
     IEnumerator Day_Count_Fade()
     {
-        Day_Counter.alpha = 0;
+        if (Persistent_Data_Store.Day % 12 == 0 && Persistent_Data_Store.Day != 0) // set day count color and skybox
+        {
+            RenderSettings.skybox = Skybox_Dusk;
+            Day_Counter.color = Color.red;
+        }
+        else if (Persistent_Data_Store.Day % 12 != 0 || Persistent_Data_Store.Day == 0)
+        {
+            RenderSettings.skybox = Skybox_Day;
+            Day_Counter.color = Color.white;
+        }
+
+            Day_Counter.alpha = 0; // make it dissapear then slowly reappear then dissapear again
 
         Audio_Manager_Script.instance.Play_Selected_Audio(Day_Fade_In_Sound, gameObject.transform.position, .5f, 1);
 
-        for (int i = 100; i > 0; i--)
+        for (int i = 100; i > 0; i--) // fade in
         {
             Day_Counter.alpha += .01f;
             yield return new WaitForSeconds(.01f);
@@ -1077,20 +1088,21 @@ public class Main_Gun_Controller : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        for (int i = 100; i > 0; i--)
+        for (int i = 100; i > 0; i--) //fade out
         {
             Day_Counter.alpha -= .01f;
             yield return new WaitForSeconds(.01f);
         }
 
-        if (Persistent_Data_Store.Day < 12)
+        if ((Persistent_Data_Store.Day % 12) != 0 || Persistent_Data_Store.Day == 0) //play normal level audio, also the second condition is for when the day is zero in which we get a false positive
         {
             Music_Controller.Music_instance.Play_Selected_Audio(Normal_Music, GameObject.Find("Main Camera").transform.position, .15f, 1, true, true,true);
         }
 
-        if (Persistent_Data_Store.Day >= 12)
+        else if ((Persistent_Data_Store.Day % 12) == 0 && Persistent_Data_Store.Day != 0) // play special level audio aka level final and every increment of 12
         {
             Music_Controller.Music_instance.Play_Selected_Audio(Final_Level_Music, GameObject.Find("Main Camera").transform.position, .6f, 1, true, true, true);
+
         }
 
 

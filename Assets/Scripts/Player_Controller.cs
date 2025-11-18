@@ -14,7 +14,7 @@ public class Player_Controller : MonoBehaviour
     CursorLockMode Lock_Cursor;
     Rigidbody Player_Rigidbody;
     GameObject Main_Camera;
-  
+
 
     List<GameObject> Ammo_Pickups;
     List<string> Ammo_Spawn_Tags;
@@ -52,7 +52,8 @@ public class Player_Controller : MonoBehaviour
     public RawImage Burst_Module_Image;
 
 
-
+    public Material Skybox_Day_Shopping;
+    public Material Skybox_Dusk_Shopping;
 
     public GameObject Soda_1;
     public GameObject Soda_2;
@@ -98,7 +99,7 @@ public class Player_Controller : MonoBehaviour
 
     public TextMeshProUGUI House_Health;
 
-   public Slider Pickup_Progress_Bar;
+    public Slider Pickup_Progress_Bar;
 
     private bool In_Ticket_Booth = false;
 
@@ -118,30 +119,30 @@ public class Player_Controller : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    { 
+    {
         Open_Closed_Stores(); // do this first so gamobject.active dependencies are satisfied
         Update_Shop_Open_Countdowns();
-       
+
         Started_Real_Countdown = false;
 
-       
-       
+        Set_Skybox_And_Start_Music();
+
         Create_Soda_List();
         Create_Sushi_List();
 
         gameObject.transform.position = Spawn_Pos;
-       
+
         Lock_Cursor = CursorLockMode.Locked;
         Cursor.lockState = Lock_Cursor;
-      
+
         Player_Rigidbody = GetComponent<Rigidbody>();
-      
+
         Main_Camera = GameObject.Find("Main Camera");
-      
+
         Instantiate_Ammo();
 
         StartCoroutine(Slow_Wave_Routine_Spawn());
-     
+
         if (Arcade.gameObject.activeInHierarchy == true)
         {
             StartCoroutine(Lazer_Routine_Spawn());
@@ -151,7 +152,7 @@ public class Player_Controller : MonoBehaviour
         {
             StartCoroutine(Sushi_Spawn_Routine());
         }
-      
+
     }
 
 
@@ -160,16 +161,16 @@ public class Player_Controller : MonoBehaviour
     {
         Update_Ammo_Counts();
         Check_Object_Pickup();
-       
 
-        if(Persistent_Data_Store.Shopping_Countdown <= 0)
+
+        if (Persistent_Data_Store.Shopping_Countdown <= 0)
         {
             Scene_Swap();
         }
 
         if (Started_Real_Countdown && Speed != Spree_Speed)  // when the spree starts you move faster
         { Speed = Spree_Speed; }
-        
+
     }
 
 
@@ -183,7 +184,7 @@ public class Player_Controller : MonoBehaviour
 
     void Scene_Swap() // swap to defend the house scene when time runs out
     {
-        SceneManager.LoadScene(1); 
+        SceneManager.LoadScene(1);
     }
 
     void Open_Closed_Stores() // depending on Day
@@ -201,7 +202,7 @@ public class Player_Controller : MonoBehaviour
                 break;
 
 
-            case >= 4:
+            case >= 5:
                 Closed_Arcade.gameObject.SetActive(false);
                 Arcade.gameObject.SetActive(true);
                 Sushi_Shop.gameObject.SetActive(true);
@@ -210,7 +211,7 @@ public class Player_Controller : MonoBehaviour
                 break;
 
 
-            case >= 2:
+            case >= 3:
                 Sushi_Shop.gameObject.SetActive(true);
                 Closed_Sushi_Shop.gameObject.SetActive(false);
                 break;
@@ -225,7 +226,7 @@ public class Player_Controller : MonoBehaviour
 
 
 
-    private void Move_Player() 
+    private void Move_Player()
     {
         Vector3 Horizontal = Input.GetAxis("Horizontal") * Speed * Time.deltaTime * Player_Rigidbody.transform.right;
         Vector3 Forward = Input.GetAxis("Vertical") * Speed * Time.deltaTime * Player_Rigidbody.transform.forward;
@@ -248,7 +249,8 @@ public class Player_Controller : MonoBehaviour
 
     }
 
-    void Initiate_Shop_States() {
+    void Initiate_Shop_States()
+    {
         Closed_Burst_Module_Shop.gameObject.SetActive(true);
         Closed_Arcade.gameObject.SetActive(true);
         Closed_Sushi_Shop.gameObject.SetActive(true);
@@ -271,7 +273,7 @@ public class Player_Controller : MonoBehaviour
 
         Player_Rigidbody.transform.rotation = (turnRotation);
 
-        
+
     }
 
 
@@ -282,7 +284,7 @@ public class Player_Controller : MonoBehaviour
 
         RaycastHit Object_Info;
         bool Object_In_Range = Physics.Raycast(Main_Camera.transform.position, Main_Camera.transform.forward, out Object_Info, 7f, Ammo_Layer);
-        
+
 
 
         //ugly ass if to exclude all the pickups that have a hold time attatcched
@@ -299,25 +301,25 @@ public class Player_Controller : MonoBehaviour
 
             }
         }
-       
 
 
-        else if(Object_In_Range && Object_Info.collider.gameObject.tag == "Sniper_Ammo_Large")   
+
+        else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Sniper_Ammo_Large")
         {
-    
+
             if (!Holding_Sniper_Large) // so we are only able to start 1 coroutine at a time
             {
                 StartCoroutine(Large_Ammo_Wait(Object_Info));
             }
         }
-       
+
 
         else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Sniper_Ammo_Xtra_Large")
         {
             StartCoroutine(Xtra_Large_Ammo_Wait(Object_Info));
 
         }
-      
+
 
         else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Health_Pickup")
         {
@@ -325,32 +327,32 @@ public class Player_Controller : MonoBehaviour
 
         }
 
-       
-        
+
+
         else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Tech_Small")
         {
-           
-        
+
+
             StartCoroutine(Small_Tech_Pickup(Object_Info));
 
         }
-      
-        
+
+
         else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Tech_Large")
         {
-           
+
             StartCoroutine(Large_Tech_Pickup(Object_Info));
 
         }
-       
-        
+
+
         else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Tech_Medium")
         {
-            
+
             StartCoroutine(Medium_Tech_Pickup(Object_Info));
 
         }
-      
+
         else if (Object_In_Range && Object_Info.collider.gameObject.tag == "Car_Door")
         {
 
@@ -360,14 +362,14 @@ public class Player_Controller : MonoBehaviour
     }
 
 
-   //multiple coroutines modify the one slider progress bar gameobject, definitely not the cleanest way to this lol
+    //multiple coroutines modify the one slider progress bar gameobject, definitely not the cleanest way to this lol
 
     IEnumerator Large_Ammo_Wait(RaycastHit Ammo_We_Looking_At) // all wait functions are checking if we are holding the pickup key over the course of X seconds
     {
         int Time_To_Wait = 10;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
-      
+
         for (int i = 0; i < 9999; i++)
         {
             bool temp = Input.GetKey(KeyCode.Mouse0);
@@ -380,7 +382,7 @@ public class Player_Controller : MonoBehaviour
                 Pickup_Progress_Bar.gameObject.SetActive(false);
                 break;
             }
-         
+
             if (i > Time_To_Wait) // about 1 seconds
             {
                 Started_Real_Countdown = true;
@@ -408,7 +410,7 @@ public class Player_Controller : MonoBehaviour
         int Time_To_Wait = 30;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
-      
+
         for (int i = 0; i < 9999; i++)
         {
             bool temp = Input.GetKey(KeyCode.Mouse0);
@@ -481,9 +483,9 @@ public class Player_Controller : MonoBehaviour
 
         }
 
- 
 
-        }
+
+    }
 
 
 
@@ -642,7 +644,7 @@ public class Player_Controller : MonoBehaviour
     {
 
         string My_Tag = tag;
-       
+
 
         switch (My_Tag)
         {
@@ -668,7 +670,7 @@ public class Player_Controller : MonoBehaviour
 
             case "Lazer_Ammo":
                 Persistent_Data_Store.Pierce_Lazer_Ammo += 1;
-              
+
                 break;
 
 
@@ -712,7 +714,7 @@ public class Player_Controller : MonoBehaviour
                 {
                     Persistent_Data_Store.House_Health += 10;
                 }
-              
+
                 break;
 
         }
@@ -721,11 +723,11 @@ public class Player_Controller : MonoBehaviour
 
 
 
-    void Instantiate_Ammo() 
+    void Instantiate_Ammo()
     {
-   
 
-        Ammo_Pickups = new List<GameObject>() ; // list for the ammo tags
+
+        Ammo_Pickups = new List<GameObject>(); // list for the ammo tags
         Ammo_Pickups.Add(Sniper_Pickup);
         Ammo_Pickups.Add(Vines_Pickup);
         Ammo_Pickups.Add(Fish);
@@ -765,9 +767,9 @@ public class Player_Controller : MonoBehaviour
 
 
             }
-          
-            
-            else if(Ammo_Spawn_Tags[i] == "Vines_Spawn")   // vines spawn make is chance based, also spawns random shit sometimes to draw player attention and potentially offer useful ammo
+
+
+            else if (Ammo_Spawn_Tags[i] == "Vines_Spawn")   // vines spawn make is chance based, also spawns random shit sometimes to draw player attention and potentially offer useful ammo
             {
                 GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
 
@@ -789,19 +791,19 @@ public class Player_Controller : MonoBehaviour
 
             }
 
-            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn")   
+            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn")
             {
                 GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
 
                 for (int j = 0; j < Current_Spawn.Length; j++)
                 {
-                        Instantiate(Ammo_Pickups[1 + Random.Range(1, 9)], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
+                    Instantiate(Ammo_Pickups[1 + Random.Range(1, 9)], Current_Spawn[j].transform.position, Current_Spawn[j].transform.rotation);
                 }
 
             }
 
 
-            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn_2")   
+            else if (Ammo_Spawn_Tags[i] == "Fish_Spawn_2")
             {
                 GameObject[] Current_Spawn = GameObject.FindGameObjectsWithTag(Ammo_Spawn_Tags[i]);
 
@@ -821,11 +823,11 @@ public class Player_Controller : MonoBehaviour
 
 
 
-IEnumerator Slow_Wave_Routine_Spawn()
+    IEnumerator Slow_Wave_Routine_Spawn()
     {
         for (int i = 999999; i > 0; i--)
         {
-            Instantiate(Slow_Wave_Pickup, Slow_Wave_Spawn.transform.position + new Vector3(Random.Range(-.1f,.1f), Random.Range(-.1f, .1f), Random.Range(-.1f, .1f)), Slow_Wave_Spawn.transform.rotation);
+            Instantiate(Slow_Wave_Pickup, Slow_Wave_Spawn.transform.position + new Vector3(Random.Range(-.1f, .1f), Random.Range(-.1f, .1f), Random.Range(-.1f, .1f)), Slow_Wave_Spawn.transform.rotation);
 
             yield return new WaitForSeconds(.33f);
         }
@@ -847,11 +849,11 @@ IEnumerator Slow_Wave_Routine_Spawn()
         }
     }
 
-    
+
 
     void Create_Sushi_List()
     {
-      
+
         Sushi_List.Add(Sushi_1);
         Sushi_List.Add(Sushi_2);
         Sushi_List.Add(Sushi_3);
@@ -883,8 +885,8 @@ IEnumerator Slow_Wave_Routine_Spawn()
     {
         for (int i = 999999; i > 0; i--)
         {
-           Instantiate(Sushi_List[Random.Range(0, 10)], Sushi_Spawn.transform.position, Sushi_Spawn.transform.rotation);
- 
+            Instantiate(Sushi_List[Random.Range(0, 10)], Sushi_Spawn.transform.position, Sushi_Spawn.transform.rotation);
+
 
             yield return new WaitForSeconds(1);
         }
@@ -906,20 +908,20 @@ IEnumerator Slow_Wave_Routine_Spawn()
         for (int i = 99999; i > 0; i--)
         {
             int Tickets_In_Scene = 0;
-           
+
             GameObject[] Lazer_Ammo_In_Scene = GameObject.FindGameObjectsWithTag("Lazer_Ammo");
-          
-            for(int j = Lazer_Ammo_In_Scene.Length - 1; j > 0; j--) // counts tickets in scene by differentiating lazer ammo whether or not the ammo uses gravity
+
+            for (int j = Lazer_Ammo_In_Scene.Length - 1; j > 0; j--) // counts tickets in scene by differentiating lazer ammo whether or not the ammo uses gravity
             {
                 if (Lazer_Ammo_In_Scene[j].GetComponent<Rigidbody>().useGravity)
                 {
                     Tickets_In_Scene++;
                 }
-                
+
 
             }
 
-            if(Tickets_In_Scene < 99999 && In_Ticket_Booth)   // limits maximum tickets after counting the tickets in the scene
+            if (Tickets_In_Scene < 99999 && In_Ticket_Booth)   // limits maximum tickets after counting the tickets in the scene
             {
                 GameObject Ticket_Spawn = GameObject.Find("Ticket_Blower_Center");
                 Instantiate(Ticket, Ticket_Spawn.transform.position + new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f)), Quaternion.Euler(Random.Range(-90f, 90f), Random.Range(-90f, 90f), Random.Range(-90f, 90f)));
@@ -941,7 +943,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
 
 
             yield return new WaitForSeconds(.2f);
-            
+
 
         }
     }
@@ -958,13 +960,13 @@ IEnumerator Slow_Wave_Routine_Spawn()
                 Right_Door.transform.Translate(new Vector3(0, 0, -.5f));
                 yield return new WaitForSeconds(.01f);
             }
-           
+
             Main_Doors_Open = true;
             Main_Doors_Opening = false;
         }
 
 
-       else if (Main_Doors_Open)
+        else if (Main_Doors_Open)
         {
             for (int j = 20; j > 0; j--)
             {
@@ -975,7 +977,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
             }
             Main_Doors_Open = false;
             Main_Doors_Opening = false;
-          
+
         }
     }
 
@@ -985,21 +987,21 @@ IEnumerator Slow_Wave_Routine_Spawn()
         GameObject[] Sushi_Countdown = GameObject.FindGameObjectsWithTag("Sushi_Shop_Days_Till_Open");
 
         GameObject[] Lazer_Countdown = GameObject.FindGameObjectsWithTag("Arcade_Shop_Days_Till_Open");
-       
+
         GameObject[] Tech_Countdown = GameObject.FindGameObjectsWithTag("Tech_Shop_Days_Till_Open");
-        
+
 
         for (int i = Sushi_Countdown.Length - 1; i >= 0; i--)
         {
-            Sushi_Countdown[i].GetComponent<TextMeshProUGUI>().text = (2 - Persistent_Data_Store.Day) + " Days Till Sushi Store Opens";
+            Sushi_Countdown[i].GetComponent<TextMeshProUGUI>().text = (3 - Persistent_Data_Store.Day) + " Days Till Sushi Store Opens";
         }
 
-        for (int k = Lazer_Countdown.Length - 1; k >= 0; k--) 
+        for (int k = Lazer_Countdown.Length - 1; k >= 0; k--)
         {
-            Lazer_Countdown[k].GetComponent<TextMeshProUGUI>().text = (4 - Persistent_Data_Store.Day) + " Days Till Arcade Opens";
+            Lazer_Countdown[k].GetComponent<TextMeshProUGUI>().text = (5 - Persistent_Data_Store.Day) + " Days Till Arcade Opens";
         }
 
-        for (int l = Tech_Countdown.Length - 1; l >= 0; l--) 
+        for (int l = Tech_Countdown.Length - 1; l >= 0; l--)
         {
             Tech_Countdown[l].GetComponent<TextMeshProUGUI>().text = (8 - Persistent_Data_Store.Day) + " Days Till Tech Shop Opens";
         }
@@ -1018,12 +1020,12 @@ IEnumerator Slow_Wave_Routine_Spawn()
     void Update_Ammo_Counts() // this whole system is fucking terrible and not able to be scaled up easily
     {
         if (Persistent_Data_Store.Sniper_Ammo > 0) { Sniper.enabled = true; Sniper_Image.enabled = true; } else if (Persistent_Data_Store.Sniper_Ammo <= 0) { Sniper.enabled = false; Sniper_Image.enabled = false; }
-       
+
         Sniper.text = "D : " + Persistent_Data_Store.Sniper_Ammo;
 
 
         if (Persistent_Data_Store.Saw_Ammo > 0) { Saw.enabled = true; Saw_Image.enabled = true; } else if (Persistent_Data_Store.Saw_Ammo <= 0) { Saw.enabled = false; Saw_Image.enabled = false; }
-       
+
         Saw.text = "E : " + Persistent_Data_Store.Saw_Ammo;
 
 
@@ -1072,8 +1074,9 @@ IEnumerator Slow_Wave_Routine_Spawn()
         }
         else if (other.name == "Main_Door_Trigger" && !Main_Doors_Opening) // when we enter the main door trigger, if the doores are open, close em
         {
-            if (!Main_Doors_Open) { 
-            StartCoroutine(Slide_Main_Doors(Main_Door_Left,Main_Door_Right));
+            if (!Main_Doors_Open)
+            {
+                StartCoroutine(Slide_Main_Doors(Main_Door_Left, Main_Door_Right));
             }
         }
 
@@ -1081,8 +1084,8 @@ IEnumerator Slow_Wave_Routine_Spawn()
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.name == "Main_Door_Trigger" && !Main_Doors_Opening)
-       
+        if (other.name == "Main_Door_Trigger" && !Main_Doors_Opening)
+
         {
             StartCoroutine(Slide_Main_Doors(Main_Door_Left, Main_Door_Right));
         }
@@ -1090,7 +1093,7 @@ IEnumerator Slow_Wave_Routine_Spawn()
 
 
     private void OnCollisionEnter(Collision collision)
-    { 
+    {
         if (collision.gameObject.name == "Door_To_Enable") // when we walk into the newly enabled door, disable it and re enable the open door aka door to disable
         {
             In_Ticket_Booth = false;
@@ -1098,6 +1101,51 @@ IEnumerator Slow_Wave_Routine_Spawn()
             Door_To_Disable.SetActive(true);
         }
     }
+
+
+    void Set_Skybox_And_Start_Music()
+    {
+        //play car door open sound
+        //play looping engine sound
+        //all store ambient sounds and vending ambient
+
+        if (Persistent_Data_Store.Day % 12 == 0 && Persistent_Data_Store.Day != 0) // set day count color and skybox
+        {
+            RenderSettings.skybox = Skybox_Dusk_Shopping;
+            //play spooky shop music
+        }
+        else if (Persistent_Data_Store.Day % 12 != 0 || Persistent_Data_Store.Day == 0)
+        {
+            //play normal shop music
+            RenderSettings.skybox = Skybox_Day_Shopping;
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

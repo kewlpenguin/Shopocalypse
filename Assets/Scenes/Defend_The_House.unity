@@ -2364,6 +2364,8 @@ MonoBehaviour:
   Saw: {fileID: 1358585441546144805, guid: fb0012809c2f7a74ab174d8113129fc8, type: 3}
   Vines: {fileID: 3479392171579019639, guid: 402a0af3cbb688047a9dea22694a5cad, type: 3}
   Vine_Spawn_Reference: {fileID: 4035357971783493204, guid: 380ac9a9ab6f07849bb6ef594bead07a, type: 3}
+  Skybox_Day: {fileID: 2100000, guid: 2c021ddc081a33d4aa1f0f7e005858b4, type: 2}
+  Skybox_Dusk: {fileID: 2100000, guid: 36b0a0e08643ad54dbbeaf96f2474e3d, type: 2}
   Selected_Bullet_Cooldown: 0
   Secondary_On_Cooldown: 0
   Main_On_Cooldown: 0
