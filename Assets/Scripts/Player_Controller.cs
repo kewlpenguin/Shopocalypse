@@ -15,6 +15,42 @@ public class Player_Controller : MonoBehaviour
     Rigidbody Player_Rigidbody;
     GameObject Main_Camera;
 
+    public AudioClip Door_Open;
+   
+    public AudioClip Heal;
+    public AudioClip Open_Can;
+    public AudioClip Dispense_Can;
+    public AudioClip Vending_Machine_Ambience;
+    
+    public AudioClip Arcade_Ambience;
+    public AudioClip Lazer_Pickup_Sound;
+   
+    public AudioClip Sushi_Ambience;
+    public AudioClip Sushi_Cruch;
+    public AudioClip Sushi_Error;
+    public AudioClip Grill_Sizzle;
+    public AudioClip Fish_Pickup;
+
+    public AudioClip Tech_Ambience;
+    public AudioClip Tech_Pickup;
+
+    public AudioClip Water_Pickup;
+    public AudioClip Fountain_Ambience;
+   
+    public AudioClip Vine_Pickup;
+   
+    public AudioClip Sniper_Pickup_Sound;
+    public AudioClip Sniper_Shop_Ambience;
+
+
+    public AudioClip Close_Car_Door;
+    public AudioClip Start_Car_Engine;
+    public AudioClip Car_Ambience;
+   
+
+
+
+
 
     List<GameObject> Ammo_Pickups;
     List<string> Ammo_Spawn_Tags;
@@ -120,6 +156,8 @@ public class Player_Controller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+     //   AudioListener[] lol = GameObject.FindObjectsByType<AudioListener>(); fuck you piece of shit assfuck retard
+
         Open_Closed_Stores(); // do this first so gamobject.active dependencies are satisfied
         Update_Shop_Open_Countdowns();
 
@@ -610,6 +648,7 @@ public class Player_Controller : MonoBehaviour
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
 
+
         for (int i = 0; i < 9999; i++)
         {
             bool temp = Input.GetKey(KeyCode.Mouse0);
@@ -622,8 +661,9 @@ public class Player_Controller : MonoBehaviour
                 Pickup_Progress_Bar.gameObject.SetActive(false);
                 break;
             }
-            if (i > Time_To_Wait) // whatever the random number genned was
+            if (i > Time_To_Wait) 
             {
+
                 SceneManager.LoadScene(1); //go to defend the house
 
                 Holding_Medium_Tech = false;
@@ -1107,7 +1147,16 @@ public class Player_Controller : MonoBehaviour
     {
         //play car door open sound
         //play looping engine sound
+
+
         //all store ambient sounds and vending ambient
+        GameObject[] Vending_Machines = GameObject.FindGameObjectsWithTag("Health_Pickup"); // find all vending machines
+        for(int i = Vending_Machines.Length; i > 0; i--)
+        {
+            Music_Controller.Music_instance.Play_Selected_Audio(Vending_Machine_Ambience,Vending_Machines[i - 1].transform.position, .3f, 1, true, true, false, 3);
+        }
+
+    
 
         if (Persistent_Data_Store.Day % 12 == 0 && Persistent_Data_Store.Day != 0) // set day count color and skybox
         {

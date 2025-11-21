@@ -1096,12 +1096,12 @@ public class Main_Gun_Controller : MonoBehaviour
 
         if ((Persistent_Data_Store.Day % 12) != 0 || Persistent_Data_Store.Day == 0) //play normal level audio, also the second condition is for when the day is zero in which we get a false positive
         {
-            Music_Controller.Music_instance.Play_Selected_Audio(Normal_Music, GameObject.Find("Main Camera").transform.position, .15f, 1, true, true,true);
+            Music_Controller.Music_instance.Play_Selected_Audio(Normal_Music, GameObject.Find("Main Camera").transform.position, .15f, 1, true, true,true, 999999999);
         }
 
         else if ((Persistent_Data_Store.Day % 12) == 0 && Persistent_Data_Store.Day != 0) // play special level audio aka level final and every increment of 12
         {
-            Music_Controller.Music_instance.Play_Selected_Audio(Final_Level_Music, GameObject.Find("Main Camera").transform.position, .6f, 1, true, true, true);
+            Music_Controller.Music_instance.Play_Selected_Audio(Final_Level_Music, GameObject.Find("Main Camera").transform.position, .6f, 1, true, true, true, 99999999);
 
         }
 
