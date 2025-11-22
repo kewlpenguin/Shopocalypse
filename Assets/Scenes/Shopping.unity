@@ -15074,7 +15074,7 @@ GameObject:
   - component: {fileID: 365786544}
   - component: {fileID: 365786543}
   m_Layer: 0
-  m_Name: Wall (22)
+  m_Name: Sushi_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20960,7 +20960,7 @@ GameObject:
   - component: {fileID: 497225662}
   - component: {fileID: 497225661}
   m_Layer: 0
-  m_Name: Wall (9)
+  m_Name: Arcade_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26429,6 +26429,7 @@ MonoBehaviour:
   Close_Car_Door: {fileID: 8300000, guid: 65dacc5e7b9f0d144abee5b25a2ba941, type: 3}
   Start_Car_Engine: {fileID: 8300000, guid: 8850594a5d4412b4cb8fac57640dcb7e, type: 3}
   Car_Ambience: {fileID: 8300000, guid: b07880cc18e18a540bb53d515cfc6965, type: 3}
+  Timed_Pickup_Sound: {fileID: 8300000, guid: bdafc53e8c42a7d4e9fe3142ece8a916, type: 3}
   Slow_Wave_Pickup: {fileID: 2499294474297080599, guid: 48a4fcf0e0c15f34e97c2fcedbf5ba96, type: 3}
   Sniper_Pickup: {fileID: 8661581824864228895, guid: 844b0585f9e9c9c45bbd73443e36a560, type: 3}
   Lazer_Pickup: {fileID: 8661581824864228895, guid: f4f5b32a52818074eb772cb36bd1f6a2, type: 3}
@@ -42727,7 +42728,7 @@ GameObject:
   - component: {fileID: 942945667}
   - component: {fileID: 942945666}
   m_Layer: 0
-  m_Name: Chair (6)
+  m_Name: Center_Sushi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43206,7 +43207,7 @@ GameObject:
   - component: {fileID: 949254591}
   - component: {fileID: 949254590}
   m_Layer: 0
-  m_Name: Wall (11)
+  m_Name: Gun_Shop_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43221,8 +43222,8 @@ Transform:
   m_GameObject: {fileID: 949254588}
   serializedVersion: 2
   m_LocalRotation: {x: -0.50000006, y: -0.49999994, z: 0.49999857, w: 0.5000015}
-  m_LocalPosition: {x: -19.813202, y: 11.5541, z: -12.992302}
-  m_LocalScale: {x: 0.8337088, y: 37.204895, z: 35.835617}
+  m_LocalPosition: {x: -19.813202, y: 13.22, z: -12.992302}
+  m_LocalScale: {x: 0.6191878, y: 37.204895, z: 35.835617}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1170571708}
@@ -43271,7 +43272,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b68910bdb502c41439a25a058781877f, type: 2}
+  - {fileID: 2100000, guid: bb2bbbc4f51ad184bac054dd17a632bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92350,7 +92351,7 @@ GameObject:
   - component: {fileID: 2052431686}
   - component: {fileID: 2052431685}
   m_Layer: 0
-  m_Name: Cube (8)
+  m_Name: Tech_Shop_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

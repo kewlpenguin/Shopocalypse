@@ -46,8 +46,8 @@ public class Player_Controller : MonoBehaviour
     public AudioClip Close_Car_Door;
     public AudioClip Start_Car_Engine;
     public AudioClip Car_Ambience;
-   
 
+    public AudioClip Timed_Pickup_Sound;
 
 
 
@@ -154,9 +154,17 @@ public class Player_Controller : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Start() 
     {
-     //   AudioListener[] lol = GameObject.FindObjectsByType<AudioListener>(); fuck you piece of shit assfuck retard
+        /*
+        AudioListener[] Listeners_In_Scene = GameObject.FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
+
+        for (int i = Listeners_In_Scene.Length; i > 0; i--)
+        {
+            Debug.Log(Listeners_In_Scene[i - 1].gameObject.name);
+        }
+        */
+
 
         Open_Closed_Stores(); // do this first so gamobject.active dependencies are satisfied
         Update_Shop_Open_Countdowns();
@@ -407,6 +415,7 @@ public class Player_Controller : MonoBehaviour
         int Time_To_Wait = 10;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
+        Audio_Manager_Script.instance.Play_Selected_Audio(Timed_Pickup_Sound, Ammo_We_Looking_At.transform.position, .075f, 1);
 
         for (int i = 0; i < 9999; i++)
         {
@@ -448,6 +457,7 @@ public class Player_Controller : MonoBehaviour
         int Time_To_Wait = 30;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
+        Audio_Manager_Script.instance.Play_Selected_Audio(Timed_Pickup_Sound, Ammo_We_Looking_At.transform.position, .075f, 1);
 
         for (int i = 0; i < 9999; i++)
         {
@@ -489,6 +499,7 @@ public class Player_Controller : MonoBehaviour
         int Time_To_Wait = 10;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
+        Audio_Manager_Script.instance.Play_Selected_Audio(Timed_Pickup_Sound, Vending_Machine_Looking_At.transform.position, .075f, 1);
 
         for (int i = 0; i < 9999; i++)
         {
@@ -506,6 +517,7 @@ public class Player_Controller : MonoBehaviour
             if (i > Time_To_Wait) //about 2 seconds
             {
                 Started_Real_Countdown = true;
+                Audio_Manager_Script.instance.Play_Selected_Audio(Dispense_Can, Vending_Machine_Looking_At.transform.position, .5f, 1);
 
                 // do not destroy because we should be looking at a vending machine
                 Holding_Health = false;
@@ -534,6 +546,7 @@ public class Player_Controller : MonoBehaviour
         float Time_To_Wait = Ammo_We_Looking_At.collider.GetComponent<Ammo_Behavior>().Tech_Pickup_Time * 10;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
+        Audio_Manager_Script.instance.Play_Selected_Audio(Timed_Pickup_Sound, Ammo_We_Looking_At.transform.position, .075f, 1);
 
         for (int i = 0; i < 9999; i++)
         {
@@ -572,6 +585,7 @@ public class Player_Controller : MonoBehaviour
         float Time_To_Wait = Ammo_We_Looking_At.collider.GetComponent<Ammo_Behavior>().Tech_Pickup_Time * 10;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
+        Audio_Manager_Script.instance.Play_Selected_Audio(Timed_Pickup_Sound, Ammo_We_Looking_At.transform.position, .075f, 1);
 
         for (int i = 0; i < 9999; i++)
         {
@@ -610,6 +624,7 @@ public class Player_Controller : MonoBehaviour
         float Time_To_Wait = Ammo_We_Looking_At.collider.GetComponent<Ammo_Behavior>().Tech_Pickup_Time * 10;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
+        Audio_Manager_Script.instance.Play_Selected_Audio(Timed_Pickup_Sound, Ammo_We_Looking_At.transform.position, .075f, 1);
 
         for (int i = 0; i < 9999; i++)
         {
@@ -644,10 +659,10 @@ public class Player_Controller : MonoBehaviour
 
     IEnumerator Leave_Shop_Early(RaycastHit Ammo_We_Looking_At) // same as above except we are pulling the randomly generated time to pickup tech number for the time to pickup value
     {
-        float Time_To_Wait = 10;
+        float Time_To_Wait = 20;
         Pickup_Progress_Bar.maxValue = Time_To_Wait;
         Pickup_Progress_Bar.gameObject.SetActive(true);
-
+        Audio_Manager_Script.instance.Play_Selected_Audio(Start_Car_Engine, GameObject.Find("mycar").transform.position, .7f, 1);
 
         for (int i = 0; i < 9999; i++)
         {
@@ -689,58 +704,69 @@ public class Player_Controller : MonoBehaviour
         switch (My_Tag)
         {
             case "Slow_Wave_Ammo":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Water_Pickup, GameObject.Find("Player").transform.position, .2f, 1);
                 Persistent_Data_Store.Slow_Wave_Ammo += 4;
                 break;
 
             case "Sniper_Ammo":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Pickup_Sound, GameObject.Find("Player").transform.position, .2f, 1);
                 Persistent_Data_Store.Sniper_Ammo += 1;
 
                 break;
 
             case "Sniper_Ammo_Large":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Pickup_Sound, GameObject.Find("Player").transform.position, .3f, 1);
                 Persistent_Data_Store.Sniper_Ammo += 5;
 
                 break;
 
 
             case "Sniper_Ammo_Xtra_Large":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Pickup_Sound, GameObject.Find("Player").transform.position, .4f, 1);
                 Persistent_Data_Store.Sniper_Ammo += 15;
 
                 break;
 
             case "Lazer_Ammo":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Pickup_Sound, GameObject.Find("Player").transform.position, .075f, 1);
                 Persistent_Data_Store.Pierce_Lazer_Ammo += 1;
 
                 break;
 
 
             case "Vines_Ammo":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Vine_Pickup, GameObject.Find("Player").transform.position, .2f, 1);
                 Persistent_Data_Store.Vines_Ammo += 1;
 
                 break;
 
 
             case "Saw_Ammo":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Sushi_Cruch, GameObject.Find("Player").transform.position, .2f, 1);
                 Persistent_Data_Store.Saw_Ammo += 10;
 
                 break;
 
             case "Saw_Ammo_Pickup_1":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Fish_Pickup, GameObject.Find("Player").transform.position, .2f, 1);
                 Persistent_Data_Store.Saw_Ammo += 5;
 
                 break;
 
             case "Tech_Small":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Tech_Pickup, GameObject.Find("Player").transform.position, .2f, 1);
                 Persistent_Data_Store.Burst_Module_Ammo += 1;
                 Debug.Log("increment burst");
                 break;
 
             case "Tech_Medium":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Tech_Pickup, GameObject.Find("Player").transform.position, .3f, 1);
                 Persistent_Data_Store.Burst_Module_Ammo += 2;
 
                 break;
 
             case "Tech_Large":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Tech_Pickup, GameObject.Find("Player").transform.position, .4f, 1);
                 Persistent_Data_Store.Burst_Module_Ammo += 3;
 
                 break;
@@ -752,6 +778,7 @@ public class Player_Controller : MonoBehaviour
 
                 if (Persistent_Data_Store.House_Health < 200)
                 {
+                    Audio_Manager_Script.instance.Play_Selected_Audio(Heal, GameObject.Find("Player").transform.position, .7f, 1);
                     Persistent_Data_Store.House_Health += 10;
                 }
 
@@ -1145,18 +1172,45 @@ public class Player_Controller : MonoBehaviour
 
     void Set_Skybox_And_Start_Music()
     {
-        //play car door open sound
-        //play looping engine sound
+        //car ambience
+        Audio_Manager_Script.instance.Play_Selected_Audio(Close_Car_Door, GameObject.Find("mycar").transform.position, .7f, 1);
+        Music_Controller.Music_instance.Play_Selected_Audio(Car_Ambience, GameObject.Find("mycar").transform.position, .64f, 1,true,true,false,30);
 
 
         //all store ambient sounds and vending ambient
         GameObject[] Vending_Machines = GameObject.FindGameObjectsWithTag("Health_Pickup"); // find all vending machines
         for(int i = Vending_Machines.Length; i > 0; i--)
         {
-            Music_Controller.Music_instance.Play_Selected_Audio(Vending_Machine_Ambience,Vending_Machines[i - 1].transform.position, .3f, 1, true, true, false, 3);
+            Music_Controller.Music_instance.Play_Selected_Audio(Vending_Machine_Ambience,Vending_Machines[i - 1].transform.position, .3f, 1, true, true, false, 12);
         }
 
-    
+        //fountain ambience
+        Music_Controller.Music_instance.Play_Selected_Audio(Fountain_Ambience, GameObject.Find("WaterFall").transform.position, .2f, 1, true, true, false, 100);
+
+        //Gun store ambience
+        Music_Controller.Music_instance.Play_Selected_Audio(Sniper_Shop_Ambience, GameObject.Find("Gun_Shop_Roof").transform.position, .07f, 1, true, true, false, 65);
+
+        //Arcade store ambience
+        if (!Closed_Arcade.activeInHierarchy)
+        {
+            Music_Controller.Music_instance.Play_Selected_Audio(Arcade_Ambience, GameObject.Find("Arcade_Roof").transform.position, .075f, 1, true, true, false, 55);
+        }
+
+        //sushi store ambience
+        if (!Closed_Sushi_Shop.activeInHierarchy)
+        {
+            Music_Controller.Music_instance.Play_Selected_Audio(Sushi_Ambience, GameObject.Find("Sushi_Roof").transform.position, .075f, 1, true, true, false, 65);
+            Music_Controller.Music_instance.Play_Selected_Audio(Grill_Sizzle, GameObject.Find("Sushi_Roof").transform.position, .0f, 1, true, true, false, 55);
+        }
+
+        //tech store ambience
+        if (!Closed_Burst_Module_Shop.activeInHierarchy)
+        {
+            Music_Controller.Music_instance.Play_Selected_Audio(Tech_Ambience, GameObject.Find("Tech_Shop_Roof").transform.position, .075f, 1, true, true, false, 55);
+        }
+
+
+
 
         if (Persistent_Data_Store.Day % 12 == 0 && Persistent_Data_Store.Day != 0) // set day count color and skybox
         {
@@ -1172,9 +1226,6 @@ public class Player_Controller : MonoBehaviour
 
 
     }
-
-
-
 
 
 
