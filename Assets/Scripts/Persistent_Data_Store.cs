@@ -46,7 +46,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
-    static public int Day = 11;
+    static public int Day = 0;
 
 
     static public int Easy_Base_Shop_Time = 30;
@@ -65,7 +65,6 @@ public class Persistent_Data_Store : MonoBehaviour
     static public int Shopping_Countdown; // the number that gets decrem,ented and keeps track of time left to shop
 
 
-
     static public bool Normal_Mode_Active = false;
 
     static public bool Game_Has_Started = false;
@@ -81,9 +80,8 @@ public class Persistent_Data_Store : MonoBehaviour
    public TextMeshProUGUI Shopping_Timer;
 
 
-  
-   
- 
+
+
 
 
 
@@ -93,12 +91,14 @@ public class Persistent_Data_Store : MonoBehaviour
     void Start()
     {
         Current_Scene = SceneManager.GetActiveScene();
+
     }
 
 
  
     void Update()
     {
+
         if (House_Health < 200 && SceneManager.GetActiveScene().buildIndex == 0) { // because house health resets to 200 we will only run this once when we go back to the title screen also these are mostly safety checks bc there is no way to get back to title except to die
             Reset_To_Default_Values();
                 }

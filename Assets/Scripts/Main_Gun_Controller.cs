@@ -29,7 +29,7 @@ public class Main_Gun_Controller : MonoBehaviour
     public Material Skybox_Day;
     public Material Skybox_Dusk;
 
-
+    bool One_Time_Death_Explosion_Triggered = false;
 
     public float Selected_Bullet_Cooldown;
     public bool Secondary_On_Cooldown;
@@ -74,7 +74,8 @@ public class Main_Gun_Controller : MonoBehaviour
     public AudioClip Vines_Fire;
     public AudioClip Burst_Wind_Up;
     public AudioClip Bomb_Activate;
-
+   
+    public AudioClip Death_Explosion;
 
     public AudioClip Day_Fade_In_Sound;
     public AudioClip Normal_Music;
@@ -106,6 +107,10 @@ public class Main_Gun_Controller : MonoBehaviour
     public RawImage Lazer_Image_Selected_Ammo;
     public RawImage Sniper_Image_Selected_Ammo;
     public RawImage Burst_Module_Image_Selected_Ammo;
+    public RawImage Heart_Break_Left;
+    public RawImage Heart_Break_Right;
+    public RawImage White_Out;
+
 
     public TextMeshProUGUI Select_Weapon_Text;
     public TextMeshProUGUI Right_Click_Reminder;
@@ -129,7 +134,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
     public Slider House_Health_Bar;
 
-    private bool Are_Dead = false;
+    public bool Are_Dead = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -923,10 +928,27 @@ public class Main_Gun_Controller : MonoBehaviour
         if(Persistent_Data_Store.House_Health <= 0)
         {
             Are_Dead = true;
+            AudioSource[] Audio_Playing_In_Scene = GameObject.FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+
+            if (!One_Time_Death_Explosion_Triggered)
+            {
+                for (int i = Audio_Playing_In_Scene.Length; i > 0; i--)
+                {
+                    Destroy(Audio_Playing_In_Scene[i - 1]);
+                }
+                Audio_Manager_Script.instance.Play_Selected_Audio(Death_Explosion, gameObject.transform.position, .2f, 1);
+                
+                One_Time_Death_Explosion_Triggered = true;
+            }
+
             Days_Survived.text = "Days Survived: " + Persistent_Data_Store.Day;
             Game_Over_Ui_Stuff.SetActive(true);
         }
     }
+
+    
+
+
 
     void Health_Bomb_Setup() // if easy mode then add bomb at 75, 50, and 25 percent health, if normal mode add bomb at only 25%. also goes based on which bombs have already been used
     {
@@ -997,9 +1019,10 @@ public class Main_Gun_Controller : MonoBehaviour
                 
                 Audio_Manager_Script.instance.Play_Selected_Audio(Bomb_Activate, gameObject.transform.position, .075f, 1);
 
+                StartCoroutine(Heart_Break_Animation());
+
                 for (int i = 0; i < All_Active_Enemies.Length; i++)
                 {
-
                     All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);
                 }
 
@@ -1014,6 +1037,8 @@ public class Main_Gun_Controller : MonoBehaviour
                 Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
 
                 Audio_Manager_Script.instance.Play_Selected_Audio(Bomb_Activate, gameObject.transform.position, .075f, 1);
+
+                StartCoroutine(Heart_Break_Animation());
 
                 for (int i = 0; i < All_Active_Enemies.Length; i++)
                 {
@@ -1030,6 +1055,8 @@ public class Main_Gun_Controller : MonoBehaviour
                 Enemy_Behavior[] All_Active_Enemies = FindObjectsByType<Enemy_Behavior>(FindObjectsSortMode.None);
 
                 Audio_Manager_Script.instance.Play_Selected_Audio(Bomb_Activate, gameObject.transform.position, .075f, 1);
+
+                StartCoroutine(Heart_Break_Animation());
 
                 for (int i = 0; i < All_Active_Enemies.Length; i++)
                 {
@@ -1051,6 +1078,8 @@ public class Main_Gun_Controller : MonoBehaviour
 
                 Audio_Manager_Script.instance.Play_Selected_Audio(Bomb_Activate, gameObject.transform.position, .075f, 1);
 
+                StartCoroutine(Heart_Break_Animation());
+
                 for (int i = 0; i < All_Active_Enemies.Length; i++)
                 {
                     All_Active_Enemies[i].SendMessage("Get_Bombed", SendMessageOptions.DontRequireReceiver);
@@ -1061,6 +1090,58 @@ public class Main_Gun_Controller : MonoBehaviour
         }
 
     }
+
+
+    IEnumerator Heart_Break_Animation() //for heart bombs, whites out screen, fades heart pieces while seperating them, then fades the white
+    {
+        // save heart pieces og positions
+        Vector3 temp_Right = Heart_Break_Right.transform.position;
+        Vector3 temp_Left = Heart_Break_Left.transform.position;
+
+        //show white flash and heart break
+        Heart_Break_Right.gameObject.SetActive(true);
+        Heart_Break_Left.gameObject.SetActive(true);
+        White_Out.gameObject.SetActive(true);
+
+        //reset all alpha values (this system is retarded btw, tmprogui is 100X more efficient)
+        Heart_Break_Right.color = new Color(Heart_Break_Right.color.r, Heart_Break_Right.color.g, Heart_Break_Right.color.b, 1f);
+        Heart_Break_Left.color = new Color(Heart_Break_Right.color.r, Heart_Break_Right.color.g, Heart_Break_Right.color.b, 1f);
+        White_Out.color = new Color(Heart_Break_Right.color.r, Heart_Break_Right.color.g, Heart_Break_Right.color.b, 1f);
+
+        for (int i = 100; i > 0; i--)
+        {
+            Heart_Break_Right.color = new Color(Heart_Break_Right.color.r, Heart_Break_Right.color.g, Heart_Break_Right.color.b, (Heart_Break_Right.color.a - .01f));
+            Heart_Break_Left.color = new Color(Heart_Break_Right.color.r, Heart_Break_Right.color.g, Heart_Break_Right.color.b, (Heart_Break_Left.color.a - .01f));
+           
+            Heart_Break_Right.transform.Translate(Vector2.right * .5f); //split the heart pieces
+            Heart_Break_Left.transform.Translate(Vector2.left * .5f);
+
+            yield return new WaitForSeconds(.01f);
+        }
+
+        for (int i = 100; i > 0; i--)
+        {
+            White_Out.color = new Color(Heart_Break_Right.color.r, Heart_Break_Right.color.g, Heart_Break_Right.color.b, (White_Out.color.a - .01f));
+            yield return new WaitForSeconds(.01f);
+        }
+
+        Heart_Break_Right.gameObject.SetActive(false);
+        Heart_Break_Left.gameObject.SetActive(false);
+        White_Out.gameObject.SetActive(false);
+
+        Heart_Break_Right.transform.position = temp_Right;
+        Heart_Break_Left.transform.position = temp_Left;
+
+    }
+
+
+
+
+
+
+
+
+
 
 
     IEnumerator Day_Count_Fade()

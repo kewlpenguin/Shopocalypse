@@ -22,6 +22,10 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
     public GameObject Super_Heavy;
     public GameObject Charger;
 
+    public AudioClip Button_Click;
+    public AudioClip Scene_Transition_Music;
+
+
     public Vector3 General_Spawn_Pos = new Vector3(78, 4, 14);
 
     List<GameObject> Normal_Spawns = new List<GameObject>();
@@ -36,7 +40,7 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
     void Start()
     {
         General_Spawn_Pos = gameObject.transform.position;
-
+        Audio_Manager_Script.instance.Play_Selected_Audio(Scene_Transition_Music, GameObject.Find("Main Camera").transform.position, .12f, 1);
 
         Fill_Out_Normal_Spawns_List();  // fill all lists
         Fill_Out_Disrupter_Spawns_List();
@@ -60,6 +64,7 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
 
     void Swap_To_Scene_3() // to shopping scene
     {
+        Audio_Manager_Script.instance.Play_Selected_Audio(Button_Click, GameObject.Find("Main Camera").transform.position, .3f, 1);
         SceneManager.LoadScene(3);
     }
 

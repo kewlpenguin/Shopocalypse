@@ -12904,7 +12904,7 @@ GameObject:
   - component: {fileID: 328320127}
   - component: {fileID: 328320126}
   m_Layer: 0
-  m_Name: Wall (31)
+  m_Name: Above_Main_Doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26407,7 +26407,7 @@ MonoBehaviour:
   Speed: 1500
   Jump_Power: 0
   Gravity_Mult: 0
-  Door_Open: {fileID: 8300000, guid: 5c3a0f65a87658046a28422dfc2d7b3f, type: 3}
+  Door_Open: {fileID: 8300000, guid: c2c77c33cf488dc43b9d177055f8b26a, type: 3}
   Heal: {fileID: 8300000, guid: f2fb9457b73938147951ad6b2767fc9f, type: 3}
   Open_Can: {fileID: 8300000, guid: 4876fccc36979904b9c8f50181559158, type: 3}
   Dispense_Can: {fileID: 8300000, guid: 9dbe4393227380749882df89cf36c502, type: 3}
@@ -26419,6 +26419,7 @@ MonoBehaviour:
   Sushi_Error: {fileID: 8300000, guid: 569ff4265b0aead4a9c8835e17cc3b2e, type: 3}
   Grill_Sizzle: {fileID: 8300000, guid: 5acfedbbe68c827489506b223687909d, type: 3}
   Fish_Pickup: {fileID: 8300000, guid: f9c4ab82252ba9549a5fcfd7d4c5649f, type: 3}
+  Incorrect_Sound: {fileID: 8300000, guid: 569ff4265b0aead4a9c8835e17cc3b2e, type: 3}
   Tech_Ambience: {fileID: 8300000, guid: 71463debf221a1b4abadf6fd8386dd8d, type: 3}
   Tech_Pickup: {fileID: 8300000, guid: 752ab3f8574b1a04697b84f0c19fd2a2, type: 3}
   Water_Pickup: {fileID: 8300000, guid: de187409f19c6c64495ed7b40c1448d4, type: 3}
@@ -26430,6 +26431,8 @@ MonoBehaviour:
   Start_Car_Engine: {fileID: 8300000, guid: 8850594a5d4412b4cb8fac57640dcb7e, type: 3}
   Car_Ambience: {fileID: 8300000, guid: b07880cc18e18a540bb53d515cfc6965, type: 3}
   Timed_Pickup_Sound: {fileID: 8300000, guid: bdafc53e8c42a7d4e9fe3142ece8a916, type: 3}
+  Countdown_Start_Sound: {fileID: 0}
+  Ten_Seconds_Remaining_Sound: {fileID: 0}
   Slow_Wave_Pickup: {fileID: 2499294474297080599, guid: 48a4fcf0e0c15f34e97c2fcedbf5ba96, type: 3}
   Sniper_Pickup: {fileID: 8661581824864228895, guid: 844b0585f9e9c9c45bbd73443e36a560, type: 3}
   Lazer_Pickup: {fileID: 8661581824864228895, guid: f4f5b32a52818074eb772cb36bd1f6a2, type: 3}
@@ -67593,14 +67596,14 @@ RectTransform:
   m_GameObject: {fileID: 1505752329}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7109237, y: 0.4746204, z: 0.61910975}
+  m_LocalScale: {x: 1.1046816, y: 0.7389835, z: 0.66839087}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 999387140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -76.1275, y: -0.9999695}
+  m_AnchoredPosition: {x: -43.3, y: -9.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1505752331
@@ -67623,7 +67626,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: c8c02a0df28583345a92d25984dae72b, type: 3}
+  m_Texture: {fileID: 2800000, guid: ac72886fc10fe244584b0877fad8d5f4, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -83743,6 +83746,7 @@ MonoBehaviour:
   Vines_Fire: {fileID: 0}
   Burst_Wind_Up: {fileID: 0}
   Bomb_Activate: {fileID: 0}
+  Death_Explosion: {fileID: 0}
   Day_Fade_In_Sound: {fileID: 0}
   Normal_Music: {fileID: 0}
   Final_Level_Music: {fileID: 0}

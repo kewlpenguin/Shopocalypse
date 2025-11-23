@@ -3419,7 +3419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.5, y: 245.6}
+  m_AnchoredPosition: {x: -3.5, y: 183.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &429496187
@@ -12764,6 +12764,8 @@ MonoBehaviour:
   Saw: {fileID: 1358585441546144805, guid: fb0012809c2f7a74ab174d8113129fc8, type: 3}
   Vines: {fileID: 3479392171579019639, guid: 402a0af3cbb688047a9dea22694a5cad, type: 3}
   Vine_Spawn_Reference: {fileID: 4035357971783493204, guid: 380ac9a9ab6f07849bb6ef594bead07a, type: 3}
+  Skybox_Day: {fileID: 0}
+  Skybox_Dusk: {fileID: 0}
   Selected_Bullet_Cooldown: 0
   Secondary_On_Cooldown: 0
   Main_On_Cooldown: 0
@@ -12787,6 +12789,17 @@ MonoBehaviour:
   Saw_Countdown: 0
   Vines_Countdown: 0
   Burst_Module_Countdown: 0
+  Sniper_Fire: {fileID: 0}
+  Basic_Fire: {fileID: 0}
+  Water_Fire: {fileID: 0}
+  Lazer_Fire: {fileID: 0}
+  Fish_Fire: {fileID: 0}
+  Vines_Fire: {fileID: 0}
+  Burst_Wind_Up: {fileID: 0}
+  Bomb_Activate: {fileID: 0}
+  Day_Fade_In_Sound: {fileID: 0}
+  Normal_Music: {fileID: 0}
+  Final_Level_Music: {fileID: 0}
   Slow_Wave2: {fileID: 0}
   Saw2: {fileID: 0}
   Vines2: {fileID: 0}
@@ -12798,13 +12811,33 @@ MonoBehaviour:
   Lazer1: {fileID: 0}
   Sniper1: {fileID: 0}
   Burst_Module: {fileID: 0}
+  Slow_Image: {fileID: 0}
+  Saw_Image: {fileID: 0}
+  Vines_Image: {fileID: 0}
+  Lazer_Image: {fileID: 0}
+  Sniper_Image: {fileID: 0}
+  Burst_Module_Image: {fileID: 0}
+  Slow_Image_Selected_Ammo: {fileID: 0}
+  Saw_Image_Selected_Ammo: {fileID: 0}
+  Vines_Image_Selected_Ammo: {fileID: 0}
+  Lazer_Image_Selected_Ammo: {fileID: 0}
+  Sniper_Image_Selected_Ammo: {fileID: 0}
+  Burst_Module_Image_Selected_Ammo: {fileID: 0}
   Select_Weapon_Text: {fileID: 0}
   Right_Click_Reminder: {fileID: 0}
   Out_Of_Ammo_Text: {fileID: 0}
   Not_Enough_For_Burst: {fileID: 0}
+  Day_Counter: {fileID: 0}
   House_Health: {fileID: 0}
   Up_Arrow: {fileID: 0}
   Down_Arrow: {fileID: 0}
+  Game_Over_Ui_Stuff: {fileID: 0}
+  Back_To_Title_Screen: {fileID: 0}
+  Days_Survived: {fileID: 0}
+  Health_Bomb_1: {fileID: 0}
+  Health_Bomb_2: {fileID: 0}
+  Health_Bomb_3: {fileID: 0}
+  House_Health_Bar: {fileID: 0}
 --- !u!54 &1660174756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13086,6 +13119,8 @@ MonoBehaviour:
   Lava_Hound_Enemy: {fileID: 1643833887706458083, guid: 1d4d4d01e41ff4b40b553df834c47540, type: 3}
   Super_Heavy: {fileID: 1643833887706458083, guid: 7a381587bdfd956458ab20a23670a3f1, type: 3}
   Charger: {fileID: 1643833887706458083, guid: a2d82860348d38c4f8fdceb3c65b2db3, type: 3}
+  Button_Click: {fileID: 8300000, guid: ed60906efb1c76b45994ee01fc4ed48f, type: 3}
+  Scene_Transition_Music: {fileID: 8300000, guid: 8ea62512863c146489a7a731553be8e8, type: 3}
   General_Spawn_Pos: {x: 0, y: 0, z: 0}
 --- !u!1 &1714802350
 GameObject:
@@ -16262,7 +16297,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.1, y: 173.1}
+  m_AnchoredPosition: {x: -1.1, y: 111}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2119925261
@@ -16395,7 +16430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}

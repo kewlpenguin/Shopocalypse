@@ -10,7 +10,13 @@ public class Switch_Scene_Button : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
+    /*
+        if(Persistent_Data_Store.Day > 0)
+        {
+            gameObject.SetActive(false);
+        }
+    */
     }
 
     // Update is called once per frame

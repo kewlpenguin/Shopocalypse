@@ -30,6 +30,7 @@ public class Player_Controller : MonoBehaviour
     public AudioClip Sushi_Error;
     public AudioClip Grill_Sizzle;
     public AudioClip Fish_Pickup;
+    public AudioClip Incorrect_Sound;
 
     public AudioClip Tech_Ambience;
     public AudioClip Tech_Pickup;
@@ -49,8 +50,8 @@ public class Player_Controller : MonoBehaviour
 
     public AudioClip Timed_Pickup_Sound;
 
-
-
+    public AudioClip Countdown_Start_Sound;
+    public AudioClip Ten_Seconds_Remaining_Sound;
 
     List<GameObject> Ammo_Pickups;
     List<string> Ammo_Spawn_Tags;
@@ -728,7 +729,7 @@ public class Player_Controller : MonoBehaviour
                 break;
 
             case "Lazer_Ammo":
-                Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Pickup_Sound, GameObject.Find("Player").transform.position, .075f, 1);
+                Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Pickup_Sound, GameObject.Find("Player").transform.position, .02f, 1);
                 Persistent_Data_Store.Pierce_Lazer_Ammo += 1;
 
                 break;
@@ -744,6 +745,16 @@ public class Player_Controller : MonoBehaviour
             case "Saw_Ammo":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Sushi_Cruch, GameObject.Find("Player").transform.position, .2f, 1);
                 Persistent_Data_Store.Saw_Ammo += 10;
+
+                break;
+
+            case "fish":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Incorrect_Sound, GameObject.Find("Player").transform.position, .2f, 1);
+
+                break;
+
+            case "Bad_Sushi":
+                Audio_Manager_Script.instance.Play_Selected_Audio(Incorrect_Sound, GameObject.Find("Player").transform.position, .2f, 1);
 
                 break;
 
@@ -1020,6 +1031,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (!Main_Doors_Open)
         {
+            Audio_Manager_Script.instance.Play_Selected_Audio(Door_Open, GameObject.Find("Above_Main_Doors").transform.position, .05f, 1);
             for (int i = 20; i > 0; i--)
             {
                 Main_Doors_Opening = true;
@@ -1037,7 +1049,7 @@ public class Player_Controller : MonoBehaviour
         {
             for (int j = 20; j > 0; j--)
             {
-                Main_Doors_Opening = true;
+                Main_Doors_Opening = true; // opening just means moving
                 Left_Door.transform.Translate(new Vector3(0, 0, -.5f));
                 Right_Door.transform.Translate(new Vector3(0, 0, .5f));
                 yield return new WaitForSeconds(.01f);

@@ -49,6 +49,7 @@ public class Enemy_Behavior : MonoBehaviour
 
 
     private bool Half_Hp; // for super heavy
+    private bool Game_Over;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -392,7 +393,12 @@ public class Enemy_Behavior : MonoBehaviour
             for (int i = 0; i < 99999; i++) // i refuse to use a fucking while loop
             {
                 Hit_On_Cooldown = true;                             // so coroutine only runs once before needing to wait on the cooldown
-                Audio_Manager_Script.instance.Play_Selected_Audio(House_Take_Damage, gameObject.transform.position, .075f, .6f + Random.Range(-.1f,.1f));
+
+                if (Persistent_Data_Store.House_Health > 0) //stop playing sounds once game is over
+                {
+                    Audio_Manager_Script.instance.Play_Selected_Audio(House_Take_Damage, gameObject.transform.position, .075f, .6f + Random.Range(-.1f, .1f));
+                }
+
                 Persistent_Data_Store.House_Health -= Damage;
 
                 if (gameObject.CompareTag("Roller")) //launch up when hit base if its the roller

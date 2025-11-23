@@ -206,7 +206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fbb2fca8a8de5954a9f52a73711930ef, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Saw_Ammo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -314,6 +314,7 @@ MonoBehaviour:
   In_Water: 0
   On_Conveyer_1: 0
   On_Conveyer_2: 0
+  Tech_Pickup_Time: 1
 --- !u!1001 &5371719979378346448
 PrefabInstance:
   m_ObjectHideFlags: 0

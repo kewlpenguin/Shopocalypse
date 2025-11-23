@@ -49,6 +49,7 @@ TagManager:
   - Tech_Shop_Days_Till_Open
   - Arcade_Shop_Days_Till_Open
   - Sushi_Shop_Days_Till_Open
+  - Bad_Sushi
   layers:
   - Default
   - TransparentFX
