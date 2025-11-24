@@ -2514,6 +2514,8 @@ MonoBehaviour:
   Health_Bomb_2: {fileID: 1015823151}
   Health_Bomb_3: {fileID: 915157634}
   House_Health_Bar: {fileID: 679005375}
+  Are_Dead: 0
+  cursorTexture: {fileID: 2800000, guid: cca13a9b12a3cc64e8bd55e9df1180e1, type: 3}
 --- !u!1 &398001566
 GameObject:
   m_ObjectHideFlags: 0

@@ -137,9 +137,13 @@ public class Main_Gun_Controller : MonoBehaviour
     public bool Are_Dead = false;
 
 
+    [SerializeField] private Texture2D cursorTexture;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Vector2 hotspot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
+        Cursor.SetCursor(cursorTexture, hotspot, CursorMode.Auto);
 
         Day_Counter.text = "Day " + Persistent_Data_Store.Day;
         StartCoroutine(Day_Count_Fade());
