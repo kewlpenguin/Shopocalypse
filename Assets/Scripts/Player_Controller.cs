@@ -72,6 +72,8 @@ public class Player_Controller : MonoBehaviour
     public GameObject Slow_Wave_Spawn;
     public GameObject Lazer_Spawn;
 
+    public GameObject Dead_Enemies;
+
     public Vector3 Spawn_Pos;
 
     public TextMeshProUGUI Slow_Wave;
@@ -236,6 +238,11 @@ public class Player_Controller : MonoBehaviour
 
     void Open_Closed_Stores() // depending on Day
     {
+        if (Persistent_Data_Store.Day > 12)
+        {
+           Dead_Enemies.SetActive(true); // to show we won in case the player visits the house
+        }
+
         switch (Persistent_Data_Store.Day)
 
         {

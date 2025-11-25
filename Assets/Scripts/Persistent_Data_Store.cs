@@ -15,11 +15,11 @@ public class Persistent_Data_Store : MonoBehaviour
     
     static public float House_Health = 200; 
     static public float Slow_Wave_Ammo = 0; 
-    static public float Sniper_Ammo = 0;
+    static public float Sniper_Ammo = 999;
     static public float Saw_Ammo = 0;
     static public float Vines_Ammo = 0;
     static public float Pierce_Lazer_Ammo = 0;
-    static public float Burst_Module_Ammo = 0;
+    static public float Burst_Module_Ammo = 55;
     static public bool Health_Bomb_1_Used = false;
     static public bool Health_Bomb_2_Used = false;
     static public bool Health_Bomb_3_Used = false;
@@ -46,7 +46,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
-    static public int Day = 0;
+    static public int Day = 11;
 
 
     static public int Easy_Base_Shop_Time = 30;

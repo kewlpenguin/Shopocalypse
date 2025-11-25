@@ -126,6 +126,7 @@ public class Main_Gun_Controller : MonoBehaviour
    
     public GameObject Game_Over_Ui_Stuff;
     public Button Back_To_Title_Screen;
+    public Button Back_To_Title_Screen_Win_Version;
     public TextMeshProUGUI Days_Survived;
 
     public GameObject Health_Bomb_1; // use gameobject to access the child images and the tick on the healthbar
@@ -156,6 +157,7 @@ public class Main_Gun_Controller : MonoBehaviour
         Health_Bomb_Setup();
 
         Back_To_Title_Screen.onClick.AddListener(Return_To_Title_Screen);
+        Back_To_Title_Screen_Win_Version.onClick.AddListener(Return_To_Title_Screen);
 
         Game_Over_Ui_Stuff.SetActive(false);
       
@@ -948,6 +950,26 @@ public class Main_Gun_Controller : MonoBehaviour
             Days_Survived.text = "Days Survived: " + Persistent_Data_Store.Day;
             Game_Over_Ui_Stuff.SetActive(true);
         }
+
+        if (Back_To_Title_Screen_Win_Version.isActiveAndEnabled)
+        {
+            Are_Dead = true;
+            AudioSource[] Audio_Playing_In_Scene = GameObject.FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+
+
+            if (!One_Time_Death_Explosion_Triggered)// no death sound this time, instead we play vic roy sound, still only once
+            { 
+                for(int i = Audio_Playing_In_Scene.Length; i > 0; i--)
+                {
+                    Destroy(Audio_Playing_In_Scene[i - 1]);
+                }
+                //play victory sound here
+
+                One_Time_Death_Explosion_Triggered = true;
+            }
+        }
+
+
     }
 
     

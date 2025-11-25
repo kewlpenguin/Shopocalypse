@@ -21,8 +21,10 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
     public GameObject Super_Heavy;
     public GameObject Charger;
 
-    public TextMeshProUGUI Enemies_Remaining_Text;
+    public RawImage Victory_Screen;
 
+    public TextMeshProUGUI Enemies_Remaining_Text;
+    public GameObject Return_To_Title_Screen_Button;
 
     public Vector3 General_Spawn_Pos = new Vector3(37f, 1.56f, 4f);
 
@@ -41,6 +43,9 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Victory_Screen.gameObject.SetActive(false);
+        Return_To_Title_Screen_Button.SetActive(false);
+
         Enemies_Remaining = 0;
         Wave_Over = false;
 
@@ -70,15 +75,21 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
       
         if(Enemies_Remaining <= 0)
         {
-            if (!Wave_Over)
+            if (!Wave_Over && Persistent_Data_Store.Day != 12)
             {
                 StartCoroutine(Wave_Ended());
             }
-           
+        else if(!Wave_Over && Persistent_Data_Store.Day == 12)
+            {
+                Victory_Screen.gameObject.SetActive(true);
+                Return_To_Title_Screen_Button.SetActive(true);
+            }
+
             Wave_Over = true; // so the swap scene coroutine is only called once
             
         }
     }
+
 
     IEnumerator Wave_Ended() // swap to next scene
     {
