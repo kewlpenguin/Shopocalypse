@@ -53,6 +53,8 @@ public class Player_Controller : MonoBehaviour
     public AudioClip Countdown_Start_Sound;
     public AudioClip Ten_Seconds_Remaining_Sound;
 
+    public AudioClip Win_Music_For_House;
+
     List<GameObject> Ammo_Pickups;
     List<string> Ammo_Spawn_Tags;
     public GameObject Slow_Wave_Pickup;
@@ -159,16 +161,6 @@ public class Player_Controller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() 
     {
-        /*
-        AudioListener[] Listeners_In_Scene = GameObject.FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
-
-        for (int i = Listeners_In_Scene.Length; i > 0; i--)
-        {
-            Debug.Log(Listeners_In_Scene[i - 1].gameObject.name);
-        }
-        */
-
-
         Open_Closed_Stores(); // do this first so gamobject.active dependencies are satisfied
         Update_Shop_Open_Countdowns();
 
@@ -1194,6 +1186,9 @@ public class Player_Controller : MonoBehaviour
         //car ambience
         Audio_Manager_Script.instance.Play_Selected_Audio(Close_Car_Door, GameObject.Find("mycar").transform.position, .7f, 1);
         Music_Controller.Music_instance.Play_Selected_Audio(Car_Ambience, GameObject.Find("mycar").transform.position, .64f, 1,true,true,false,30);
+
+        //house ambience 
+        Music_Controller.Music_instance.Play_Selected_Audio(Win_Music_For_House, GameObject.Find("mychild").transform.position, .64f, 1, true, true, false, 30);
 
 
         //all store ambient sounds and vending ambient

@@ -81,6 +81,7 @@ public class Main_Gun_Controller : MonoBehaviour
     public AudioClip Normal_Music;
     public AudioClip Final_Level_Music; //Day 12
 
+
     public TextMeshProUGUI Slow_Wave2;
     public TextMeshProUGUI Saw2; // for cooldowns
     public TextMeshProUGUI Vines2;
@@ -127,6 +128,8 @@ public class Main_Gun_Controller : MonoBehaviour
     public GameObject Game_Over_Ui_Stuff;
     public Button Back_To_Title_Screen;
     public Button Back_To_Title_Screen_Win_Version;
+    public Button Continue_Button;
+
     public TextMeshProUGUI Days_Survived;
 
     public GameObject Health_Bomb_1; // use gameobject to access the child images and the tick on the healthbar
@@ -158,6 +161,8 @@ public class Main_Gun_Controller : MonoBehaviour
 
         Back_To_Title_Screen.onClick.AddListener(Return_To_Title_Screen);
         Back_To_Title_Screen_Win_Version.onClick.AddListener(Return_To_Title_Screen);
+        Continue_Button.onClick.AddListener(Swap_To_Scene_2);
+
 
         Game_Over_Ui_Stuff.SetActive(false);
       
@@ -702,7 +707,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     for (float i = 0; i < 30; i++)
                     {
                         Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Fire, gameObject.transform.position, .075f, 1);
-                        Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
+                        Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-3f, 3f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Sniper_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }
@@ -767,9 +772,9 @@ public class Main_Gun_Controller : MonoBehaviour
                     for (float i = 0; i < 5; i++)
                     {
                         Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .25f, 1);
-                        Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
+                        Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-2f, 2f), 1, 1)); // need to randomize this
                         Persistent_Data_Store.Vines_Ammo--;
-                        yield return new WaitForSeconds(.03f);
+                        yield return new WaitForSeconds(.3f);
                     }
 
                 }
@@ -928,13 +933,23 @@ public class Main_Gun_Controller : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+
+    void Swap_To_Scene_2()//for continue button
+    {
+        SceneManager.LoadScene(2);
+    }
+
+
+
+
+
     void Game_Over_Check()
     {
 
-        if(Persistent_Data_Store.House_Health <= 0)
+        if (Persistent_Data_Store.House_Health <= 0)
         {
             Are_Dead = true;
-            AudioSource[] Audio_Playing_In_Scene = GameObject.FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+            AudioSource[] Audio_Playing_In_Scene = GameObject.FindObjectsByType<AudioSource>(FindObjectsSortMode.None); // destroy all other audio sources like music etc
 
             if (!One_Time_Death_Explosion_Triggered)
             {
@@ -943,7 +958,7 @@ public class Main_Gun_Controller : MonoBehaviour
                     Destroy(Audio_Playing_In_Scene[i - 1]);
                 }
                 Audio_Manager_Script.instance.Play_Selected_Audio(Death_Explosion, gameObject.transform.position, .2f, 1);
-                
+
                 One_Time_Death_Explosion_Triggered = true;
             }
 
@@ -953,28 +968,15 @@ public class Main_Gun_Controller : MonoBehaviour
 
         if (Back_To_Title_Screen_Win_Version.isActiveAndEnabled)
         {
-            Are_Dead = true;
-            AudioSource[] Audio_Playing_In_Scene = GameObject.FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-
-
-            if (!One_Time_Death_Explosion_Triggered)// no death sound this time, instead we play vic roy sound, still only once
-            { 
-                for(int i = Audio_Playing_In_Scene.Length; i > 0; i--)
+                if (!One_Time_Death_Explosion_Triggered)// no death sound this time, just set aredead, delay is built into the wait to show victory screen in enemy spawn manager
                 {
-                    Destroy(Audio_Playing_In_Scene[i - 1]);
-                }
-                //play victory sound here
-
+                Are_Dead = true;
                 One_Time_Death_Explosion_Triggered = true;
-            }
+                }
         }
-
-
     }
 
     
-
-
 
     void Health_Bomb_Setup() // if easy mode then add bomb at 75, 50, and 25 percent health, if normal mode add bomb at only 25%. also goes based on which bombs have already been used
     {
@@ -1159,13 +1161,6 @@ public class Main_Gun_Controller : MonoBehaviour
         Heart_Break_Left.transform.position = temp_Left;
 
     }
-
-
-
-
-
-
-
 
 
 

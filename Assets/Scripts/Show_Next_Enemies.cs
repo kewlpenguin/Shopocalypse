@@ -25,6 +25,7 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
     public AudioClip Button_Click;
     public AudioClip Scene_Transition_Music;
 
+    public Material Skybox_Dusk;
 
     public Vector3 General_Spawn_Pos = new Vector3(78, 4, 14);
 
@@ -60,6 +61,10 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
     void Update()
     {
         gameObject.transform.Rotate(0, .04f, 0);
+        if(Persistent_Data_Store.Day % 12 == 0 && Persistent_Data_Store.Day != 0)
+        {
+            RenderSettings.skybox = Skybox_Dusk;
+        }
     }
 
     void Swap_To_Scene_3() // to shopping scene

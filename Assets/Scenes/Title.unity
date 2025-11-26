@@ -27294,6 +27294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e3726b338f42348afde65021be0cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Shop_Time_Start: {fileID: 8300000, guid: fae0427fe313e4c48becf296d1a8a7d3, type: 3}
+  Ten_Seconds_Left: {fileID: 8300000, guid: 3c89ccb7a2c29ce42aa85c84d8183c8d, type: 3}
   Test_Show_Var: 0
   Shopping_Timer: {fileID: 957351092}
 --- !u!4 &797571134

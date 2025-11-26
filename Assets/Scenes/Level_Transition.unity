@@ -12797,6 +12797,7 @@ MonoBehaviour:
   Vines_Fire: {fileID: 0}
   Burst_Wind_Up: {fileID: 0}
   Bomb_Activate: {fileID: 0}
+  Death_Explosion: {fileID: 0}
   Day_Fade_In_Sound: {fileID: 0}
   Normal_Music: {fileID: 0}
   Final_Level_Music: {fileID: 0}
@@ -12823,6 +12824,9 @@ MonoBehaviour:
   Lazer_Image_Selected_Ammo: {fileID: 0}
   Sniper_Image_Selected_Ammo: {fileID: 0}
   Burst_Module_Image_Selected_Ammo: {fileID: 0}
+  Heart_Break_Left: {fileID: 0}
+  Heart_Break_Right: {fileID: 0}
+  White_Out: {fileID: 0}
   Select_Weapon_Text: {fileID: 0}
   Right_Click_Reminder: {fileID: 0}
   Out_Of_Ammo_Text: {fileID: 0}
@@ -12833,11 +12837,14 @@ MonoBehaviour:
   Down_Arrow: {fileID: 0}
   Game_Over_Ui_Stuff: {fileID: 0}
   Back_To_Title_Screen: {fileID: 0}
+  Back_To_Title_Screen_Win_Version: {fileID: 0}
   Days_Survived: {fileID: 0}
   Health_Bomb_1: {fileID: 0}
   Health_Bomb_2: {fileID: 0}
   Health_Bomb_3: {fileID: 0}
   House_Health_Bar: {fileID: 0}
+  Are_Dead: 0
+  cursorTexture: {fileID: 0}
 --- !u!54 &1660174756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13121,6 +13128,7 @@ MonoBehaviour:
   Charger: {fileID: 1643833887706458083, guid: a2d82860348d38c4f8fdceb3c65b2db3, type: 3}
   Button_Click: {fileID: 8300000, guid: ed60906efb1c76b45994ee01fc4ed48f, type: 3}
   Scene_Transition_Music: {fileID: 8300000, guid: 8ea62512863c146489a7a731553be8e8, type: 3}
+  Skybox_Dusk: {fileID: 2100000, guid: c82a334cf5a5e47978749c210cee72a7, type: 2}
   General_Spawn_Pos: {x: 0, y: 0, z: 0}
 --- !u!1 &1714802350
 GameObject:

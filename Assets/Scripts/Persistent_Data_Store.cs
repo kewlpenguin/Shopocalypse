@@ -17,8 +17,8 @@ public class Persistent_Data_Store : MonoBehaviour
     static public float Slow_Wave_Ammo = 0; 
     static public float Sniper_Ammo = 999;
     static public float Saw_Ammo = 0;
-    static public float Vines_Ammo = 0;
-    static public float Pierce_Lazer_Ammo = 0;
+    static public float Vines_Ammo = 99;
+    static public float Pierce_Lazer_Ammo = 99;
     static public float Burst_Module_Ammo = 55;
     static public bool Health_Bomb_1_Used = false;
     static public bool Health_Bomb_2_Used = false;
@@ -71,6 +71,9 @@ public class Persistent_Data_Store : MonoBehaviour
     static public bool CountDown_Has_Started = false;
 
     static public Scene Current_Scene;
+
+    public AudioClip Shop_Time_Start;
+    public AudioClip Ten_Seconds_Left;
 
 
     public float Test_Show_Var;
@@ -261,6 +264,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
                 if (!CountDown_Has_Started)
                 {
+ 
                     StartCoroutine(Shopping_Timer_Countdown());
                     CountDown_Has_Started = true;
                 }
@@ -284,7 +288,13 @@ public class Persistent_Data_Store : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             Shopping_Countdown--;
-         
+        
+            if(Shopping_Countdown == 10) //ten second warning
+            {
+                Audio_Manager_Script.instance.Play_Selected_Audio(Ten_Seconds_Left, GameObject.Find("Player").transform.position, .075f, 1);
+                Shopping_Timer.fontSize = 50;
+            }
+
             if(Current_Scene.buildIndex != 3) // when we are not in shop stop the countdown
             {
                 break;
@@ -298,41 +308,24 @@ public class Persistent_Data_Store : MonoBehaviour
     {
         if (Game_Has_Started) // if we pickup an object before the pre shopping time is over set the countdown to be the shopping time because the game has started
         {
-            Shopping_Timer.fontSize = 40;
-
-            if (Shopping_Countdown > Shopping_Time)
+            if (Shopping_Countdown > Shopping_Time) // this will always be true but is a safeguard because shopcountdown is not infinite
             {
+                Audio_Manager_Script.instance.Play_Selected_Audio(Shop_Time_Start, GameObject.Find("Player").transform.position, 1, 1);
                 Shopping_Countdown = Shopping_Time;
             }
-
-        }
-
-
-        if (Shopping_Countdown < Shopping_Time)
-        {
-            Game_Has_Started = true;
-        }
-
-        if (!Game_Has_Started) 
-        { 
-        Shopping_Timer.fontSize = 25;
-         }
-
-
-        if (Shopping_Countdown > Shopping_Time) // if we are in the pre shopping time make the text say untill spree starts instead of until next vwave arrives
-        {
-
-            Shopping_Timer.text = "WARNING: TAKING ANY ITEM WILL ALERT THE NEXT WAVE ";
-            Shopping_Timer.color = Color.yellow;
-        }
-       
-        else if (Shopping_Countdown <= Shopping_Time) // iff the spree time has begun
-        {
-            Shopping_Timer.fontSize = 40;
+         
+            if(Shopping_Countdown > 10) { Shopping_Timer.fontSize = 40; } // we will make it larger at 10 seconds left
             Shopping_Timer.color = Color.red;
             Shopping_Timer.text = "Time Until Next Wave Arrives: " + Shopping_Countdown;
         }
 
+        else if (!Game_Has_Started) 
+        { 
+        Shopping_Timer.fontSize = 25;
+            Shopping_Timer.text = "WARNING: TAKING ANY ITEM WILL ALERT THE NEXT WAVE ";
+            Shopping_Timer.color = Color.yellow;
+        }
+       
     }
 
 

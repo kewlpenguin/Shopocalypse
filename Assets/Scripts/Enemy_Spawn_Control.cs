@@ -25,6 +25,7 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
     public TextMeshProUGUI Enemies_Remaining_Text;
     public GameObject Return_To_Title_Screen_Button;
+    public GameObject Continue_Button;
 
     public Vector3 General_Spawn_Pos = new Vector3(37f, 1.56f, 4f);
 
@@ -39,12 +40,15 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
     bool Wave_Over;
 
+    public AudioClip Victory_Music;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Victory_Screen.gameObject.SetActive(false);
         Return_To_Title_Screen_Button.SetActive(false);
+        Continue_Button.SetActive(false);
+        
 
         Enemies_Remaining = 0;
         Wave_Over = false;
@@ -79,10 +83,10 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
             {
                 StartCoroutine(Wave_Ended());
             }
-        else if(!Wave_Over && Persistent_Data_Store.Day == 12)
+     
+            else if(!Wave_Over && Persistent_Data_Store.Day == 12)
             {
-                Victory_Screen.gameObject.SetActive(true);
-                Return_To_Title_Screen_Button.SetActive(true);
+                StartCoroutine(Game_Ended());
             }
 
             Wave_Over = true; // so the swap scene coroutine is only called once
@@ -98,6 +102,25 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
 
     }
 
+    IEnumerator Game_Ended() // swap to next scene
+    {
+        AudioSource[] Audio_Playing_In_Scene = GameObject.FindObjectsByType<AudioSource>(FindObjectsSortMode.None); // destroy all other audio sources like music etc
+
+            for (int i = Audio_Playing_In_Scene.Length; i > 0; i--)
+            {
+                Destroy(Audio_Playing_In_Scene[i - 1]);
+            }
+
+        
+
+        //play victory sound here
+        Audio_Manager_Script.instance.Play_Selected_Audio(Victory_Music, GameObject.Find("Main Camera").transform.position, .5f, 1);
+
+        yield return new WaitForSeconds(5.5f);
+        Victory_Screen.gameObject.SetActive(true);
+        Return_To_Title_Screen_Button.SetActive(true);
+        Continue_Button.SetActive(true);
+    }
 
 
 
