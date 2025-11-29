@@ -29,6 +29,10 @@ public class Enemy_Behavior : MonoBehaviour
     public AudioClip Death_Sound_Large_1;
     public AudioClip Death_Sound_Large_2;
 
+    public GameObject Sniper_Hit_VFX;
+
+
+
     private float Hit_Speed = 1;
     bool Touching_House = false;
     bool Slowed = false;
@@ -54,7 +58,6 @@ public class Enemy_Behavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
         EnemyRigidbody = gameObject.GetComponent<Rigidbody>();
         Enemy_Type = gameObject.tag; // get enemy type from tag
         Enemy_Behavior_From_Type(Enemy_Type);
@@ -147,9 +150,6 @@ public class Enemy_Behavior : MonoBehaviour
     {
         Universal_Enemy_Movement();
     }
-
-
-
 
 
     void Enemy_Behavior_From_Type(string Enemy_To_Initialize) // reads the tag of the instantiated prefab to give it behavior
@@ -442,6 +442,7 @@ public class Enemy_Behavior : MonoBehaviour
         { 
         yield return new WaitForSeconds(.33f);
             Audio_Manager_Script.instance.Play_Selected_Audio(Fish_Chomp, gameObject.transform.position, .1f, 1 + Random.Range(-.1f, .1f));
+
             Health -= 1f;
         }
     }
@@ -494,8 +495,6 @@ public class Enemy_Behavior : MonoBehaviour
             if (collision.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1)
             {
                 StartCoroutine(Repeated_Saw_Damage());
-
-
                 collision.gameObject.GetComponent<Bullet_Control>().Enemies_Hit++;
             }
         }
@@ -545,9 +544,10 @@ public class Enemy_Behavior : MonoBehaviour
         else if (other.gameObject.CompareTag("Sniper"))
         {
             Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Hit, gameObject.transform.position, .25f, .9f + Random.Range(-.1f, .1f));
+            Instantiate(Sniper_Hit_VFX, other.transform.position, gameObject.transform.rotation);
             Destroy(other.gameObject);
-            // StartCoroutine(Local_Invincibility_Sniper());// because the stupid roller has multiple segments but also to prevent potential multi hits
-            if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1)
+
+            if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1) // so we dont get collaterals
             {
                 Health -= 15;
                 EnemyRigidbody.AddForce(Vector3.right * Sniper_Knockback + new Vector3(0, (Sniper_Knockback / 2), 0), ForceMode.Impulse);

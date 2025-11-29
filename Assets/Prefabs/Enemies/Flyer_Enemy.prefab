@@ -116,6 +116,7 @@ MonoBehaviour:
   Death_Sound_Small: {fileID: 8300000, guid: c7778d309d79ffb46be8d91cfdfeab75, type: 3}
   Death_Sound_Large_1: {fileID: 8300000, guid: 921f6fc8024152542bd0f25247869b52, type: 3}
   Death_Sound_Large_2: {fileID: 8300000, guid: 584c11358fba97f41b2d5c023959c391, type: 3}
+  Sniper_Hit_VFX: {fileID: 5669246471909640947, guid: bfd016bff164dfc4aac33a0563922772, type: 3}
   On_Ground: 0
   Hit_On_Cooldown: 0
   Is_Lava_Child: 0

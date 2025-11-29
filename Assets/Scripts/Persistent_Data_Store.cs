@@ -46,7 +46,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
-    static public int Day = 11;
+    static public int Day = 0;
 
 
     static public int Easy_Base_Shop_Time = 30;
@@ -81,7 +81,7 @@ public class Persistent_Data_Store : MonoBehaviour
     static public List<int> Choosen_Spawn_List_Numbers = new List<int>(); //  for picking what lists of enemies we want to pull enemir=es from
 
    public TextMeshProUGUI Shopping_Timer;
-
+    public TextMeshProUGUI Shop_Time_Warning;
 
 
 
@@ -102,24 +102,22 @@ public class Persistent_Data_Store : MonoBehaviour
     void Update()
     {
 
-        if (House_Health < 200 && SceneManager.GetActiveScene().buildIndex == 0) { // because house health resets to 200 we will only run this once when we go back to the title screen also these are mostly safety checks bc there is no way to get back to title except to die
+        if (Scene_Swaps > 0 && SceneManager.GetActiveScene().buildIndex == 0) { // if we are chilling in the title do not run multiple times, also will not reset to default until we leave and return to main
             Reset_To_Default_Values();
                 }
 
         Check_For_Scene_Swap();
       
-        Total_Ammo = Slow_Wave_Ammo + Saw_Ammo + Sniper_Ammo + Pierce_Lazer_Ammo + Vines_Ammo; // not including burst module
-       
-        
-        
-        Test_Show_Var = Difficulty;
+        Total_Ammo = Slow_Wave_Ammo + Saw_Ammo + Sniper_Ammo + Pierce_Lazer_Ammo + Vines_Ammo; // not including burst module, this is for ui stuff like out of ammo text
+
+        Test_Show_Var = Difficulty; // for testing obv
 
 
-        if (Current_Scene.buildIndex == 3)
+        if (Current_Scene.buildIndex == 3) // only run shopping checks in shopping scene
         {
-            Game_Has_Started = FindFirstObjectByType<Player_Controller>().Started_Real_Countdown;
+            Game_Has_Started = FindFirstObjectByType<Player_Controller>().Started_Real_Countdown; // there is only one player and one playercontroller script so this will find it and reference it
            
-            Check_For_Object_Pickup();
+            Check_For_Object_Pickup(); 
          
         }
 
@@ -219,8 +217,9 @@ public class Persistent_Data_Store : MonoBehaviour
 
         if (Temp != Current_Scene) // current and temp should be the same at the beginning but as soon as the scene changes temp will change first and the if will run
         {
-          
+            Shop_Time_Warning.gameObject.SetActive(false);
             Shopping_Timer.gameObject.SetActive(false);
+
             Scene_Swaps++;
 
             if (Temp.buildIndex == 2) // increment difficulty during every show next enemies phase immediately after the enemies have been decided for the upcoming level
@@ -259,7 +258,8 @@ public class Persistent_Data_Store : MonoBehaviour
                 CountDown_Has_Started = false;
                 
                 Shopping_Timer.gameObject.SetActive(true);
-              
+              Shop_Time_Warning.gameObject.SetActive(true);
+
                 Shopping_Countdown = Pre_Shopping_Time;
 
                 if (!CountDown_Has_Started)
@@ -312,6 +312,7 @@ public class Persistent_Data_Store : MonoBehaviour
             {
                 Audio_Manager_Script.instance.Play_Selected_Audio(Shop_Time_Start, GameObject.Find("Player").transform.position, 1, 1);
                 Shopping_Countdown = Shopping_Time;
+                Shop_Time_Warning.gameObject.SetActive(false);
             }
          
             if(Shopping_Countdown > 10) { Shopping_Timer.fontSize = 40; } // we will make it larger at 10 seconds left
@@ -324,6 +325,8 @@ public class Persistent_Data_Store : MonoBehaviour
         Shopping_Timer.fontSize = 25;
             Shopping_Timer.text = "WARNING: TAKING ANY ITEM WILL ALERT THE NEXT WAVE ";
             Shopping_Timer.color = Color.yellow;
+
+            Shop_Time_Warning.text = "Todays Shopping Time is: " + Shopping_Time + " Seconds";
         }
        
     }

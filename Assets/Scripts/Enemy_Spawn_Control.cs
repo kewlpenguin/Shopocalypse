@@ -22,6 +22,7 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
     public GameObject Charger;
 
     public RawImage Victory_Screen;
+    public GameObject Confetti;
 
     public TextMeshProUGUI Enemies_Remaining_Text;
     public GameObject Return_To_Title_Screen_Button;
@@ -48,7 +49,6 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
         Victory_Screen.gameObject.SetActive(false);
         Return_To_Title_Screen_Button.SetActive(false);
         Continue_Button.SetActive(false);
-        
 
         Enemies_Remaining = 0;
         Wave_Over = false;
@@ -120,8 +120,39 @@ public class Enemy_Spawn_Control : MonoBehaviour   // pulls straight from persis
         Victory_Screen.gameObject.SetActive(true);
         Return_To_Title_Screen_Button.SetActive(true);
         Continue_Button.SetActive(true);
+        StartCoroutine(Celebration_Confetti_Spawner());
     }
 
+
+    IEnumerator Celebration_Confetti_Spawner()
+    {
+        for (int i = 999999; i > 0; i--)
+        {
+            StartCoroutine(Celebration_Confetti_Behavior());
+            yield return new WaitForSeconds(2f);
+        }
+
+    }
+
+    IEnumerator Celebration_Confetti_Behavior()
+    {
+        // GameObject.Find("Canvas")
+        GameObject Confetti_Spawned = Instantiate(Confetti, GameObject.Find("Confetti_OG").transform.position, GameObject.Find("Confetti_OG").transform.rotation); //spawn confetti att a position not that important rn
+      
+        Confetti_Spawned.transform.SetParent(GameObject.Find("Canvas").transform); // add it to the canvas
+        Confetti_Spawned.transform.position = GameObject.Find("Confetti_OG").transform.position + new Vector3(Random.Range(-100f,100f),0,0); // move it to starting pos on canvas
+        Confetti_Spawned.transform.localScale = new Vector3(11.376f, 11.376f, 11.376f); // resize it to be the origional confetti size
+
+        float Confetti_Layer_Move_Speed = Random.Range(-2f, -.5f);
+
+        for (int i = 2500; i > 0; i--) // move the confetti downwards
+        {
+            Confetti_Spawned.transform.Translate(0, Confetti_Layer_Move_Speed, 0); // move randome a bit
+            yield return new WaitForSeconds(.01f);
+        }
+        Destroy(Confetti_Spawned);
+
+    }
 
 
 

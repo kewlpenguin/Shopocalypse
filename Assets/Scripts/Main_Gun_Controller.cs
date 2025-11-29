@@ -146,6 +146,8 @@ public class Main_Gun_Controller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Time.timeScale = 1; // when we go back to main menu with button it also pauses so we unpause when loading back in the first scene
+
         Vector2 hotspot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
         Cursor.SetCursor(cursorTexture, hotspot, CursorMode.Auto);
 
