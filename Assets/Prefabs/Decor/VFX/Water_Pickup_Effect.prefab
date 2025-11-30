@@ -24504,7 +24504,7 @@ GameObject:
   - component: {fileID: 2653815990408753488}
   - component: {fileID: 3730147036289899011}
   m_Layer: 0
-  m_Name: Hit_3_Blue
+  m_Name: Water_Pickup_Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

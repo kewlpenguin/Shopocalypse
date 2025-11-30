@@ -26,6 +26,8 @@ public class Main_Gun_Controller : MonoBehaviour
     public GameObject Vines;
     public GameObject Vine_Spawn_Reference;
 
+    public GameObject Fire_Main_VFX;
+
     public Material Skybox_Day;
     public Material Skybox_Dusk;
 
@@ -502,6 +504,7 @@ public class Main_Gun_Controller : MonoBehaviour
                         StartCoroutine(Weapon_Cooldown_Slow_Wave());
                         Audio_Manager_Script.instance.Play_Selected_Audio(Water_Fire, gameObject.transform.position, 10, .75f);
                         Instantiate(Slow_Wave, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
                     }
                     
                     else if(Persistent_Data_Store.Slow_Wave_Ammo <= 0) // just another safety check

@@ -2675,11 +2675,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1311123844440639665, guid: 37b6571247371af43a5829474cb9f105, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -370
+      value: -363.5
       objectReference: {fileID: 0}
     - target: {fileID: 1311123844440639665, guid: 37b6571247371af43a5829474cb9f105, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -197.5
+      value: -191.8
       objectReference: {fileID: 0}
     - target: {fileID: 1311123844440639665, guid: 37b6571247371af43a5829474cb9f105, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2872,6 +2872,7 @@ MonoBehaviour:
   Saw: {fileID: 1358585441546144805, guid: fb0012809c2f7a74ab174d8113129fc8, type: 3}
   Vines: {fileID: 3479392171579019639, guid: 402a0af3cbb688047a9dea22694a5cad, type: 3}
   Vine_Spawn_Reference: {fileID: 4035357971783493204, guid: 380ac9a9ab6f07849bb6ef594bead07a, type: 3}
+  Fire_Main_VFX: {fileID: 85941164691198867, guid: 9b1caa4103e478d40be476cb75210b5e, type: 3}
   Skybox_Day: {fileID: 2100000, guid: 2c021ddc081a33d4aa1f0f7e005858b4, type: 2}
   Skybox_Dusk: {fileID: 2100000, guid: 36b0a0e08643ad54dbbeaf96f2474e3d, type: 2}
   Selected_Bullet_Cooldown: 0
@@ -5494,7 +5495,7 @@ RectTransform:
   m_GameObject: {fileID: 812355981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.020017669, y: 0.020017669, z: 0.020017669}
+  m_LocalScale: {x: 0.030288735, y: 0.020017669, z: 0.020017669}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 159856102}
@@ -5524,7 +5525,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: c8c02a0df28583345a92d25984dae72b, type: 3}
+  m_Texture: {fileID: 2800000, guid: ac72886fc10fe244584b0877fad8d5f4, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -9965,7 +9966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}

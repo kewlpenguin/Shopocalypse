@@ -14,9 +14,9 @@ public class Persistent_Data_Store : MonoBehaviour
     public static Persistent_Data_Store Instance;
     
     static public float House_Health = 200; 
-    static public float Slow_Wave_Ammo = 0; 
+    static public float Slow_Wave_Ammo = 55; 
     static public float Sniper_Ammo = 999;
-    static public float Saw_Ammo = 0;
+    static public float Saw_Ammo = 55;
     static public float Vines_Ammo = 99;
     static public float Pierce_Lazer_Ammo = 99;
     static public float Burst_Module_Ammo = 55;
@@ -82,11 +82,6 @@ public class Persistent_Data_Store : MonoBehaviour
 
    public TextMeshProUGUI Shopping_Timer;
     public TextMeshProUGUI Shop_Time_Warning;
-
-
-
-
-
 
 
 

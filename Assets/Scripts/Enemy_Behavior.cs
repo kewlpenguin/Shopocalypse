@@ -30,6 +30,10 @@ public class Enemy_Behavior : MonoBehaviour
     public AudioClip Death_Sound_Large_2;
 
     public GameObject Sniper_Hit_VFX;
+    public GameObject Basic_Hit_VFX;
+    public GameObject Slow_Hit_VFX;
+    public GameObject Lazer_Hit_VFX;
+    public GameObject Lazer_Crit_VFX;
 
 
 
@@ -519,6 +523,8 @@ public class Enemy_Behavior : MonoBehaviour
         if (other.tag == "Slow_Wave")
         {
             Audio_Manager_Script.instance.Play_Selected_Audio(Water_Hit, gameObject.transform.position, .1f, 1 + Random.Range(-.1f, .1f));
+            Instantiate(Slow_Hit_VFX, other.transform.position, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-90f,90f), Random.Range(-90f, 90f), Random.Range(-90f, 90f)));
+
             if (!Slowed)
             {
                 StartCoroutine(Slow_Timer());
@@ -545,6 +551,7 @@ public class Enemy_Behavior : MonoBehaviour
         {
             Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Hit, gameObject.transform.position, .25f, .9f + Random.Range(-.1f, .1f));
             Instantiate(Sniper_Hit_VFX, other.transform.position, gameObject.transform.rotation);
+
             Destroy(other.gameObject);
 
             if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1) // so we dont get collaterals
@@ -561,6 +568,8 @@ public class Enemy_Behavior : MonoBehaviour
         else if (other.gameObject.CompareTag("Main"))
         {
             Audio_Manager_Script.instance.Play_Selected_Audio(Basic_Hit, gameObject.transform.position, .15f, 1.2f + Random.Range(-.1f, .1f));
+            Instantiate(Basic_Hit_VFX, other.transform.position, gameObject.transform.rotation);
+
             Destroy(other.gameObject);
             if (other.gameObject.GetComponent<Bullet_Control>().Enemies_Hit < 1) { 
             Health -= 3;
@@ -573,6 +582,8 @@ public class Enemy_Behavior : MonoBehaviour
         else if (other.gameObject.CompareTag("Pierce_Lazer"))
         {
             Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Hit, gameObject.transform.position, .075f, 1 + Random.Range(-.2f, .2f));
+            Instantiate(Lazer_Hit_VFX, other.transform.position, gameObject.transform.rotation);
+
             Health -= 2.1f; // does abt 24 to rollers
             EnemyRigidbody.AddForce(Vector3.right * Pierce_Lazer_Knockback + new Vector3(0, (Pierce_Lazer_Knockback / 2), 0), ForceMode.Impulse);
 
@@ -585,6 +596,8 @@ public class Enemy_Behavior : MonoBehaviour
             if(!On_Ground && gameObject.tag != "Roller") // quadrouple damage to Airborne enemies
             {
                 Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_crit, gameObject.transform.position, .15f, 1 + Random.Range(-.1f, .1f));
+                Instantiate(Lazer_Crit_VFX, other.transform.position, gameObject.transform.rotation);
+
                 Health -= 30;
                 EnemyRigidbody.AddForce(Vector3.right * Pierce_Lazer_Knockback * 15, ForceMode.Impulse);
             }
@@ -592,6 +605,8 @@ public class Enemy_Behavior : MonoBehaviour
             if (gameObject.tag == "Roller")
             {
                 Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_crit, gameObject.transform.position, .15f, 1 + Random.Range(-.1f, .1f));
+                Instantiate(Lazer_Crit_VFX, other.transform.position, gameObject.transform.rotation);
+
             }
 
         }

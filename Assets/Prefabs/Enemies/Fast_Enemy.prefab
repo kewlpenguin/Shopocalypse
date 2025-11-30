@@ -293,7 +293,11 @@ MonoBehaviour:
   Death_Sound_Small: {fileID: 8300000, guid: c7778d309d79ffb46be8d91cfdfeab75, type: 3}
   Death_Sound_Large_1: {fileID: 8300000, guid: 921f6fc8024152542bd0f25247869b52, type: 3}
   Death_Sound_Large_2: {fileID: 8300000, guid: 584c11358fba97f41b2d5c023959c391, type: 3}
-  Sniper_Hit_VFX: {fileID: 5669246471909640947, guid: bfd016bff164dfc4aac33a0563922772, type: 3}
+  Sniper_Hit_VFX: {fileID: 3042519775331041172, guid: 6c48695ba36624b499625a39ac969bb9, type: 3}
+  Basic_Hit_VFX: {fileID: 3042519775331041172, guid: 91199827b53a8354598ca477a498de20, type: 3}
+  Slow_Hit_VFX: {fileID: 4371574358465749826, guid: 54e33dd7bee8c1a4a96217c41ba849e5, type: 3}
+  Lazer_Hit_VFX: {fileID: 5669246471909640947, guid: 4461b1e751059394f8f702d53ecc1855, type: 3}
+  Lazer_Crit_VFX: {fileID: 3042519775331041172, guid: 221fa2b38926f1249b8452e8aa7cdc8c, type: 3}
   On_Ground: 0
   Hit_On_Cooldown: 0
   Is_Lava_Child: 0
