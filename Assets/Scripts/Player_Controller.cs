@@ -164,6 +164,7 @@ public class Player_Controller : MonoBehaviour
 
     public bool Started_Real_Countdown = false;
 
+    private Vector3 Last_Picked_Up_Object;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() 
@@ -331,14 +332,14 @@ public class Player_Controller : MonoBehaviour
 
 
 
-    private void Pickup_Object()
+    private void Pickup_Object() // runs on click with object in range
     {
         LayerMask Ammo_Layer = LayerMask.GetMask("ammo");
 
         RaycastHit Object_Info;
         bool Object_In_Range = Physics.Raycast(Main_Camera.transform.position, Main_Camera.transform.forward, out Object_Info, 7f, Ammo_Layer);
 
-
+        Last_Picked_Up_Object = Object_Info.transform.position;
 
         //ugly ass if to exclude all the pickups that have a hold time attatcched
         if (Object_In_Range && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Large" && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Xtra_Large" && Object_Info.collider.gameObject.tag != "Health_Pickup"
@@ -703,7 +704,7 @@ public class Player_Controller : MonoBehaviour
     }
 
 
-    void Increment_Ammo_Counters(string tag) //increments the global ammo counts based on the tag of the raycasted object
+    void Increment_Ammo_Counters(string tag) //increments the global ammo counts based on the tag of the raycasted object and uses the last position data from the most recently picked up object for VFX im so good at this shit its crazyt
     {
 
         string My_Tag = tag;
@@ -713,17 +714,20 @@ public class Player_Controller : MonoBehaviour
         {
             case "Slow_Wave_Ammo":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Water_Pickup, GameObject.Find("Player").transform.position, .2f, 1);
+                Instantiate(Pickup_Slow_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Slow_Wave_Ammo += 4;
                 break;
 
             case "Sniper_Ammo":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Pickup_Sound, GameObject.Find("Player").transform.position, .2f, 1);
+                Instantiate(Pickup_Sniper_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Sniper_Ammo += 1;
 
                 break;
 
             case "Sniper_Ammo_Large":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Pickup_Sound, GameObject.Find("Player").transform.position, .3f, 1);
+                Instantiate(Pickup_Sniper_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Sniper_Ammo += 5;
 
                 break;
@@ -731,12 +735,14 @@ public class Player_Controller : MonoBehaviour
 
             case "Sniper_Ammo_Xtra_Large":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Pickup_Sound, GameObject.Find("Player").transform.position, .4f, 1);
+                Instantiate(Pickup_Sniper_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Sniper_Ammo += 15;
 
                 break;
 
             case "Lazer_Ammo":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Pickup_Sound, GameObject.Find("Player").transform.position, .02f, 1);
+                Instantiate(Pickup_Lazer_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Pierce_Lazer_Ammo += 1;
 
                 break;
@@ -744,6 +750,7 @@ public class Player_Controller : MonoBehaviour
 
             case "Vines_Ammo":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Vine_Pickup, GameObject.Find("Player").transform.position, .2f, 1);
+                Instantiate(Pickup_Vines_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Vines_Ammo += 1;
 
                 break;
@@ -751,6 +758,7 @@ public class Player_Controller : MonoBehaviour
 
             case "Saw_Ammo":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Sushi_Cruch, GameObject.Find("Player").transform.position, .2f, 1);
+                Instantiate(Pickup_Sushi_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Saw_Ammo += 10;
 
                 break;
@@ -767,24 +775,27 @@ public class Player_Controller : MonoBehaviour
 
             case "Saw_Ammo_Pickup_1":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Fish_Pickup, GameObject.Find("Player").transform.position, .2f, 1);
+                Instantiate(Pickup_Sushi_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Saw_Ammo += 5;
 
                 break;
 
             case "Tech_Small":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Tech_Pickup, GameObject.Find("Player").transform.position, .2f, 1);
+                Instantiate(Pickup_Burst_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Burst_Module_Ammo += 1;
-                Debug.Log("increment burst");
                 break;
 
             case "Tech_Medium":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Tech_Pickup, GameObject.Find("Player").transform.position, .3f, 1);
+                Instantiate(Pickup_Burst_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Burst_Module_Ammo += 2;
 
                 break;
 
             case "Tech_Large":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Tech_Pickup, GameObject.Find("Player").transform.position, .4f, 1);
+                Instantiate(Pickup_Burst_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                 Persistent_Data_Store.Burst_Module_Ammo += 3;
 
                 break;
@@ -797,6 +808,7 @@ public class Player_Controller : MonoBehaviour
                 if (Persistent_Data_Store.House_Health < 200)
                 {
                     Audio_Manager_Script.instance.Play_Selected_Audio(Heal, GameObject.Find("Player").transform.position, .7f, 1);
+                    Instantiate(Pickup_Drink_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
                     Persistent_Data_Store.House_Health += 10;
                 }
 
@@ -1210,25 +1222,25 @@ public class Player_Controller : MonoBehaviour
         Music_Controller.Music_instance.Play_Selected_Audio(Fountain_Ambience, GameObject.Find("WaterFall").transform.position, .2f, 1, true, true, false, 100);
 
         //Gun store ambience
-        Music_Controller.Music_instance.Play_Selected_Audio(Sniper_Shop_Ambience, GameObject.Find("Gun_Shop_Roof").transform.position, .07f, 1, true, true, false, 65);
+        Music_Controller.Music_instance.Play_Selected_Audio(Sniper_Shop_Ambience, GameObject.Find("Gun_Shop_Roof").transform.position, .2f, 1, true, true, false, 65);
 
         //Arcade store ambience
         if (!Closed_Arcade.activeInHierarchy)
         {
-            Music_Controller.Music_instance.Play_Selected_Audio(Arcade_Ambience, GameObject.Find("Arcade_Roof").transform.position, .075f, 1, true, true, false, 55);
+            Music_Controller.Music_instance.Play_Selected_Audio(Arcade_Ambience, GameObject.Find("Arcade_Roof").transform.position, .2f, 1, true, true, false, 55);
         }
 
         //sushi store ambience
         if (!Closed_Sushi_Shop.activeInHierarchy)
         {
-            Music_Controller.Music_instance.Play_Selected_Audio(Sushi_Ambience, GameObject.Find("Sushi_Roof").transform.position, .075f, 1, true, true, false, 65);
+            Music_Controller.Music_instance.Play_Selected_Audio(Sushi_Ambience, GameObject.Find("Sushi_Roof").transform.position, .2f, 1, true, true, false, 65);
             Music_Controller.Music_instance.Play_Selected_Audio(Grill_Sizzle, GameObject.Find("Sushi_Roof").transform.position, .0f, 1, true, true, false, 55);
         }
 
         //tech store ambience
         if (!Closed_Burst_Module_Shop.activeInHierarchy)
         {
-            Music_Controller.Music_instance.Play_Selected_Audio(Tech_Ambience, GameObject.Find("Tech_Shop_Roof").transform.position, .075f, 1, true, true, false, 55);
+            Music_Controller.Music_instance.Play_Selected_Audio(Tech_Ambience, GameObject.Find("Tech_Shop_Roof").transform.position, .2f, 1, true, true, false, 55);
         }
 
 

@@ -76,7 +76,8 @@ public class Main_Gun_Controller : MonoBehaviour
     public AudioClip Vines_Fire;
     public AudioClip Burst_Wind_Up;
     public AudioClip Bomb_Activate;
-   
+    public AudioClip Click_Sound;
+
     public AudioClip Death_Explosion;
 
     public AudioClip Day_Fade_In_Sound;
@@ -279,7 +280,8 @@ public class Main_Gun_Controller : MonoBehaviour
 
     void Switch_Selected_Ammo() // very inneficient way of checking what the active weapon is
     {
-       
+        
+        string Temp = Selected_Ammo; // for playing weapon swap sound
 
         Slow_Wave_Active = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Alpha1);
         Sniper_Active = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.Alpha2); ;
@@ -334,7 +336,11 @@ public class Main_Gun_Controller : MonoBehaviour
                 Slow_Image_Selected_Ammo.gameObject.SetActive(false); Vines_Image_Selected_Ammo.gameObject.SetActive(true); Saw_Image_Selected_Ammo.gameObject.SetActive(false); Lazer_Image_Selected_Ammo.gameObject.SetActive(false); Sniper_Image_Selected_Ammo.gameObject.SetActive(false);
         }
 
-   
+    
+   if(Temp != Selected_Ammo) // it will have changed by now if we swapped weapons
+        {
+            Audio_Manager_Script.instance.Play_Selected_Audio(Click_Sound, gameObject.transform.position, .7f, 1);
+        }
 
 }
 
@@ -416,6 +422,11 @@ public class Main_Gun_Controller : MonoBehaviour
                 Persistent_Data_Store.Saw_Ammo -= 1;
                 Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .25f, .75f);
                 Instantiate(Saw, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
+               
+                GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                Destroy(Fire_Effect, 2);
+
                 yield return new WaitForSeconds(.11f);
             }
             else if(Persistent_Data_Store.Saw_Ammo <= 0) { break; }
@@ -503,9 +514,14 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Slow_Wave_On_Cooldown && Persistent_Data_Store.Slow_Wave_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Slow_Wave());
+
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                        Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                        Destroy(Fire_Effect, 2);
+
                         Audio_Manager_Script.instance.Play_Selected_Audio(Water_Fire, gameObject.transform.position, 10, .75f);
                         Instantiate(Slow_Wave, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
-                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation);
+                       
                     }
                     
                     else if(Persistent_Data_Store.Slow_Wave_Ammo <= 0) // just another safety check
@@ -525,6 +541,11 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Sniper_On_Cooldown && Persistent_Data_Store.Sniper_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Sniper());
+
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                        Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                        Destroy(Fire_Effect, 2);
+
                         Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Fire, gameObject.transform.position, .15f, 1);
                         Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation);
 
@@ -547,6 +568,11 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Pierce_Lazer_On_Cooldown && Persistent_Data_Store.Pierce_Lazer_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Pierce_Lazer());
+
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                        Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                        Destroy(Fire_Effect, 2);
+
                         Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Fire, gameObject.transform.position, .045f, 1);
                         Instantiate(Pierce_Lazer, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation);
 
@@ -586,6 +612,11 @@ public class Main_Gun_Controller : MonoBehaviour
                     if (!Vines_On_Cooldown && Persistent_Data_Store.Vines_Ammo > 0)
                     {
                         StartCoroutine(Weapon_Cooldown_Vines());
+
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                        Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                        Destroy(Fire_Effect, 2);
+
                         Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .2f, 1);
                         GameObject Vine_Shot = Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation); // needs changed a bit here
                         Vine_Shot.GetComponent<Bullet_Control>().Vine_Spawn = Vine_Spawn_Reference;
@@ -698,6 +729,11 @@ public class Main_Gun_Controller : MonoBehaviour
                     {
                         Audio_Manager_Script.instance.Play_Selected_Audio(Water_Fire, gameObject.transform.position, 5, .75f);
                         Instantiate(Slow_Wave, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f,10f),1,1)); // need to randomize this
+
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                        Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                        Destroy(Fire_Effect, 2);
+
                         Persistent_Data_Store.Slow_Wave_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }
@@ -719,6 +755,11 @@ public class Main_Gun_Controller : MonoBehaviour
                     {
                         Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Fire, gameObject.transform.position, .075f, 1);
                         Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-3f, 3f), 1, 1)); // need to randomize this
+
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                        Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                        Destroy(Fire_Effect, 2);
+
                         Persistent_Data_Store.Sniper_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }
@@ -740,6 +781,11 @@ public class Main_Gun_Controller : MonoBehaviour
                     {
                         Audio_Manager_Script.instance.Play_Selected_Audio(Lazer_Fire, gameObject.transform.position, .0225f, 1);
                         Instantiate(Pierce_Lazer, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
+
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                        Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                        Destroy(Fire_Effect, 2);
+
                         Persistent_Data_Store.Pierce_Lazer_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }
@@ -762,6 +808,11 @@ public class Main_Gun_Controller : MonoBehaviour
                     {
                         Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .125f, .75f);
                         Instantiate(Saw, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
+
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                        Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                        Destroy(Fire_Effect, 2);
+
                         Persistent_Data_Store.Saw_Ammo--;
                         yield return new WaitForSeconds(.03f);
                     }
@@ -784,6 +835,11 @@ public class Main_Gun_Controller : MonoBehaviour
                     {
                         Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .25f, 1);
                         Instantiate(Vines, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-2f, 2f), 1, 1)); // need to randomize this
+
+                        GameObject Fire_Effect = Instantiate(Fire_Main_VFX, gameObject.transform.position + gameObject.transform.forward * 2.4f, gameObject.transform.rotation);
+                        Fire_Effect.transform.SetParent(gameObject.transform); // so it follows for a bit aka inherits momentum
+                        Destroy(Fire_Effect, 2);
+
                         Persistent_Data_Store.Vines_Ammo--;
                         yield return new WaitForSeconds(.3f);
                     }
@@ -960,6 +1016,7 @@ public class Main_Gun_Controller : MonoBehaviour
         if (Persistent_Data_Store.House_Health <= 0)
         {
             Are_Dead = true;
+            Persistent_Data_Store.Instance.Save_All_Information();
             AudioSource[] Audio_Playing_In_Scene = GameObject.FindObjectsByType<AudioSource>(FindObjectsSortMode.None); // destroy all other audio sources like music etc
 
             if (!One_Time_Death_Explosion_Triggered)

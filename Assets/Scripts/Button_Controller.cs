@@ -17,7 +17,6 @@ public class Button_Controller : MonoBehaviour
     public AudioClip Button_Click_SFX;
     public AudioClip Title_Screen_Music; // also applies to help menu
 
-
     //  public AudioClip Bat_Quick_Attack;
 
 
@@ -31,7 +30,7 @@ public class Button_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     void Assign_Buttons()// and toggles
     {

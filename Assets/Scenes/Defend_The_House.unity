@@ -3035,7 +3035,7 @@ MonoBehaviour:
   Saw: {fileID: 1358585441546144805, guid: fb0012809c2f7a74ab174d8113129fc8, type: 3}
   Vines: {fileID: 3479392171579019639, guid: 402a0af3cbb688047a9dea22694a5cad, type: 3}
   Vine_Spawn_Reference: {fileID: 4035357971783493204, guid: 380ac9a9ab6f07849bb6ef594bead07a, type: 3}
-  Fire_Main_VFX: {fileID: 85941164691198867, guid: 9b1caa4103e478d40be476cb75210b5e, type: 3}
+  Fire_Main_VFX: {fileID: 8078720523478869859, guid: 4f5fc4bbd01b03a4499a6ed77f175fc7, type: 3}
   Skybox_Day: {fileID: 2100000, guid: 2c021ddc081a33d4aa1f0f7e005858b4, type: 2}
   Skybox_Dusk: {fileID: 2100000, guid: 36b0a0e08643ad54dbbeaf96f2474e3d, type: 2}
   Selected_Bullet_Cooldown: 0
@@ -3069,6 +3069,7 @@ MonoBehaviour:
   Vines_Fire: {fileID: 8300000, guid: f9c4ab82252ba9549a5fcfd7d4c5649f, type: 3}
   Burst_Wind_Up: {fileID: 8300000, guid: 32fd6cebc9f947941bf83e1c8d727f0d, type: 3}
   Bomb_Activate: {fileID: 8300000, guid: 843c532c790c1654f91fa74094a8b355, type: 3}
+  Click_Sound: {fileID: 8300000, guid: ed60906efb1c76b45994ee01fc4ed48f, type: 3}
   Death_Explosion: {fileID: 8300000, guid: 843c532c790c1654f91fa74094a8b355, type: 3}
   Day_Fade_In_Sound: {fileID: 8300000, guid: 5e6ebfb92bdd9e843bf6d67df8fe7faf, type: 3}
   Normal_Music: {fileID: 8300000, guid: 22a5aa6930182db4cafbca6368de73fd, type: 3}

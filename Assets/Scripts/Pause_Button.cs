@@ -75,7 +75,7 @@ public class Pause_Button : MonoBehaviour
             Game_Is_Paused = false;
             Paused_Indicator.gameObject.SetActive(false);
             Help_Menu_Button.gameObject.SetActive(false);
-
+            Are_You_Sure_Button_Set.gameObject.SetActive(false);
         }
 
     }
@@ -89,6 +89,7 @@ public class Pause_Button : MonoBehaviour
 
     void Return_To_Main_Menu_Actual()
     {
+        Persistent_Data_Store.Instance.Save_All_Information();
         Audio_Manager_Script.instance.Play_Selected_Audio(Button_Click_SFX, gameObject.transform.position, .7f, 1);
         SceneManager.LoadScene(0);
     }

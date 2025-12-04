@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Collections;
-
+using System.IO;
 
 
 
@@ -15,11 +15,11 @@ public class Persistent_Data_Store : MonoBehaviour
     
     static public float House_Health = 200; 
     static public float Slow_Wave_Ammo = 0; 
-    static public float Sniper_Ammo = 1231313;
+    static public float Sniper_Ammo = 0;
     static public float Saw_Ammo = 0;
     static public float Vines_Ammo = 0;
     static public float Pierce_Lazer_Ammo = 0;
-    static public float Burst_Module_Ammo = 12;
+    static public float Burst_Module_Ammo = 0;
     static public bool Health_Bomb_1_Used = false;
     static public bool Health_Bomb_2_Used = false;
     static public bool Health_Bomb_3_Used = false;
@@ -46,7 +46,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
-    static public int Day = 10;
+    static public int Day = 0;
 
 
     static public int Easy_Base_Shop_Time = 30;
@@ -83,11 +83,14 @@ public class Persistent_Data_Store : MonoBehaviour
    public TextMeshProUGUI Shopping_Timer;
     public TextMeshProUGUI Shop_Time_Warning;
 
-
+    public int Easy_Highscore_Persistent;
+    public int Hard_Highscore_Persistent;
 
 
     void Start()
     {
+        Load_Highscores(); // deserializes saved data
+        Update_Highscore(); // updates text objects
         Current_Scene = SceneManager.GetActiveScene();
 
     }
@@ -212,6 +215,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
         if (Temp != Current_Scene) // current and temp should be the same at the beginning but as soon as the scene changes temp will change first and the if will run
         {
+            Update_Highscore();
             Shop_Time_Warning.gameObject.SetActive(false);
             Shopping_Timer.gameObject.SetActive(false);
 
@@ -500,11 +504,79 @@ public class Persistent_Data_Store : MonoBehaviour
 
 
 
+    [System.Serializable]
+    class Save_Data
+    {
+        public int Easy_Highscore;
+        public int Hard_Highscore; // aka hard
+    }
+
+    public void Save_All_Information()
+    {
+        string path = Application.persistentDataPath + "/savefile.json"; // if there is no file yet
+        Save_Data data;
+
+        if (!File.Exists(path))
+        {
+            data = new Save_Data(); // create it here
+            data.Easy_Highscore = 0;
+            Hard_Highscore_Persistent = 0; // initialize at 0 for comparisons later
+        }
+        else // otherwise copy the existing data before writing over it 
+        {
+            string json_Temp = File.ReadAllText(path);
+            data = JsonUtility.FromJson<Save_Data>(json_Temp);
+        }
 
 
+        if (!Normal_Mode_Active) // if we are in easy mode save the easy highscore as the current day
+        {
+            if (data.Easy_Highscore < Day) // if we got a new highscore then save it
+            {
+                data.Easy_Highscore = Day;
+                Easy_Highscore_Persistent = Day;
+            }
+        }
+        else if (Normal_Mode_Active)
+        {
+            if (data.Hard_Highscore < Day) // if we got a new highscore then save it
+            {
+                data.Hard_Highscore = Day;
+                Hard_Highscore_Persistent = Day;
+            }
+        }
+        
+        string json = JsonUtility.ToJson(data);
+
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
 
 
+    public void Load_Highscores()
+    {
+        string path = Application.persistentDataPath + "/savefile.json"; // just this shit again
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            Save_Data data = JsonUtility.FromJson<Save_Data>(json);
+            Debug.Log("loaded info");
+            Debug.Log(data.Easy_Highscore);
+            Easy_Highscore_Persistent = data.Easy_Highscore;
+            Hard_Highscore_Persistent = data.Hard_Highscore;
+        }
+    }
 
+    private void Update_Highscore()
+    {
+        if (GameObject.Find("Highscore") != null) // if we can find highscore in scene, idk if it works yet
+        {
+            TextMeshProUGUI Easy_Highscore_Text = GameObject.Find("Highscore").GetComponent<TextMeshProUGUI>();
+            Easy_Highscore_Text.text = "Bargain Buyer Best: " + Easy_Highscore_Persistent.ToString() + " Days Survived";
 
+            TextMeshProUGUI Hard_Highscore_Text = GameObject.Find("Highscore Normal").GetComponent<TextMeshProUGUI>();
+            Hard_Highscore_Text.text = "Purchase Practitioner PB: " + Hard_Highscore_Persistent.ToString() + " Days Survived";
+
+        }
+    }
 
 }
