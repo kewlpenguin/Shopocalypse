@@ -137,6 +137,13 @@ public class Player_Controller : MonoBehaviour
 
     private List<GameObject> Sodas = new List<GameObject>();
 
+    public GameObject Pickup_Sushi_VFX; // use for sushi, soda, 
+    public GameObject Pickup_Sniper_VFX;
+    public GameObject Pickup_Lazer_VFX;
+    public GameObject Pickup_Vines_VFX;
+    public GameObject Pickup_Slow_VFX;
+    public GameObject Pickup_Drink_VFX;
+    public GameObject Pickup_Burst_VFX;
 
     public TextMeshProUGUI House_Health;
 
@@ -342,6 +349,7 @@ public class Player_Controller : MonoBehaviour
             {
                 Started_Real_Countdown = true;
                 Debug.Log("Activate");
+
                 Increment_Ammo_Counters(Object_Info.collider.tag);
                 Destroy(Object_Info.collider.gameObject);
 

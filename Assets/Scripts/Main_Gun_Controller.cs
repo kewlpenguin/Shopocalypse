@@ -139,6 +139,7 @@ public class Main_Gun_Controller : MonoBehaviour
     public GameObject Health_Bomb_3;
 
     public Slider House_Health_Bar;
+    public Slider Charge_Up_Bar;
 
     public bool Are_Dead = false;
 
@@ -645,19 +646,23 @@ public class Main_Gun_Controller : MonoBehaviour
         for (float i = 0; i < 3f; i += .1f)
         {
             bool Space_Held = Input.GetKey(KeyCode.Space) || Input.GetKeyDown(KeyCode.Alpha6); ;
-          
+           
+                Charge_Up_Bar.maxValue = 1;
+                Charge_Up_Bar.value = i;
             
             if (Space_Held)
             {
+                Charge_Up_Bar.gameObject.SetActive(true);
                 Charging = true;
                 Burst_Module1.fontSize = Weapon_Selected_Font_Size;
-     
+               
                 yield return new WaitForSeconds(.1f);
                 if (i >= 1f)
                 {
                     Debug.Log("fire coroutine");
                     StartCoroutine(Initiate_Bullet_Burst());
                     Charging = false;
+                    Charge_Up_Bar.gameObject.SetActive(false);
                     Burst_Module1.fontSize = Default_Font_Size;
                     break;
                 }
@@ -666,6 +671,7 @@ public class Main_Gun_Controller : MonoBehaviour
             else if (!Space_Held)
             {
                 Charging = false;
+                Charge_Up_Bar.gameObject.SetActive(false);
                 Burst_Module1.fontSize = Default_Font_Size;
                 break;
             }
