@@ -50,7 +50,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
 
     static public int Easy_Base_Shop_Time = 30;
-    static public int Normal_Base_Shop_Time = 10;
+    static public int Normal_Base_Shop_Time = 1;
     
     static public int Base_Shop_Time; //we set this later
 
@@ -238,7 +238,7 @@ public class Persistent_Data_Store : MonoBehaviour
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
 
 
-                Shopping_Time = Base_Shop_Time + (6 * Day); // either 10 or 30 seconds plus 5 * Day (for difficulty scaling reguardless of difficulty bc you would get way too much time in normal mode)
+                Shopping_Time = Base_Shop_Time + (4 * Day); // either 10 or 30 seconds plus 5 * Day (for difficulty scaling reguardless of difficulty bc you would get way too much time in normal mode)
 
                 if (Default_Health_Bomb_1_Used) // give extra time to recover if we lose our last life
                 {

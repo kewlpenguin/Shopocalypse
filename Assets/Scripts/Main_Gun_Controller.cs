@@ -746,12 +746,12 @@ public class Main_Gun_Controller : MonoBehaviour
 
 
             case "Sniper":
-                if (Persistent_Data_Store.Sniper_Ammo >= 30 && !Burst_Module_On_Cooldown)
+                if (Persistent_Data_Store.Sniper_Ammo >= 40 && !Burst_Module_On_Cooldown)
                 {
 
                     StartCoroutine(Burst_Module_Cooldown_Timer()); // put burst module on cooldown if firing is successful also ammo is subtracted from burst module in the cooldown coroutine
 
-                    for (float i = 0; i < 30; i++)
+                    for (float i = 0; i < 40; i++)
                     {
                         Audio_Manager_Script.instance.Play_Selected_Audio(Sniper_Fire, gameObject.transform.position, .075f, 1);
                         Instantiate(Sniper, gameObject.transform.position + gameObject.transform.forward * 4, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-3f, 3f), 1, 1)); // need to randomize this
@@ -766,7 +766,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                 }
 
-                else if (Persistent_Data_Store.Sniper_Ammo < 30) { StartCoroutine(Show_Not_Enough_Burst_Text()); }
+                else if (Persistent_Data_Store.Sniper_Ammo < 40) { StartCoroutine(Show_Not_Enough_Burst_Text()); }
 
                 break;
 
@@ -799,12 +799,12 @@ public class Main_Gun_Controller : MonoBehaviour
 
             case "Saw":
 
-                if (Persistent_Data_Store.Saw_Ammo >= 40 && !Burst_Module_On_Cooldown)
+                if (Persistent_Data_Store.Saw_Ammo >= 50 && !Burst_Module_On_Cooldown)
                 {
 
                     StartCoroutine(Burst_Module_Cooldown_Timer()); // put burst module on cooldown if firing is successful also ammo is subtracted from burst module in the cooldown coroutine
 
-                    for (float i = 0; i < 40; i++)
+                    for (float i = 0; i < 50; i++)
                     {
                         Audio_Manager_Script.instance.Play_Selected_Audio(Vines_Fire, gameObject.transform.position, .125f, .75f);
                         Instantiate(Saw, gameObject.transform.position + gameObject.transform.forward * 2, gameObject.transform.rotation * Quaternion.Euler(Random.Range(-10f, 10f), 1, 1)); // need to randomize this
@@ -819,7 +819,7 @@ public class Main_Gun_Controller : MonoBehaviour
 
                 }
 
-                else if (Persistent_Data_Store.Saw_Ammo < 40) { StartCoroutine(Show_Not_Enough_Burst_Text()); }
+                else if (Persistent_Data_Store.Saw_Ammo < 50) { StartCoroutine(Show_Not_Enough_Burst_Text()); }
 
                 break;
 

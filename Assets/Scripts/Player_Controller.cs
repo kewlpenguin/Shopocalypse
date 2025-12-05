@@ -715,7 +715,7 @@ public class Player_Controller : MonoBehaviour
             case "Slow_Wave_Ammo":
                 Audio_Manager_Script.instance.Play_Selected_Audio(Water_Pickup, GameObject.Find("Player").transform.position, .2f, 1);
                 Instantiate(Pickup_Slow_VFX, Last_Picked_Up_Object, gameObject.transform.rotation);
-                Persistent_Data_Store.Slow_Wave_Ammo += 4;
+                Persistent_Data_Store.Slow_Wave_Ammo += 7;
                 break;
 
             case "Sniper_Ammo":
@@ -1222,7 +1222,7 @@ public class Player_Controller : MonoBehaviour
         Music_Controller.Music_instance.Play_Selected_Audio(Fountain_Ambience, GameObject.Find("WaterFall").transform.position, .2f, 1, true, true, false, 100);
 
         //Gun store ambience
-        Music_Controller.Music_instance.Play_Selected_Audio(Sniper_Shop_Ambience, GameObject.Find("Gun_Shop_Roof").transform.position, .2f, 1, true, true, false, 65);
+        Music_Controller.Music_instance.Play_Selected_Audio(Sniper_Shop_Ambience, GameObject.Find("Gun_Shop_Roof").transform.position, .1f, 1, true, true, false, 65);
 
         //Arcade store ambience
         if (!Closed_Arcade.activeInHierarchy)

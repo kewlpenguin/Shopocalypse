@@ -264,8 +264,8 @@ public class Enemy_Behavior : MonoBehaviour
     }
     void Inialize_Lava_Hound_Mini_Enemy() // called when an enemies tag is roller etc
     {
-        Max_Health = 60;
-        Health = 60;
+        Max_Health = 50;
+        Health = 50;
         Move_Speed = -6f - Random.Range(-1f, 1f);
         Damage = 2f;
         Hit_Speed = 2f;
@@ -287,7 +287,7 @@ public class Enemy_Behavior : MonoBehaviour
     {
         Max_Health = 500;
         Health = 500;
-        Move_Speed = -.7f;
+        Move_Speed = -1f;
         Damage = 25f;
         Hit_Speed = 3f;
      
