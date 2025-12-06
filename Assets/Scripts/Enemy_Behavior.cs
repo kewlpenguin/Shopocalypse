@@ -254,7 +254,7 @@ public class Enemy_Behavior : MonoBehaviour
     {
         Max_Health = 9;
         Health = 9;
-        Move_Speed = -4f - Random.Range(-1f, 1f);
+        Move_Speed = -3f - Random.Range(-1f, 1f);
         Damage = 2;
         Hit_Speed = 2f;
         Max_Fly_Hight = Random.Range(3f, 3.5f);
@@ -266,7 +266,7 @@ public class Enemy_Behavior : MonoBehaviour
     {
         Max_Health = 50;
         Health = 50;
-        Move_Speed = -6f - Random.Range(-1f, 1f);
+        Move_Speed = -5f - Random.Range(-1f, 1f);
         Damage = 2f;
         Hit_Speed = 2f;
         Max_Fly_Hight = Random.Range(2.5f, 3f);
@@ -288,7 +288,7 @@ public class Enemy_Behavior : MonoBehaviour
         Max_Health = 500;
         Health = 500;
         Move_Speed = -1f;
-        Damage = 25f;
+        Damage = 20f;
         Hit_Speed = 3f;
      
 

@@ -1219,7 +1219,7 @@ public class Player_Controller : MonoBehaviour
         }
 
         //fountain ambience
-        Music_Controller.Music_instance.Play_Selected_Audio(Fountain_Ambience, GameObject.Find("WaterFall").transform.position, .2f, 1, true, true, false, 100);
+        Music_Controller.Music_instance.Play_Selected_Audio(Fountain_Ambience, GameObject.Find("WaterFall").transform.position, .3f, 1, true, true, false, 80);
 
         //Gun store ambience
         Music_Controller.Music_instance.Play_Selected_Audio(Sniper_Shop_Ambience, GameObject.Find("Gun_Shop_Roof").transform.position, .1f, 1, true, true, false, 65);
