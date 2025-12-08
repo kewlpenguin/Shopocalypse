@@ -14,6 +14,26 @@ public class Button_Controller : MonoBehaviour
     public Toggle Easy_Mode_Button;
     public ToggleGroup Difficulty_Selector;
 
+
+    public Toggle Mute_Music;
+    public Toggle Mute_Sound_Effects;
+
+    public Toggle Enable_Free_Samples; // gives some of each ammo at the beginning, can help if struggling with hard mode, acts as a small reward for beating easy mode
+
+    public Toggle Enable_Infinite_Ammo;// should be locked behind hard mode 12 day win
+    public Toggle Enable_Custom_Difficulty_Increment; // added to normal increment
+    public InputField Select_Difficulty_Increment;
+    public Toggle Enable_Barrel_Launcher;
+
+
+
+   
+  
+  
+
+
+   // potential events mode after complete easy mode for later build if i feel like it
+
     public AudioClip Button_Click_SFX;
     public AudioClip Title_Screen_Music; // also applies to help menu
 

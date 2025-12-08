@@ -50,6 +50,7 @@ TagManager:
   - Arcade_Shop_Days_Till_Open
   - Sushi_Shop_Days_Till_Open
   - Bad_Sushi
+  - Barrel
   layers:
   - Default
   - TransparentFX

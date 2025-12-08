@@ -76,7 +76,9 @@ public class Bullet_Control : MonoBehaviour
                 StartCoroutine(Bullet_Movement());
                 break;
 
-
+            case "Barrel":
+                StartCoroutine(Bullet_Movement());
+                break;
 
             case "Saw":
                 Saw_Behavior();

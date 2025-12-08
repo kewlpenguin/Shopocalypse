@@ -46,7 +46,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
-    static public int Day = 0;
+    static public int Day = 9;
 
 
     static public int Easy_Base_Shop_Time = 15;
@@ -69,6 +69,9 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public bool Game_Has_Started = false;
     static public bool CountDown_Has_Started = false;
+
+    static public bool Barrel_Launcher_Enabled = false;
+
 
     static public Scene Current_Scene;
 
@@ -225,15 +228,19 @@ public class Persistent_Data_Store : MonoBehaviour
             {
                 Day++;
 
-                if ((Day % 12) != 0) // because day is incremented before we check the remainder we will not get any false positives
+                if ((Day % 12) != 0 ) // because day is incremented before we check the remainder we will not get any false positives
                 {
+                    if((Day % 13) == 0) // if its the day after a final wav e then reset the difficulty scaling
+                    {
+                        Difficulty = (Difficulty / 3);
+                    }
+
                     Difficulty += Difficulty_Increment;
                 }
                 else if ((Day % 12) == 0) // on final day make it 3X harder, also insanely mone difficult every 12th day
                 {
                     Difficulty = Difficulty * 3;
                 }
-
 
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
 
@@ -574,5 +581,17 @@ public class Persistent_Data_Store : MonoBehaviour
 
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
