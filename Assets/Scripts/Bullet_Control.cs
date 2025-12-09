@@ -105,7 +105,7 @@ public class Bullet_Control : MonoBehaviour
 
     IEnumerator Bullet_Movement() // bullet movespeed and lifetime are assigned in the inspector per bullet type
     {
-        if(gameObject.tag == "Main")
+        if(gameObject.tag == "Main" || gameObject.tag == "Barrel")
         {
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             gameObject.transform.LookAt(mouseWorldPos);

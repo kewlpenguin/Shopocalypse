@@ -46,8 +46,9 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
-    static public int Day = 9;
-
+    static public int Day = 13;
+    
+    static public int Custom_Difficulty_Additive = 0;
 
     static public int Easy_Base_Shop_Time = 15;
     static public int Normal_Base_Shop_Time = 5;
@@ -71,7 +72,10 @@ public class Persistent_Data_Store : MonoBehaviour
     static public bool CountDown_Has_Started = false;
 
     static public bool Barrel_Launcher_Enabled = false;
-
+    static public bool Music_Disabled = false;
+    static public bool SFX_Disabled = false;
+    static public bool Infinite_Ammo_Enabled = false;
+    static public bool Free_Samples_Enabled = false;
 
     static public Scene Current_Scene;
 
@@ -86,8 +90,8 @@ public class Persistent_Data_Store : MonoBehaviour
    public TextMeshProUGUI Shopping_Timer;
     public TextMeshProUGUI Shop_Time_Warning;
 
-    public int Easy_Highscore_Persistent;
-    public int Hard_Highscore_Persistent;
+    static public int Easy_Highscore_Persistent;
+    static public int Hard_Highscore_Persistent;
 
 
     void Start()
@@ -102,6 +106,13 @@ public class Persistent_Data_Store : MonoBehaviour
  
     void Update()
     {
+        
+        if (Input.GetKeyDown(KeyCode.R)) // or whatever key, for testing
+        {
+            File.Delete(Application.persistentDataPath + "/savefile.json");
+            Debug.Log("Save file deleted!");
+        }
+        
 
         if (Scene_Swaps > 0 && SceneManager.GetActiveScene().buildIndex == 0) { // if we are chilling in the title do not run multiple times, also will not reset to default until we leave and return to main
             Reset_To_Default_Values();
@@ -134,10 +145,8 @@ public class Persistent_Data_Store : MonoBehaviour
     private void Awake()
     {
 
-
         if (Instance == null)
         {
-
             Instance = this;
             DontDestroyOnLoad(gameObject); // Don't destroy this object
         }
@@ -236,7 +245,12 @@ public class Persistent_Data_Store : MonoBehaviour
                     }
 
                     Difficulty += Difficulty_Increment;
+                    if (Custom_Difficulty_Additive != 0) // if the custom additive has been set to something
+                    {
+                        Difficulty += Custom_Difficulty_Additive;
+                    }
                 }
+
                 else if ((Day % 12) == 0) // on final day make it 3X harder, also insanely mone difficult every 12th day
                 {
                     Difficulty = Difficulty * 3;
@@ -514,8 +528,15 @@ public class Persistent_Data_Store : MonoBehaviour
         public int Hard_Highscore; // aka hard
     }
 
-    public void Save_All_Information()
+    public void Save_All_Information() //happens on game over or return to main menu
     {
+        Custom_Difficulty_Additive = 0; // reset on return to main menu because the checkbox values do. this is uintended and not borne of my laziness
+        Infinite_Ammo_Enabled = false;
+        Free_Samples_Enabled = false;
+        Barrel_Launcher_Enabled = false;
+        SFX_Disabled = false;
+        Music_Disabled = false;
+
         string path = Application.persistentDataPath + "/savefile.json"; // if there is no file yet
         Save_Data data;
 

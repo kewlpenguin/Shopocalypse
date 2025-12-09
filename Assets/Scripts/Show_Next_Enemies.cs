@@ -58,9 +58,9 @@ public class Show_Next_Enemies : MonoBehaviour // an extremely butchered version
 
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        gameObject.transform.Rotate(0, .04f, 0);
+        gameObject.transform.Rotate(0, .4f, 0);
         if(Persistent_Data_Store.Day % 12 == 0 && Persistent_Data_Store.Day != 0)
         {
             RenderSettings.skybox = Skybox_Dusk;

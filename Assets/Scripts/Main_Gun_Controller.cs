@@ -25,6 +25,7 @@ public class Main_Gun_Controller : MonoBehaviour
     public GameObject Saw;
     public GameObject Vines;
     public GameObject Vine_Spawn_Reference;
+    public GameObject Barrel;
 
     public GameObject Fire_Main_VFX;
 
@@ -466,8 +467,15 @@ public class Main_Gun_Controller : MonoBehaviour
         for(int i = 0; i < 4; i++)
         {
             Audio_Manager_Script.instance.Play_Selected_Audio(Basic_Fire, gameObject.transform.position, .075f, 1);
+            if (Persistent_Data_Store.Barrel_Launcher_Enabled)
+            {
+                Instantiate(Barrel, gameObject.transform.position + gameObject.transform.up * .75f + gameObject.transform.forward * .75f, gameObject.transform.rotation);
+            }
+            else
+            {
+                Instantiate(Main, gameObject.transform.position + gameObject.transform.up * .75f + gameObject.transform.forward * .75f, gameObject.transform.rotation);
+            }
 
-            Instantiate(Main, gameObject.transform.position + gameObject.transform.up * .75f + gameObject.transform.forward * .75f, gameObject.transform.rotation);
             yield return new WaitForSeconds(.1f);
         }
       

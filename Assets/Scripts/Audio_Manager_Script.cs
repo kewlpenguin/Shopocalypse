@@ -34,24 +34,26 @@ public class Audio_Manager_Script : MonoBehaviour
 
     public void Play_Selected_Audio(AudioClip Audio_Clip, Vector3 Audio_Source_Position, float Volume, float Pitch)
     {
-        // instantiate audio source
-        AudioSource My_Audio_Source = Instantiate(Base_Audio_Source, Audio_Source_Position, Quaternion.identity);
+        if (!Persistent_Data_Store.SFX_Disabled)
+        {
+            // instantiate audio source
+            AudioSource My_Audio_Source = Instantiate(Base_Audio_Source, Audio_Source_Position, Quaternion.identity);
 
-        My_Audio_Source.clip = Audio_Clip;
+            My_Audio_Source.clip = Audio_Clip;
 
-        //change volume
-        My_Audio_Source.volume = Volume;
+            //change volume
+            My_Audio_Source.volume = Volume;
 
-        //change pitch
-        My_Audio_Source.pitch = Pitch;
+            //change pitch
+            My_Audio_Source.pitch = Pitch;
 
-        //play clip
-        My_Audio_Source.Play();
+            //play clip
+            My_Audio_Source.Play();
 
-        //Destroy after done playing
-       float Clip_Length =  My_Audio_Source.clip.length;
-       StartCoroutine(Wait_For_Clip_Over(Clip_Length, My_Audio_Source));
-
+            //Destroy after done playing
+            float Clip_Length = My_Audio_Source.clip.length;
+            StartCoroutine(Wait_For_Clip_Over(Clip_Length, My_Audio_Source));
+        }
     }
 
 

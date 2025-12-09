@@ -35,38 +35,40 @@ public class Music_Controller : MonoBehaviour
 
     public void Play_Selected_Audio(AudioClip Audio_Clip, Vector3 Audio_Source_Position, float Volume, float Pitch, bool Loop, bool End_If_False, bool Fade_In, float Max_Distance) // end if false does nothing now but it is in case we want to use it later we wont have to go back and change every music play call
     {
-        // instantiate audio source
-        AudioSource My_Audio_Source = Instantiate(Base_Audio_Source, Audio_Source_Position, Quaternion.identity);
-
-        My_Audio_Source.clip = Audio_Clip;
-
-        //change volume
-        My_Audio_Source.volume = Volume;
-
-        //change pitch
-        My_Audio_Source.pitch = Pitch;
-
-
-        My_Audio_Source.maxDistance = Max_Distance;
-
-        //play clip
-        My_Audio_Source.Play();
-
-       
-
-        //Destroy after done playing
-        if (Loop == false)
+        if (!Persistent_Data_Store.Music_Disabled)
         {
-            float Clip_Length = My_Audio_Source.clip.length;
-            StartCoroutine(Wait_For_Clip_Over(Clip_Length, Volume, My_Audio_Source, Loop, Fade_In));
-        }
+            // instantiate audio source
+            AudioSource My_Audio_Source = Instantiate(Base_Audio_Source, Audio_Source_Position, Quaternion.identity);
 
-        else if (Loop == true)
-        {
-            float Clip_Length = My_Audio_Source.clip.length;
-            StartCoroutine(Wait_For_Clip_Over(Clip_Length, Volume, My_Audio_Source, Loop, Fade_In));
-        }
+            My_Audio_Source.clip = Audio_Clip;
 
+            //change volume
+            My_Audio_Source.volume = Volume;
+
+            //change pitch
+            My_Audio_Source.pitch = Pitch;
+
+
+            My_Audio_Source.maxDistance = Max_Distance;
+
+            //play clip
+            My_Audio_Source.Play();
+
+
+
+            //Destroy after done playing
+            if (Loop == false)
+            {
+                float Clip_Length = My_Audio_Source.clip.length;
+                StartCoroutine(Wait_For_Clip_Over(Clip_Length, Volume, My_Audio_Source, Loop, Fade_In));
+            }
+
+            else if (Loop == true)
+            {
+                float Clip_Length = My_Audio_Source.clip.length;
+                StartCoroutine(Wait_For_Clip_Over(Clip_Length, Volume, My_Audio_Source, Loop, Fade_In));
+            }
+        }
     }
 
 

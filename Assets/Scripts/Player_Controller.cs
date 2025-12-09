@@ -339,7 +339,10 @@ public class Player_Controller : MonoBehaviour
         RaycastHit Object_Info;
         bool Object_In_Range = Physics.Raycast(Main_Camera.transform.position, Main_Camera.transform.forward, out Object_Info, 7f, Ammo_Layer);
 
-        Last_Picked_Up_Object = Object_Info.transform.position;
+        if (Object_In_Range)
+        {
+            Last_Picked_Up_Object = Object_Info.transform.position;
+        }
 
         //ugly ass if to exclude all the pickups that have a hold time attatcched
         if (Object_In_Range && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Large" && Object_Info.collider.gameObject.tag != "Sniper_Ammo_Xtra_Large" && Object_Info.collider.gameObject.tag != "Health_Pickup"
