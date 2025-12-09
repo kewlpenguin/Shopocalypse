@@ -51,6 +51,7 @@ public class Music_Controller : MonoBehaviour
 
             My_Audio_Source.maxDistance = Max_Distance;
 
+
             //play clip
             My_Audio_Source.Play();
 
@@ -80,8 +81,8 @@ public class Music_Controller : MonoBehaviour
             StartCoroutine(Fade_Music_In(Volume, Source_To_Destroy));
         }
 
-
         yield return new WaitForSeconds(Clip_Length);
+
         if (Source_To_Destroy != null && Loop == false)
         {
             Destroy(Source_To_Destroy.gameObject);

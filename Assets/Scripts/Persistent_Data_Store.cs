@@ -46,7 +46,7 @@ public class Persistent_Data_Store : MonoBehaviour
 
     static public int Difficulty = 0;   // increment on every shop scene swap, because we add 1 to difficulty when building enemy rosters this value technically starts at 1 even in normal mode
     static public int Difficulty_Increment = 0;
-    static public int Day = 13;
+    static public int Day = 0;
     
     static public int Custom_Difficulty_Additive = 0;
 
@@ -584,7 +584,6 @@ public class Persistent_Data_Store : MonoBehaviour
             string json = File.ReadAllText(path);
             Save_Data data = JsonUtility.FromJson<Save_Data>(json);
             Debug.Log("loaded info");
-            Debug.Log(data.Easy_Highscore);
             Easy_Highscore_Persistent = data.Easy_Highscore;
             Hard_Highscore_Persistent = data.Hard_Highscore;
         }

@@ -43,7 +43,6 @@ public class Button_Controller : MonoBehaviour
     {
         Assign_Buttons();
         Music_Controller.Music_instance.Play_Selected_Audio(Title_Screen_Music, gameObject.transform.position, .2f, 1, true, true, false, 99999999);
-        Debug.Log("returned to title");
     }
 
     // Update is called once per frame
@@ -67,7 +66,7 @@ public class Button_Controller : MonoBehaviour
 
         Start_Button.gameObject.SetActive(false);
 
-
+        
         Mute_Music.onValueChanged.AddListener(Disable_Music);
 
         Mute_Sound_Effects.onValueChanged.AddListener(Disable_SFX);
@@ -91,10 +90,11 @@ public class Button_Controller : MonoBehaviour
         Select_Difficulty_Increment.onValueChanged.AddListener(Change_Difficulty_Increment);
         Enable_Barrel_Launcher.onValueChanged.AddListener(Barrel_Launcher);
 
-
+        
 
 
     }
+
 
     void Activate_Start_Button(bool Difficulty_Has_Been_Selected) //if we have selected a difficulty, activate and display the start button
     {
@@ -116,7 +116,7 @@ public class Button_Controller : MonoBehaviour
         Audio_Manager_Script.instance.Play_Selected_Audio(Button_Click_SFX, gameObject.transform.position, .75f, 1);
         GameObject.Find("Persistent_Data_Store").SendMessage("Swap_To_Scene_1", SendMessageOptions.RequireReceiver);
     }
-
+    
     void Disable_Music(bool Box_Checked)
     {
         Audio_Manager_Script.instance.Play_Selected_Audio(Button_Click_SFX, gameObject.transform.position, .75f, 1);
@@ -279,6 +279,6 @@ public class Button_Controller : MonoBehaviour
 
         }
     }
-
+    
 
 }
