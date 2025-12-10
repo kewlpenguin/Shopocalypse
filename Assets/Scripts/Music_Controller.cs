@@ -117,11 +117,18 @@ public class Music_Controller : MonoBehaviour
 
         for (int i = 0; i < 200; i++)
         {
-            Source_To_Destroy.volume = Running_Total += Percent_Additive; // i am so fucking smart gib me job plz
+            if (Source_To_Destroy != null)
+            {
+                Source_To_Destroy.volume = Running_Total += Percent_Additive; // i am so fucking smart gib me job plz
+            }
             yield return new WaitForSeconds(.01f);
         }
 
-        Source_To_Destroy.volume = Volume;
+        if (Source_To_Destroy != null)
+        {
+            Source_To_Destroy.volume = Volume;
+        }
+  
     }
 
 

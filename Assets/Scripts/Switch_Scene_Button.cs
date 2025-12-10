@@ -11,12 +11,12 @@ public class Switch_Scene_Button : MonoBehaviour
     void Start()
     {
 
-    /*
+    
         if(Persistent_Data_Store.Day > 0)
         {
             gameObject.SetActive(false);
         }
-    */
+    
     }
 
     // Update is called once per frame

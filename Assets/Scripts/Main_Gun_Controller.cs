@@ -1005,12 +1005,17 @@ public class Main_Gun_Controller : MonoBehaviour
 
     void Return_To_Title_Screen()
     {
+        Persistent_Data_Store.Day++;
+        Persistent_Data_Store.Instance.Save_All_Information();
+        Audio_Manager_Script.instance.Play_Selected_Audio(Click_Sound, gameObject.transform.position, .7f, 1);
         SceneManager.LoadScene(0);
     }
 
 
     void Swap_To_Scene_2()//for continue button
     {
+        Persistent_Data_Store.Instance.Save_All_Information(); // in case we close game or whatever
+        Audio_Manager_Script.instance.Play_Selected_Audio(Click_Sound, gameObject.transform.position, .7f, 1);
         SceneManager.LoadScene(2);
     }
 

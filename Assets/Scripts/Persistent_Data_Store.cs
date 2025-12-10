@@ -106,13 +106,13 @@ public class Persistent_Data_Store : MonoBehaviour
  
     void Update()
     {
-        
+        /* can be used to wipe save data
         if (Input.GetKeyDown(KeyCode.R)) // or whatever key, for testing
         {
             File.Delete(Application.persistentDataPath + "/savefile.json");
             Debug.Log("Save file deleted!");
         }
-        
+        */
 
         if (Scene_Swaps > 0 && SceneManager.GetActiveScene().buildIndex == 0) { // if we are chilling in the title do not run multiple times, also will not reset to default until we leave and return to main
             Reset_To_Default_Values();
@@ -259,7 +259,7 @@ public class Persistent_Data_Store : MonoBehaviour
                 Build_Next_Enemy_Roster(); // after difficulty is incremented and while we are in the shopping scene so it is readyt for later, this will not be applyed until after the scene transition scene
 
 
-                Shopping_Time = Base_Shop_Time + (5 * Day); // either 10 or 30 seconds plus 5 * Day (for difficulty scaling reguardless of difficulty bc you would get way too much time in normal mode)
+                Shopping_Time = Base_Shop_Time + (6 * Day); // either 10 or 30 seconds plus 5 * Day (for difficulty scaling reguardless of difficulty bc you would get way too much time in normal mode)
 
 
                 if (Day % 12 == 0) //give 50 more seconds of shopping time on the final day

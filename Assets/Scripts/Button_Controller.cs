@@ -72,12 +72,12 @@ public class Button_Controller : MonoBehaviour
         Mute_Sound_Effects.onValueChanged.AddListener(Disable_SFX);
 
 
-        if(Persistent_Data_Store.Easy_Highscore_Persistent >= 12) // hide or show ui options based on max wave reached
+        if(Persistent_Data_Store.Easy_Highscore_Persistent > 12) // hide or show ui options based on max wave reached
         {
             Enable_Free_Samples.gameObject.SetActive(true);
         }
 
-        if (Persistent_Data_Store.Hard_Highscore_Persistent >= 12)
+        if (Persistent_Data_Store.Hard_Highscore_Persistent > 12)
         {
             Enable_Barrel_Launcher.gameObject.SetActive(true);
             Enable_Custom_Difficulty_Increment.gameObject.SetActive(true);
