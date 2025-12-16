@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1307901098295610429}
     m_Modifications:
+    - target: {fileID: 323403499790169776, guid: 71f7f7205610ca748afe0434d3abaca4, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1456871708693859807, guid: 71f7f7205610ca748afe0434d3abaca4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0541381
@@ -70,6 +74,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1307901098295610429}
     m_Modifications:
+    - target: {fileID: 323403499790169776, guid: 71f7f7205610ca748afe0434d3abaca4, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1456871708693859807, guid: 71f7f7205610ca748afe0434d3abaca4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0541381
@@ -188,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -248,6 +260,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1478aa9a009792e41ab2e5bcae7ff115, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1478aa9a009792e41ab2e5bcae7ff115, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1478aa9a009792e41ab2e5bcae7ff115, type: 3}
@@ -423,6 +439,7 @@ MonoBehaviour:
   In_Water: 0
   On_Conveyer_1: 0
   On_Conveyer_2: 0
+  Tech_Pickup_Time: 1
 --- !u!1001 &2445407616213132704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -485,6 +502,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027256822239902712, guid: 522da606bfffa5e4fac901bc5a651200, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164164779318657175, guid: 522da606bfffa5e4fac901bc5a651200, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -561,6 +582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -634,6 +659,10 @@ PrefabInstance:
     - target: {fileID: 3171012812721711200, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -709,6 +738,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -782,6 +815,10 @@ PrefabInstance:
     - target: {fileID: 3171012812721711200, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -857,6 +894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -917,6 +958,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3347906735397456832, guid: 643eda14df7cd8745abeaf58554e29df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4484753640323494063, guid: 643eda14df7cd8745abeaf58554e29df, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -993,6 +1038,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1066,6 +1115,10 @@ PrefabInstance:
     - target: {fileID: 3171012812721711200, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1141,6 +1194,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1214,6 +1271,10 @@ PrefabInstance:
     - target: {fileID: 3171012812721711200, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1289,6 +1350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1361,6 +1426,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027256822239902712, guid: 522da606bfffa5e4fac901bc5a651200, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164164779318657175, guid: 522da606bfffa5e4fac901bc5a651200, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1437,6 +1506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1510,6 +1583,10 @@ PrefabInstance:
     - target: {fileID: 3171012812721711200, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1585,6 +1662,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1658,6 +1739,10 @@ PrefabInstance:
     - target: {fileID: 3171012812721711200, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1733,6 +1818,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9164164779318657175, guid: 522da606bfffa5e4fac901bc5a651200, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1793,6 +1882,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5438928142817428863, guid: a065e9fed0d45314090a9e8a95e5ce29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6571271413890416144, guid: a065e9fed0d45314090a9e8a95e5ce29, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6571271413890416144, guid: a065e9fed0d45314090a9e8a95e5ce29, type: 3}
@@ -1872,6 +1965,10 @@ PrefabInstance:
     - target: {fileID: 3171012812721711200, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
       propertyPath: m_Name
       value: Sushi_Small_Cucumber_005
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963536189118663093, guid: b35d3daa5e4dbe54a8e4533ec5d4b288, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

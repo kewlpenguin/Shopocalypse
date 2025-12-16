@@ -29,7 +29,7 @@ public class Help_Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && Help_Screen.gameObject.activeInHierarchy) 
+        if (Input.GetKeyDown(KeyCode.Tab) && Help_Screen.gameObject.activeInHierarchy) 
         {
             Swap_Title_Help_Screen();
         }

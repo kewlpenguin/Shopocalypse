@@ -45,7 +45,7 @@ public class Pause_Button : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) // holy fuck dis is clean, so basically this will only apply to scenes with the pause button prefab in it so no need to worry abt unintended behavior. it reuses the pause function 
+        if (Input.GetKeyDown(KeyCode.Tab)) // holy fuck dis is clean, so basically this will only apply to scenes with the pause button prefab in it so no need to worry abt unintended behavior. it reuses the pause function 
                                                 //so the code stays clean. it works in the shopping scene because it bypasses the button entirely to execute the pause function so we can just hit escape again and it works jus fine
         {
             Pause_Game();

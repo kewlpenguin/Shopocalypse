@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9164164779318657175, guid: 522da606bfffa5e4fac901bc5a651200, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -126,6 +130,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Small_Nori_002
       objectReference: {fileID: 0}
+    - target: {fileID: 6198339619137702868, guid: 9e2dae4be4b61954694301693fe66cf2, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -186,6 +194,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1478aa9a009792e41ab2e5bcae7ff115, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1478aa9a009792e41ab2e5bcae7ff115, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1478aa9a009792e41ab2e5bcae7ff115, type: 3}
@@ -331,6 +343,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1307901098295610429}
     m_Modifications:
+    - target: {fileID: 5319216097560353264, guid: 4e4ef37a74104ad46886de1a914d32ed, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5967650674080512037, guid: 4e4ef37a74104ad46886de1a914d32ed, type: 3}
       propertyPath: m_Name
       value: Nigiri_Tuna_001
@@ -393,6 +409,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1307901098295610429}
     m_Modifications:
+    - target: {fileID: 5319216097560353264, guid: 4e4ef37a74104ad46886de1a914d32ed, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5967650674080512037, guid: 4e4ef37a74104ad46886de1a914d32ed, type: 3}
       propertyPath: m_Name
       value: Nigiri_Tuna_001 (2)
@@ -455,6 +475,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1307901098295610429}
     m_Modifications:
+    - target: {fileID: 5319216097560353264, guid: 4e4ef37a74104ad46886de1a914d32ed, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5967650674080512037, guid: 4e4ef37a74104ad46886de1a914d32ed, type: 3}
       propertyPath: m_Name
       value: Nigiri_Tuna_001 (1)
@@ -573,6 +597,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8695160002091728623, guid: 6dfa186c65d70d44e84cf35ebd4b906d, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -647,6 +675,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8695160002091728623, guid: 6dfa186c65d70d44e84cf35ebd4b906d, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -707,6 +739,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5438928142817428863, guid: a065e9fed0d45314090a9e8a95e5ce29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6571271413890416144, guid: a065e9fed0d45314090a9e8a95e5ce29, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -770,6 +806,10 @@ PrefabInstance:
     - target: {fileID: 5549579861565204993, guid: 9e2dae4be4b61954694301693fe66cf2, type: 3}
       propertyPath: m_Name
       value: Sushi_Small_Nori_002 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198339619137702868, guid: 9e2dae4be4b61954694301693fe66cf2, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -843,6 +883,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7557116244399441280, guid: 6dfa186c65d70d44e84cf35ebd4b906d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695160002091728623, guid: 6dfa186c65d70d44e84cf35ebd4b906d, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

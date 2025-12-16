@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rice_001
       objectReference: {fileID: 0}
+    - target: {fileID: 8109615111528932490, guid: 211991d4b3b5af640a34ebde000936b2, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -124,6 +128,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e7b16e889565694589ddc1bf10192ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9e7b16e889565694589ddc1bf10192ee, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 9e7b16e889565694589ddc1bf10192ee, type: 3}
@@ -307,6 +315,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4484753640323494063, guid: 643eda14df7cd8745abeaf58554e29df, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -381,6 +393,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8695160002091728623, guid: 6dfa186c65d70d44e84cf35ebd4b906d, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -399,6 +415,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4048583294733275828}
     m_Modifications:
+    - target: {fileID: 7530984752148556696, guid: 90857c1a542456e4ca8df2df79e89827, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8323657936989391437, guid: 90857c1a542456e4ca8df2df79e89827, type: 3}
       propertyPath: m_Name
       value: Spoon_Wood_002

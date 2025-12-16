@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4048583294733275828}
     m_Modifications:
+    - target: {fileID: 349059438695603668, guid: 8f3f35261b743bc4fa696a9803503536, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1482589628139382459, guid: 8f3f35261b743bc4fa696a9803503536, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.39012
@@ -127,6 +131,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 9e7b16e889565694589ddc1bf10192ee, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9e7b16e889565694589ddc1bf10192ee, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d1fb55cf7078bf243a05f37bcf0d71a6, type: 2}
@@ -240,6 +248,7 @@ MonoBehaviour:
   In_Water: 0
   On_Conveyer_1: 0
   On_Conveyer_2: 0
+  Tech_Pickup_Time: 1
 --- !u!4 &4048583294733275828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e7b16e889565694589ddc1bf10192ee, type: 3}
@@ -308,6 +317,10 @@ PrefabInstance:
     - target: {fileID: 7749533367711679839, guid: 211991d4b3b5af640a34ebde000936b2, type: 3}
       propertyPath: m_Name
       value: Rice_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109615111528932490, guid: 211991d4b3b5af640a34ebde000936b2, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -381,6 +394,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7557116244399441280, guid: 6dfa186c65d70d44e84cf35ebd4b906d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695160002091728623, guid: 6dfa186c65d70d44e84cf35ebd4b906d, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8695160002091728623, guid: 6dfa186c65d70d44e84cf35ebd4b906d, type: 3}
@@ -461,6 +478,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rice_001 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8109615111528932490, guid: 211991d4b3b5af640a34ebde000936b2, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -534,6 +555,10 @@ PrefabInstance:
     - target: {fileID: 5568062639002810802, guid: d4fdd35ae7541fa4894185b6dbadba56, type: 3}
       propertyPath: m_Name
       value: Nigiri_Tuna_Fat_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216452960647207015, guid: d4fdd35ae7541fa4894185b6dbadba56, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

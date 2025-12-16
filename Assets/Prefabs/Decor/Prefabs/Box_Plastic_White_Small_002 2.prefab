@@ -53,6 +53,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fbb2fca8a8de5954a9f52a73711930ef, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: fbb2fca8a8de5954a9f52a73711930ef, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d1fb55cf7078bf243a05f37bcf0d71a6, type: 2}
@@ -174,6 +178,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5157253852869004927}
     m_Modifications:
+    - target: {fileID: 5746210427934375331, guid: be45c2e4c0c20f840b5b9f9f1582259d, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6106423151191907446, guid: be45c2e4c0c20f840b5b9f9f1582259d, type: 3}
       propertyPath: m_Name
       value: Nigiri_Salmon_002
@@ -292,6 +300,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6571271413890416144, guid: a065e9fed0d45314090a9e8a95e5ce29, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -352,6 +364,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3347906735397456832, guid: 643eda14df7cd8745abeaf58554e29df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4484753640323494063, guid: 643eda14df7cd8745abeaf58554e29df, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
